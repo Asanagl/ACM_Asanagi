@@ -1,0 +1,1 @@
+{"name":"Local: syuct_m","url":"d:\\ACM\\25dfs_bfs\\syuct_m.cpp","tests":[{"id":1778158033749,"input":"2\n1234\n2144\n\n1111\n9999\n","output":"2\n4\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\ACM\\25dfs_bfs\\syuct_m.cpp","group":"local","local":true}

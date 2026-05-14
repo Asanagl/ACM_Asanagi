@@ -1,0 +1,1 @@
+{"name":"Local: d","url":"d:\\ACM\\25ncwinter_round5\\d.cpp","tests":[{"id":1770791479220,"input":"3\n2 1\n1 3\n1 4","output":"16"},{"id":1770791484941,"input":"1\n1 1","output":"0"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\ACM\\25ncwinter_round5\\d.cpp","group":"local","local":true}

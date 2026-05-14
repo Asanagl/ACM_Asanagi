@@ -1,0 +1,21 @@
+# C++ 编译产物
+*.exe
+*.out
+*.o
+*.obj
+*.ilk
+*.pdb
+
+# 测试输入输出
+*.in
+*.out
+input.txt
+output.txt
+
+# IDE
+.vscode/
+.idea/
+
+# 系统文件
+.DS_Store
+Thumbs.db

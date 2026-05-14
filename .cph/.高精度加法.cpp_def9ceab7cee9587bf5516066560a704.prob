@@ -1,0 +1,1 @@
+{"name":"Local: 高精度加法","url":"d:\\ACM\\高精度加法.cpp","tests":[{"id":1770599675146,"input":"22222222222222222222\n33333333333333333333","output":"55555555555555555555"},{"id":1770600547013,"input":"0 0","output":"0"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\ACM\\高精度加法.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: temp","url":"d:\\ACM\\atcoder_dp\\temp.cpp","tests":[{"id":1774098177613,"input":"2\n1 2","output":"2"},{"id":1774098191308,"input":"3\n1 2 3\n","output":"4\n"},{"id":1774098199437,"input":"9\n1 2 1 3 2 2 2 2 3\n","output":"10\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\ACM\\atcoder_dp\\temp.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: NanJing省赛H","url":"d:\\ACM\\atcoder_dp\\NanJing省赛H.cpp","tests":[{"id":1774781673760,"input":"3\n4 1\naabb\n5 2\nabcab\n7 3\nabcdece\n","output":"3\n6\n10"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\ACM\\atcoder_dp\\NanJing省赛H.cpp","group":"local","local":true}

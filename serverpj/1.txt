@@ -1,0 +1,38 @@
+# 创建目录
+mkdir -p ~/myblog/mysql_data ~/myblog/wp_data
+
+# 生成配置文件
+cat > ~/myblog/docker-compose.yml << 'EOF'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - /home/ubuntu/myblog/mysql_/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: AaZz!@#09
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress123
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress123
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - /home/ubuntu/myblog/wp_/var/www/html
+EOF
+
+# 启动
+cd ~/myblog && docker compose up -d
+
+# 检查
+docker compose ps

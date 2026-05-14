@@ -1,0 +1,413 @@
+﻿{
+    "size_threshold_gb":  1,
+    "summary":  {
+                    "total_scanned":  41,
+                    "error_count":  0,
+                    "auto_organized":  41,
+                    "skipped_count":  0,
+                    "created_folder_count":  4
+                },
+    "errors":  [
+
+               ],
+    "created_folders":  [
+                            {
+                                "created_at":  "2026-05-13T21:09:42",
+                                "path":  "D:\\ACM\\不常用文件",
+                                "folder_name":  "不常用文件"
+                            },
+                            {
+                                "created_at":  "2026-05-13T21:09:42",
+                                "path":  "D:\\ACM\\代码",
+                                "folder_name":  "代码"
+                            },
+                            {
+                                "created_at":  "2026-05-13T21:09:42",
+                                "path":  "D:\\ACM\\安装包",
+                                "folder_name":  "安装包"
+                            },
+                            {
+                                "created_at":  "2026-05-13T21:09:42",
+                                "path":  "D:\\ACM\\文档",
+                                "folder_name":  "文档"
+                            }
+                        ],
+    "operations":  [
+                       {
+                           "destination_path":  "D:\\ACM\\不常用文件\\b.cpp",
+                           "method":  "不常用文件归类（超过60天未使用）",
+                           "destination_folder":  "不常用文件",
+                           "original_path":  "D:\\ACM\\b.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "b.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\不常用文件\\install_nodejs.ps1",
+                           "method":  "不常用文件归类（超过60天未使用）",
+                           "destination_folder":  "不常用文件",
+                           "original_path":  "D:\\ACM\\install_nodejs.ps1",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "install_nodejs.ps1"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\不常用文件\\install_nodejs_fixed.ps1",
+                           "method":  "不常用文件归类（超过60天未使用）",
+                           "destination_folder":  "不常用文件",
+                           "original_path":  "D:\\ACM\\install_nodejs_fixed.ps1",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "install_nodejs_fixed.ps1"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\不常用文件\\install_node_simple.ps1",
+                           "method":  "不常用文件归类（超过60天未使用）",
+                           "destination_folder":  "不常用文件",
+                           "original_path":  "D:\\ACM\\install_node_simple.ps1",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "install_node_simple.ps1"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\不常用文件\\m.cpp",
+                           "method":  "不常用文件归类（超过60天未使用）",
+                           "destination_folder":  "不常用文件",
+                           "original_path":  "D:\\ACM\\m.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "m.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\不常用文件\\P1541.cpp",
+                           "method":  "不常用文件归类（超过60天未使用）",
+                           "destination_folder":  "不常用文件",
+                           "original_path":  "D:\\ACM\\P1541.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "P1541.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\不常用文件\\板子.md",
+                           "method":  "不常用文件归类（超过60天未使用）",
+                           "destination_folder":  "不常用文件",
+                           "original_path":  "D:\\ACM\\板子.md",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "板子.md"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\不常用文件\\算竞模板.md",
+                           "method":  "不常用文件归类（超过60天未使用）",
+                           "destination_folder":  "不常用文件",
+                           "original_path":  "D:\\ACM\\算竞模板.md",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "算竞模板.md"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\不常用文件\\算竞模板.pdf",
+                           "method":  "不常用文件归类（超过60天未使用）",
+                           "destination_folder":  "不常用文件",
+                           "original_path":  "D:\\ACM\\算竞模板.pdf",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "算竞模板.pdf"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\bee_hive.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\bee_hive.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "bee_hive.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\安装包\\bee_hive.exe",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "安装包",
+                           "original_path":  "D:\\ACM\\bee_hive.exe",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "bee_hive.exe"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\cf2149_1.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\cf2149_1.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "cf2149_1.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\安装包\\cf2149_1.exe",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "安装包",
+                           "original_path":  "D:\\ACM\\cf2149_1.exe",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "cf2149_1.exe"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\cowcoder16.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\cowcoder16.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "cowcoder16.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\cowcoder19.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\cowcoder19.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "cowcoder19.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\cowcoderyuesai1051.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\cowcoderyuesai1051.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "cowcoderyuesai1051.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\cownoder18.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\cownoder18.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "cownoder18.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\安装包\\cownoder18.exe",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "安装包",
+                           "original_path":  "D:\\ACM\\cownoder18.exe",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "cownoder18.exe"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\DAG_sort.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\DAG_sort.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "DAG_sort.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\e.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\e.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "e.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\安装包\\e.exe",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "安装包",
+                           "original_path":  "D:\\ACM\\e.exe",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "e.exe"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\f.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\f.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "f.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\fenduanhanshu.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\fenduanhanshu.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "fenduanhanshu.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\g.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\g.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "g.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\h.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\h.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "h.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\i.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\i.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "i.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\安装包\\i.exe",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "安装包",
+                           "original_path":  "D:\\ACM\\i.exe",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "i.exe"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\idea.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\idea.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "idea.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\mode.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\mode.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "mode.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\NCpractice_降温(easy).cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\NCpractice_降温(easy).cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "NCpractice_降温(easy).cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\安装包\\NCpractice_降温(easy).exe",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "安装包",
+                           "original_path":  "D:\\ACM\\NCpractice_降温(easy).exe",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "NCpractice_降温(easy).exe"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\noip2005.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\noip2005.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "noip2005.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\P1006.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\P1006.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "P1006.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\P1057.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\P1057.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "P1057.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\P1114.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\P1114.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "P1114.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\P1115.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\P1115.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "P1115.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\README.md",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\README.md",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "README.md"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\幂运算.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\幂运算.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "幂运算.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\文档\\新建 文本文档.txt",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "文档",
+                           "original_path":  "D:\\ACM\\新建 文本文档.txt",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "新建 文本文档.txt"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\模板.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\模板.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "模板.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\代码\\高精度加法.cpp",
+                           "method":  "按文件类型分类",
+                           "destination_folder":  "代码",
+                           "original_path":  "D:\\ACM\\高精度加法.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "高精度加法.cpp"
+                       }
+                   ],
+    "target_dir":  "D:\\ACM",
+    "skipped":  [
+
+                ],
+    "phase":  "phase2",
+    "timestamp":  "2026-05-13T21:09:42",
+    "dry_run":  false
+}

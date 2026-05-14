@@ -1,0 +1,1 @@
+{"name":"Local: bee_hive","url":"d:\\ACM\\bee_hive.cpp","tests":[{"id":1774702075547,"input":"2\n3\n4\n5\n0","output":"2\n3\n4\n6\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\ACM\\bee_hive.cpp","group":"local","local":true}

@@ -1,0 +1,575 @@
+﻿{
+    "size_threshold_gb":  1,
+    "summary":  {
+                    "total_scanned":  62,
+                    "error_count":  0,
+                    "auto_organized":  21,
+                    "skipped_count":  0,
+                    "created_folder_count":  0
+                },
+    "errors":  [
+
+               ],
+    "created_folders":  [
+
+                        ],
+    "operations":  [
+                       {
+                           "destination_path":  "D:\\ACM\\codeforce\\codeforcediv4.cpp",
+                           "method":  "关键词匹配已有文件夹",
+                           "destination_folder":  "codeforce",
+                           "original_path":  "D:\\ACM\\codeforcediv4.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "codeforcediv4.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\Touhou_practice\\luogu.cpp",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "Touhou_practice",
+                           "original_path":  "D:\\ACM\\luogu.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "luogu.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\Touhou_practice\\luogu1046.cpp",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "Touhou_practice",
+                           "original_path":  "D:\\ACM\\luogu1046.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "luogu1046.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\Touhou_practice\\luogu1089.cpp",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "Touhou_practice",
+                           "original_path":  "D:\\ACM\\luogu1089.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "luogu1089.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\Touhou_practice\\luogu1089.exe",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "Touhou_practice",
+                           "original_path":  "D:\\ACM\\luogu1089.exe",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "luogu1089.exe"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\Touhou_practice\\luogu1179.cpp",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "Touhou_practice",
+                           "original_path":  "D:\\ACM\\luogu1179.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "luogu1179.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\Touhou_practice\\luogu1307.cpp",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "Touhou_practice",
+                           "original_path":  "D:\\ACM\\luogu1307.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "luogu1307.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\Touhou_practice\\luogu1307.exe",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "Touhou_practice",
+                           "original_path":  "D:\\ACM\\luogu1307.exe",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "luogu1307.exe"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\Touhou_practice\\luogu1425.cpp",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "Touhou_practice",
+                           "original_path":  "D:\\ACM\\luogu1425.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "luogu1425.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\Touhou_practice\\Luogu_B_3644.cpp",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "Touhou_practice",
+                           "original_path":  "D:\\ACM\\Luogu_B_3644.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "Luogu_B_3644.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\nowcoder\\nowcoder14.cpp",
+                           "method":  "关键词匹配已有文件夹",
+                           "destination_folder":  "nowcoder",
+                           "original_path":  "D:\\ACM\\nowcoder14.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "nowcoder14.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\nowcoder\\nowcoder14.exe",
+                           "method":  "关键词匹配已有文件夹",
+                           "destination_folder":  "nowcoder",
+                           "original_path":  "D:\\ACM\\nowcoder14.exe",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "nowcoder14.exe"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\nowcoder\\nowcoder15.cpp",
+                           "method":  "关键词匹配已有文件夹",
+                           "destination_folder":  "nowcoder",
+                           "original_path":  "D:\\ACM\\nowcoder15.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "nowcoder15.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\nowcoder\\nowcoderzhousai.cpp",
+                           "method":  "关键词匹配已有文件夹",
+                           "destination_folder":  "nowcoder",
+                           "original_path":  "D:\\ACM\\nowcoderzhousai.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "nowcoderzhousai.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\nowcoder\\nowcoder_day1_t1.cpp",
+                           "method":  "关键词匹配已有文件夹",
+                           "destination_folder":  "nowcoder",
+                           "original_path":  "D:\\ACM\\nowcoder_day1_t1.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "nowcoder_day1_t1.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\nowcoder\\nowcoder_xiaobaiyuesai_chongxian .cpp",
+                           "method":  "关键词匹配已有文件夹",
+                           "destination_folder":  "nowcoder",
+                           "original_path":  "D:\\ACM\\nowcoder_xiaobaiyuesai_chongxian .cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "nowcoder_xiaobaiyuesai_chongxian .cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\25_DSU\\syuctoj.icu配置文件.txt",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "25_DSU",
+                           "original_path":  "D:\\ACM\\syuctoj.icu配置文件.txt",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "syuctoj.icu配置文件.txt"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\25_DSU\\syuctoj001.cpp",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "25_DSU",
+                           "original_path":  "D:\\ACM\\syuctoj001.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "syuctoj001.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\Touhou_practice\\temp,cpp",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "Touhou_practice",
+                           "original_path":  "D:\\ACM\\temp,cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "temp,cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\Touhou_practice\\temp_1.cpp",
+                           "method":  "命名规律匹配已有文件夹",
+                           "destination_folder":  "Touhou_practice",
+                           "original_path":  "D:\\ACM\\temp.cpp",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "temp.cpp"
+                       },
+                       {
+                           "destination_path":  "D:\\ACM\\GPLT\\准考证 - GPLT 团体程序设计天梯赛 2026 年.pdf",
+                           "method":  "关键词匹配已有文件夹",
+                           "destination_folder":  "GPLT",
+                           "original_path":  "D:\\ACM\\准考证 - GPLT 团体程序设计天梯赛 2026 年.pdf",
+                           "confidence":  "high",
+                           "status":  "done",
+                           "file":  "准考证 - GPLT 团体程序设计天梯赛 2026 年.pdf"
+                       }
+                   ],
+    "target_dir":  "D:\\ACM",
+    "skipped":  [
+
+                ],
+    "phase":  "phase1",
+    "timestamp":  "2026-05-13T21:07:51",
+    "dry_run":  false,
+    "existing_folders":  [
+                             "25winter_sort",
+                             "25福建ccpc",
+                             "GPLT",
+                             "ACM_day1",
+                             "25_DSU",
+                             "nowcoder",
+                             "Touhou_practice",
+                             "ACM_day2",
+                             "26prac_double_point",
+                             "25winter_deque",
+                             "25winter_final",
+                             "25winter_mind",
+                             "25winter_contest1",
+                             "25winter_simulation",
+                             "Atcoder",
+                             "codeforce",
+                             "算法竞赛进阶导论0x60图论",
+                             "25winter_prefix_diff",
+                             "serverpj",
+                             "25winter__c++",
+                             "25winter_binary",
+                             "CACC_practice",
+                             "26dfs_bfs",
+                             "26icpc西安",
+                             "dp",
+                             "25dfs_bfs",
+                             "25ccpc北京",
+                             "26天梯选拔",
+                             "cf div4"
+                         ],
+    "unmatched_files":  [
+                            {
+                                "path":  "D:\\ACM\\b.cpp",
+                                "size":  0,
+                                "atime":  1770104963,
+                                "mtime":  1770104963,
+                                "ext":  ".cpp",
+                                "file":  "b.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\bee_hive.cpp",
+                                "size":  1022,
+                                "atime":  1778676073,
+                                "mtime":  1774780453,
+                                "ext":  ".cpp",
+                                "file":  "bee_hive.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\bee_hive.exe",
+                                "size":  60337,
+                                "atime":  1778677094,
+                                "mtime":  1774701821,
+                                "ext":  ".exe",
+                                "file":  "bee_hive.exe"
+                            },
+                            {
+                                "path":  "D:\\ACM\\cf2149_1.cpp",
+                                "size":  1364,
+                                "atime":  1778676879,
+                                "mtime":  1758849970,
+                                "ext":  ".cpp",
+                                "file":  "cf2149_1.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\cf2149_1.exe",
+                                "size":  59828,
+                                "atime":  1778677095,
+                                "mtime":  1758812151,
+                                "ext":  ".exe",
+                                "file":  "cf2149_1.exe"
+                            },
+                            {
+                                "path":  "D:\\ACM\\cowcoder16.cpp",
+                                "size":  2329,
+                                "atime":  1778676879,
+                                "mtime":  1767774020,
+                                "ext":  ".cpp",
+                                "file":  "cowcoder16.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\cowcoder19.cpp",
+                                "size":  1759,
+                                "atime":  1778676073,
+                                "mtime":  1767774020,
+                                "ext":  ".cpp",
+                                "file":  "cowcoder19.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\cowcoderyuesai1051.cpp",
+                                "size":  1087,
+                                "atime":  1778676073,
+                                "mtime":  1761483056,
+                                "ext":  ".cpp",
+                                "file":  "cowcoderyuesai1051.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\cownoder18.cpp",
+                                "size":  818,
+                                "atime":  1778676877,
+                                "mtime":  1764581063,
+                                "ext":  ".cpp",
+                                "file":  "cownoder18.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\cownoder18.exe",
+                                "size":  221409,
+                                "atime":  1778677095,
+                                "mtime":  1764581099,
+                                "ext":  ".exe",
+                                "file":  "cownoder18.exe"
+                            },
+                            {
+                                "path":  "D:\\ACM\\DAG_sort.cpp",
+                                "size":  924,
+                                "atime":  1778676073,
+                                "mtime":  1774096295,
+                                "ext":  ".cpp",
+                                "file":  "DAG_sort.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\e.cpp",
+                                "size":  944,
+                                "atime":  1778676073,
+                                "mtime":  1769153345,
+                                "ext":  ".cpp",
+                                "file":  "e.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\e.exe",
+                                "size":  184448,
+                                "atime":  1778677096,
+                                "mtime":  1769149439,
+                                "ext":  ".exe",
+                                "file":  "e.exe"
+                            },
+                            {
+                                "path":  "D:\\ACM\\f.cpp",
+                                "size":  1141,
+                                "atime":  1778676073,
+                                "mtime":  1769153345,
+                                "ext":  ".cpp",
+                                "file":  "f.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\fenduanhanshu.cpp",
+                                "size":  1335,
+                                "atime":  1778676877,
+                                "mtime":  1765540399,
+                                "ext":  ".cpp",
+                                "file":  "fenduanhanshu.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\g.cpp",
+                                "size":  1554,
+                                "atime":  1778676878,
+                                "mtime":  1769153345,
+                                "ext":  ".cpp",
+                                "file":  "g.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\h.cpp",
+                                "size":  930,
+                                "atime":  1778676073,
+                                "mtime":  1769153345,
+                                "ext":  ".cpp",
+                                "file":  "h.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\i.cpp",
+                                "size":  1144,
+                                "atime":  1778676073,
+                                "mtime":  1769155097,
+                                "ext":  ".cpp",
+                                "file":  "i.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\i.exe",
+                                "size":  173554,
+                                "atime":  1778677097,
+                                "mtime":  1769155098,
+                                "ext":  ".exe",
+                                "file":  "i.exe"
+                            },
+                            {
+                                "path":  "D:\\ACM\\idea.cpp",
+                                "size":  625,
+                                "atime":  1778676073,
+                                "mtime":  1773545087,
+                                "ext":  ".cpp",
+                                "file":  "idea.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\install_nodejs.ps1",
+                                "size":  3223,
+                                "atime":  1773459942,
+                                "mtime":  1770711959,
+                                "ext":  ".ps1",
+                                "file":  "install_nodejs.ps1"
+                            },
+                            {
+                                "path":  "D:\\ACM\\install_nodejs_fixed.ps1",
+                                "size":  3451,
+                                "atime":  1773459956,
+                                "mtime":  1770712196,
+                                "ext":  ".ps1",
+                                "file":  "install_nodejs_fixed.ps1"
+                            },
+                            {
+                                "path":  "D:\\ACM\\install_node_simple.ps1",
+                                "size":  2382,
+                                "atime":  1773459955,
+                                "mtime":  1770711959,
+                                "ext":  ".ps1",
+                                "file":  "install_node_simple.ps1"
+                            },
+                            {
+                                "path":  "D:\\ACM\\m.cpp",
+                                "size":  0,
+                                "atime":  1770015593,
+                                "mtime":  1770015593,
+                                "ext":  ".cpp",
+                                "file":  "m.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\mode.cpp",
+                                "size":  569,
+                                "atime":  1778676073,
+                                "mtime":  1774177005,
+                                "ext":  ".cpp",
+                                "file":  "mode.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\NCpractice_降温(easy).cpp",
+                                "size":  951,
+                                "atime":  1778676073,
+                                "mtime":  1765104463,
+                                "ext":  ".cpp",
+                                "file":  "NCpractice_降温(easy).cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\NCpractice_降温(easy).exe",
+                                "size":  143521,
+                                "atime":  1778677099,
+                                "mtime":  1765104503,
+                                "ext":  ".exe",
+                                "file":  "NCpractice_降温(easy).exe"
+                            },
+                            {
+                                "path":  "D:\\ACM\\noip2005.cpp",
+                                "size":  893,
+                                "atime":  1778676073,
+                                "mtime":  1758812642,
+                                "ext":  ".cpp",
+                                "file":  "noip2005.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\P1006.cpp",
+                                "size":  150,
+                                "atime":  1778676073,
+                                "mtime":  1773460011,
+                                "ext":  ".cpp",
+                                "file":  "P1006.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\P1057.cpp",
+                                "size":  109,
+                                "atime":  1778676073,
+                                "mtime":  1773460012,
+                                "ext":  ".cpp",
+                                "file":  "P1057.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\P1114.cpp",
+                                "size":  864,
+                                "atime":  1778676073,
+                                "mtime":  1765540399,
+                                "ext":  ".cpp",
+                                "file":  "P1114.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\P1115.cpp",
+                                "size":  433,
+                                "atime":  1778676073,
+                                "mtime":  1773449814,
+                                "ext":  ".cpp",
+                                "file":  "P1115.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\P1541.cpp",
+                                "size":  0,
+                                "atime":  1773460013,
+                                "mtime":  1773460013,
+                                "ext":  ".cpp",
+                                "file":  "P1541.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\README.md",
+                                "size":  0,
+                                "atime":  1778677448,
+                                "mtime":  1778677448,
+                                "ext":  ".md",
+                                "file":  "README.md"
+                            },
+                            {
+                                "path":  "D:\\ACM\\幂运算.cpp",
+                                "size":  1245,
+                                "atime":  1778676838,
+                                "mtime":  1770602412,
+                                "ext":  ".cpp",
+                                "file":  "幂运算.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\新建 文本文档.txt",
+                                "size":  0,
+                                "atime":  1778676790,
+                                "mtime":  1778676790,
+                                "ext":  ".txt",
+                                "file":  "新建 文本文档.txt"
+                            },
+                            {
+                                "path":  "D:\\ACM\\板子.md",
+                                "size":  22386,
+                                "atime":  1770876854,
+                                "mtime":  1765104463,
+                                "ext":  ".md",
+                                "file":  "板子.md"
+                            },
+                            {
+                                "path":  "D:\\ACM\\模板.cpp",
+                                "size":  585,
+                                "atime":  1778676835,
+                                "mtime":  1778154918,
+                                "ext":  ".cpp",
+                                "file":  "模板.cpp"
+                            },
+                            {
+                                "path":  "D:\\ACM\\算竞模板.md",
+                                "size":  11614,
+                                "atime":  1773316815,
+                                "mtime":  1764131337,
+                                "ext":  ".md",
+                                "file":  "算竞模板.md"
+                            },
+                            {
+                                "path":  "D:\\ACM\\算竞模板.pdf",
+                                "size":  207922,
+                                "atime":  1764131428,
+                                "mtime":  1764131353,
+                                "ext":  ".pdf",
+                                "file":  "算竞模板.pdf"
+                            },
+                            {
+                                "path":  "D:\\ACM\\高精度加法.cpp",
+                                "size":  2139,
+                                "atime":  1778676073,
+                                "mtime":  1770600764,
+                                "ext":  ".cpp",
+                                "file":  "高精度加法.cpp"
+                            }
+                        ]
+}

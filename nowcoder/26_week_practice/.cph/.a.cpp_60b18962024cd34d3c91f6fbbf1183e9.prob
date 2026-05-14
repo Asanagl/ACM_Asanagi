@@ -1,0 +1,1 @@
+{"name":"Local: a","url":"d:\\ACM\\26_week_practice\\a.cpp","tests":[{"id":1772708475777,"input":"3\n3\n110\n2\n01\n5\n01111","output":"YES\nNO\nYES"},{"id":1772708841464,"input":"1\n16\n0000000001100000","output":"YES"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\ACM\\26_week_practice\\a.cpp","group":"local","local":true}
