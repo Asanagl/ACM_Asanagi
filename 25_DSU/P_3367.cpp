@@ -23,7 +23,7 @@ int find (int n)
     else return fa[n] = find(fa[n]) ; 
 }
 
-void solve()
+void Asanagi()
 {
     int n , m  ;
     cin >> n >> m ;
@@ -67,7 +67,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

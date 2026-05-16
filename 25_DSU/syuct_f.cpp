@@ -40,7 +40,7 @@ void merge(int x, int y)
     }
 }
 
-void solve()
+void Asanagi()
 {
     fa.clear() , siz.clear() ;
     int n , m ;
@@ -80,7 +80,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

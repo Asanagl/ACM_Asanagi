@@ -15,7 +15,7 @@ const ld PI = acos(-1.0);
 const ld EPS = 1e-9;
 const int MOD =  998244353 ;
 using ll = long long ;
-void solve()
+void Asanagi()
 {
     string s;
     cin >> s;
@@ -38,7 +38,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

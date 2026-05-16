@@ -14,7 +14,7 @@ int N;
 int vvi[105][105];
 int col0[105][105];
 
-void solve() 
+void Asanagi() 
 {
     cin >> N;
     for (int y = 1; y <= N; y++) {
@@ -94,6 +94,6 @@ void solve()
 signed main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
-    solve();
+    Asanagi();
     return 0;
 }

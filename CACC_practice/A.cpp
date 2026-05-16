@@ -21,7 +21,7 @@ int circle(int a , int b)
     return res + 1;
 }
 
-void solve()
+void Asanagi()
 {
     int n, m;
     cin >> n >> m;
@@ -35,7 +35,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

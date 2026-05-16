@@ -2,7 +2,7 @@
 using namespace std;
 
 using ll = long long ;
-void solve() {
+void Asanagi() {
     int n;
     cin >> n;
     vector<int> v(n);
@@ -69,5 +69,5 @@ int main() {
     cin.tie(nullptr);
     int t;
     cin >> t;
-    while (t--) solve();
+    while (t--) Asanagi();
 }

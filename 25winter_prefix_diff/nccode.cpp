@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-void solve() {
+void Asanagi() {
     int n, m;
     cin >> n >> m;
     vector<int> a(n);
@@ -29,7 +29,7 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        solve();
+        Asanagi();
     }
     return 0;
 }

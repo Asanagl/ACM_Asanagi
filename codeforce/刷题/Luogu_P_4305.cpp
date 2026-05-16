@@ -2,7 +2,7 @@
 using namespace std;
 
 #define IOS ios::sync_with_stdio(false); cin.tie(nullptr); cout.tie(nullptr)
-void solve()
+void Asanagi()
 {
     int n;
     cin >> n;
@@ -30,6 +30,6 @@ int main()
     IOS ;
     int T;
     cin >> T;
-    while (T--) solve();
+    while (T--) Asanagi();
     return 0;
 }

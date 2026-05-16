@@ -27,7 +27,7 @@ int Asagi(int a, int b) {
 }
 
 
-void solve()
+void Asanagi()
 {
     int n;
     string s;
@@ -73,7 +73,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

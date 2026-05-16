@@ -39,7 +39,7 @@ void init()
     }
 }
 
-void solve()
+void Asanagi()
 {
 
     int n;
@@ -110,7 +110,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

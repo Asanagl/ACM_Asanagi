@@ -42,7 +42,7 @@ void merge(int x, int y)
         siz[y] += siz[x];
     }
 }
-void solve()
+void Asanagi()
 {
     vector<PII> v ;
     fa.clear(); siz.clear(); ha.clear(); st.clear();
@@ -91,7 +91,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

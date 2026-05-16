@@ -19,7 +19,7 @@ const int dy[8] = {-2 , -1 , 1 , 2 , 2 , 1 , -1 , -2} ;
 int n , m , sx , sy ;
 vector <vector<int>> ans (405 , vector <int> (405 , -1)) ; 
 vector <vector<int>> vis (405 , vector <int> (405 , 0)) ; 
-void solve()
+void Asanagi()
 {
     cin >> n >> m >> sx >> sy ;
     queue<pair<int ,int>> qe ;
@@ -58,7 +58,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

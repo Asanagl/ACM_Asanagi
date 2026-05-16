@@ -21,7 +21,7 @@ bool cmp(const segment& a, const segment& b) {
     return a.r > b.r; 
 }
 
-void solve()
+void Asanagi()
 {   
     int n;
     cin >> n;
@@ -57,7 +57,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

@@ -4,7 +4,7 @@ using namespace std ;
 
 const int ins = -999 ;
 
-void solve()
+void Asanagi()
 {
     int n , x ;
     cin >> n >> x ;
@@ -34,5 +34,5 @@ void solve()
 
 int main()
 {
-    solve();
+    Asanagi();
 }

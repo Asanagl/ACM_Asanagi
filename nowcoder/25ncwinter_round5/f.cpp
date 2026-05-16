@@ -24,7 +24,7 @@ int comp(int n, int a, int b, int k)
     return a * k + b * T;
 }
 
-void solve()
+void Asanagi()
 {
     int n, a, b;
     cin >> n >> a >> b;
@@ -71,7 +71,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

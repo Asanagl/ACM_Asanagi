@@ -37,7 +37,7 @@ void bfs (int sx  ,int sy )
         }
     }
 }
-void solve()
+void Asanagi()
 {
     cin >> n ;
     for (int i = 1 ; i <= n ; i ++)
@@ -66,7 +66,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

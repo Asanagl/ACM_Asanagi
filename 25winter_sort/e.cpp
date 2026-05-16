@@ -15,7 +15,7 @@ struct student
     int score ;
     int id ;
 };
-void solve()
+void Asanagi()
 {
     int n;
     cin >> n ;
@@ -54,7 +54,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

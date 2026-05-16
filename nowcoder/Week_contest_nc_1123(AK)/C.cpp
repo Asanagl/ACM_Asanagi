@@ -28,7 +28,7 @@ void preprocess() {
     }
 }
 
-void solve()
+void Asanagi()
 {
     int l, r;
     cin >> l >> r;
@@ -45,7 +45,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

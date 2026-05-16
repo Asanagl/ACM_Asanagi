@@ -18,7 +18,7 @@ const int dy[8] = {0,1,0,-1,1,-1,-1,1} ;
 int n , m ;
 int vis[110][110] ;
 int ysnb[110][110] ;
-void solve()
+void Asanagi()
 {
     int n ;
     string s ;
@@ -47,7 +47,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

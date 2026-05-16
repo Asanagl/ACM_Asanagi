@@ -24,7 +24,7 @@ int change(int num) {
     return (d1 - 1) * 729 + (d2 - 1) * 81 + (d3 - 1) * 9 + (d4 - 1);
 }
 
-void solve()
+void Asanagi()
 {
     cin >> n >> m ;
     
@@ -37,7 +37,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

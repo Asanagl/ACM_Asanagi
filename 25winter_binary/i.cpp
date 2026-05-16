@@ -50,7 +50,7 @@ int Binary_Search (int n , int x ,vector <int> &v)
 
 }
 
-void solve()
+void Asanagi()
 {
     ll n ;
     cin >> n ;
@@ -78,7 +78,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

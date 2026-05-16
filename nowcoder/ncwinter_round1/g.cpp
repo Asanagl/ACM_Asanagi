@@ -115,7 +115,7 @@ ll changemax_rev(ll L, ll R, int D)
     return j;
 }
 
-void solve()
+void Asanagi()
 {
     ll l, r;
     cin >> l >> r;
@@ -165,7 +165,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

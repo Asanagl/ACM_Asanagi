@@ -5,7 +5,7 @@ using namespace std ;
 #define endl "\n"
 #define pb push_back
 #define INF 3005
-void solve()
+void Asanagi()
 {
     int n ;
     cin >> n ;
@@ -33,6 +33,6 @@ int main ()
     // cin >> t ;
     while (t--)
     {
-        solve() ;
+        Asanagi() ;
     }
 }

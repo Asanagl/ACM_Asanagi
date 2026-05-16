@@ -24,7 +24,7 @@ bool cmp(const student& a, const student& b)
 
 
 
-void solve()
+void Asanagi()
 {    int n, m;
     cin >> n >> m;
     vector<student> v(n);
@@ -58,7 +58,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

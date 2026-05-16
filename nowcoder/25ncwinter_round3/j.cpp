@@ -20,7 +20,7 @@ int get_depth(ll x) {
     return 63 - __builtin_clzll(x);
 } // 严肃誊抄板子中，，，，
 
-void solve()
+void Asanagi()
 {
 
     int n, q;
@@ -51,7 +51,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

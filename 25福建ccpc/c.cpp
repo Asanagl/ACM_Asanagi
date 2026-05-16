@@ -49,7 +49,7 @@ bool check(int x, const vector<int> &a)
     }
     return cnt1 > cmp0;
 }
-void solve()
+void Asanagi()
 {
     int n;
     cin >> n;
@@ -82,7 +82,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

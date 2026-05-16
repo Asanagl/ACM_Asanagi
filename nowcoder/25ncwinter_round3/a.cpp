@@ -19,7 +19,7 @@ const ld EPS = 1e-9;
 
 // }
 
-void solve()
+void Asanagi()
 {
     int n ;
     cin >> n ;
@@ -36,7 +36,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

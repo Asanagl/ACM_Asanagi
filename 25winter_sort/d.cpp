@@ -24,7 +24,7 @@ bool ncdec_cmp(const string& a, const string& b) {
     return ncinc_cmp(b, a);
 }
 
-void solve() 
+void Asanagi() 
 {
     string cmp_name;
     cin >> cmp_name;
@@ -51,6 +51,6 @@ void solve()
 
 signed main() {
     IOS;
-    solve();  
+    Asanagi();  
     return 0;
 }

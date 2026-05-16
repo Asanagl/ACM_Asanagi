@@ -18,7 +18,7 @@ const int MOD = 676767677 ;
 
 
 
-void solve()
+void Asanagi()
 {
     
 }
@@ -30,7 +30,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

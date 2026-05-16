@@ -28,7 +28,7 @@ bool cmp(const stct& p1, const stct& p2) {
     return p1.id < p2.id;
 }
 
-void solve()
+void Asanagi()
 {
     int n  ;
     cin  >> n ;
@@ -58,7 +58,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

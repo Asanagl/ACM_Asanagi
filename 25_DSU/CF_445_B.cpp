@@ -42,7 +42,7 @@ void merge(int x, int y)
     sum *= 2 ;
 }
 
-void solve()
+void Asanagi()
 {
     int n , m  ;
     cin >> n >> m  ;
@@ -66,7 +66,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

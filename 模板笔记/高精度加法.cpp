@@ -74,7 +74,7 @@ string sub(string a, string b) // 高精度减法，返回a - b
     return ans;
 }
 
-void solve()
+void Asanagi()
 {
     string a, b;
     cin >> a >> b;
@@ -89,7 +89,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

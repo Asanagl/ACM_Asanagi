@@ -21,7 +21,7 @@ struct DSU {
     }
 };
 
-void solve() {
+void Asanagi() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
@@ -62,6 +62,6 @@ void solve() {
 }
 
 int main() {
-    solve();
+    Asanagi();
     return 0;
 }

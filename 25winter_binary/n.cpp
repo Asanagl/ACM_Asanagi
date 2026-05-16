@@ -74,7 +74,7 @@ int Binary_Search (int n ,int m,vector <int> &v)
 
 }
 
-void solve()
+void Asanagi()
 {
     cin >> L >> N >> M;
     rocks.resize(N);
@@ -97,7 +97,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

@@ -17,7 +17,7 @@ using ll = long long ;
 int n ;
 
 vector <int> v (inf) ;
-void solve()
+void Asanagi()
 {
     int mex = 1 ; 
     cin >> n ;
@@ -42,7 +42,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

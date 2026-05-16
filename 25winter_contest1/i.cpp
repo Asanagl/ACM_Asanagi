@@ -6,7 +6,7 @@ using namespace std ;
 const int MAX= 2e5+5 ;
 const int N = 505 ;
 
-void solve()
+void Asanagi()
 {
     
     bitset <MAX * 2> isPrime ;
@@ -70,6 +70,6 @@ int main ()
     // cin >> t ;
     while (t--)
     {
-        solve() ;
+        Asanagi() ;
     }
 }

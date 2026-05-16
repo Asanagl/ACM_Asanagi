@@ -31,7 +31,7 @@ void bfs(pair<int , int> s , int c)
         int x = s.first , y = s.second ;
     }
 }
-void solve()
+void Asanagi()
 {
     cin >> n >> m ;
     for (int i = 1 ; i <= n ; i ++)
@@ -64,7 +64,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

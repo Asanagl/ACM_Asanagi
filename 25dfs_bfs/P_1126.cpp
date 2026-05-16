@@ -22,7 +22,7 @@ const int pry[4] = {0, 1, 0, 1};
 int m, n;                   
 vector <vector<int>> ysnb (60 , vector<int>(60 , INF)) ;
 
-void solve()
+void Asanagi()
 {
     cin >> n >> m;
     for (int i = 0; i <= n+1; i++)
@@ -101,7 +101,7 @@ signed main()
     int t = 1;
     // cin >> t;
     while (t--) {
-        solve();
+        Asanagi();
     }
     return 0;
 }

@@ -20,7 +20,7 @@ bool check(int mid)
     return sum >= n;
 }
 
-void solve()
+void Asanagi()
 {
     cin >> n >> m;
 
@@ -55,7 +55,7 @@ signed main() {
     int t = 1;
     cin >> t;
     while (t--) {
-        solve();
+        Asanagi();
     }
     return 0;
 }

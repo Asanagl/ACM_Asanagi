@@ -32,7 +32,7 @@ bool cmp(   const patient &a, const patient &b) {
     return a_older && !b_older;
 }
 
-void solve()
+void Asanagi()
 {   
     int n ;
     cin >> n ;
@@ -57,7 +57,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

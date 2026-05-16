@@ -40,7 +40,7 @@ struct Fenwick {
     }
 };
 
-void solve()
+void Asanagi()
 {
     int n ,q ;
     cin >> n  >> q ;
@@ -76,7 +76,7 @@ signed main()
 //     cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

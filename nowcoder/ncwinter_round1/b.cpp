@@ -23,7 +23,7 @@ void init()
     for (int i = 1; i < MAXN; i++)
         fact[i] = fact[i - 1] * i % MOD;
 }
-void solve()
+void Asanagi()
 {
     int n;
     cin >> n;
@@ -70,7 +70,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

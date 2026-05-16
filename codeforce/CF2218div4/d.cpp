@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std ;
-void solve ()
+void Asanagi ()
 {
     int n;
     cin >> n;
@@ -23,6 +23,6 @@ int main ()
     cin >> t ;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
 }

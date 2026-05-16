@@ -12,7 +12,7 @@ const ld EPS = 1e-9;
 
 const int prefixes[6] = {1005, 1006, 1007, 1008, 1009, 1010};
 
-void solve()
+void Asanagi()
 {
     int x, a, b, c;
     cin >> x >> a >> b >> c;
@@ -76,7 +76,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

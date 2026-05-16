@@ -59,7 +59,7 @@ int gcd(int a, int b)
     return gcd(b, a % b);
 }
 
-void solve()
+void Asanagi()
 {
     vector<int> a(4);
     vector<int> b(4);
@@ -116,7 +116,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

@@ -16,7 +16,7 @@ using ll = long long ;
 const int dx[4] = {0 , 0 , 1 , -1} ;
 const int dy[4] = {1 , -1 , 0 , 0} ;
 int n , m ;
-void solve()
+void Asanagi()
 {
     // * 哒哒哒哒哒 好想玩原神
     while (cin >> n >> m)
@@ -108,7 +108,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

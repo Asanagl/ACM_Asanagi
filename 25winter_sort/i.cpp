@@ -22,7 +22,7 @@ bool cmp (const song &a, const song &b)
     return a.cha > b.cha;
 }
 
-void solve()
+void Asanagi()
 {   
     int n ,dick ;
     cin >> n >> dick;
@@ -67,7 +67,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

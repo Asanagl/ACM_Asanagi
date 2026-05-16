@@ -4,7 +4,7 @@ using namespace std ;
 #define IOS ios_base::sync_with_stdio(false);cin.tie(NULL);cout.tie(NULL)
 #define endl "\n"
 
-void solve()
+void Asanagi()
 {
     ll a , b ,c ;
     cin >> a >> b >> c ;
@@ -19,6 +19,6 @@ int main ()
     // cin >> t ;
     while (t--)
     {
-        solve() ;
+        Asanagi() ;
     }
 }

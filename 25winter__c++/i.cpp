@@ -37,7 +37,7 @@ int longestsonstring(char *a, int a_l, char *b, int b_l) {
 
     return ans;
 }
-void solve()
+void Asanagi()
 {
     string s, t;
     cin >> s >> t;
@@ -72,7 +72,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

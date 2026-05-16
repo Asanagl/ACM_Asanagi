@@ -23,7 +23,7 @@ struct city
 };
 
 
-void solve()
+void Asanagi()
 {
     int n, m, a, b;
     cin >> n >> m;
@@ -106,7 +106,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

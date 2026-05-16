@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std ;
 const int INF = 3e5 +10 ;
-void solve ()
+void Asanagi ()
 {
     int n , m , k ;
     cin >> n >> m >> k ;
@@ -23,7 +23,7 @@ int main ()
     int t = 1;
     // cin >> t ;
     while (t--)
-    solve();
+    Asanagi();
 
 }
 

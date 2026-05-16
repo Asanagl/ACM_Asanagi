@@ -14,7 +14,7 @@ bool cmp(int a , int b)
 {
     return abs(a) > abs(b);
 }
-void solve()
+void Asanagi()
 {
     int n ;
     cin >> n ;
@@ -31,7 +31,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

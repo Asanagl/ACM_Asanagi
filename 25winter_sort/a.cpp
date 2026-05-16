@@ -18,7 +18,7 @@ bool cmp (int a, int b)
     if (a %2 ==0 && b %2 ==0) return a < b;
     return a > b;
 }
-void solve()
+void Asanagi()
 {
     vector<int> a(10);
     for (auto &it : a) cin >> it;
@@ -33,7 +33,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

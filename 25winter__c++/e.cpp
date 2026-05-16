@@ -25,7 +25,7 @@ bool find_b (vector <vector <char>> &vvc , int n , int m)
     }
     return false ;
 }
-void solve()
+void Asanagi()
 {
     int n , m , r ,c  ;
     cin >> n >> m >> r >> c ;
@@ -77,7 +77,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

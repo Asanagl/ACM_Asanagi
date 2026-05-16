@@ -38,7 +38,7 @@ void merge(int x, int y, int &ysnb) {
         siz[y] += siz[x];
     }
 }
-void solve() {
+void Asanagi() {
     int n, m;
     while (cin >> n >> m)
     {
@@ -74,7 +74,7 @@ signed main() {
     int t = 1;
     // cin >> t;
     while (t--) {
-        solve();
+        Asanagi();
     }
     return 0;
 }

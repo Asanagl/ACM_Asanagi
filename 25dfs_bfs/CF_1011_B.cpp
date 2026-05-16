@@ -21,7 +21,7 @@ int ysnb[110][110] ;
 bool cmp(int x,int y){
 	return x>y;
 }
-void solve()
+void Asanagi()
 {
     int n, m;
     int cnt[105];
@@ -54,7 +54,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

@@ -27,7 +27,7 @@ struct mas
     int H ;
     int val ;
 };
-void solve()
+void Asanagi()
 {
     int n , m , C ;
     cin >> n >> C ;
@@ -66,7 +66,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

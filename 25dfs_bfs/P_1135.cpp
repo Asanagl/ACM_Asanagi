@@ -46,7 +46,7 @@ void Dijkstra()
     }
 }
 
-void solve()
+void Asanagi()
 {
     cin >> n >> s >> b;
     int m = n - 1;
@@ -74,7 +74,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

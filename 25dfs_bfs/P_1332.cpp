@@ -45,7 +45,7 @@ void bfs(vector <pair<int,int>> led , int l)
         } 
     }
 }
-void solve()
+void Asanagi()
 {
     int  a , b ;
     cin >> n >> m >> a >> b ;
@@ -78,7 +78,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

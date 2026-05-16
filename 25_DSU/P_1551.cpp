@@ -40,7 +40,7 @@ void merge(int x, int y)
     }
 }
 
-void solve()
+void Asanagi()
 {
     int n , m , p  ;
     cin >> n >> m >> p ;
@@ -71,7 +71,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

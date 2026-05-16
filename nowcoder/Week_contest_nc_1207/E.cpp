@@ -60,7 +60,7 @@ void decode(int sub, int &parity, int &used, int &ghost_parity, int &time_left)
     }
 }
 
-void solve()
+void Asanagi()
 {
     int n, m, k;
     cin >> n >> m >> k;
@@ -168,7 +168,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }

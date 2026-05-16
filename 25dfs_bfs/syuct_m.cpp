@@ -25,7 +25,7 @@ int change(int ysnb)
     return (d1 - 1) * 729 + (d2 - 1) * 81 + (d3 - 1) * 9 + (d4 - 1);
 }
 
-void solve()
+void Asanagi()
 {
     cin >> n >> m;
     int s = change(n);
@@ -90,7 +90,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

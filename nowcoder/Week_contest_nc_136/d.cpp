@@ -8,7 +8,7 @@ using namespace std ;
 using ll = long long ;
 const int INF = 1e9+10 ;
 const int LINF = 1e12+10 ;
-void solve ()
+void Asanagi ()
 {
     int n;
     cin >> n;
@@ -37,6 +37,6 @@ signed main ()
     t = 1 ;
     while (t--)
     {
-        solve ();
+        Asanagi ();
     }
 }

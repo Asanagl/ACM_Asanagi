@@ -15,7 +15,7 @@ const ld PI = acos(-1.0);
 const ld EPS = 1e-9;
 
 
-void solve()
+void Asanagi()
 {
     int xa, ya, xb, yb;
     cin >> xa >> ya >> xb >> yb;
@@ -41,7 +41,7 @@ signed main()
     // cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

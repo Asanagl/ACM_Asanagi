@@ -34,7 +34,7 @@ i128 ceild(i128 n, i128 d) {
     else return n / d;
 }
 
-void solve()
+void Asanagi()
 {
     ll xin, ain, bin;
     cin >> xin >> ain >> bin;
@@ -102,7 +102,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-            solve();
+            Asanagi();
         }
     return 0;
 }

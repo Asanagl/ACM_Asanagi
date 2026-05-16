@@ -8,7 +8,7 @@ bool compare(const pair<int, int>& x, const pair<int, int>& y)
     return x.second > y.second;
 }
 
-void solve()
+void Asanagi()
 {
     int n;
     cin >> n;
@@ -46,7 +46,7 @@ int main()
 
     while (T--)
     {
-        solve();
+        Asanagi();
     }
 
     return 0;

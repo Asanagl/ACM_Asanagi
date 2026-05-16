@@ -41,7 +41,7 @@ bool cmp(int start, int n, vector<int>& ans) {
     return true;
 }
 
-void solve() {
+void Asanagi() {
     int n;
     cin >> n;
     if (n < 4) {
@@ -66,7 +66,7 @@ int main() {
     int t;
     cin >> t;
     while (t--) {
-        solve();
+        Asanagi();
     }
     return 0;
 }

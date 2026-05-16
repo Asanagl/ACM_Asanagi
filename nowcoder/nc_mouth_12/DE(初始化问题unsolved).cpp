@@ -12,7 +12,7 @@ const ld PI = acos(-1.0);
 const ld EPS = 1e-9;
 
 vector<int> cirno = {9,99,999,9999,99999,999999,9999999,99999999,999999999,9999999999,99999999999,999999999999,9999999999999,9999999999999,99999999999999,999999999999999,9999999999999999}; ;
-void solve()
+void Asanagi()
 {
     int ans = LLONG_MAX;
     int x ;
@@ -44,7 +44,7 @@ signed main()
     cin >> t;
     while (t--)
     {
-        solve();
+        Asanagi();
     }
     return 0;
 }
