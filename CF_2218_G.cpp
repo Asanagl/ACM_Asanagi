@@ -14,6 +14,7 @@ const int LINF = 1e18+10;
 const ld PI = acos(-1.0);
 const ld EPS = 1e-9;
 using ll = long long ;
+const int MOD = 676767677 ;
 
 void solve()
 {
