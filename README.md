@@ -5,7 +5,6 @@
 
 ## 目录结构
 
-```
 ACM_Asanagi/
 ├── codeforces/          # Codeforces 题解
 ├── atcoder/             # AtCoder 题解
