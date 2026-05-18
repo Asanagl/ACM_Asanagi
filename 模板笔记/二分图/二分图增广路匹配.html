@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>增广路与匈牙利算法可视化</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #00d4ff;
+            margin-bottom: 10px;
+            font-size: 2.2em;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #8892b0;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .main-layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1100px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .canvas-area {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            border-radius: 12px;
+            background: #0d1117;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .control-panel {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            height: fit-content;
+        }
+
+        .panel-title {
+            color: #00d4ff;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #0a0a0a;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #e0e0e0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff4757, #cc0033);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(255, 71, 87, 0.4);
+        }
+
+        .info-box {
+            background: rgba(0, 212, 255, 0.08);
+            border-left: 4px solid #00d4ff;
+            padding: 15px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .legend-line {
+            width: 30px;
+            height: 3px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        .status-bar {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .status-item {
+            text-align: center;
+        }
+
+        .status-value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #00d4ff;
+        }
+
+        .status-label {
+            font-size: 0.85em;
+            color: #8892b0;
+            margin-top: 4px;
+        }
+
+        .explanation {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 20px;
+        }
+
+        .explanation h2 {
+            color: #00d4ff;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .explanation p {
+            line-height: 1.8;
+            margin-bottom: 12px;
+            color: #c0c0c0;
+        }
+
+        .highlight {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 15px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+            margin: 10px 0;
+            color: #c9d1d9;
+        }
+
+        .code-keyword { color: #ff7b72; }
+        .code-func { color: #d2a8ff; }
+        .code-comment { color: #8b949e; }
+        .code-string { color: #a5d6ff; }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .step-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .step-dot.active {
+            background: #00d4ff;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+        }
+
+        .step-dot.completed {
+            background: #00ff88;
+        }
+
+        .speed-control {
+            margin: 15px 0;
+        }
+
+        .speed-control label {
+            display: block;
+            margin-bottom: 8px;
+            color: #8892b0;
+            font-size: 0.9em;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #00d4ff;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: #0a0a0a;
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 5px 25px rgba(0, 212, 255, 0.4);
+            transform: translateX(400px);
+            transition: transform 0.4s ease;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .graph-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .graph-btn {
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            color: #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .graph-btn:hover, .graph-btn.active {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: #00d4ff;
+            color: #00d4ff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 增广路与匈牙利算法可视化</h1>
+        <p class="subtitle">通过动态图理解二分图最大匹配的核心概念</p>
+
+        <div class="status-bar">
+            <div class="status-item">
+                <div class="status-value" id="matchCount">0</div>
+                <div class="status-label">当前匹配数</div>
+            </div>
+            <div class="status-item">
+                <div class="status-value" id="maxMatch">?</div>
+                <div class="status-label">最大匹配数</div>
+            </div>
+            <div class="status-item">
+                <div class="status-value" id="currentStep">准备</div>
+                <div class="status-label">当前阶段</div>
+            </div>
+            <div class="status-item">
+                <div class="status-value" id="augPathLen">-</div>
+                <div class="status-label">增广路长度</div>
+            </div>
+        </div>
+
+        <div class="main-layout">
+            <div class="canvas-area">
+                <canvas id="graphCanvas" width="800" height="550"></canvas>
+                <div class="step-indicator" id="stepIndicator"></div>
+            </div>
+
+            <div class="control-panel">
+                <div class="panel-title">⚙️ 控制面板</div>
+
+                <div class="graph-selector">
+                    <button class="graph-btn active" onclick="loadGraph(0)">示例1</button>
+                    <button class="graph-btn" onclick="loadGraph(1)">示例2</button>
+                    <button class="graph-btn" onclick="loadGraph(2)">示例3</button>
+                </div>
+
+                <div class="info-box" id="infoBox">
+                    点击"开始算法"观看匈牙利算法执行过程。观察如何从初始空匹配逐步找到最大匹配。
+                </div>
+
+                <button class="btn btn-primary" id="startBtn" onclick="startAlgorithm()">
+                    ▶️ 开始算法
+                </button>
+                <button class="btn btn-secondary" id="stepBtn" onclick="stepForward()">
+                    ⏭️ 单步执行
+                </button>
+                <button class="btn btn-secondary" onclick="resetGraph()">
+                    🔄 重置
+                </button>
+                <button class="btn btn-danger" onclick="clearMatch()">
+                    ❌ 清空匹配
+                </button>
+
+                <div class="speed-control">
+                    <label>⏱️ 动画速度</label>
+                    <input type="range" id="speedSlider" min="1" max="10" value="5">
+                </div>
+
+                <div class="panel-title" style="margin-top: 25px;">📊 图例说明</div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ff6b6b;"></div>
+                        <span>左部节点 (U)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #4ecdc4;"></div>
+                        <span>右部节点 (V)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-line" style="background: rgba(255,255,255,0.3);"></div>
+                        <span>未匹配边</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-line" style="background: #ffd700; height: 4px;"></div>
+                        <span>已匹配边</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-line" style="background: #ff4757; height: 4px;"></div>
+                        <span>增广路径</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ffd700; box-shadow: 0 0 10px #ffd700;"></div>
+                        <span>当前考察点</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="explanation">
+            <h2>📚 核心概念解析</h2>
+
+            <h3 style="color: #ffd700; margin: 20px 0 10px 0;">1. 什么是增广路？</h3>
+            <p>
+                <span class="highlight">增广路 (Augmenting Path)</span> 是二分图中一条从某个<span class="highlight">未匹配点</span>出发，
+                到另一个<span class="highlight">未匹配点</span>结束的路径，且路径上的边<span class="highlight">交替出现</span>：
+                未匹配边 → 匹配边 → 未匹配边 → 匹配边 → ... → 未匹配边。
+            </p>
+            <p>
+                关键性质：增广路的起点和终点都是未匹配点，且路径长度（边数）一定是<span class="highlight">奇数</span>。
+                如果我们把增广路上的匹配状态<span class="highlight">全部翻转</span>（匹配变未匹配，未匹配变匹配），
+                匹配数就会<span class="highlight">增加 1</span>！
+            </p>
+
+            <h3 style="color: #ffd700; margin: 20px 0 10px 0;">2. 匈牙利算法核心思想</h3>
+            <p>
+                匈牙利算法（König-Egeváry定理）的核心就是不断寻找增广路：
+            </p>
+            <div class="code-block">
+<span class="code-comment">// 伪代码</span>
+<span class="code-keyword">while</span> (存在增广路) {
+    找到一条增广路 P;
+    <span class="code-comment">// 翻转P上所有边的匹配状态</span>
+    <span class="code-keyword">for</span> (P中的每条边 e) {
+        e.匹配 = !e.匹配;
+    }
+    匹配数++;
+}
+<span class="code-keyword">return</span> 匹配数;  <span class="code-comment">// 此时达到最大匹配</span>
+            </div>
+            <p>
+                当图中<span class="highlight">不存在增广路</span>时，当前的匹配就是<span class="highlight">最大匹配</span>。
+                这是Berge定理的直接推论。
+            </p>
+
+            <h3 style="color: #ffd700; margin: 20px 0 10px 0;">3. 为什么增广路能增加匹配数？</h3>
+            <p>
+                假设增广路有 k 条匹配边和 k+1 条未匹配边（因为路径交替且两端是未匹配边）。
+                翻转后：k 条匹配边变成未匹配，k+1 条未匹配边变成匹配。
+                净增加：(k+1) - k = <span class="highlight">1</span> 条匹配边！
+            </p>
+
+            <h3 style="color: #ffd700; margin: 20px 0 10px 0;">4. 算法复杂度</h3>
+            <p>
+                每次增广匹配数至少增加1，最多进行 |V| 次增广。
+                每次DFS寻找增广路复杂度 O(E)。
+                总复杂度：<span class="highlight">O(V × E)</span>。
+            </p>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // ==================== 图数据结构 ====================
+        class BipartiteGraph {
+            constructor() {
+                this.leftNodes = [];   // 左部节点
+                this.rightNodes = [];  // 右部节点
+                this.edges = [];       // 所有边
+                this.matchL = {};      // 左部匹配
+                this.matchR = {};      // 右部匹配
+                this.adj = {};         // 邻接表
+            }
+
+            addLeftNode(id, label) {
+                this.leftNodes.push({id, label, x: 0, y: 0});
+                this.adj[id] = [];
+            }
+
+            addRightNode(id, label) {
+                this.rightNodes.push({id, label, x: 0, y: 0});
+                this.adj[id] = [];
+            }
+
+            addEdge(u, v) {
+                this.edges.push({u, v, matched: false, inPath: false, highlighted: false});
+                this.adj[u].push(v);
+            }
+
+            resetMatch() {
+                this.matchL = {};
+                this.matchR = {};
+                this.edges.forEach(e => {
+                    e.matched = false;
+                    e.inPath = false;
+                    e.highlighted = false;
+                });
+            }
+
+            getEdge(u, v) {
+                return this.edges.find(e => e.u === u && e.v === v);
+            }
+
+            isMatched(u, v) {
+                const e = this.getEdge(u, v);
+                return e ? e.matched : false;
+            }
+        }
+
+        // ==================== 预定义示例图 ====================
+        const graphTemplates = [
+            // 示例1：经典5+5图，最大匹配4
+            {
+                left: ['A','B','C','D','E'],
+                right: ['1','2','3','4','5'],
+                edges: [
+                    ['A','1'], ['A','2'],
+                    ['B','2'], ['B','3'],
+                    ['C','1'], ['C','3'], ['C','4'],
+                    ['D','4'], ['D','5'],
+                    ['E','5']
+                ]
+            },
+            // 示例2：需要交错增广的图
+            {
+                left: ['A','B','C','D'],
+                right: ['1','2','3','4'],
+                edges: [
+                    ['A','1'], ['A','2'],
+                    ['B','1'], ['B','3'],
+                    ['C','2'], ['C','3'], ['C','4'],
+                    ['D','4']
+                ]
+            },
+            // 示例3：完美匹配图
+            {
+                left: ['A','B','C','D'],
+                right: ['1','2','3','4'],
+                edges: [
+                    ['A','1'], ['A','2'],
+                    ['B','1'], ['B','2'], ['B','3'],
+                    ['C','2'], ['C','3'], ['C','4'],
+                    ['D','3'], ['D','4']
+                ]
+            }
+        ];
+
+        // ==================== 全局变量 ====================
+        let graph = new BipartiteGraph();
+        let canvas, ctx;
+        let animationId = null;
+        let isAnimating = false;
+        let currentLeftIndex = 0;
+        let algorithmState = 'idle'; // idle, searching, augmenting, done
+        let augPath = [];
+        let visitedNodes = new Set();
+        let currentNode = null;
+        let pathEdges = [];
+        let autoPlay = false;
+        let animationSpeed = 5;
+        let phase = 0; // 0:选择起点, 1:DFS探索, 2:找到增广路, 3:翻转, 4:完成
+        let phaseTimer = 0;
+
+        // ==================== 初始化 ====================
+        function init() {
+            canvas = document.getElementById('graphCanvas');
+            ctx = canvas.getContext('2d');
+
+            // 高DPI支持
+            const dpr = window.devicePixelRatio || 1;
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+            canvas.style.width = rect.width + 'px';
+            canvas.style.height = rect.height + 'px';
+
+            loadGraph(0);
+
+            document.getElementById('speedSlider').addEventListener('input', (e) => {
+                animationSpeed = parseInt(e.target.value);
+            });
+
+            animate();
+        }
+
+        function loadGraph(index) {
+            if (isAnimating) return;
+
+            document.querySelectorAll('.graph-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i === index);
+            });
+
+            const tmpl = graphTemplates[index];
+            graph = new BipartiteGraph();
+
+            tmpl.left.forEach((label, i) => graph.addLeftNode(`L${i}`, label));
+            tmpl.right.forEach((label, i) => graph.addRightNode(`R${i}`, label));
+            tmpl.edges.forEach(([u, v]) => {
+                const ui = tmpl.left.indexOf(u);
+                const vi = tmpl.right.indexOf(v);
+                graph.addEdge(`L${ui}`, `R${vi}`);
+            });
+
+            calculateLayout();
+            resetState();
+            updateStatus();
+            showToast(`已加载示例 ${index + 1}`);
+        }
+
+        function calculateLayout() {
+            const marginX = 100;
+            const marginY = 80;
+            const canvasWidth = 800;
+            const canvasHeight = 550;
+
+            const leftX = marginX + 50;
+            const rightX = canvasWidth - marginX - 50;
+
+            // 左部节点垂直分布
+            const leftStep = (canvasHeight - 2 * marginY) / Math.max(graph.leftNodes.length - 1, 1);
+            graph.leftNodes.forEach((node, i) => {
+                node.x = leftX;
+                node.y = graph.leftNodes.length === 1 
+                    ? canvasHeight / 2 
+                    : marginY + i * leftStep;
+            });
+
+            // 右部节点垂直分布
+            const rightStep = (canvasHeight - 2 * marginY) / Math.max(graph.rightNodes.length - 1, 1);
+            graph.rightNodes.forEach((node, i) => {
+                node.x = rightX;
+                node.y = graph.rightNodes.length === 1 
+                    ? canvasHeight / 2 
+                    : marginY + i * rightStep;
+            });
+        }
+
+        function resetState() {
+            algorithmState = 'idle';
+            currentLeftIndex = 0;
+            augPath = [];
+            visitedNodes.clear();
+            currentNode = null;
+            pathEdges = [];
+            autoPlay = false;
+            phase = 0;
+            phaseTimer = 0;
+            graph.resetMatch();
+            updateStatus();
+            updateInfo('点击"开始算法"观看匈牙利算法执行过程。观察如何从初始空匹配逐步找到最大匹配。');
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('startBtn').innerHTML = '▶️ 开始算法';
+        }
+
+        function clearMatch() {
+            if (isAnimating) return;
+            graph.resetMatch();
+            resetState();
+        }
+
+        function resetGraph() {
+            if (isAnimating) {
+                autoPlay = false;
+                isAnimating = false;
+            }
+            resetState();
+        }
+
+        // ==================== 匈牙利算法逻辑 ====================
+        function startAlgorithm() {
+            if (algorithmState === 'done') {
+                resetGraph();
+                setTimeout(startAlgorithm, 100);
+                return;
+            }
+
+            if (algorithmState === 'idle') {
+                algorithmState = 'searching';
+                autoPlay = true;
+                document.getElementById('startBtn').disabled = true;
+                document.getElementById('startBtn').innerHTML = '⏳ 执行中...';
+                currentLeftIndex = 0;
+                phase = 0;
+            }
+        }
+
+        function stepForward() {
+            if (algorithmState === 'idle') {
+                startAlgorithm();
+                autoPlay = false;
+                document.getElementById('startBtn').disabled = true;
+                return;
+            }
+
+            if (algorithmState === 'done') return;
+
+            autoPlay = false;
+            performOneStep();
+        }
+
+        function performOneStep() {
+            if (algorithmState === 'done') return;
+
+            // 寻找下一个未匹配的左部节点作为起点
+            while (currentLeftIndex < graph.leftNodes.length && graph.matchL[graph.leftNodes[currentLeftIndex].id]) {
+                currentLeftIndex++;
+            }
+
+            if (currentLeftIndex >= graph.leftNodes.length) {
+                algorithmState = 'done';
+                updateInfo('🎉 算法结束！不存在增广路，当前匹配即为<span class="highlight">最大匹配</span>。');
+                document.getElementById('startBtn').innerHTML = '🔄 重新开始';
+                document.getElementById('startBtn').disabled = false;
+                showToast('算法完成！达到最大匹配');
+                updateStatus();
+                return;
+            }
+
+            const startNode = graph.leftNodes[currentLeftIndex];
+
+            if (phase === 0) {
+                // 阶段0：选择起点
+                currentNode = startNode.id;
+                visitedNodes.clear();
+                visitedNodes.add(currentNode);
+                pathEdges = [];
+                augPath = [];
+                updateInfo(`选择未匹配点 <span class="highlight">${startNode.label}</span> 作为增广路起点，开始DFS寻找增广路...`);
+                phase = 1;
+
+            } else if (phase === 1) {
+                // 阶段1：DFS寻找增广路
+                const result = findAugmentingPath(startNode.id);
+
+                if (result.found) {
+                    augPath = result.path;
+                    pathEdges = [];
+                    for (let i = 0; i < augPath.length - 1; i++) {
+                        const edge = graph.getEdge(augPath[i], augPath[i+1]) || graph.getEdge(augPath[i+1], augPath[i]);
+                        if (edge) pathEdges.push(edge);
+                    }
+
+                    // 高亮增广路
+                    pathEdges.forEach(e => e.inPath = true);
+
+                    const pathStr = augPath.map(id => {
+                        const node = [...graph.leftNodes, ...graph.rightNodes].find(n => n.id === id);
+                        return node ? node.label : id;
+                    }).join(' → ');
+
+                    updateInfo(`✅ 找到增广路！<br>路径: <span class="highlight">${pathStr}</span><br>长度: ${augPath.length - 1} 条边（奇数，符合要求）<br>准备翻转路径上的匹配状态...`);
+                    phase = 2;
+                } else {
+                    updateInfo(`❌ 从点 <span class="highlight">${startNode.label}</span> 出发找不到增广路。尝试下一个未匹配点...`);
+                    currentLeftIndex++;
+                    phase = 0;
+                    visitedNodes.clear();
+                    currentNode = null;
+                }
+
+            } else if (phase === 2) {
+                // 阶段2：翻转增广路
+                let flipCount = 0;
+                pathEdges.forEach(e => {
+                    e.matched = !e.matched;
+                    e.inPath = false;
+                    flipCount++;
+                });
+
+                // 更新匹配关系
+                for (let i = 0; i < augPath.length - 1; i += 2) {
+                    graph.matchL[augPath[i]] = augPath[i+1];
+                    graph.matchR[augPath[i+1]] = augPath[i];
+                }
+                // 清除旧匹配
+                Object.keys(graph.matchL).forEach(k => {
+                    if (!augPath.includes(k) && !augPath.includes(graph.matchL[k])) {
+                        // 保留其他匹配
+                    }
+                });
+                // 重新整理匹配
+                const newMatchL = {};
+                const newMatchR = {};
+                graph.edges.filter(e => e.matched).forEach(e => {
+                    newMatchL[e.u] = e.v;
+                    newMatchR[e.v] = e.u;
+                });
+                graph.matchL = newMatchL;
+                graph.matchR = newMatchR;
+
+                const matchCount = Object.keys(graph.matchL).length;
+                updateInfo(`🔄 翻转完成！匹配数增加到 <span class="highlight">${matchCount}</span><br>增广路上的 ${flipCount} 条边：未匹配↔匹配状态互换<br>继续寻找下一个增广路...`);
+
+                currentLeftIndex++;
+                phase = 0;
+                visitedNodes.clear();
+                currentNode = null;
+                pathEdges = [];
+                augPath = [];
+
+                showToast(`增广成功！当前匹配数: ${matchCount}`);
+            }
+
+            updateStatus();
+        }
+
+        function findAugmentingPath(startId) {
+            const visited = new Set();
+            const parent = {};
+
+            function dfs(u) {
+                visited.add(u);
+
+                const isLeft = u.startsWith('L');
+                const neighbors = isLeft ? graph.adj[u] : 
+                    graph.edges.filter(e => e.v === u && e.matched).map(e => e.u);
+
+                // 从左部出发，走未匹配边；从右部出发，走匹配边
+                for (const v of neighbors) {
+                    const edge = isLeft ? graph.getEdge(u, v) : graph.getEdge(v, u);
+                    if (!edge) continue;
+
+                    // 左部只能走未匹配边，右部只能走匹配边
+                    if (isLeft && edge.matched) continue;
+                    if (!isLeft && !edge.matched) continue;
+
+                    if (visited.has(v)) continue;
+
+                    parent[v] = u;
+
+                    // 如果v是右部未匹配点，找到增广路
+                    if (v.startsWith('R') && !graph.matchR[v]) {
+                        //  reconstruct path
+                        const path = [v];
+                        let cur = v;
+                        while (cur !== startId) {
+                            cur = parent[cur];
+                            path.push(cur);
+                        }
+                        return path.reverse();
+                    }
+
+                    const result = dfs(v);
+                    if (result) return result;
+                }
+
+                return null;
+            }
+
+            const path = dfs(startId);
+            return {found: !!path, path: path || []};
+        }
+
+        // ==================== 动画循环 ====================
+        function animate() {
+            if (autoPlay && algorithmState === 'searching') {
+                phaseTimer += animationSpeed / 5;
+                if (phaseTimer >= 30) {
+                    phaseTimer = 0;
+                    performOneStep();
+                }
+            }
+
+            draw();
+            animationId = requestAnimationFrame(animate);
+        }
+
+        // ==================== 绘制函数 ====================
+        function draw() {
+            const width = 800;
+            const height = 550;
+
+            ctx.clearRect(0, 0, width, height);
+
+            // 背景网格
+            drawGrid(width, height);
+
+            // 绘制边
+            graph.edges.forEach(edge => {
+                const u = graph.leftNodes.find(n => n.id === edge.u) || graph.rightNodes.find(n => n.id === edge.u);
+                const v = graph.leftNodes.find(n => n.id === edge.v) || graph.rightNodes.find(n => n.id === edge.v);
+                if (!u || !v) return;
+
+                drawEdge(u, v, edge);
+            });
+
+            // 绘制节点
+            [...graph.leftNodes, ...graph.rightNodes].forEach(node => {
+                drawNode(node);
+            });
+
+            // 绘制动画效果
+            if (currentNode && phase === 1) {
+                const node = [...graph.leftNodes, ...graph.rightNodes].find(n => n.id === currentNode);
+                if (node) {
+                    drawPulse(node.x, node.y, 25, 'rgba(255, 212, 0, 0.3)');
+                }
+            }
+
+            // 绘制路径动画
+            if (pathEdges.length > 0 && phase === 2) {
+                const progress = (phaseTimer / 30) || 0.5;
+                pathEdges.forEach((edge, i) => {
+                    const u = graph.leftNodes.find(n => n.id === edge.u) || graph.rightNodes.find(n => n.id === edge.u);
+                    const v = graph.leftNodes.find(n => n.id === edge.v) || graph.rightNodes.find(n => n.id === edge.v);
+                    if (!u || !v) return;
+
+                    const t = Math.min(1, Math.max(0, (progress * pathEdges.length - i)));
+                    if (t > 0) {
+                        drawAnimatedEdge(u, v, t, edge.matched);
+                    }
+                });
+            }
+        }
+
+        function drawGrid(w, h) {
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < w; x += 40) {
+                ctx.beginPath();
+                ctx.moveTo(x, 0);
+                ctx.lineTo(x, h);
+                ctx.stroke();
+            }
+            for (let y = 0; y < h; y += 40) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.lineTo(w, y);
+                ctx.stroke();
+            }
+        }
+
+        function drawEdge(u, v, edge) {
+            const isMatched = edge.matched;
+            const inPath = edge.inPath;
+
+            ctx.beginPath();
+            ctx.moveTo(u.x, u.y);
+            ctx.lineTo(v.x, v.y);
+
+            if (inPath) {
+                ctx.strokeStyle = '#ff4757';
+                ctx.lineWidth = 4;
+                ctx.setLineDash([10, 5]);
+                ctx.shadowColor = '#ff4757';
+                ctx.shadowBlur = 10;
+            } else if (isMatched) {
+                ctx.strokeStyle = '#ffd700';
+                ctx.lineWidth = 3;
+                ctx.setLineDash([]);
+                ctx.shadowColor = '#ffd700';
+                ctx.shadowBlur = 8;
+            } else {
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+                ctx.lineWidth = 1.5;
+                ctx.setLineDash([]);
+                ctx.shadowColor = 'transparent';
+                ctx.shadowBlur = 0;
+            }
+
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.shadowBlur = 0;
+
+            // 绘制方向指示（小箭头）
+            if (inPath || isMatched) {
+                const midX = (u.x + v.x) / 2;
+                const midY = (u.y + v.y) / 2;
+                const angle = Math.atan2(v.y - u.y, v.x - u.x);
+
+                ctx.save();
+                ctx.translate(midX, midY);
+                ctx.rotate(angle);
+                ctx.fillStyle = inPath ? '#ff4757' : '#ffd700';
+                ctx.beginPath();
+                ctx.moveTo(0, -3);
+                ctx.lineTo(8, 0);
+                ctx.lineTo(0, 3);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function drawAnimatedEdge(u, v, progress, isMatched) {
+            const midX = u.x + (v.x - u.x) * progress;
+            const midY = u.y + (v.y - u.y) * progress;
+
+            ctx.beginPath();
+            ctx.moveTo(u.x, u.y);
+            ctx.lineTo(midX, midY);
+            ctx.strokeStyle = isMatched ? '#ff4757' : '#00ff88';
+            ctx.lineWidth = 5;
+            ctx.shadowColor = isMatched ? '#ff4757' : '#00ff88';
+            ctx.shadowBlur = 15;
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+
+            // 流动粒子
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(midX, midY, 4, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawNode(node) {
+            const isLeft = node.id.startsWith('L');
+            const isMatched = isLeft ? !!graph.matchL[node.id] : !!graph.matchR[node.id];
+            const isCurrent = node.id === currentNode;
+            const isVisited = visitedNodes.has(node.id);
+            const inPath = augPath.includes(node.id);
+
+            const baseColor = isLeft ? '#ff6b6b' : '#4ecdc4';
+            const radius = 28;
+
+            // 外发光
+            if (isCurrent || inPath) {
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, radius + 8, 0, Math.PI * 2);
+                ctx.fillStyle = isCurrent ? 'rgba(255, 212, 0, 0.2)' : 'rgba(255, 71, 87, 0.2)';
+                ctx.fill();
+            }
+
+            // 节点圆
+            ctx.beginPath();
+            ctx.arc(node.x, node.y, radius, 0, Math.PI * 2);
+
+            if (isMatched) {
+                ctx.fillStyle = baseColor;
+                ctx.shadowColor = baseColor;
+                ctx.shadowBlur = 15;
+            } else {
+                ctx.fillStyle = isVisited ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.08)';
+                ctx.shadowBlur = 0;
+            }
+
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            // 边框
+            ctx.strokeStyle = isMatched ? '#ffd700' : (isVisited ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 0.2)');
+            ctx.lineWidth = isMatched ? 3 : 2;
+            ctx.stroke();
+
+            // 标签
+            ctx.fillStyle = '#ffffff';
+            ctx.font = 'bold 16px "Segoe UI", sans-serif';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(node.label, node.x, node.y);
+
+            // 匹配指示器
+            if (isMatched) {
+                const matchId = isLeft ? graph.matchL[node.id] : graph.matchR[node.id];
+                const matchNode = [...graph.leftNodes, ...graph.rightNodes].find(n => n.id === matchId);
+                if (matchNode) {
+                    ctx.fillStyle = '#ffd700';
+                    ctx.font = '12px sans-serif';
+                    ctx.fillText(`↔${matchNode.label}`, node.x, node.y + radius + 18);
+                }
+            }
+        }
+
+        function drawPulse(x, y, radius, color) {
+            const time = Date.now() / 1000;
+            const pulseRadius = radius + Math.sin(time * 3) * 8;
+            const alpha = 0.3 + Math.sin(time * 3) * 0.2;
+
+            ctx.beginPath();
+            ctx.arc(x, y, pulseRadius, 0, Math.PI * 2);
+            ctx.fillStyle = color.replace(/[\d.]+\)$/, alpha + ')');
+            ctx.fill();
+        }
+
+        // ==================== UI更新 ====================
+        function updateStatus() {
+            const matchCount = Object.keys(graph.matchL).length;
+            document.getElementById('matchCount').textContent = matchCount;
+
+            // 计算最大匹配（简单估计）
+            const maxPossible = Math.min(graph.leftNodes.length, graph.rightNodes.length);
+            document.getElementById('maxMatch').textContent = algorithmState === 'done' ? matchCount : `${matchCount}/${maxPossible}`;
+
+            const phaseNames = ['选择起点', 'DFS探索', '找到增广路', '翻转状态', '完成'];
+            document.getElementById('currentStep').textContent = algorithmState === 'done' ? '完成' : 
+                algorithmState === 'idle' ? '准备' : phaseNames[phase];
+
+            document.getElementById('augPathLen').textContent = augPath.length > 0 ? augPath.length - 1 : '-';
+        }
+
+        function updateInfo(html) {
+            document.getElementById('infoBox').innerHTML = html;
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2500);
+        }
+
+        // ==================== 启动 ====================
+        window.onload = init;
+    </script>
+</body>
+</html>
