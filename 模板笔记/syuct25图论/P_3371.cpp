@@ -1,28 +1,15 @@
 #include <bits/stdc++.h>
 using namespace std ;
 const int N=10100;
-long long dist[N];int n,m,s;
+int dist[N];int n,m,s;
 vector<pair<int,int>> v[N];
 bool vis[N];
-void dijie(){
-    for(int i=0;i<n;i++){
-        int t=-1;
-        for(int j=1;j<=n;j++){
-            if(!vis[j]&&(t==-1||dist[j]<dist[t]))   t=j;
-        }
-        if(t==-1)   return;
-        vis[t]=1;//t被加S集合里了
-        for(auto [l,r]:v[t]){
-            dist[l]=min(dist[l],dist[t]+r);
-        }
-    }
-}
 int main ()
 {    
     
     cin >>n>>m>>s;
     for(int i=1;i<=n;i++){
-        dist[i]=((long long)1<<31)-1;
+        dist[i]=(1<<31)-1;
     }
     dist[s]=0;
     while(m--){
@@ -30,7 +17,20 @@ int main ()
         cin >>u>>x>>a;
         v[u].push_back({x,a});
     }
-    dijie();
+    priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> q;
+    q.push({0,s});
+    while(!q.empty()){
+        auto [l,r]=q.top();//取出当前距离源点最近点
+        q.pop();
+        if(vis[r])  continue;//如果当前点最短距离已经被确定，那么跳过
+        vis[r]=1;//标记这个点的最短距离已经被确定
+        for(auto [a,b]:v[r]){//遍历r的所有出边
+            if(dist[a]>dist[r]+b){
+                dist[a]=dist[r]+b;
+                q.push({dist[a],a});//如果这个点最短距离被更新，那么将这个点加入队列中
+            }
+        }
+    }
     for(int i=1;i<=n;i++)
     cout <<dist[i]<<" ";
 }
