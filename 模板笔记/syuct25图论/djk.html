@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dijkstra 算法可视化 - 最短路径模拟</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #eaeaea;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            border-bottom: 2px solid #0f3460;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.2em;
+            background: linear-gradient(90deg, #e94560, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 0.95em;
+        }
+        
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            gap: 20px;
+            height: calc(100vh - 140px);
+            min-height: 600px;
+        }
+        
+        @media (max-width: 1200px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto 1fr auto;
+                height: auto;
+            }
+        }
+        
+        .panel {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+        
+        .panel h3 {
+            color: #e94560;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .panel h3::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 18px;
+            background: #e94560;
+            border-radius: 2px;
+        }
+        
+        .control-group {
+            margin-bottom: 18px;
+        }
+        
+        .control-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.85em;
+            color: #b0b0b0;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 8px;
+            border: none;
+            border-radius: 8px;
+            background: #0f3460;
+            color: #eaeaea;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        button:hover:not(:disabled) {
+            background: #e94560;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+        }
+        
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        button.primary {
+            background: linear-gradient(135deg, #e94560, #c73e54);
+            font-weight: 600;
+        }
+        
+        button.primary:hover:not(:disabled) {
+            background: linear-gradient(135deg, #ff6b6b, #e94560);
+        }
+        
+        button.danger {
+            background: #533483;
+        }
+        
+        button.danger:hover:not(:disabled) {
+            background: #7c3aed;
+        }
+        
+        .mode-indicator {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            background: #0f3460;
+            color: #eaeaea;
+        }
+        
+        .mode-indicator.active {
+            background: #e94560;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        #canvas-container {
+            position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+        
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .canvas-hint {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.8em;
+            color: #a0a0a0;
+            pointer-events: none;
+            line-height: 1.6;
+        }
+        
+        .speed-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        input[type="range"] {
+            flex: 1;
+            -webkit-appearance: none;
+            height: 6px;
+            border-radius: 3px;
+            background: #0f3460;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #e94560;
+            cursor: pointer;
+        }
+        
+        .info-box {
+            background: rgba(15, 52, 96, 0.3);
+            border-left: 3px solid #e94560;
+            padding: 12px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 15px;
+            font-size: 0.85em;
+            line-height: 1.5;
+            min-height: 60px;
+        }
+        
+        .dist-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85em;
+            margin-top: 10px;
+        }
+        
+        .dist-table th,
+        .dist-table td {
+            padding: 6px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dist-table th {
+            background: rgba(15, 52, 96, 0.5);
+            color: #e94560;
+            font-weight: 600;
+        }
+        
+        .dist-table td {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+        }
+        
+        .dist-table td.infinity {
+            color: #666;
+        }
+        
+        .dist-table td.updated {
+            color: #ffd93d;
+            animation: flash 0.5s;
+        }
+        
+        .dist-table td.confirmed {
+            color: #6bcb77;
+            font-weight: 700;
+        }
+        
+        @keyframes flash {
+            0% { background: rgba(255, 217, 61, 0.3); }
+            100% { background: transparent; }
+        }
+        
+        .queue-display {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            min-height: 100px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            line-height: 1.8;
+        }
+        
+        .queue-item {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 2px;
+            background: rgba(15, 52, 96, 0.6);
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .queue-item.current {
+            background: rgba(233, 69, 96, 0.3);
+            border-color: #e94560;
+            font-weight: bold;
+        }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+            font-size: 0.8em;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .stat-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #e94560;
+        }
+        
+        .stat-label {
+            font-size: 0.75em;
+            color: #a0a0a0;
+            margin-top: 4px;
+        }
+        
+        /* 权重输入弹窗 */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal {
+            background: #1a1a2e;
+            border: 1px solid #0f3460;
+            border-radius: 16px;
+            padding: 24px;
+            min-width: 300px;
+            text-align: center;
+        }
+        
+        .modal h4 {
+            color: #e94560;
+            margin-bottom: 15px;
+        }
+        
+        .modal input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #0f3460;
+            background: rgba(0, 0, 0, 0.3);
+            color: #eaeaea;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 1em;
+            text-align: center;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .modal-buttons button {
+            flex: 1;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ Dijkstra 算法可视化模拟器</h1>
+            <div class="subtitle">交互式单源最短路径算法演示 | 支持建图、单步调试、自动播放</div>
+        </header>
+        
+        <div class="main-layout">
+            <!-- 左侧面板：控制与图例 -->
+            <div class="panel">
+                <h3>操作模式</h3>
+                <div id="mode-indicator" class="mode-indicator active">添加节点模式</div>
+                <div class="control-group">
+                    <button onclick="setMode('addNode')" id="btn-add-node">➕ 添加节点 (点击画布)</button>
+                    <button onclick="setMode('addEdge')" id="btn-add-edge">🔗 添加边 (选两个节点)</button>
+                    <button onclick="setMode('move')" id="btn-move">✋ 拖拽移动节点</button>
+                    <button onclick="setMode('delete')" id="btn-delete">🗑️ 删除节点/边</button>
+                </div>
+                
+                <h3>图操作</h3>
+                <div class="control-group">
+                    <button onclick="generateRandomGraph()" class="danger">🎲 随机生成图</button>
+                    <button onclick="clearGraph()" class="danger">🗑️ 清空画布</button>
+                    <button onclick="loadPreset('classic')">📋 经典样例图</button>
+                </div>
+                
+                <h3>图例说明</h3>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #4ecdc4;"></div>
+                        <span>源点</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #95e1d3;"></div>
+                        <span>未访问</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ffd93d;"></div>
+                        <span>待处理(队列中)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #e94560;"></div>
+                        <span>当前处理</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #6bcb77;"></div>
+                        <span>已确定最短路</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 中间画布 -->
+            <div class="panel" id="canvas-container">
+                <canvas id="graphCanvas"></canvas>
+                <div class="canvas-hint">
+                    💡 操作提示：<br>
+                    • 左键点击空白处：添加节点<br>
+                    • 右键点击节点：设为源点<br>
+                    • 拖拽节点：调整位置<br>
+                    • 双击节点/边：删除
+                </div>
+            </div>
+            
+            <!-- 右侧面板：算法状态 -->
+            <div class="panel">
+                <h3>算法控制</h3>
+                <div class="control-group">
+                    <button onclick="startDijkstra()" class="primary" id="btn-start">▶️ 开始 Dijkstra</button>
+                    <button onclick="pauseDijkstra()" id="btn-pause" disabled>⏸️ 暂停</button>
+                    <button onclick="stepDijkstra()" id="btn-step" disabled">⏭️ 单步执行</button>
+                    <button onclick="resetDijkstra()" id="btn-reset">🔄 重置算法</button>
+                </div>
+                
+                <div class="speed-control">
+                    <span>速度:</span>
+                    <input type="range" id="speedSlider" min="1" max="10" value="5">
+                    <span id="speedValue">5</span>
+                </div>
+                
+                <h3>执行状态</h3>
+                <div class="info-box" id="status-info">
+                    点击"开始 Dijkstra"运行算法，或先构建/导入一个图。
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-value" id="step-count">0</div>
+                        <div class="stat-label">执行步数</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-value" id="node-processed">0</div>
+                        <div class="stat-label">已处理节点</div>
+                    </div>
+                </div>
+                
+                <h3>距离数组 (dist[])</h3>
+                <table class="dist-table" id="dist-table">
+                    <thead>
+                        <tr id="dist-header"></tr>
+                    </thead>
+                    <tbody>
+                        <tr id="dist-values"></tr>
+                    </tbody>
+                </table>
+                
+                <h3>优先队列 (Priority Queue)</h3>
+                <div class="queue-display" id="queue-display">
+                    <span style="color: #666;">队列为空</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 权重输入弹窗 -->
+    <div class="modal-overlay" id="weightModal">
+        <div class="modal">
+            <h4>设置边权重</h4>
+            <input type="number" id="weightInput" value="5" min="1" max="999">
+            <div class="modal-buttons">
+                <button onclick="confirmWeight()" class="primary">确认</button>
+                <button onclick="cancelWeight()">取消</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==================== 核心数据结构 ====================
+        const canvas = document.getElementById('graphCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let nodes = [];
+        let edges = [];
+        let nextId = 0;
+        let sourceNode = null;
+        
+        // 交互状态
+        let mode = 'addNode'; // addNode, addEdge, move, delete
+        let selectedNode = null;
+        let draggingNode = null;
+        let hoverNode = null;
+        let pendingEdge = null; // {from, to} 等待输入权重
+        
+        // 算法状态
+        let algorithmState = {
+            running: false,
+            paused: false,
+            step: 0,
+            dist: {},
+            prev: {},
+            pq: [], // 优先队列，元素: {node, dist}
+            visited: new Set(),
+            currentNode: null,
+            relaxingEdge: null,
+            finished: false,
+            timer: null
+        };
+        
+        // 视觉配置
+        const NODE_RADIUS = 22;
+        const COLORS = {
+            source: '#4ecdc4',
+            unvisited: '#95e1d3',
+            queued: '#ffd93d',
+            current: '#e94560',
+            confirmed: '#6bcb77',
+            edge: 'rgba(255, 255, 255, 0.3)',
+            edgeHighlight: '#e94560',
+            edgeRelax: '#ffd93d',
+            text: '#ffffff',
+            bg: '#1a1a2e'
+        };
+        
+        // ==================== 初始化 ====================
+        function resizeCanvas() {
+            const container = document.getElementById('canvas-container');
+            canvas.width = container.clientWidth;
+            canvas.height = container.clientHeight;
+            draw();
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        
+        // ==================== 图操作 ====================
+        function addNode(x, y) {
+            const node = {
+                id: nextId++,
+                x: x,
+                y: y,
+                label: String.fromCharCode(65 + (nextId - 1) % 26) + (nextId > 26 ? Math.floor((nextId-1)/26) : '')
+            };
+            nodes.push(node);
+            if (!sourceNode) sourceNode = node;
+            updateDistTable();
+            draw();
+            return node;
+        }
+        
+        function addEdge(from, to, weight) {
+            // 检查是否已存在
+            const exists = edges.find(e => 
+                (e.from === from && e.to === to) || (e.from === to && e.to === from)
+            );
+            if (exists) {
+                exists.weight = weight;
+            } else {
+                edges.push({ from, to, weight, id: edges.length });
+            }
+            draw();
+        }
+        
+        function deleteNode(node) {
+            nodes = nodes.filter(n => n !== node);
+            edges = edges.filter(e => e.from !== node && e.to !== node);
+            if (sourceNode === node) sourceNode = nodes[0] || null;
+            resetDijkstra();
+            updateDistTable();
+            draw();
+        }
+        
+        function deleteEdge(edge) {
+            edges = edges.filter(e => e !== edge);
+            draw();
+        }
+        
+        function clearGraph() {
+            nodes = [];
+            edges = [];
+            nextId = 0;
+            sourceNode = null;
+            resetDijkstra();
+            updateDistTable();
+            draw();
+        }
+        
+        function generateRandomGraph() {
+            clearGraph();
+            const count = 6 + Math.floor(Math.random() * 5); // 6-10个节点
+            const width = canvas.width - 100;
+            const height = canvas.height - 100;
+            
+            // 生成节点，避免重叠
+            for (let i = 0; i < count; i++) {
+                let x, y, attempts = 0;
+                do {
+                    x = 50 + Math.random() * width;
+                    y = 50 + Math.random() * height;
+                    attempts++;
+                } while (attempts < 50 && nodes.some(n => Math.hypot(n.x - x, n.y - y) < 80));
+                addNode(x, y);
+            }
+            
+            // 生成边，确保连通性（生成树）
+            for (let i = 1; i < nodes.length; i++) {
+                const target = Math.floor(Math.random() * i);
+                const weight = 1 + Math.floor(Math.random() * 20);
+                addEdge(nodes[i], nodes[target], weight);
+            }
+            
+            // 添加额外随机边
+            const extraEdges = Math.floor(count * 1.5);
+            for (let i = 0; i < extraEdges; i++) {
+                const a = nodes[Math.floor(Math.random() * nodes.length)];
+                const b = nodes[Math.floor(Math.random() * nodes.length)];
+                if (a !== b && !edges.find(e => 
+                    (e.from === a && e.to === b) || (e.from === b && e.to === a)
+                )) {
+                    addEdge(a, b, 1 + Math.floor(Math.random() * 20));
+                }
+            }
+            
+            sourceNode = nodes[0];
+            updateDistTable();
+            draw();
+        }
+        
+        function loadPreset(type) {
+            clearGraph();
+            if (type === 'classic') {
+                // 经典Dijkstra样例
+                const n0 = addNode(100, 150);
+                const n1 = addNode(300, 80);
+                const n2 = addNode(500, 150);
+                const n3 = addNode(200, 300);
+                const n4 = addNode(400, 300);
+                const n5 = addNode(600, 300);
+                
+                addEdge(n0, n1, 4);
+                addEdge(n0, n3, 2);
+                addEdge(n1, n2, 3);
+                addEdge(n1, n3, 1);
+                addEdge(n1, n4, 5);
+                addEdge(n3, n4, 3);
+                addEdge(n3, n5, 6);
+                addEdge(n4, n2, 2);
+                addEdge(n4, n5, 1);
+                addEdge(n2, n5, 4);
+                
+                sourceNode = n0;
+            }
+            updateDistTable();
+            draw();
+        }
+        
+        // ==================== 交互处理 ====================
+        function setMode(newMode) {
+            mode = newMode;
+            selectedNode = null;
+            pendingEdge = null;
+            
+            // 更新UI
+            document.querySelectorAll('.mode-indicator').forEach(el => el.remove());
+            const indicator = document.createElement('div');
+            indicator.className = 'mode-indicator active';
+            
+            const labels = {
+                addNode: '添加节点模式',
+                addEdge: '添加边模式',
+                move: '拖拽移动模式',
+                delete: '删除模式'
+            };
+            indicator.textContent = labels[newMode];
+            
+            const panel = document.querySelector('.panel');
+            panel.insertBefore(indicator, panel.children[1]);
+            
+            // 更新按钮状态
+            ['add-node', 'add-edge', 'move', 'delete'].forEach(id => {
+                document.getElementById('btn-' + id).style.background = '';
+            });
+            document.getElementById('btn-' + newMode.replace(/([A-Z])/g, '-$1').toLowerCase()).style.background = '#e94560';
+            
+            draw();
+        }
+        
+        canvas.addEventListener('mousedown', e => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const clickedNode = getNodeAt(x, y);
+            
+            if (mode === 'addNode' && !clickedNode) {
+                addNode(x, y);
+            } else if (mode === 'addEdge') {
+                if (clickedNode) {
+                    if (!selectedNode) {
+                        selectedNode = clickedNode;
+                        draw();
+                    } else if (selectedNode !== clickedNode) {
+                        pendingEdge = { from: selectedNode, to: clickedNode };
+                        document.getElementById('weightModal').style.display = 'flex';
+                        document.getElementById('weightInput').focus();
+                        selectedNode = null;
+                    }
+                }
+            } else if (mode === 'move') {
+                if (clickedNode) draggingNode = clickedNode;
+            } else if (mode === 'delete') {
+                if (clickedNode) deleteNode(clickedNode);
+                else {
+                    const edge = getEdgeAt(x, y);
+                    if (edge) deleteEdge(edge);
+                }
+            }
+        });
+        
+        canvas.addEventListener('mousemove', e => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            if (draggingNode) {
+                draggingNode.x = x;
+                draggingNode.y = y;
+                draw();
+            } else {
+                hoverNode = getNodeAt(x, y);
+                canvas.style.cursor = hoverNode ? 'pointer' : (mode === 'addNode' ? 'crosshair' : 'default');
+                draw();
+            }
+        });
+        
+        canvas.addEventListener('mouseup', () => {
+            draggingNode = null;
+        });
+        
+        canvas.addEventListener('contextmenu', e => {
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const node = getNodeAt(x, y);
+            if (node) {
+                sourceNode = node;
+                resetDijkstra();
+                updateDistTable();
+                draw();
+            }
+        });
+        
+        canvas.addEventListener('dblclick', e => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const node = getNodeAt(x, y);
+            if (node) {
+                deleteNode(node);
+            } else {
+                const edge = getEdgeAt(x, y);
+                if (edge) deleteEdge(edge);
+            }
+        });
+        
+        function getNodeAt(x, y) {
+            return nodes.find(n => Math.hypot(n.x - x, n.y - y) <= NODE_RADIUS);
+        }
+        
+        function getEdgeAt(x, y) {
+            return edges.find(e => {
+                const d = pointToLineDistance(x, y, e.from.x, e.from.y, e.to.x, e.to.y);
+                return d < 10;
+            });
+        }
+        
+        function pointToLineDistance(px, py, x1, y1, x2, y2) {
+            const A = px - x1;
+            const B = py - y1;
+            const C = x2 - x1;
+            const D = y2 - y1;
+            const dot = A * C + B * D;
+            const lenSq = C * C + D * D;
+            let param = -1;
+            if (lenSq !== 0) param = dot / lenSq;
+            let xx, yy;
+            if (param < 0) { xx = x1; yy = y1; }
+            else if (param > 1) { xx = x2; yy = y2; }
+            else { xx = x1 + param * C; yy = y1 + param * D; }
+            return Math.hypot(px - xx, py - yy);
+        }
+        
+        function confirmWeight() {
+            const w = parseInt(document.getElementById('weightInput').value) || 1;
+            if (pendingEdge) {
+                addEdge(pendingEdge.from, pendingEdge.to, w);
+                pendingEdge = null;
+            }
+            document.getElementById('weightModal').style.display = 'none';
+        }
+        
+        function cancelWeight() {
+            pendingEdge = null;
+            selectedNode = null;
+            document.getElementById('weightModal').style.display = 'none';
+            draw();
+        }
+        
+        document.getElementById('weightInput').addEventListener('keypress', e => {
+            if (e.key === 'Enter') confirmWeight();
+            if (e.key === 'Escape') cancelWeight();
+        });
+        
+        // ==================== 绘制 ====================
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制边
+            edges.forEach(edge => {
+                const isHighlight = algorithmState.relaxingEdge === edge;
+                const isPath = isShortestPathEdge(edge);
+                
+                ctx.beginPath();
+                ctx.moveTo(edge.from.x, edge.from.y);
+                ctx.lineTo(edge.to.x, edge.to.y);
+                ctx.strokeStyle = isHighlight ? COLORS.edgeRelax : (isPath ? COLORS.confirmed : COLORS.edge);
+                ctx.lineWidth = isHighlight ? 4 : (isPath ? 3 : 2);
+                ctx.stroke();
+                
+                // 权重标签
+                const mx = (edge.from.x + edge.to.x) / 2;
+                const my = (edge.from.y + edge.to.y) / 2;
+                ctx.fillStyle = isHighlight ? COLORS.edgeRelax : '#a0a0a0';
+                ctx.font = 'bold 13px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                
+                // 背景
+                const text = String(edge.weight);
+                const metrics = ctx.measureText(text);
+                ctx.fillStyle = 'rgba(26, 26, 46, 0.9)';
+                ctx.fillRect(mx - metrics.width/2 - 4, my - 8, metrics.width + 8, 16);
+                
+                ctx.fillStyle = isHighlight ? COLORS.edgeRelax : '#eaeaea';
+                ctx.fillText(text, mx, my);
+            });
+            
+            // 绘制节点
+            nodes.forEach(node => {
+                const isSource = node === sourceNode;
+                const isCurrent = algorithmState.currentNode === node;
+                const isVisited = algorithmState.visited.has(node);
+                const isQueued = algorithmState.pq.some(item => item.node === node);
+                
+                let color = COLORS.unvisited;
+                if (isSource && algorithmState.step === 0) color = COLORS.source;
+                else if (isCurrent) color = COLORS.current;
+                else if (isVisited) color = COLORS.confirmed;
+                else if (isQueued) color = COLORS.queued;
+                
+                // 外发光效果
+                if (isCurrent || (isSource && algorithmState.step === 0)) {
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, NODE_RADIUS + 8, 0, Math.PI * 2);
+                    ctx.fillStyle = color + '33';
+                    ctx.fill();
+                }
+                
+                // 节点圆
+                ctx.beginPath();
+                ctx.arc(node.x, node.y, NODE_RADIUS, 0, Math.PI * 2);
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+                
+                // 标签
+                ctx.fillStyle = '#1a1a2e';
+                ctx.font = 'bold 14px sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(node.label, node.x, node.y - 2);
+                
+                // 距离标注（算法运行时）
+                if (algorithmState.step > 0 && algorithmState.dist[node.id] !== undefined) {
+                    const d = algorithmState.dist[node.id];
+                    const distText = d === Infinity ? '∞' : d;
+                    ctx.fillStyle = isVisited ? COLORS.confirmed : (isQueued ? COLORS.queued : '#a0a0a0');
+                    ctx.font = 'bold 11px sans-serif';
+                    ctx.fillText(distText, node.x, node.y + NODE_RADIUS + 14);
+                }
+                
+                // 选中高亮
+                if (node === selectedNode || node === hoverNode) {
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, NODE_RADIUS + 4, 0, Math.PI * 2);
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([4, 4]);
+                    ctx.stroke();
+                    ctx.setLineDash([]);
+                }
+            });
+        }
+        
+        function isShortestPathEdge(edge) {
+            if (!algorithmState.finished) return false;
+            // 检查这条边是否在最短路径树中
+            const u = edge.from, v = edge.to;
+            return (algorithmState.prev[v.id] === u && algorithmState.dist[v.id] === algorithmState.dist[u.id] + edge.weight) ||
+                   (algorithmState.prev[u.id] === v && algorithmState.dist[u.id] === algorithmState.dist[v.id] + edge.weight);
+        }
+        
+        // ==================== Dijkstra 算法核心 ====================
+        function initDijkstra() {
+            if (!sourceNode) {
+                alert('请先设置源点（右键点击节点）');
+                return false;
+            }
+            
+            algorithmState.dist = {};
+            algorithmState.prev = {};
+            algorithmState.pq = [];
+            algorithmState.visited = new Set();
+            algorithmState.step = 0;
+            algorithmState.currentNode = null;
+            algorithmState.relaxingEdge = null;
+            algorithmState.finished = false;
+            
+            nodes.forEach(n => {
+                algorithmState.dist[n.id] = Infinity;
+                algorithmState.prev[n.id] = null;
+            });
+            
+            algorithmState.dist[sourceNode.id] = 0;
+            algorithmState.pq.push({ node: sourceNode, dist: 0 });
+            
+            return true;
+        }
+        
+        function dijkstraStep() {
+            if (algorithmState.finished) return false;
+            
+            // 找最小
+            if (algorithmState.pq.length === 0) {
+                algorithmState.finished = true;
+                algorithmState.currentNode = null;
+                algorithmState.relaxingEdge = null;
+                updateStatus('算法结束！所有可达节点已确定最短路径。');
+                updateControls();
+                draw();
+                return false;
+            }
+            
+            // 按距离排序取最小（简化版优先队列）
+            algorithmState.pq.sort((a, b) => a.dist - b.dist);
+            const current = algorithmState.pq.shift();
+            
+            // 如果已经访问过则跳过（处理过时的队列元素）
+            if (algorithmState.visited.has(current.node)) {
+                return true; // 继续下一步
+            }
+            
+            algorithmState.currentNode = current.node;
+            algorithmState.visited.add(current.node);
+            algorithmState.step++;
+            
+            updateStatus(`步骤 ${algorithmState.step}: 取出节点 ${current.node.label} (距离=${current.dist})，检查其邻接边...`);
+            
+            // 检查邻居
+            const neighbors = edges.filter(e => e.from === current.node || e.to === current.node);
+            let relaxCount = 0;
+            
+            neighbors.forEach(edge => {
+                const neighbor = edge.from === current.node ? edge.to : edge.from;
+                if (algorithmState.visited.has(neighbor)) return;
+                
+                const newDist = algorithmState.dist[current.node.id] + edge.weight;
+                
+                algorithmState.relaxingEdge = edge;
+                updateDistTable();
+                updateQueueDisplay();
+                draw();
+                
+                if (newDist < algorithmState.dist[neighbor.id]) {
+                    algorithmState.dist[neighbor.id] = newDist;
+                    algorithmState.prev[neighbor.id] = current.node;
+                    algorithmState.pq.push({ node: neighbor, dist: newDist });
+                    relaxCount++;
+                    updateStatus(`步骤 ${algorithmState.step}: 松弛边 ${current.node.label}-${neighbor.label}，更新 ${neighbor.label} 的距离为 ${newDist}`);
+                }
+            });
+            
+            if (relaxCount === 0) {
+                updateStatus(`步骤 ${algorithmState.step}: 节点 ${current.node.label} 处理完成，无邻接点需要更新。`);
+            }
+            
+            algorithmState.relaxingEdge = null;
+            updateDistTable();
+            updateQueueDisplay();
+            updateStats();
+            draw();
+            
+            return true;
+        }
+        
+        // ==================== 控制逻辑 ====================
+        function startDijkstra() {
+            if (algorithmState.running) return;
+            
+            if (algorithmState.step === 0 && !algorithmState.paused) {
+                if (!initDijkstra()) return;
+            }
+            
+            algorithmState.running = true;
+            algorithmState.paused = false;
+            updateControls();
+            
+            const speed = 11 - parseInt(document.getElementById('speedSlider').value);
+            const delay = speed * 200;
+            
+            function loop() {
+                if (!algorithmState.running || algorithmState.paused) return;
+                
+                const continued = dijkstraStep();
+                if (continued && !algorithmState.finished) {
+                    algorithmState.timer = setTimeout(loop, delay);
+                } else {
+                    algorithmState.running = false;
+                    updateControls();
+                }
+            }
+            
+            loop();
+        }
+        
+        function pauseDijkstra() {
+            algorithmState.paused = true;
+            algorithmState.running = false;
+            if (algorithmState.timer) clearTimeout(algorithmState.timer);
+            updateControls();
+            updateStatus('算法已暂停，点击"继续"或"单步执行"');
+        }
+        
+        function stepDijkstra() {
+            if (algorithmState.step === 0 && !algorithmState.paused) {
+                if (!initDijkstra()) return;
+            }
+            
+            algorithmState.paused = true;
+            algorithmState.running = false;
+            if (algorithmState.timer) clearTimeout(algorithmState.timer);
+            
+            dijkstraStep();
+            updateControls();
+        }
+        
+        function resetDijkstra() {
+            algorithmState.running = false;
+            algorithmState.paused = false;
+            if (algorithmState.timer) clearTimeout(algorithmState.timer);
+            algorithmState.step = 0;
+            algorithmState.dist = {};
+            algorithmState.prev = {};
+            algorithmState.pq = [];
+            algorithmState.visited = new Set();
+            algorithmState.currentNode = null;
+            algorithmState.relaxingEdge = null;
+            algorithmState.finished = false;
+            
+            updateStatus('已重置。构建图后点击"开始 Dijkstra"运行算法。');
+            updateDistTable();
+            updateQueueDisplay();
+            updateStats();
+            updateControls();
+            draw();
+        }
+        
+        // ==================== UI 更新 ====================
+        function updateStatus(msg) {
+            document.getElementById('status-info').textContent = msg;
+        }
+        
+        function updateStats() {
+            document.getElementById('step-count').textContent = algorithmState.step;
+            document.getElementById('node-processed').textContent = algorithmState.visited.size;
+        }
+        
+        function updateControls() {
+            const running = algorithmState.running && !algorithmState.paused;
+            const started = algorithmState.step > 0 || algorithmState.pq.length > 0;
+            const finished = algorithmState.finished;
+            
+            document.getElementById('btn-start').textContent = running ? '▶️ 运行中...' : (started && !finished ? '▶️ 继续' : '▶️ 开始 Dijkstra');
+            document.getElementById('btn-start').disabled = running || finished;
+            document.getElementById('btn-pause').disabled = !running;
+            document.getElementById('btn-step').disabled = running || finished;
+        }
+        
+        function updateDistTable() {
+            const header = document.getElementById('dist-header');
+            const values = document.getElementById('dist-values');
+            
+            header.innerHTML = '';
+            values.innerHTML = '';
+            
+            nodes.forEach(node => {
+                const th = document.createElement('th');
+                th.textContent = node.label;
+                header.appendChild(th);
+                
+                const td = document.createElement('td');
+                const dist = algorithmState.dist[node.id];
+                
+                if (dist === undefined || dist === Infinity) {
+                    td.textContent = '∞';
+                    td.className = 'infinity';
+                } else {
+                    td.textContent = dist;
+                    if (algorithmState.visited.has(node)) {
+                        td.className = 'confirmed';
+                    } else if (algorithmState.pq.some(item => item.node === node)) {
+                        td.className = 'updated';
+                    }
+                }
+                
+                values.appendChild(td);
+            });
+        }
+        
+        function updateQueueDisplay() {
+            const display = document.getElementById('queue-display');
+            if (algorithmState.pq.length === 0) {
+                display.innerHTML = '<span style="color: #666;">队列为空</span>';
+                return;
+            }
+            
+            // 排序显示
+            const sorted = [...algorithmState.pq].sort((a, b) => a.dist - b.dist);
+            display.innerHTML = sorted.map((item, idx) => {
+                const isCurrent = algorithmState.currentNode === item.node;
+                return `<span class="queue-item ${isCurrent ? 'current' : ''}">${item.node.label}:${item.dist}</span>`;
+            }).join('');
+        }
+        
+        document.getElementById('speedSlider').addEventListener('input', e => {
+            document.getElementById('speedValue').textContent = e.target.value;
+        });
+        
+        // ==================== 启动 ====================
+        resizeCanvas();
+        setMode('addNode');
+        loadPreset('classic');
+        updateDistTable();
+    </script>
+</body>
+</html>
