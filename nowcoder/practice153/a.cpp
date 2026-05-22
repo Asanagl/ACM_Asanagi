@@ -17,7 +17,27 @@ using ll = long long ;
 
 void Asanagi()
 {
-    
+    string s;
+    cin >> s;
+    int c2 = 0, c20 = 0, c202 = 0, mx = 0;
+    int ans = 0, n = s.size();
+    for (int i = 0; i < n; i++) 
+    {
+        if (s[i] == '2') 
+        {
+            c202 += c20;
+            ++c2;
+        } else if (s[i] == '0') 
+        {
+            c20 += c2;
+        }
+        if (c202 > mx) 
+        {
+            mx = c202;
+            ans = i + 1;
+        }
+    }
+    cout << ans << endl;
 }
 
 signed main()
