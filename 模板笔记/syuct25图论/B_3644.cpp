@@ -64,7 +64,7 @@ int main()
 
            // 若入度减为 0，说明 it 的所有前驱都已被处理，可以入队等待输出
            if (pt[it].du == 0)
-               qe.push(it);>
+               qe.push(it);
        }
    }
 

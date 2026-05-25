@@ -1,0 +1,1 @@
+{"name":"Local: E","url":"c:\\Users\\Asanagi\\Documents\\ACM\\ACM_Asanagi\\模板笔记\\syuct25图论\\E.cpp","tests":[{"id":1779707330969,"input":"4 3\n1 2\n2 3\n4 3\n","output":"1 2 4 3"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Asanagi\\Documents\\ACM\\ACM_Asanagi\\模板笔记\\syuct25图论\\E.cpp","group":"local","local":true}
