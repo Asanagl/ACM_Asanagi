@@ -21,21 +21,23 @@ int find (int n)
     if(fa[n] == n) return n ;
     else return fa[n] = find(fa[n]) ; 
 }
-void merge(int x, int y)
+bool merge(int x, int y)
 {
     x = find(x);
     y = find(y);
     if (x == y)
-        return;
+        return false;
     if (siz[x] > siz[y])
     {
         fa[y] = x;
         siz[x] += siz[y];
+        return true ;
     }
     else
     {
         fa[x] = y;
         siz[y] += siz[x];
+        return true ;
     }
 }
 struct graph 
@@ -46,7 +48,34 @@ struct graph
 void Asanagi() {
     int n ;
     cin >> n ;
-    
+    vector <graph> v (N) ;
+    for (int i = 0 ; i <= n ; i++)
+    {
+        fa[i] = i ;
+        siz[i] = 1 ;
+    }
+    vector<int> w(n + 1);
+    for (int i = 1; i <= n; i++) cin >> w[i];
+    vector<graph> e;
+    for (int i = 1; i <= n; i++) 
+    e.pb({0, i, w[i]});
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; ++j) {
+            int x; cin >> x;
+            if (i < j) e.pb({i, j, x});
+        }
+    }
+    sort(e.begin() , e.end() , [](graph a,graph b) {return a.z < b.z ;}) ;
+    int ans = 0  , sad = 0  ;
+    for (auto &it : e) 
+    {
+        if (merge(it.x , it.y))
+        {
+            ans += it.z ;
+            if (++sad == n ) break ; 
+        }
+    }
+    cout << ans << endl ;
 }
 
 signed main()
