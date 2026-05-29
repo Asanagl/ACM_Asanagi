@@ -1,0 +1,1 @@
+{"name":"Local: K","url":"c:\\Users\\Asanagi\\Documents\\ACM\\ACM_Asanagi\\模板笔记\\syuct25图论\\K.cpp","tests":[{"id":1779863926536,"input":"2\n2\n10 10\n20 20\n3\n1 1\n2 2\n1000 1000\n","output":"1414.2\noh!\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"c:\\Users\\Asanagi\\Documents\\ACM\\ACM_Asanagi\\模板笔记\\syuct25图论\\K.cpp","group":"local","local":true}
