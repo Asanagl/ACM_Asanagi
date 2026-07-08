@@ -38,8 +38,6 @@ void Asanagi()
         for (int j = 1 ; j <= 4 * n  - i ; j++)
         {
             flag = true ;
-            
-            
             if (v[j].second > v[j+1].second && (v[j].first == v[j+1].first) )
             {
                 temp = v[j];
@@ -58,27 +56,14 @@ void Asanagi()
         }
         if(!flag) break;
     }
-    for (int i = 0 ; i <= 3 ; i ++)
-    {
-        for (int j = 1 ; j < n ; j++)
-        {
-            int idx = j + i*n ;
-            if (!(v[idx].first <= v[idx+1].first && v[idx].second == v[idx+1].second))
-            {
-                cout << "No" << endl ;
-                return;
-            }
+    for (int i = 1; i < 4 * n; ++i) {
+        if (v[i].second > v[i+1].second) {
+            cout << "No" << endl ;
+            return;
         }
-    }
-    if (n==1) 
-    {
-        for (int i = 1 ; i < 4*n ; i++)
-        {
-            if (v[i].second > v[i+1].second)
-            {
-                cout << "No" << endl ;
-                return ;
-            }
+        if (v[i].second == v[i+1].second && v[i].first > v[i+1].first) {
+            cout << "No" << endl ;
+            return;
         }
     }
     cout << "Yes" << endl ;
