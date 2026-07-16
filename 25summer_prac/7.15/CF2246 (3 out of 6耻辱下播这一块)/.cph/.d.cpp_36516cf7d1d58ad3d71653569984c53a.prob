@@ -1,0 +1,1 @@
+{"name":"Local: d","url":"d:\\ACM\\25summer_prac\\7.15\\CF2246 (3 out of 6耻辱下播这一块)\\d.cpp","tests":[{"id":1784107700614,"input":"4\n3\n1 2 3\n4\n2 2 2 2\n5\n6 8 2 4 1\n8\n1 3 5 7 9 11 13 15\n","output":"6\n5\n12\n35\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\ACM\\25summer_prac\\7.15\\CF2246 (3 out of 6耻辱下播这一块)\\d.cpp","group":"local","local":true}
