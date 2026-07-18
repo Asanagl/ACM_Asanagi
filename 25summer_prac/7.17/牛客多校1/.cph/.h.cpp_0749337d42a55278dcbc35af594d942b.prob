@@ -1,0 +1,1 @@
+{"name":"Local: h","url":"d:\\ACM\\25summer_prac\\7.17\\牛客多校1\\h.cpp","tests":[{"id":1784273182908,"input":"2\n1\nRRS\nPSS\n1000000000\nRSP\nRSP","output":"1.000000000000\n706356363.862663573876"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\ACM\\25summer_prac\\7.17\\牛客多校1\\h.cpp","group":"local","local":true}
