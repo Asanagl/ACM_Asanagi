@@ -1,0 +1,1 @@
+{"name":"Local: AC自动机(拓扑优化)","url":"d:\\ACM\\模板笔记\\字典树+AC自动机\\AC自动机(拓扑优化).cpp","tests":[{"id":1784625475341,"input":"5\na\nbb\naa\nabaa\nabaaa\nabaaabaa\n","output":"6\n0\n3\n2\n1\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\ACM\\模板笔记\\字典树+AC自动机\\AC自动机(拓扑优化).cpp","group":"local","local":true}
