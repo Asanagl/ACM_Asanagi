@@ -1,0 +1,1 @@
+{"name":"Local: E","url":"d:\\ACM\\25summer_prac\\ic沈阳补题\\E.cpp","tests":[{"id":1785566783124,"input":"3\n10 20 30","output":"85.0"},{"id":1785567588870,"input":"1\n35","output":"35.0"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"d:\\ACM\\25summer_prac\\ic沈阳补题\\E.cpp","group":"local","local":true}
