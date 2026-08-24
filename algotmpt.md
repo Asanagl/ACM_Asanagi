@@ -1,10 +1,8 @@
-<!-- 已移除 PDF 页码、旧目录、代码行号与 OCR 残留，并按 D:\ACM 的代码风格重构。 -->
-
 # 算法竞赛 C++ 模板
 
 > 从竞赛到禁赛
 >
-> 网络与 XCPC 算法协会 · 2025-12-31
+> Asanagi_Sagiri
 
 这份手册汇总了算法竞赛中常用的 C++ 模板，覆盖数论与组合计数、数据结构、图论、128 位整数、字符串、AC 自动机、动态规划与调试工具。示例默认使用 GNU C++17；代码以可复制、边界明确、注释清晰和便于赛时修改为目标。
 
@@ -30,7 +28,6 @@
 - 不使用 `#define int long long`、`#define endl`、`pb` 等宏，避免类型和接口被隐式改变。
 - 图、树、并查集、树状数组和线段树默认 **1-based**；字符串和普通数组算法默认 **0-based**。
 - 类型名使用 `PascalCase`，多词函数与变量使用 `snake_case`，缩进为 4 个空格。
-- 完整程序沿用 `D:\ACM` 中的 `Asanagi()` 外壳；独立算法片段使用能表达用途的函数名。
 - 代码注释按“状态含义、维护方式、边界条件、易错点”的顺序编写；赛时确认理解后可按需删除。
 - 同一章节的后续片段可能依赖前文类型，例如 Dijkstra、SPFA 和 Prim 依赖 `Edge` 与 `Graph`，模逆元依赖 `exgcd`。
 
@@ -3150,44 +3147,3 @@ int maximum_non_overlapping_intervals(vector<Interval> intervals)
 | 子集和回溯 | `O(2^n)` | `O(n)` | 仅适合较小 `n` |
 | 区间调度 | `O(n log n)` | `O(n)` | 半开区间，按右端点贪心 |
 
-## 在线评测实测
-
-以下记录均在 2026-07-25 使用本文模板主体，仅添加对应题目的输入输出入口后提交。洛谷原生题使用洛谷评测；洛谷 AtCoder RemoteJudge 暂不可用的部分改在 AtCoder 官方站评测。
-
-| 模板 | 在线题目 | 记录 | 语言 | 结果 | 备注 |
-| --- | --- | --- | --- | --- | --- |
-| 树状数组 | P3374 | [R288510933](https://www.luogu.com.cn/record/288510933) | C++14 (GCC 9) | Accepted | 单点增加、区间求和 |
-| 并查集 | P3367 | [R288514877](https://www.luogu.com.cn/record/288514877) | C++17 | Accepted | 合并与连通性查询 |
-| Dijkstra | P4779 | [R288517710](https://www.luogu.com.cn/record/288517710) | C++14 (GCC 9) | Accepted | 非负权有向图 |
-| Prim | P3366 | [R288519156](https://www.luogu.com.cn/record/288519156) | C++17 | Accepted | 包含不连通判断 |
-| KMP | P3375 | [R288519829](https://www.luogu.com.cn/record/288519829) | C++17 | Accepted | 匹配位置与前缀函数 |
-| Trie | P2580 | [R288520897](https://www.luogu.com.cn/record/288520897) | C++17 | Accepted | 插入与精确查询 |
-| 线性筛 | P3383 | [R288522072](https://www.luogu.com.cn/record/288522072) | C++17 | Accepted | 峰值内存 416.28 MB |
-| 扩展欧几里得 / 模逆元 | P1082 | [R288523723](https://www.luogu.com.cn/record/288523723) | C++17 | Accepted | 任意正模数下求逆元 |
-| Miller-Rabin / Pollard-Rho | P4718 | [R288524537](https://www.luogu.com.cn/record/288524537) | C++17 | Accepted | 64 位整数分解，100 分 |
-| SPFA 负环检测 | P3385 | [R288528660](https://www.luogu.com.cn/record/288528660) | C++17 | Accepted | 仅判断从 1 号点可达的负环 |
-| 卡特兰数 | P1044 | [R288542264](https://www.luogu.com.cn/record/288542264) | C++17 O2 | Accepted | 无 Boost 依赖的 `u64` 递推 |
-| 莫比乌斯筛 / 反演 | P3455 | [R288550131](https://www.luogu.com.cn/record/288550131) | C++14 (GCC 9) O2 | Accepted | 线性筛、前缀和与整除分块 |
-| 异或线性基 | P3812 | [R288541332](https://www.luogu.com.cn/record/288541332) | C++17 O2 | Accepted | 最大子集异或和 |
-| Floyd | B3647 | [R288543279](https://www.luogu.com.cn/record/288543279) | C++14 (GCC 9) O2 | Accepted | 无向图、重边取最小值 |
-| 二分图最大匹配 | P3386 | [R288542891](https://www.luogu.com.cn/record/288542891) | C++14 (GCC 9) O2 | Accepted | Kuhn 增广路与时间戳 |
-| AC 自动机 | P5357 | [R288542504](https://www.luogu.com.cn/record/288542504) | C++20 O2 | Accepted | BFS 建 fail、逆序回传出现次数 |
-| 线性 DP | AtCoder DP B | [#77803404](https://atcoder.jp/contests/dp/submissions/77803404) | C++23 (Clang 21.1.0) | Accepted | 青蛙跳跃，前 `k` 个状态转移 |
-| 0/1 背包 | P1048 | [R288543606](https://www.luogu.com.cn/record/288543606) | C++14 (GCC 9) O2 | Accepted | 容量倒序枚举 |
-| 完全背包 | P1616 | [R288543907](https://www.luogu.com.cn/record/288543907) | C++14 (GCC 9) O2 | Accepted | 容量正序枚举 |
-| 价值维 0/1 背包 | AtCoder DP E | [#77803362](https://atcoder.jp/contests/dp/submissions/77803362) | C++23 (Clang 21.1.0) | Accepted | `dp[value]` 保存最小重量 |
-| LIS | P1020 | [R288549703](https://www.luogu.com.cn/record/288549703) | C++14 (GCC 9) O2 | Accepted | `lower_bound` 求严格上升子序列 |
-| LCS 与方案恢复 | AtCoder DP F | [#77803439](https://atcoder.jp/contests/dp/submissions/77803439) | C++23 (Clang 21.1.0) | Accepted | 输出一组实际最长公共子序列 |
-| 区间 DP | P1775 | [R288547314](https://www.luogu.com.cn/record/288547314) | C++14 (GCC 9) O2 | Accepted | 线性石子合并 |
-| 树形 DP | P1352 | [R288549369](https://www.luogu.com.cn/record/288549369) | C++14 (GCC 9) O2 | Accepted | 树上最大权独立集 |
-| 状态压缩 DP | AtCoder ABC180 E | [#77803777](https://atcoder.jp/contests/abc180/submissions/77803777) | C++23 (Clang 21.1.0) | Accepted | Hamilton 回路，与路径模板共用状态转移 |
-| DAG DP | AtCoder DP G | [#77803457](https://atcoder.jp/contests/dp/submissions/77803457) | C++23 (Clang 21.1.0) | Accepted | 拓扑排序求最长路径 |
-| 整数二分 | P2249 | [R288550277](https://www.luogu.com.cn/record/288550277) | C++14 (GCC 9) O2 | Accepted | `first_true` 查找首次出现位置 |
-| 归并统计逆序对 | P1908 | [R288550400](https://www.luogu.com.cn/record/288550400) | C++14 (GCC 9) O2 | Accepted | 合并阶段累计跨区间逆序对 |
-| 排列回溯 | P1706 | [R288550487](https://www.luogu.com.cn/record/288550487) | C++14 (GCC 9) O2 | Accepted | 按字典序枚举全排列 |
-| 区间调度 | P1803 | [R288550651](https://www.luogu.com.cn/record/288550651) | C++14 (GCC 9) O2 | Accepted | 按结束时间贪心 |
-
-> [!NOTE]
-> - P4779 的记录显示为 C++14，是洛谷 GCC 9 以扩展形式接受了结构化绑定；本文仍以 GNU C++17 为正式语言标准。
-> - P1044 首次使用 `cpp_int` 提交时因洛谷缺少 Boost 头文件而编译失败，表中记录是随后通过的无依赖版本。
-> - AtCoder 的记录来自官方站；洛谷页面当时明确提示 “AtCoder RemoteJudge 暂不可用”。

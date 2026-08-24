@@ -1,10 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
-using int64 = long long;
+using ll = long long;
 const int MOD = 998244353;
 
-int64 mod_pow(int64 base, int64 exp) {
-    int64 res = 1 % MOD;
+ll mod_pow(ll base, ll exp) {
+    ll res = 1 % MOD;
     base %= MOD;
     while (exp > 0) {
         if (exp & 1) res = (__int128)res * base % MOD;
@@ -34,7 +34,7 @@ int main() {
         }
         
         uint64_t value = k0;
-        int64 shift = 0;
+        ll shift = 0;
         while ((value & 1ULL) == 0) {
             value >>= 1;
             shift++;
@@ -54,7 +54,7 @@ int main() {
                 if (shift >= ai) {
                     shift -= ai;
                 } else {
-                    int64 diff = ai - shift;
+                    ll diff = ai - shift;
                     shift = 0;
                     if (diff >= 64) {
                         value = 0;
@@ -78,7 +78,7 @@ int main() {
         if (is_zero || value == 0) {
             cout << 0 << '\n';
         } else {
-            int64 ans = (value % MOD) * mod_pow(2, shift) % MOD;
+            ll ans = (value % MOD) * mod_pow(2, shift) % MOD;
             cout << ans % MOD << '\n';
         }
     }
