@@ -1,0 +1,284 @@
+{
+  "slug": "04-25",
+  "title": "最短循环节",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-26 14:41:27 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\25",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\25\\exported-tests",
+  "caseCount": 34,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample",
+      "seed": "1",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "sample-2",
+      "type": "sample",
+      "seed": "2",
+      "group": "sample",
+      "input": "sample\\sample-2.in",
+      "answer": "sample\\sample-2.ans"
+    },
+    {
+      "name": "min-1",
+      "type": "min",
+      "seed": "101",
+      "group": "secret",
+      "input": "secret\\min-1.in",
+      "answer": "secret\\min-1.ans"
+    },
+    {
+      "name": "tiny-1",
+      "type": "tiny",
+      "seed": "102",
+      "group": "secret",
+      "input": "secret\\tiny-1.in",
+      "answer": "secret\\tiny-1.ans"
+    },
+    {
+      "name": "tiny-2",
+      "type": "tiny",
+      "seed": "103",
+      "group": "secret",
+      "input": "secret\\tiny-2.in",
+      "answer": "secret\\tiny-2.ans"
+    },
+    {
+      "name": "tiny-3",
+      "type": "tiny",
+      "seed": "104",
+      "group": "secret",
+      "input": "secret\\tiny-3.in",
+      "answer": "secret\\tiny-3.ans"
+    },
+    {
+      "name": "small-1",
+      "type": "small",
+      "seed": "105",
+      "group": "secret",
+      "input": "secret\\small-1.in",
+      "answer": "secret\\small-1.ans"
+    },
+    {
+      "name": "small-2",
+      "type": "small",
+      "seed": "106",
+      "group": "secret",
+      "input": "secret\\small-2.in",
+      "answer": "secret\\small-2.ans"
+    },
+    {
+      "name": "all-same-1",
+      "type": "all-same",
+      "seed": "107",
+      "group": "secret",
+      "input": "secret\\all-same-1.in",
+      "answer": "secret\\all-same-1.ans"
+    },
+    {
+      "name": "all-same-2",
+      "type": "all-same",
+      "seed": "108",
+      "group": "secret",
+      "input": "secret\\all-same-2.in",
+      "answer": "secret\\all-same-2.ans"
+    },
+    {
+      "name": "repeated-1",
+      "type": "repeated",
+      "seed": "109",
+      "group": "secret",
+      "input": "secret\\repeated-1.in",
+      "answer": "secret\\repeated-1.ans"
+    },
+    {
+      "name": "repeated-2",
+      "type": "repeated",
+      "seed": "110",
+      "group": "secret",
+      "input": "secret\\repeated-2.in",
+      "answer": "secret\\repeated-2.ans"
+    },
+    {
+      "name": "repeated-3",
+      "type": "repeated",
+      "seed": "111",
+      "group": "secret",
+      "input": "secret\\repeated-3.in",
+      "answer": "secret\\repeated-3.ans"
+    },
+    {
+      "name": "anti-tail-1",
+      "type": "anti-tail",
+      "seed": "112",
+      "group": "secret",
+      "input": "secret\\anti-tail-1.in",
+      "answer": "secret\\anti-tail-1.ans"
+    },
+    {
+      "name": "anti-tail-2",
+      "type": "anti-tail",
+      "seed": "113",
+      "group": "secret",
+      "input": "secret\\anti-tail-2.in",
+      "answer": "secret\\anti-tail-2.ans"
+    },
+    {
+      "name": "anti-tail-3",
+      "type": "anti-tail",
+      "seed": "114",
+      "group": "secret",
+      "input": "secret\\anti-tail-3.in",
+      "answer": "secret\\anti-tail-3.ans"
+    },
+    {
+      "name": "anti-tail-4",
+      "type": "anti-tail",
+      "seed": "115",
+      "group": "secret",
+      "input": "secret\\anti-tail-4.in",
+      "answer": "secret\\anti-tail-4.ans"
+    },
+    {
+      "name": "anti-border-1",
+      "type": "anti-border",
+      "seed": "116",
+      "group": "secret",
+      "input": "secret\\anti-border-1.in",
+      "answer": "secret\\anti-border-1.ans"
+    },
+    {
+      "name": "anti-border-2",
+      "type": "anti-border",
+      "seed": "117",
+      "group": "secret",
+      "input": "secret\\anti-border-2.in",
+      "answer": "secret\\anti-border-2.ans"
+    },
+    {
+      "name": "anti-border-3",
+      "type": "anti-border",
+      "seed": "118",
+      "group": "secret",
+      "input": "secret\\anti-border-3.in",
+      "answer": "secret\\anti-border-3.ans"
+    },
+    {
+      "name": "anti-border-4",
+      "type": "anti-border",
+      "seed": "119",
+      "group": "secret",
+      "input": "secret\\anti-border-4.in",
+      "answer": "secret\\anti-border-4.ans"
+    },
+    {
+      "name": "anti-half-1",
+      "type": "anti-half",
+      "seed": "120",
+      "group": "secret",
+      "input": "secret\\anti-half-1.in",
+      "answer": "secret\\anti-half-1.ans"
+    },
+    {
+      "name": "anti-half-2",
+      "type": "anti-half",
+      "seed": "121",
+      "group": "secret",
+      "input": "secret\\anti-half-2.in",
+      "answer": "secret\\anti-half-2.ans"
+    },
+    {
+      "name": "anti-half-3",
+      "type": "anti-half",
+      "seed": "122",
+      "group": "secret",
+      "input": "secret\\anti-half-3.in",
+      "answer": "secret\\anti-half-3.ans"
+    },
+    {
+      "name": "random-1",
+      "type": "random",
+      "seed": "123",
+      "group": "secret",
+      "input": "secret\\random-1.in",
+      "answer": "secret\\random-1.ans"
+    },
+    {
+      "name": "random-2",
+      "type": "random",
+      "seed": "124",
+      "group": "secret",
+      "input": "secret\\random-2.in",
+      "answer": "secret\\random-2.ans"
+    },
+    {
+      "name": "random-3",
+      "type": "random",
+      "seed": "125",
+      "group": "secret",
+      "input": "secret\\random-3.in",
+      "answer": "secret\\random-3.ans"
+    },
+    {
+      "name": "random-4",
+      "type": "random",
+      "seed": "126",
+      "group": "secret",
+      "input": "secret\\random-4.in",
+      "answer": "secret\\random-4.ans"
+    },
+    {
+      "name": "random-5",
+      "type": "random",
+      "seed": "127",
+      "group": "secret",
+      "input": "secret\\random-5.in",
+      "answer": "secret\\random-5.ans"
+    },
+    {
+      "name": "random-6",
+      "type": "random",
+      "seed": "128",
+      "group": "secret",
+      "input": "secret\\random-6.in",
+      "answer": "secret\\random-6.ans"
+    },
+    {
+      "name": "prime-1",
+      "type": "prime",
+      "seed": "129",
+      "group": "secret",
+      "input": "secret\\prime-1.in",
+      "answer": "secret\\prime-1.ans"
+    },
+    {
+      "name": "max-1",
+      "type": "max",
+      "seed": "130",
+      "group": "secret",
+      "input": "secret\\max-1.in",
+      "answer": "secret\\max-1.ans"
+    },
+    {
+      "name": "max-periodic-1",
+      "type": "max-periodic",
+      "seed": "131",
+      "group": "secret",
+      "input": "secret\\max-periodic-1.in",
+      "answer": "secret\\max-periodic-1.ans"
+    },
+    {
+      "name": "near-max-tail-1",
+      "type": "near-max-tail",
+      "seed": "132",
+      "group": "secret",
+      "input": "secret\\near-max-tail-1.in",
+      "answer": "secret\\near-max-tail-1.ans"
+    }
+  ]
+}

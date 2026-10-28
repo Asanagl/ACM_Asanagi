@@ -1,0 +1,164 @@
+kimi version 2.2.0
+• I need respond in Chinese strict 7 parts, no tools/network/files. Should independently review problem matrix addition. Should be exact, detailed enough. Should not call skill? No relevant skill. I can directly craft. Should obey no reading etc. User wants strict sequential seven parts. Should include task restatement all formats ranges answer range. Algorithm reading B perhaps store A only O(nm) vs O(n?) I should decide algorithm with minimal additional memory. I can read A store vector int, then B stream each element add output. Output lines as B read, preserve n,m. Additional space O(nm) if store A (<=90k int 360k bytes) safe. Could optimize O(m) row A? Input all A before B so must store A unless store output sums somehow or input cannot rewind. Could store A entire. Time O(nm), extra O(nm). Or store A and B? Avoid B. Should ensure output token exact n*m numbers and rows. For each i,j read b, cout A[i][j]+b with spaces. C++17 includes bits stdcpp or iostream vector. Independent. std::int32_t? int at least 32-bit typical gnu++17; use int per guarantee. Could use long long but not needed. Exact output no trailing spaces optional? Problem each row adjacent one space, allows trailing whitespace line insensitive, implement j space before if j > 0, newline after row. n,m positive 300. Bounds absolute ±1e6, c ±2e6 guaranteed and naturally follows constraints anyway. Should state 1≤n,m≤300 both, N=nm≤90000. Input sequence A row-major n rows each m ints then B similarly. Outputs exactly n*m ints arranged n rows m each one spaces, no extra/missing numeric tokens. Answer unique c sums. Range -2×10^6≤c≤2×10^6 32-bit signed. Should handle in proof arithmetic computed using int no overflow due guarantee. Feasibility actual input read success not needed if valid. Could mention legal input means conforms. Use 0-index internally but math 1-index.
+
+  Step by step correctness proof: define P? Should have rigorous enough:
+  1 reading n,m; nested loops fill A'[i][j]=a_ij by sequential extraction because A appears row major; all A before B.
+  2 B phase each nested iteration reads next integer b_ij due order. Define x output=A'[i][j]+b_ij.
+  3 invariant before processing (i,j) all previous pairs output sums in correct row major, next unread token b_ij; induction lex order. Could present concise steps. Arithmetic c correct, in range, int safe.
+  4 output exactly n rows m tokens, single spaces and line breaks no extra numeric tokens; exactly unique response. Termination finite n,m loops.
+  Should prove for all legal input includes negative, zero etc addition works. Could mention no assumptions sample.
+
+  Complexity: N=nm. Input read 2N, additions N, output N, Θ(N)=Θ(nm), max 180000 input ints and 90000 outputs, trivial 1 sec (I/O normal). Memory store A N ints, O(nm), variables O(1), output stream buffer? "额外空间 Θ(nm)，约 4N=360000 bytes (~0.35MiB) plus vector/iostream fixed overhead far below 256MiB". If storing vector<vector<int>> overhead slight n 300 negligible. Use flat vector easiest and complexity. Implementation vector<int> a(n*m); index i*m+j; n*m max 90000 int multiplication safe anyway n,m ≤300. ios sync false tie nullptr. Output c int. `for (int i = 0; i < n; ++i) { for (...) { int b; cin >> b; if (j) cout << ' '; cout << a[...]+b; } cout << '\n'; }`. Could check return? no need valid input. Full includes <iostream>, <vector>. main return 0. No external resources.
+
+  Boundary tests "列出所有值得测试的边界情况" can't literally all possible 90k combos, categories. Include n=m=1 smallest positive, values ±1e6 giving sums -2e6,0,2e6; maximum dims 300x300 all constant pattern including positive and negative and mixed signs; nonsquare 1x300 and 300x1 to catch loop/row output and flattening; negative and zero mixture sample-like to verify - plus negatives; matrix A/B order block verify second B not accidentally interleaved? Test distinct sequences ensures mapping and no reading interleaving; output tokens count exact, no leading/trailing perhaps format check; test rows with m=1/n=1 already. Could list 5-6 categories, not actual test data required. Perhaps include m=1/n=300 and n=1/m=300 as transpose-like. Values negative to positive cancellation, sign. Maximum memory and time. Could mention `n,m=300` max data and result within 32 bit. Additional guarantee redundant derived from bounds. Risk section: possible ambiguities traps:
+  - Wording mathematical indices 1-based vs code 0-based; correct flattening index.
+  - Input order all A then all B, not row interleaved `A_i B_i`; easy trap.
+  - Token judge means row whitespace line-end insensitive but number sequence and count strict. Should have exactly 2? Output n*m no extra debug, no missing, one spaces as required. "行首行尾空白不敏感" doesn't mean arbitrary tokens can be added or line structure arbitrary? Judge compares tokens, so line breaks likely whitespace. User explicitly output n lines, adhere. Extra numeric tokens error. Could state do not rely on trailing spaces tolerance.
+  - Negative inputs and output signs, no absolute values etc.
+  - 32-bit safe guarantee, don't use 16-bit; no long long necessary but use int safe. Guarantee range also follows stated input bounds (no contradiction).
+  - Resource safe no algorithms issue.
+  - "数据可能存在" malformed inputs? User says only legal, no need validate. Risk perhaps if actual data violates range/count behavior undefined/incorrect? I should not invent risks. State no substantive ambiguity for legal input. Could mention output range guarantee redundant and not an extra operation clipping: do not saturate; values naturally sums. Potential matrix dimensions both up to 300 not necessarily square. Use n≠m tests.
+  - "每行内相邻整数之间用一个空格分隔" trailing spaces not needed. Token comparison tolerates line-leading trailing but output format exact.
+  - Memory if store both matrices still okay but mine one.
+  - 1 sec C++ I/O fast with sync off. Output max numbers ~90000 each up to 7 chars plus sign maybe 8? irrelevant.
+
+  Make sure strict seven parts no preamble or postface. Format headings `## 1. 任务复述` etc. Part 7 code only within part. User said "严格依次输出以下七部分" headings fine. Should not include extra risk not written rules. No tools. I should not overdo. User demands detailed proof, edges risk. Perhaps 1500-2000 Chinese chars. Could produce all.
+
+  I'll analyze subtle concerns: Could streaming output while reading B produce output before full input but no issue. Use `std::vector<int> a(static_cast<std::size_t>(n) * m);` includes cstddef? vector defines size_t, can simply `vector<int> a(n * m)` no issue. n,m int max 300. `a[i*m+j]`. Use `int b; std::cin >> b;`. For legal input always success. gnu++17 direct compile.
+
+  Time size 180k ints <= 1e6 textual ~1.3MB, output <~0.8 MB, trivial. I can avoid exact runtime promises: "在通常评测环境下非常安全；操作规模很小，1秒足够；内存 <1MiB plus process runtime?" Should be careful with "额外空间" vector about 360000 bytes = 351.5625 KiB =0.3433 MiB. Plus fixed overhead, far below 256 MiB. Process iostream runtime not counted extra algorithm memory. I can state "矩阵存储约 360000 字节（约 0.35 MiB），另有很小的固定开销". Time Θ(nm) includes input/output, at most 270000 processed total (2N reads+N writes). Output arithmetic N.
+
+  Correctness proof maybe theorem and lemmas:
+  - Storage lemma: after first loops, `a[i*m+j]=a_{i+1,j+1}`.
+  - Computation lemma: before B iteration each next input b and no other numbers consumed; outputs sum.
+  - Format lemma: loops exactly etc.
+  - Conclusion unique.
+  No need overly formal induction? User asks "逐步正确性证明" not necessarily mathematical induction but provide numbered steps and loop invariant. I can use index math with 1-based and implementation formula. Define stored `S_{i,j}` mathematical abstract (even code flat). In algorithm store A at `i*m+j` 0-index. In proof use 1≤i≤n etc and say corresponding location. Steps:
+  1 After reading A, stored `A'` equal exact each a due sequential row order.
+  2 In B stage lexicographic iteration. Each legal input B follows A, so iteration i,j reads exactly b_ij. There is no skipped/reordered.
+  3 emitted x=stored+b=a+b=c. int no overflow by guarantee.
+  4 exactly nm iterations covers every position once and no others; output spaces/newlines matches. Therefore output token sequence exactly standard, unique.
+  5 terminates finite. Could integrate.
+
+  Task restatement answer range: `-10^6 <= aij,bij <= 10^6`, `-2*10^6 <= cij <= 2*10^6`, c each 32-bit signed. n,m positive ints. Both n rows m columns. First line n m. Should clarify all A then B. Output n lines m ints separated single spaces. Unique. Maybe include judge semantics in task restatement? User asked precise input output ranges; can mention judge in risk only. Resource maybe complexity.
+
+  Boundary list all worthwhile:
+  1 minimum n=m=1 with each combinations extreme: (-1e6,-1e6) -> -2e6, (1e6,1e6)->2e6, (1e6,-1e6)->0. It covers range and output single line no inter-element spaces.
+  2 maximum n=m=300 with mixed extremes: performance/mem/count, sums extreme.
+  3 n=1,m=300 and n=300,m=1, and optionally 2x3/3x2 to expose dimension swap. Single row/column enough; include non-square `2x3`/`3x2` catches n,m transposition. Should not be redundant? "所有值得测试" I can group.
+  4 mixed negative zero positive including negative+negative and cancellation, sign correctness. Extremes already negative+negative. Include random small asymmetric A/B to catch block ordering.
+  5 distinct-valued A,B e.g. a=100i+j, b=... but within bound, to ensure pair correct; for n,m small values. Don't need explicit formulas maybe say small matrix with every position different and B not symmetric. Checks storage order and all A before B.
+  6 output exact token count no extra debug/trailing numbers, automatic check. This is more output validation than test case. Could say for above tests verify N tokens and n line each m. Worth include.
+
+  Risks:
+  - no ambiguity in math. "本题答案唯一" okay.
+  - token judge and whitespace.
+  - integer overflow only if violate constraints; int safe given range. `a+b` both int and max within guarantee. If actual data outside, not obligated.
+  - `-2*10^6` math is -2,000,000 not exponent precedence etc; no issue.
+  - reading full A then B key.
+  - dimensions not necessarily equal.
+  Could state no need check invalid input because guaranteed. Avoid making up possible unspecified multiple test cases: The statement has one case only, no T; do not loop until EOF. This is an important trap. "只读一组数据；不要自行假设多组或读到 EOF". Good risk.
+  - No modulo; output exact signed decimal. Maybe not needed.
+
+  No actual testing because user says no files/tools and wants response not execution. I shouldn't claim compiled/tested. Provide implementation without claiming actual verification. "可直接编译" code valid. Could include code comment? Instructions default no comments; no comments. Include using std. Fine.
+
+  I'll output in Chinese. No citations. No markdown table perhaps simple list. Headings are requested. Complexity math notation. In part 1 could use numbered? Avoid nested heavy but plain.
+
+  I should think if a more memory efficient algorithm possible O(nm) is fine. If reviewers expect O(1) extra? Not required. Could store A in vector, B streaming. Additional O(nm) memory safe. Could use output matrix store and then B, same. This is simple.
+
+  Could use algorithm store all A and then output as reading B. Since judge compares only after termination no issue. If online output not problematic. Input and output same streams decoupled (`tie(nullptr)`), no flushing each token.
+
+  At maximum output `-2000000` 8 chars + space 9*90000 ~810k, trivial.
+
+  Memory bytes exact int assumed 4 bytes? Statement 32-bit signed, gnu++17 target `int` 4 normally but C++ standard only at least 16. In implementation for gnu++17 target 32-bit int. I could use `std::int32_t` from `<cstdint>` to explicitly satisfy. `std::int32_t` exists on target. Reading into int32_t works overload maybe typedef int. Sum of two int32_t undergo int promotion; if int 32 bit, safe range. Output fine. Simpler `int`. Guarantee says can use 32-bit signed, so valid. I can state under gnu++17 environment `int` 32-bit. No need `long long`. If code `int n,m`, fine.
+
+  Memory if int 4 byte. "按 32 位 int 计" qualifies.
+
+  Proof if output token comparison ignores row leading/trailing whitespace, my exact row structure anyway. `cout << '\n'` after last row permitted (whitespace). Single space only between columns. No extra numbers. Good.
+
+  I can finish now. Should have no tools. Ensure no preamble such as "以下". Seven parts exactly.
+
+  I'll draft:
+
+  ## 1... 
+  "输入仅有一组数据" based statement yes.
+  - First n,m ...
+  - A block...
+  - B block...
+  - bounds all...
+  Output ...
+  "The result unique, each c is ordinary integer sum no modulo".
+
+  Part 2 algorithm:
+  1 read n,m allocate N.
+  2 for...
+  3 for B each read b and compute, output with j space...
+  Could use math pseudocode no need duplicate code.
+
+  Part 3:
+  Define `S(i,j)`. Numbered proof as above. Mention termination.
+
+  Part 4:
+  N≤90000. read 2N etc. Θ(N) time. Extra Θ(N) A only. Max ~360000 bytes. Fast IO. "在题给gnu++17环境且输入输出正常的前提下，对1000ms/256MiB非常安全" no absolute timing guarantee perhaps no need caveat normal.
+  Time dominated I/O not nested overhead.
+
+  Part 5 grouped 6:
+  - min/extreme
+  - max
+  - row/col
+  - nonsquare
+  - mixed sign
+  - position identifiable & input block and output token count. Could merge formatting check as separate.
+  I shouldn't produce test files, just descriptions.
+
+  Part 6:
+  "No material ambiguity under legal input" and bullet risks. Should avoid data "可能存在" claims no evidence. "题面本身对合法输入没有实质歧义，实际风险主要在实现..." good.
+  - one case and input block
+  - n,m independent
+  - token strict
+  - integer range guarantee no clipping
+  - negative signs and stream? covered boundaries.
+  Maybe whitespace line insensitive not full output flexibility? It says token compare, "多余或缺失数字错误". I state exactly N numbers.
+  - no need reject malformed input not relevant.
+
+  Part 7 code.
+
+  I can include `const int index = i * m + j;` for B? Should A store index repeated. Code:
+  ```
+  #include <iostream>
+  #include <vector>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      int n, m;
+      std::cin >> n >> m;
+      std::vector<int> a(n * m);
+
+      for (int i=0;...){...}
+      for (int i...){
+        for (int j...){
+          int b;
+          std::cin >> b;
+          if (j>0) std::cout << ' ';
+          std::cout << a[i*m+j]+b;
+        }
+        std::cout << '\n';
+      }
+      return 0;
+  }
+  ```
+  No input failure handling needed. Could if (!(cin>>n>>m)) return 0; but for legal input irrelevant; handling empty input doesn't violate. Independent complete. Add it? If missing numbers, can't solve; no need. Keep simple. Some judges require not output if bad, no concern.
+
+  Correctness proof refers all A read before output yes.
+
+  Risk "额外非数字文本" token judge perhaps token compare all? Statement specifically numbers extra or missing; output no other anyway.
+
+  Boundary "所有值得" no random exhaustive needed. Could mention exhaustive small values optional? Not needed. They may expect list not actual data.
+
+  I should keep response standalone no unverified statements. The code is certainly compile. No tests run due explicit no files/tools, but no need disclose as they didn't ask execution. Should I say not actually compile? Not necessary and would be extra postface violating 7 parts. I can present code.
+
+  Now produce polished Chinese.
+
+To resume this session: kimi -r session_8798f995-b5cf-4793-971b-6575eef269d4

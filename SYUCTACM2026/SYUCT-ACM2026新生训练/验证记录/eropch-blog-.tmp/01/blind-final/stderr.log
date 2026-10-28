@@ -1,0 +1,28 @@
+kimi version 2.2.0
+• The user asks for a blind review solution — no tools, just answer. I should produce the six items in Chinese: restatement, algorithm, correctness proof, complexity, edge cases, and a complete GNU C++17 program.
+
+  Let me write it carefully. Use `std::string`, read with `std::cin >> s` (input has no whitespace). Output length, s.front(), s.back(), newline.
+
+  Length up to 1000, so no issue. Note `s.size()` returns size_t; printing is fine.
+
+  Potential pitfalls: reading with `std::cin` skips whitespace — input has no whitespace so fine. If input were empty... constraints guarantee non-empty. Still could guard, but not necessary; maybe mention assumption.
+
+  Write the proof: Let n = |s|. Length output: s.size() after reading exactly the token, since no whitespace, the token equals s, so size = n. First character: s[0] is by definition the character at index 0. Last: s[n-1] where n≥1 so index valid. Format: separated by single spaces and trailing newline.
+
+  Edge cases: n=1 → first == last; s = "a" → "1 a a". All same characters e.g. "zzz" → "3 z z". Max length 1000. Leading/trailing? no whitespace. Possibly s consisting of 'a'*1000.
+
+  Also note output format: "长度 首字符 尾字符" separated by exactly one space.
+
+  Provide code.
+
+  Also maybe mention complexity O(n) time, O(n) space for storing input (or O(1) extra beyond input). Note memory limit fine.
+
+  I'll keep it structured but not overly long. Use headings 1-6.
+
+  Also should I mention reading via getline vs cin? cin >> s is fine. Mention that the string contains no whitespace so operator>> reads the whole line.
+
+  Let me be careful about "证明" being closed/stepwise.
+
+  Write it.
+
+To resume this session: kimi -r session_d74bc9e9-8dc6-454e-b438-b63273bf93c4

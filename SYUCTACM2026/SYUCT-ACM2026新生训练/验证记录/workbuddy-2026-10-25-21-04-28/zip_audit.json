@@ -1,0 +1,477 @@
+[
+ {
+  "pid": "01",
+  "zip": "01.zip",
+  "problems": [],
+  "entries": 70,
+  "title": "字符串的头和尾",
+  "pid_field": "T193",
+  "md_bytes": 1362,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 33,
+  "cases_manifest": 33,
+  "groups": {
+   "sample": 2,
+   "secret": 31
+  },
+  "secret_distinct": 31,
+  "ok": true
+ },
+ {
+  "pid": "02",
+  "zip": "02.zip",
+  "problems": [],
+  "entries": 100,
+  "title": "空格计数",
+  "pid_field": "T819",
+  "md_bytes": 1974,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 48,
+  "cases_manifest": 48,
+  "groups": {
+   "sample": 3,
+   "secret": 45
+  },
+  "secret_distinct": 45,
+  "ok": true
+ },
+ {
+  "pid": "03",
+  "zip": "03.zip",
+  "problems": [],
+  "entries": 82,
+  "title": "元音计数",
+  "pid_field": "T118",
+  "md_bytes": 2352,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 39,
+  "cases_manifest": 39,
+  "groups": {
+   "sample": 3,
+   "secret": 36
+  },
+  "secret_distinct": 36,
+  "ok": true
+ },
+ {
+  "pid": "04",
+  "zip": "04.zip",
+  "problems": [],
+  "entries": 92,
+  "title": "大小写互换",
+  "pid_field": "T719",
+  "md_bytes": 1689,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 44,
+  "cases_manifest": 44,
+  "groups": {
+   "sample": 2,
+   "secret": 42
+  },
+  "secret_distinct": 42,
+  "ok": true
+ },
+ {
+  "pid": "05",
+  "zip": "05.zip",
+  "problems": [],
+  "entries": 80,
+  "title": "字符替换",
+  "pid_field": "T346",
+  "md_bytes": 1615,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 38,
+  "cases_manifest": 38,
+  "groups": {
+   "sample": 2,
+   "secret": 36
+  },
+  "secret_distinct": 36,
+  "ok": true
+ },
+ {
+  "pid": "06",
+  "zip": "06.zip",
+  "problems": [],
+  "entries": 80,
+  "title": "反转字符串",
+  "pid_field": "T714",
+  "md_bytes": 2058,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 38,
+  "cases_manifest": 38,
+  "groups": {
+   "sample": 2,
+   "secret": 36
+  },
+  "secret_distinct": 36,
+  "ok": true
+ },
+ {
+  "pid": "07",
+  "zip": "07.zip",
+  "problems": [],
+  "entries": 100,
+  "title": "回文判断",
+  "pid_field": "T554",
+  "md_bytes": 2693,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 48,
+  "cases_manifest": 48,
+  "groups": {
+   "sample": 5,
+   "secret": 43
+  },
+  "secret_distinct": 43,
+  "ok": true
+ },
+ {
+  "pid": "08",
+  "zip": "08.zip",
+  "problems": [],
+  "entries": 102,
+  "title": "子串在哪里",
+  "pid_field": "T175",
+  "md_bytes": 2531,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 49,
+  "cases_manifest": 49,
+  "groups": {
+   "sample": 3,
+   "secret": 46
+  },
+  "secret_distinct": 46,
+  "ok": true
+ },
+ {
+  "pid": "09",
+  "zip": "09.zip",
+  "problems": [],
+  "entries": 68,
+  "title": "截取一段",
+  "pid_field": "T257",
+  "md_bytes": 2191,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 32,
+  "cases_manifest": 32,
+  "groups": {
+   "sample": 2,
+   "secret": 30
+  },
+  "secret_distinct": 30,
+  "ok": true
+ },
+ {
+  "pid": "10",
+  "zip": "10.zip",
+  "problems": [],
+  "entries": 68,
+  "title": "数字串求和",
+  "pid_field": "T124",
+  "md_bytes": 1406,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 32,
+  "cases_manifest": 32,
+  "groups": {
+   "sample": 2,
+   "secret": 30
+  },
+  "secret_distinct": 30,
+  "ok": true
+ },
+ {
+  "pid": "11",
+  "zip": "11.zip",
+  "problems": [],
+  "entries": 82,
+  "title": "矩阵原样输出",
+  "pid_field": "T151",
+  "md_bytes": 1937,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 39,
+  "cases_manifest": 39,
+  "groups": {
+   "sample": 3,
+   "secret": 36
+  },
+  "secret_distinct": 36,
+  "ok": true
+ },
+ {
+  "pid": "12",
+  "zip": "12.zip",
+  "problems": [],
+  "entries": 84,
+  "title": "矩阵加法",
+  "pid_field": "T790",
+  "md_bytes": 2329,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 40,
+  "cases_manifest": 40,
+  "groups": {
+   "sample": 1,
+   "secret": 39
+  },
+  "secret_distinct": 39,
+  "ok": true
+ },
+ {
+  "pid": "13",
+  "zip": "13.zip",
+  "problems": [],
+  "entries": 74,
+  "title": "每行的和",
+  "pid_field": "T900",
+  "md_bytes": 1610,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 35,
+  "cases_manifest": 35,
+  "groups": {
+   "sample": 1,
+   "secret": 34
+  },
+  "secret_distinct": 34,
+  "ok": true
+ },
+ {
+  "pid": "14",
+  "zip": "14.zip",
+  "problems": [],
+  "entries": 82,
+  "title": "每列的和",
+  "pid_field": "T250",
+  "md_bytes": 1867,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 39,
+  "cases_manifest": 39,
+  "groups": {
+   "sample": 3,
+   "secret": 36
+  },
+  "secret_distinct": 36,
+  "ok": true
+ },
+ {
+  "pid": "15",
+  "zip": "15.zip",
+  "problems": [],
+  "entries": 122,
+  "title": "最大值的位置",
+  "pid_field": "T273",
+  "md_bytes": 3154,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 59,
+  "cases_manifest": 59,
+  "groups": {
+   "sample": 3,
+   "secret": 56
+  },
+  "secret_distinct": 56,
+  "ok": true
+ },
+ {
+  "pid": "16",
+  "zip": "16.zip",
+  "problems": [],
+  "entries": 100,
+  "title": "两条对角线",
+  "pid_field": "T643",
+  "md_bytes": 2767,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 48,
+  "cases_manifest": 48,
+  "groups": {
+   "sample": 3,
+   "secret": 45
+  },
+  "secret_distinct": 45,
+  "ok": true
+ },
+ {
+  "pid": "17",
+  "zip": "17.zip",
+  "problems": [],
+  "entries": 90,
+  "title": "每行逆序",
+  "pid_field": "T131",
+  "md_bytes": 1677,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 43,
+  "cases_manifest": 43,
+  "groups": {
+   "sample": 3,
+   "secret": 40
+  },
+  "secret_distinct": 40,
+  "ok": true
+ },
+ {
+  "pid": "18",
+  "zip": "18.zip",
+  "problems": [],
+  "entries": 84,
+  "title": "矩阵转置",
+  "pid_field": "T359",
+  "md_bytes": 2904,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 40,
+  "cases_manifest": 40,
+  "groups": {
+   "sample": 2,
+   "secret": 38
+  },
+  "secret_distinct": 38,
+  "ok": true
+ },
+ {
+  "pid": "19",
+  "zip": "19.zip",
+  "problems": [],
+  "entries": 80,
+  "title": "顺时针旋转",
+  "pid_field": "T857",
+  "md_bytes": 1726,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 38,
+  "cases_manifest": 38,
+  "groups": {
+   "sample": 2,
+   "secret": 36
+  },
+  "secret_distinct": 36,
+  "ok": true
+ },
+ {
+  "pid": "20",
+  "zip": "20.zip",
+  "problems": [],
+  "entries": 72,
+  "title": "边框元素之和",
+  "pid_field": "T126",
+  "md_bytes": 2166,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 34,
+  "cases_manifest": 34,
+  "groups": {
+   "sample": 2,
+   "secret": 32
+  },
+  "secret_distinct": 32,
+  "ok": true
+ },
+ {
+  "pid": "21",
+  "zip": "21.zip",
+  "problems": [],
+  "entries": 84,
+  "title": "四邻格统计",
+  "pid_field": "T463",
+  "md_bytes": 2748,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 40,
+  "cases_manifest": 40,
+  "groups": {
+   "sample": 2,
+   "secret": 38
+  },
+  "secret_distinct": 38,
+  "ok": true
+ },
+ {
+  "pid": "22",
+  "zip": "22.zip",
+  "problems": [],
+  "entries": 84,
+  "title": "子矩阵求和",
+  "pid_field": "T712",
+  "md_bytes": 2807,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 40,
+  "cases_manifest": 40,
+  "groups": {
+   "sample": 1,
+   "secret": 39
+  },
+  "secret_distinct": 39,
+  "ok": true
+ },
+ {
+  "pid": "23",
+  "zip": "23.zip",
+  "problems": [],
+  "entries": 76,
+  "title": "回文修补",
+  "pid_field": "T841",
+  "md_bytes": 2036,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 36,
+  "cases_manifest": 36,
+  "groups": {
+   "sample": 2,
+   "secret": 34
+  },
+  "secret_distinct": 34,
+  "ok": true
+ },
+ {
+  "pid": "24",
+  "zip": "24.zip",
+  "problems": [],
+  "entries": 92,
+  "title": "棋盘染色",
+  "pid_field": "T602",
+  "md_bytes": 1373,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 44,
+  "cases_manifest": 44,
+  "groups": {
+   "sample": 1,
+   "secret": 43
+  },
+  "secret_distinct": 43,
+  "ok": true
+ },
+ {
+  "pid": "25",
+  "zip": "25.zip",
+  "problems": [],
+  "entries": 72,
+  "title": "最短循环节",
+  "pid_field": "T413",
+  "md_bytes": 1798,
+  "checker_type": "testlib",
+  "checker_file": "checker.cpp",
+  "cases_in_zip": 34,
+  "cases_manifest": 34,
+  "groups": {
+   "sample": 2,
+   "secret": 32
+  },
+  "secret_distinct": 32,
+  "ok": true
+ }
+]

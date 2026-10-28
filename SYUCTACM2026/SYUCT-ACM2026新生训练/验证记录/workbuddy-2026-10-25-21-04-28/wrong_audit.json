@@ -1,0 +1,1744 @@
+[
+ {
+  "pid": "01",
+  "wrong": "wrong-reverse",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 33
+ },
+ {
+  "pid": "01",
+  "wrong": "wrong-only-length",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "PE"
+  },
+  "n_fail": 1,
+  "n_cases": 33
+ },
+ {
+  "pid": "01",
+  "wrong": "wrong-off-by-one",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 33
+ },
+ {
+  "pid": "01",
+  "wrong": "wrong-char-read",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 33
+ },
+ {
+  "pid": "01",
+  "wrong": "wrong-first-twice",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 33
+ },
+ {
+  "pid": "02",
+  "wrong": "wrong-cin",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "02",
+  "wrong": "wrong-runs",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "02",
+  "wrong": "wrong-last",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-3",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "02",
+  "wrong": "wrong-quadratic",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "all-space-near-max-1",
+   "group": "secret",
+   "kind": "TLE"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "03",
+  "wrong": "wrong-y",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-3",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "03",
+  "wrong": "wrong-case",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "03",
+  "wrong": "wrong-total",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "03",
+  "wrong": "wrong-miss-u",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "03",
+  "wrong": "wrong-or-literal",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "03",
+  "wrong": "wrong-last",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "04",
+  "wrong": "wrong-position",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 44
+ },
+ {
+  "pid": "04",
+  "wrong": "wrong-xor",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 44
+ },
+ {
+  "pid": "04",
+  "wrong": "wrong-token",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 44
+ },
+ {
+  "pid": "04",
+  "wrong": "wrong-skip-last",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "min-upper",
+   "group": "secret",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 44
+ },
+ {
+  "pid": "04",
+  "wrong": "wrong-range",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "nonletters-all",
+   "group": "secret",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 44
+ },
+ {
+  "pid": "04",
+  "wrong": "wrong-oneway",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 44
+ },
+ {
+  "pid": "05",
+  "wrong": "wrong-delete",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "05",
+  "wrong": "wrong-first",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "05",
+  "wrong": "wrong-last",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "05",
+  "wrong": "wrong-swap",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "06",
+  "wrong": "wrong-a",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "06",
+  "wrong": "wrong-b",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "same-large",
+   "group": "secret",
+   "kind": "TLE"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "06",
+  "wrong": "wrong-c",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "06",
+  "wrong": "wrong-even-mid",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "06",
+  "wrong": "wrong-middle-drop",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "min-digit",
+   "group": "secret",
+   "kind": "PE"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "06",
+  "wrong": "wrong-sort",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "07",
+  "wrong": "wrong-inner-pair",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-5",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "07",
+  "wrong": "wrong-odd-is-no",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "07",
+  "wrong": "wrong-off-by-one",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "07",
+  "wrong": "wrong-ends-only",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-5",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "07",
+  "wrong": "wrong-quadratic",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "same-max",
+   "group": "secret",
+   "kind": "TLE"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "07",
+  "wrong": "wrong-lowercase",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "08",
+  "wrong": "wrong-last-occ",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 49
+ },
+ {
+  "pid": "08",
+  "wrong": "wrong-one-based",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 49
+ },
+ {
+  "pid": "08",
+  "wrong": "wrong-count-occ",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 49
+ },
+ {
+  "pid": "08",
+  "wrong": "wrong-tail-bound",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "min-found",
+   "group": "secret",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 49
+ },
+ {
+  "pid": "08",
+  "wrong": "wrong-first-char",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 49
+ },
+ {
+  "pid": "08",
+  "wrong": "wrong-skip-zero",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-3",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 49
+ },
+ {
+  "pid": "08",
+  "wrong": "wrong-inner-short",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 49
+ },
+ {
+  "pid": "09",
+  "wrong": "wrong-end-as-length",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 32
+ },
+ {
+  "pid": "09",
+  "wrong": "wrong-ignore-right",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 32
+ },
+ {
+  "pid": "09",
+  "wrong": "wrong-exclusive-end",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 32
+ },
+ {
+  "pid": "09",
+  "wrong": "wrong-zero-index",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 32
+ },
+ {
+  "pid": "09",
+  "wrong": "wrong-loop-drop-last",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 32
+ },
+ {
+  "pid": "10",
+  "wrong": "wrong-ascii",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 32
+ },
+ {
+  "pid": "10",
+  "wrong": "wrong-skip-first",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 32
+ },
+ {
+  "pid": "10",
+  "wrong": "wrong-parse-integer",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "directed-parse",
+   "group": "secret",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 32
+ },
+ {
+  "pid": "10",
+  "wrong": "wrong-break-zero",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 32
+ },
+ {
+  "pid": "10",
+  "wrong": "wrong-digital-root",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 32
+ },
+ {
+  "pid": "11",
+  "wrong": "wrong-transpose",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "11",
+  "wrong": "wrong-abs",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "11",
+  "wrong": "wrong-last-column",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "11",
+  "wrong": "wrong-last-row",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "11",
+  "wrong": "wrong-print-dimensions",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "11",
+  "wrong": "wrong-trailing-space",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "11",
+  "wrong": "wrong-missing-final-newline",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "11",
+  "wrong": "wrong-single-line",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "11",
+  "wrong": "wrong-flat-index",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "11",
+  "wrong": "wrong-no-separator",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "12",
+  "wrong": "wrong-subtract",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "12",
+  "wrong": "wrong-quadratic",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "random-1",
+   "group": "secret",
+   "kind": "TLE"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "12",
+  "wrong": "wrong-missing-last",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "12",
+  "wrong": "wrong-reverse-b",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "12",
+  "wrong": "wrong-interleaved",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "13",
+  "wrong": "wrong-int",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 35
+ },
+ {
+  "pid": "13",
+  "wrong": "wrong-colsum",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 35
+ },
+ {
+  "pid": "13",
+  "wrong": "wrong-prefix",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 35
+ },
+ {
+  "pid": "14",
+  "wrong": "wrong-rows",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "14",
+  "wrong": "wrong-int",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-3",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "14",
+  "wrong": "wrong-loop",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "14",
+  "wrong": "wrong-quadratic-search",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "near-max-rows",
+   "group": "secret",
+   "kind": "TLE"
+  },
+  "n_fail": 1,
+  "n_cases": 39
+ },
+ {
+  "pid": "15",
+  "wrong": "wrong-tie-last",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 59
+ },
+ {
+  "pid": "15",
+  "wrong": "wrong-col-major",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 59
+ },
+ {
+  "pid": "15",
+  "wrong": "wrong-value-only",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "PE"
+  },
+  "n_fail": 1,
+  "n_cases": 59
+ },
+ {
+  "pid": "15",
+  "wrong": "wrong-init-zero",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 59
+ },
+ {
+  "pid": "15",
+  "wrong": "wrong-zero-based",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 59
+ },
+ {
+  "pid": "15",
+  "wrong": "wrong-swap-row-col",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 59
+ },
+ {
+  "pid": "15",
+  "wrong": "wrong-off-by-one",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "one-row-2",
+   "group": "secret",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 59
+ },
+ {
+  "pid": "15",
+  "wrong": "wrong-quadratic",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "near-limit-1",
+   "group": "secret",
+   "kind": "TLE"
+  },
+  "n_fail": 1,
+  "n_cases": 59
+ },
+ {
+  "pid": "16",
+  "wrong": "wrong-swap-order",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "16",
+  "wrong": "wrong-dedup-center",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "16",
+  "wrong": "wrong-else-if",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "16",
+  "wrong": "wrong-off-by-one",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "16",
+  "wrong": "wrong-int-sum",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "odd-center-1",
+   "group": "secret",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "16",
+  "wrong": "wrong-anti-shape",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "16",
+  "wrong": "wrong-only-main",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "PE"
+  },
+  "n_fail": 1,
+  "n_cases": 48
+ },
+ {
+  "pid": "17",
+  "wrong": "wrong-global",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 43
+ },
+ {
+  "pid": "17",
+  "wrong": "wrong-vertical",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 43
+ },
+ {
+  "pid": "17",
+  "wrong": "wrong-double-swap",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 43
+ },
+ {
+  "pid": "17",
+  "wrong": "wrong-odd-skip",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 43
+ },
+ {
+  "pid": "18",
+  "wrong": "wrong-original",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "18",
+  "wrong": "wrong-reshape",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "18",
+  "wrong": "wrong-drop-last",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "18",
+  "wrong": "wrong-double-swap",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "square-small-1",
+   "group": "secret",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "19",
+  "wrong": "wrong-transpose",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "19",
+  "wrong": "wrong-counterclockwise",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "19",
+  "wrong": "wrong-loop-bound",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "PE"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "19",
+  "wrong": "wrong-quadratic",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "near-max-wide",
+   "group": "secret",
+   "kind": "TLE"
+  },
+  "n_fail": 1,
+  "n_cases": 38
+ },
+ {
+  "pid": "20",
+  "wrong": "wrong-whole",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 34
+ },
+ {
+  "pid": "20",
+  "wrong": "wrong-corners-twice",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 34
+ },
+ {
+  "pid": "20",
+  "wrong": "wrong-degenerate-double",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 34
+ },
+ {
+  "pid": "20",
+  "wrong": "wrong-single-zero",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 34
+ },
+ {
+  "pid": "20",
+  "wrong": "wrong-offbyone",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 34
+ },
+ {
+  "pid": "20",
+  "wrong": "wrong-rows-only",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 34
+ },
+ {
+  "pid": "20",
+  "wrong": "wrong-int",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "big-positive",
+   "group": "secret",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 34
+ },
+ {
+  "pid": "21",
+  "wrong": "wrong-diagonal",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "21",
+  "wrong": "wrong-self",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "21",
+  "wrong": "wrong-wrap",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "21",
+  "wrong": "wrong-count-neighbors",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "21",
+  "wrong": "wrong-missing-down-right",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "21",
+  "wrong": "wrong-transpose",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "21",
+  "wrong": "wrong-quadratic",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "near-max-1",
+   "group": "secret",
+   "kind": "TLE"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "22",
+  "wrong": "wrong-half-open",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "22",
+  "wrong": "wrong-prefix",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "22",
+  "wrong": "wrong-int",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "22",
+  "wrong": "wrong-rowrange",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "22",
+  "wrong": "wrong-quadratic",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "near-max-1",
+   "group": "secret",
+   "kind": "TLE"
+  },
+  "n_fail": 1,
+  "n_cases": 40
+ },
+ {
+  "pid": "23",
+  "wrong": "wrong-center",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 36
+ },
+ {
+  "pid": "23",
+  "wrong": "wrong-double",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 36
+ },
+ {
+  "pid": "23",
+  "wrong": "wrong-index",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "min-even-diff-1",
+   "group": "secret",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 36
+ },
+ {
+  "pid": "24",
+  "wrong": "wrong-shift",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 44
+ },
+ {
+  "pid": "24",
+  "wrong": "wrong-same-rows",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 44
+ },
+ {
+  "pid": "24",
+  "wrong": "wrong-row-constant",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 44
+ },
+ {
+  "pid": "24",
+  "wrong": "wrong-drop-column",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 44
+ },
+ {
+  "pid": "24",
+  "wrong": "wrong-spaced",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 44
+ },
+ {
+  "pid": "25",
+  "wrong": "wrong-shift",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 34
+ },
+ {
+  "pid": "25",
+  "wrong": "wrong-border",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-2",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 34
+ },
+ {
+  "pid": "25",
+  "wrong": "wrong-half",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "WA"
+  },
+  "n_fail": 1,
+  "n_cases": 34
+ },
+ {
+  "pid": "25",
+  "wrong": "wrong-offbyone",
+  "expected": "fail",
+  "killed": true,
+  "first": {
+   "case": "sample-1",
+   "group": "sample",
+   "kind": "PE"
+  },
+  "n_fail": 1,
+  "n_cases": 34
+ }
+]

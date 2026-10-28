@@ -1,0 +1,3 @@
+kimi version 2.2.0
+error: failed to run prompt: Model "primary" is not configured in config.toml.
+See log: C:\Users\Asanagi\.kimi-code\logs\kimi-code.log

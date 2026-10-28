@@ -1,0 +1,4 @@
+maximum = 7
+maximum index = 0
+minimum = -5
+negative count = 2

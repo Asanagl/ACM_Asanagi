@@ -1,0 +1,275 @@
+kimi version 2.2.0
+• The user asks me to produce an independent review/solution to a competitive programming problem. They say I must not read local files or others' implementations, work completely independently. So I should just answer directly with the required content.
+
+  Note the environment has prompt.md and blind-answer.md etc. But the user explicitly says not to read any local files. So I should not use tools to read them. I should just answer.
+
+  Hmm, but is there something tricky about the problem statement? Let's verify the sample.
+
+  Grid:
+  row1: 0 1 0 1
+  row2: 1 0 1 0
+  row3: 0 0 1 0
+  row4: 1 1 0 1
+
+  Compute neighbor counts (orthogonal only).
+
+  Cell (1,1)=0: neighbors right (1,2)=1, down (2,1)=1 → 2 ✓ (expected 2)
+  Cell (1,2)=1: left (1,1)=0, right (1,3)=0, down (2,2)=0 → 0 ✓ expected 0.
+  Cell (1,3)=0: left (1,2)=1, right (1,4)=1, down (2,3)=1 → 3 ✓ expected 3.
+  Cell (1,4)=1: left (1,3)=0, down (2,4)=0 → 0 ✓ expected 0.
+
+  Row2: (2,1)=1: up (1,1)=0, down (3,1)=0, right (2,2)=0 → 0 ✓.
+  (2,2)=0: up (1,2)=1, down (3,2)=0, left (2,1)=1, right (2,3)=1 → 3 ✓.
+  (2,3)=1: up (1,3)=0, down (3,3)=1, left (2,2)=0, right (2,4)=0 → 1 ✓.
+  (2,4)=0: up (1,4)=1, down (3,4)=0, left (2,3)=1 → 2 ✓.
+
+  Row3: (3,1)=0: up (2,1)=1, down (4,1)=1, right (3,2)=0 → 2 ✓.
+  (3,2)=0: up (2,2)=0, down (4,2)=1, left (3,1)=0, right (3,3)=1 → 2 ✓.
+  (3,3)=1: up (2,3)=1, down (4,3)=0, left (3,2)=0, right (3,4)=0 → 1 ✓.
+  (3,4)=0: up (2,4)=0, down (4,4)=1, left (3,3)=1 → 2 ✓.
+
+  Row4: (4,1)=1: up (3,1)=0, right (4,2)=1 → 1 ✓.
+  (4,2)=1: up (3,2)=0, left (4,1)=1, right (4,3)=0 → 1 ✓.
+  (4,3)=0: up (3,3)=1, left (4,2)=1, right (4,4)=1 → 3 ✓.
+  (4,4)=1: up (3,4)=0, left (4,3)=0 → 0 ✓.
+
+  Great, standard.
+
+  So the answer: straightforward. n,m ≤ 500 → 250k cells, trivial.
+
+  I need to write 7 sections in Chinese, with a complete C++17 program.
+
+  Let me consider noting that the problem is trivial/unambiguous — as an independent reviewer, I should note there's nothing ambiguous, no multi-solution. Also note that "整数之间用一个空格分隔" and trailing spaces allowed per judge semantics.
+
+  Elaborate details:
+
+  1. 任务复述: Given n×m 0/1 grid, for each cell output count of 1s among its 4 orthogonal neighbors (up down left right). Diagonal excluded. Cells with fewer than 4 neighbors: 
+  - interior cells (2 ≤ i ≤ n-1, 2 ≤ j ≤ m-1) have exactly 4.
+  - edge non-corner cells on top/bottom rows (with m ≥ 2) or left/right columns (with n ≥ 2) have 3.
+  - corner cells have 2 (when n ≥ 2 and m ≥ 2).
+  - n=1 or m=1 special: single row → each cell has at most left and right (2), and endpoints have 1; if n=m=1, the single cell has 0 neighbors.
+  Also "direction excluded": diagonal (i±1, j±1) excluded; out-of-grid directions excluded.
+
+  2. Algorithm: 枚举每个格子，检查四个方向边界，累加。Or use padding with zeros: pad (n+2)×(m+2) grid with 0 border; then all cells have 4 neighbors. That's a clean approach. Complexity O(nm).
+
+  I'll present the padding approach as the core, and mention a direct boundary-check version equivalence. Actually simplest to write both? Provide one program. Let's write padding version — it makes the correctness proof of boundary cases clean (padding zeros contribute 0, and out-of-bound neighbors are conceptually 0).
+
+  Careful: padding with 0 means out-of-bound neighbors count as 0, which is exactly what "不存在则不参与统计" gives. Good.
+
+  3. Correctness proof: 
+  - Lemma 1: For any cell (i,j), the number of 1-valued orthogonal in-grid neighbors equals the sum over the four directions of a(i+di, j+dj) where a(x,y) is defined as original value if in grid, else 0.
+  - Proof: for directions where the neighbor is in-grid, term is original value; for out-of-grid, term is 0 and the neighbor doesn't participate → correct.
+  - Lemma 2: padded grid b has b[i][j] = a(i,j) for all 1<=i<=n,1<=j<=m, and b = 0 on the border; hence for cells in range, b[i+1][j] = a(i-1,j) etc., and for out-of-range indices, b is the pad 0 (since indices range 1..n+1 within a (n+2)×(m+2) array... need to check: i ranges 1..n, so i-1 ranges 0..n-1, i+1 ranges 2..n+1; the padded array has rows 0..n+1. For i=1, i-1=0 → row 0 which is padding = 0. For i=n, i+1 = n+1 → row n+1 which is padding = 0. So all accesses are in-bounds of padded array, and access at row 0 or n+1 returns 0, which stands for the nonexistent neighbor. Good.
+  - Theorem: output equals correct count per cell. Also each cell processed exactly once (double loop), so output shape is exactly n×m.
+
+  4. Complexity: O(nm) time, O(nm) space (or O(nm) padded → O(nm)).
+
+  5. Edge cases: n=1 (single row: only left/right, no up/down); m=1 (single column); n=m=1 (answer is 0); all-0 grid (all zeros); all-1 grid (interior 4, edges 3, corners 2; n=1 → all 1s answer... for n=1, all ones, m≥2: endpoints 1, middle 2; m=1,n≥2 similar); maximum 500×500 = 250000 cells, answer ≤ 4, fits int; input has no spaces between chars — must read as string not as individual ints (important! If you read with `cin >> int` you'd read the whole "0101" as 101). That's a key trap.
+
+  Also note: reading with scanf("%1d") would work but string is simplest.
+
+  6. Risks: 
+  - reading digits as integers (main trap)
+  - output formatting: use spaces, no trailing issues (trailing space allowed but be clean)
+  - no prompt text
+  - cin with sync_with_stdio(false)
+  - using char comparison '1' vs int 1
+  - n=1 or m=1: loops must not access out of range — padding solves; direct index version needs guard conditions.
+  - output size: 250k numbers, use '\n' not endl for speed.
+  - Multi-test? No, single test.
+
+  7. Code.
+
+  Let me write the code:
+
+  ```cpp
+  #include <cstdio>
+  #include <iostream>
+  #include <string>
+  #include <vector>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      int n, m;
+      if (!(std::cin >> n >> m)) return 0;
+
+      std::vector<std::string> g(n);
+      for (int i = 0; i < n; ++i) std::cin >> g[i];
+
+      std::string out;
+      out.reserve(static_cast<size_t>(n) * m * 2 + n);
+      for (int i = 0; i < n; ++i) {
+          for (int j = 0; j < m; ++j) {
+              int c = 0;
+              if (i > 0 && g[i-1][j] == '1') ++c;
+              if (i + 1 < n && g[i+1][j] == '1') ++c;
+              if (j > 0 && g[i][j-1] == '1') ++c;
+              if (j + 1 < m && g[i][j+1] == '1') ++c;
+              if (j) out += ' ';
+              out += static_cast<char>('0' + c);
+              // c in 0..4
+          }
+          out += '\n';
+      }
+      std::fwrite(out.data(), 1, out.size(), stdout);
+      return 0;
+  }
+  ```
+
+  Note c ≤ 4, so single digit '0'+c works. Good.
+
+  Alternatively use padding to be robust. I'll present the direct-check version as the main code since it's simple and avoids allocation, but the proof uses the "treated as 0" formulation. Maybe I should present the padded version as the algorithm since it makes proof cleaner, but the code uses guards. Let me align: I'll describe the algorithm as "对每个格子，按四个方向检查，越界视为不存在的邻居（贡献 0）。等价的实现是加一圈 0 边界"。 And code uses guards. That's consistent.
+
+  Also mention that the answer is uniquely determined, judge compares tokens, so we output exactly n lines of m integers.
+
+  Let me also double-check reading: input line could have leading/trailing spaces? "每行输入一个长度为 m 的字符串" — standard. `cin >> g[i]` skips whitespace, safe.
+
+  One more detail: if m could be 0? No, m ≥ 1.
+
+  Potential trap: `g[i][j]` when using string indexing with signed char — fine since '0'/'1' ASCII.
+
+  Also mention: outputs are at most 4, so no overflow; even int fine; total output ~250k numbers ≈ 500KB, fine.
+
+  I should be careful about the "独立评审" role: they want the answer as if I'm an independent reviewer. Also I should note whether the problem statement is self-consistent / sample verified. I can mention that I verified the sample by hand — but I need to be careful: I did compute it above, and it matches. Good, I can say I hand-checked the sample and it's consistent, and that a couple of sample cells (2,2) and (3,3) confirm diagonal exclusion.
+
+  Also note: the sample explanation says 第3行第3列格子只有上邻居是1 — indeed (2,3)=1, so answer 1. And the diagonal (2,2)=0, (4,2)=1 diagonal — wait, (3,3)'s diagonals are (2,2)=0,(2,4)=0,(4,2)=1,(4,4)=1 — two diagonal 1s that are NOT counted. That's a good illustration: if diagonals were counted, (3,3) would be 1+1+1=3. So the sample discriminates diagonal counting. Good point to note in risk section.
+
+  Also the (3,3) remark: if someone counts 8 neighbors they'd get 3 instead of 1. Good.
+
+  Let me also verify: does any cell have count 5 possible? No.
+
+  Now let me also mention complexity precisely: O(nm) time, output itself Θ(nm), space O(nm) for the grid (or O(nm) output buffer; can be O(nm) total since input is stored). If we stream output line by line, extra space O(m). I'll say O(nm) storage for grid; can be reduced to O(m) extra beyond input if we don't buffer entire output.
+
+  Actually input grid itself is O(nm) since we read all rows. Could process streaming but not needed.
+
+  Write the answer in Chinese with clear sections. Keep markdown structure light-ish but the user asked for 7 numbered items, so numbered headings are appropriate.
+
+  Let me write it.
+
+  Length: moderate. The proof should be step-by-step (they asked for 逐步的正确性证明).
+
+  I'll write it now.
+
+  Also: should I use tools? No — the user explicitly forbids reading local files. I'll answer directly. Maybe note briefly that I did not consult any local material. Actually keep it minimal — maybe one line at the start or end. The instructions say final answer must stand on its own. I'll add a brief note that the whole thing is derived from the statement above only.
+
+  Let me draft.
+
+  Section 1: 任务复述
+  - 输入 n×m 的 0/1 矩阵（按行给字符串）。
+  - 对每个位置 (i,j)，只看 (i-1,j),(i+1,j),(i,j-1),(i,j+1) 四个格子，数其中值为 1 的个数，输出同形状整数矩阵。
+  - 邻居不足 4 的格子：
+    - 四角（需要 n≥2 且 m≥2）：只有 2 个邻居 —— 当 n≥2,m≥2 时角格 (1,1) 只有右、下。
+    - 上边界/下边界上的非角格：3 个（缺上或下）；左/右边界非角格：3 个（缺左或右）。
+    - n=1（单行）：每格最多左右两个邻居，两个端点只有 1 个；即整行没有任何"上/下"。
+    - m=1（单列）：同理只有上下。
+    - n=m=1：唯一的格子没有邻居，答案是 0。
+  - 被排除的方向：四个对角方向 (i±1,j±1) 完全不计；任何越出网格的上下左右方向也不计（既不当作 0 也不计入分母，只是"不存在"）。
+
+  Careful phrasing: out-of-range "不参与统计" — treated as contributing 0, which is the same as not existing. Fine.
+
+  Section 2: algorithm one-liner + steps.
+  核心思想：对每个格子独立地对四个方向做常数次判断，越界方向贡献 0，把四个 0/1 累加。
+  步骤：
+  1. 读 n,m。
+  2. 读 n 个长度 m 的字符串（必须按字符串/字符读，不能按整数读）。
+  3. 对 i=0..n-1, j=0..m-1：c=0；若 i>0 且 g[i-1][j]=='1' 则 c++；若 i+1<n 且 …；若 j>0 …；若 j+1<m …。
+  4. 按行输出，每行 m 个整数，空格分隔。
+  （等价写法：在外面补一圈 0，变成 (n+2)×(m+2)，就不用写边界判断；两者结果相同。）
+
+  Section 3: proof. Structure:
+  - 定义 a(x,y) = 若 1≤x≤n,1≤y≤m 取原值，否则为 0（"虚拟 0"）。真值 T(i,j) = a(i-1,j)+a(i+1,j)+a(i,j-1)+a(i,j+1)。
+  - 引理1：对网格内任意 (i,j)，T(i,j) 等于"实际存在的正交邻居中 1 的个数"。证明：四个方向逐个看，若该方向邻居在网格内，a 取原值，恰是该邻居的值，且它确实是实际存在的邻居；若越界，a=0，而该方向本来没有邻居，按题意不参与统计，等价贡献 0。四个方向互不重复、覆盖了全部正交邻居，故求和即所求。对角方向从未出现在这四项中，故恒被排除。
+  - 引理2：程序算出的 c(i,j) 等于 T(i,j)。证明按四个 if 分支对齐：程序只在 i>0 时加 g[i-1][j]，否则不加，正对应"i=0 时不存在上邻居、a 贡献 0"；i+1<n、j>0、j+1<m 同理。字符比较 g=='1' 与数值 1 等价（输入保证只有 '0'/'1'）。因此 c(i,j)=T(i,j)。
+  - 定理：输出矩阵第 i 行第 j 个数 = 正确答案。因为外层二重循环对每个 (i,j) 恰好执行一次（0≤i<n, 0≤j<m 各遍历一次），每行恰好输出 m 个数、共 n 行，与要求形状一致；每行末尾换行、整数间单个空格，符合判题 token 规则；不含其他文字。
+  - 边界情形在证明中未特殊处理，因为引理 1 的"虚拟 0"对所有 i,j 一致成立：n=1 时上下两个 if 恒不成立，等价于 a=0；m=1 时左右两个 if 恒不成立；n=m=1 时四项全不成立 c=0。四角在 n,m≥2 时恰好两项成立。
+
+  Section 4: complexity: time O(nm)（每格 4 次常数判断 + 1 次输出），空间 O(nm) 存网格 + 输出缓冲 O(nm)（可退化为按行输出则额外 O(m)）；n,m≤500 时 2.5×10^5 格，远在限制内。
+
+  Section 5: edge cases list — as above, with expected values.
+  - n=1,m=1: input "0" → 0; "1" → 0.
+  - n=1,m=5, "11111" → 1 2 2 2 1.
+  - m=1: same transposed.
+  - all zeros 500×500 → all 0.
+  - all ones: interior 4, edge 3, corners 2; n=1 all ones → 1 2 2 … 2 1.
+  - n=2 or m=2: still fine.
+  - max 500×500 → 250000 outputs, count ≤ 4.
+
+  Section 6: risks
+  - 把每行当整数读（`cin >> int`）会把 "0101" 读成 101 且吃掉多行 → 必须读字符串/字符。
+  - 用 '1' 与 1 混比。
+  - 边界判断写成 `i>=0`、数组不开外圈却访问 g[-1] → UB。
+  - 输出用 endl 太慢（250k 行也可接受，但仍建议 '\n'）；用 printf 每数字一次也可。
+  - 多输出解释文字、或输出 "Case #" 之类 → 判错。
+  - 行列互换（把 n 当列）：读入顺序是 n 行 m 列。
+  - 行列索引从 0 或 1 混用导致越界。
+  - 斜向误计：样例 (3,3) 周围有 1 个正交 1 和 2 个对角 1，若按 8 邻域会得 3，是明显的判错信号 —— 可用来自测。
+  - 空输出/漏最后一行、行尾少列。
+  - 只适用于本题：不需要多测。
+
+  Section 7: code.
+
+  I'll present code as a single block. Let me make sure it compiles mentally.
+
+  ```cpp
+  #include <cstdio>
+  #include <iostream>
+  #include <string>
+  #include <vector>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      int n = 0, m = 0;
+      if (!(std::cin >> n >> m)) return 0;
+
+      std::vector<std::string> g(n);
+      for (int i = 0; i < n; ++i) {
+          std::cin >> g[i];
+      }
+
+      std::string out;
+      out.reserve(static_cast<std::size_t>(n) * static_cast<std::size_t>(m) * 2 +
+                  static_cast<std::size_t>(n));
+
+      for (int i = 0; i < n; ++i) {
+          for (int j = 0; j < m; ++j) {
+              int cnt = 0;
+              if (i > 0 && g[i - 1][j] == '1') ++cnt;
+              if (i + 1 < n && g[i + 1][j] == '1') ++cnt;
+              if (j > 0 && g[i][j - 1] == '1') ++cnt;
+              if (j + 1 < m && g[i][j + 1] == '1') ++cnt;
+              if (j > 0) out.push_back(' ');
+              out.push_back(static_cast<char>('0' + cnt));
+          }
+          out.push_back('\n');
+      }
+
+      std::fwrite(out.data(), 1, out.size(), stdout);
+      return 0;
+  }
+  ```
+
+  Need <cstddef> for std::size_t? <cstdio>/<string> typically pull it in; `std::size_t` is defined in <cstddef>. To be safe, use `size_t` from <cstring>? Hmm. Better: just use `out.reserve((size_t)n * m * 2 + n);` — size_t in global namespace comes from <cstddef> transitively via <cstdio> typically guaranteed? Standard says <cstdio> declares size_t? Actually <cstdio> is required to declare std::size_t? Hmm, not exactly; but in practice it's fine. To be robust, include <cstddef> and use std::size_t.
+
+  I'll add `#include <cstddef>` and cast. Or simply avoid: `out.reserve(2 * (size_t)n * m + n)` — still needs size_t. Simpler: use `std::string out;` without reserve, or compute with long long: `out.reserve(static_cast<std::size_t>(2LL * n * m + n));` still size_t. Just include <cstddef>. Fine.
+
+  Actually simplest: skip reserve entirely — string grows fine for 500KB. But reserve is nice. I'll include <cstddef>.
+
+  Also fwrite with std::string data — fine. Could just use std::cout << out; with sync_with_stdio(false) — good enough. I'll use fwrite for determinism.
+
+  One more consideration: is it possible that the input has rows shorter (m chars) — yes exactly m.
+
+  Let me also double check "输出唯一（不存在多解）" — yes.
+
+  I'll also add a short "自检" note in section 6 about testing on sample, and maybe include sample verification in section 3/6.
+
+  Now write the final answer in Chinese, moderate length.
+
+  Maybe I should also mention in section 1 that counts are between 0 and 4 always, so single digit output.
+
+  I'll write it.
+
+To resume this session: kimi -r session_f164163c-b2b6-43f7-a1d3-2aa1570a7289

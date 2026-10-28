@@ -1,0 +1,341 @@
+{
+  "slug": "04-04",
+  "title": "大小写互换",
+  "interactive": false,
+  "timeLimitMs": 1000,
+  "memoryLimitMb": 256,
+  "standard": "gnu++17",
+  "statement": "docs/statement.md",
+  "tutorial": "docs/tutorial.md",
+  "validator": "src/validator/validator.cpp",
+  "generator": {
+    "path": "src/generator/generator.cpp",
+    "cases": [
+      {
+        "name": "sample-1",
+        "type": "sample",
+        "seed": 1,
+        "group": "sample"
+      },
+      {
+        "name": "sample-2",
+        "type": "sample-spaces",
+        "seed": 2,
+        "group": "sample"
+      },
+      {
+        "name": "min-upper",
+        "type": "min-upper",
+        "seed": 1001,
+        "group": "secret"
+      },
+      {
+        "name": "min-lower",
+        "type": "min-lower",
+        "seed": 1002,
+        "group": "secret"
+      },
+      {
+        "name": "min-digit",
+        "type": "min-digit",
+        "seed": 1003,
+        "group": "secret"
+      },
+      {
+        "name": "min-space",
+        "type": "min-space",
+        "seed": 1004,
+        "group": "secret"
+      },
+      {
+        "name": "min-punct",
+        "type": "min-punct",
+        "seed": 1005,
+        "group": "secret"
+      },
+      {
+        "name": "upper-alphabet",
+        "type": "upper-alphabet",
+        "seed": 1006,
+        "group": "secret"
+      },
+      {
+        "name": "lower-alphabet",
+        "type": "lower-alphabet",
+        "seed": 1007,
+        "group": "secret"
+      },
+      {
+        "name": "nonletters-all",
+        "type": "nonletters-all",
+        "seed": 1008,
+        "group": "secret"
+      },
+      {
+        "name": "spaces-only",
+        "type": "spaces-only",
+        "seed": 1009,
+        "group": "secret"
+      },
+      {
+        "name": "repeated-upper",
+        "type": "repeated-upper",
+        "seed": 1010,
+        "group": "secret"
+      },
+      {
+        "name": "repeated-lower",
+        "type": "repeated-lower",
+        "seed": 1011,
+        "group": "secret"
+      },
+      {
+        "name": "repeated-punctuation",
+        "type": "repeated-punctuation",
+        "seed": 1012,
+        "group": "secret"
+      },
+      {
+        "name": "alternating-1",
+        "type": "alternating-lower-first",
+        "seed": 1013,
+        "group": "secret"
+      },
+      {
+        "name": "alternating-2",
+        "type": "alternating-upper-first",
+        "seed": 1014,
+        "group": "secret"
+      },
+      {
+        "name": "ascii-all",
+        "type": "ascii-all",
+        "seed": 1015,
+        "group": "secret"
+      },
+      {
+        "name": "ascii-all-reversed",
+        "type": "ascii-all-reversed",
+        "seed": 1016,
+        "group": "secret"
+      },
+      {
+        "name": "leading-trailing-spaces",
+        "type": "leading-trailing-spaces",
+        "seed": 1017,
+        "group": "secret"
+      },
+      {
+        "name": "repeated-spaces",
+        "type": "repeated-spaces",
+        "seed": 1018,
+        "group": "secret"
+      },
+      {
+        "name": "letter-boundaries",
+        "type": "letter-boundaries",
+        "seed": 1019,
+        "group": "secret"
+      },
+      {
+        "name": "kill-position",
+        "type": "kill-position",
+        "seed": 1020,
+        "group": "secret"
+      },
+      {
+        "name": "kill-xor",
+        "type": "kill-xor",
+        "seed": 1021,
+        "group": "secret"
+      },
+      {
+        "name": "kill-token",
+        "type": "kill-token",
+        "seed": 1022,
+        "group": "secret"
+      },
+      {
+        "name": "kill-last",
+        "type": "kill-last",
+        "seed": 1023,
+        "group": "secret"
+      },
+      {
+        "name": "kill-range",
+        "type": "kill-range",
+        "seed": 1024,
+        "group": "secret"
+      },
+      {
+        "name": "kill-oneway",
+        "type": "kill-oneway",
+        "seed": 1025,
+        "group": "secret"
+      },
+      {
+        "name": "random-small-1",
+        "type": "random-small",
+        "seed": 2401,
+        "group": "secret"
+      },
+      {
+        "name": "random-small-2",
+        "type": "random-small",
+        "seed": 2402,
+        "group": "secret"
+      },
+      {
+        "name": "random-medium-1",
+        "type": "random-medium",
+        "seed": 2601,
+        "group": "secret"
+      },
+      {
+        "name": "random-medium-2",
+        "type": "random-medium",
+        "seed": 2602,
+        "group": "secret"
+      },
+      {
+        "name": "random-letters",
+        "type": "random-letters",
+        "seed": 2801,
+        "group": "secret"
+      },
+      {
+        "name": "random-with-spaces",
+        "type": "random-with-spaces",
+        "seed": 2901,
+        "group": "secret"
+      },
+      {
+        "name": "near-max-random",
+        "type": "near-max-random",
+        "seed": 3001,
+        "group": "secret"
+      },
+      {
+        "name": "near-max-pattern",
+        "type": "near-max-pattern",
+        "seed": 3101,
+        "group": "secret"
+      },
+      {
+        "name": "max-random-1",
+        "type": "max-random",
+        "seed": 3201,
+        "group": "secret"
+      },
+      {
+        "name": "max-random-2",
+        "type": "max-random",
+        "seed": 3202,
+        "group": "secret"
+      },
+      {
+        "name": "max-letters",
+        "type": "max-letters",
+        "seed": 3401,
+        "group": "secret"
+      },
+      {
+        "name": "max-nonletters",
+        "type": "max-nonletters",
+        "seed": 3501,
+        "group": "secret"
+      },
+      {
+        "name": "max-mixed",
+        "type": "max-mixed",
+        "seed": 3601,
+        "group": "secret"
+      },
+      {
+        "name": "max-cycle",
+        "type": "max-cycle",
+        "seed": 3701,
+        "group": "secret"
+      },
+      {
+        "name": "max-sparse-letters",
+        "type": "max-sparse-letters",
+        "seed": 3801,
+        "group": "secret"
+      },
+      {
+        "name": "max-upper",
+        "type": "max-upper",
+        "seed": 3901,
+        "group": "secret"
+      },
+      {
+        "name": "max-lower",
+        "type": "max-lower",
+        "seed": 4001,
+        "group": "secret"
+      }
+    ]
+  },
+  "checker": "src/checker/checker.cpp",
+  "build": {
+    "cppCompiler": "g++",
+    "cppFlags": [
+      "-std=gnu++17",
+      "-O2",
+      "-pipe"
+    ]
+  },
+  "solutions": [
+    {
+      "name": "main",
+      "path": "src/solution.cpp",
+      "language": "cpp",
+      "role": "main"
+    },
+    {
+      "name": "solution2",
+      "path": "src/solution2.cpp",
+      "language": "cpp",
+      "role": "reference"
+    }
+  ],
+  "wrongSolutions": [
+    {
+      "name": "wrong-position",
+      "path": "src/wrong/wrong-position.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    },
+    {
+      "name": "wrong-xor",
+      "path": "src/wrong/wrong-xor.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    },
+    {
+      "name": "wrong-token",
+      "path": "src/wrong/wrong-token.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    },
+    {
+      "name": "wrong-skip-last",
+      "path": "src/wrong/wrong-skip-last.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    },
+    {
+      "name": "wrong-range",
+      "path": "src/wrong/wrong-range.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    },
+    {
+      "name": "wrong-oneway",
+      "path": "src/wrong/wrong-oneway.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    }
+  ]
+}

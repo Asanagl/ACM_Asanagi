@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html data-page="problem_detail" data-layout="basic" class="layout--basic page--problem_detail theme--light nojs" data-mantine-color-scheme="light" lang="" data-app="Hydro">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="canonical" href="https://oj.syuctacm.cn/p/827">  <meta name="theme-color" content="#56758f">
+    <meta property="og:site_name" content="SYUCT OJ" />
+  <meta property="og:url" content="https://oj.syuctacm.cn/p/827" />
+  <meta property="og:image" content="/favicon-96x96.png" />
+                                  <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="P0242. 循环练习C - SYUCT OJ" />
+    <meta property="og:description" content="题目描述
+输入一个整数n，代表n个学生再输入n个数，统计分数大于等于60的人数。
+输入格式
+第一行输入n。
+第二行输入n个数。
+输出格式
+输出大于等于60分的人数。
+样例
+6
+10 20 30 40 ..." />
+    <title>循环练习C - 题目详情 - SYUCT OJ</title>
+  <style>
+    body {
+      --font-family: "Open Sans", "Open Sans", "Seravek", "Segoe UI", "Verdana", "PingFang SC", "Hiragino Sans GB", "Lantinghei SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans";
+      --code-font-family: "Source Code Pro", "monaco", "Source Code Pro", "Consolas", "Lucida Console", "monospace";
+      --font-ligatures: none !important;
+    }
+          #panel { display: flex; flex-direction: column; }
+      </style>
+      <link rel="stylesheet" media="all" href="/theme-4.58.5.css">
+        <script>
+      var _htmlNode = document.documentElement;
+      _htmlNode.className = _htmlNode.className.replace(' nojs', ' hasjs');
+      window.UiContext = '{"cdn_prefix":"/","url_prefix":"/","ws_prefix":"/","constantVersion":"afaf5740","domainId":"system","domainVersion":1792848814990,"extraTitleContent":"\u5FAA\u73AF\u7EC3\u4E60C","SWConfig":{"preload":"","hosts":["http://oj.syuctacm.cn","https://oj.syuctacm.cn","https://oj.syuctacm.cn/","/"],"assets":[],"domains":[]}}';
+      window.UserContext = '{"_id":0,"mail":"Guest@hydro.local","uname":"Guest","hashType":"hydro","priv":8,"regat":"2025-03-06T12:26:22.389Z","loginat":"2026-03-07T10:35:53.368Z","perm":"BigInt::1291862133704988065921","role":"guest","scope":"BigInt::-1","tfa":false,"authn":false,"group":[],"domains":[],"timeZone":"Asia/Shanghai","codeLang":"cc.cc17","avatar":"gravatar:Guest@hydro.local","gender":2,"backgroundImage":"/components/profile/backgrounds/1.jpg","pinnedDomains":[],"checkin_time":"1997-01-11","showTimeAgo":true,"fontFamily":"Open Sans","codeFontFamily":"Source Code Pro","theme":"light","preferredEditorType":"sv","formatCode":true,"avatarUrl":"//cn.gravatar.com/avatar/97119d3d15d5201ab506330ed4bab0f7?d=mm&s=128"}';
+    </script>
+      </head>
+<body>
+      <script type="text/javascript" src="/resource/afaf5740/entry.js"></script>
+    <script type="text/javascript" src="/resource/4.58.5/lang-zh.js"></script>
+    <script type="text/javascript" src="/hydro-4.58.5.js"></script>
+    <nav class="nav slideout-menu" id="menu">
+  <div class="row"><div class="columns clearfix">
+    <ol class="nav__list nav__list--main clearfix">
+      <li class="nav__list-item">
+        <a href="/"><img class="nav__logo" src="/nav_logo_dark.png"></a>
+      </li>        <li class="nav__list-item">
+  <a href="/" class="nav__item">
+    首页
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/p" class="nav__item nav--active">
+    题库
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/training" class="nav__item">
+    训练
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/contest" class="nav__item">
+    比赛
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/homework" class="nav__item">
+    作业
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/discuss" class="nav__item">
+    讨论
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/record" class="nav__item">
+    评测记录
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/ranking" class="nav__item">
+    排名
+  </a>
+</li>
+      </ol>
+    <ol class="nav__list nav__list--secondary clearfix">
+          <li class="nav__list-item"><a href="/login" class="nav__item" name="nav_login">登录</a></li>
+            <li class="nav__list-item"><a href="/register" class="nav__item--round">注册</a></li>
+            <li class="nav__list-item nojs--hide" data-dropdown-pos="bottom right" data-dropdown-custom-class="nav__dropdown" data-dropdown-target="#menu-nav-user" data-dropdown-disabledconstrainToWindow data-dropdown-trigger-desktop-only>
+        <a href="javascript:;" class="nav__item">
+          <span class="icon icon-global"></span>Language <span class="icon icon-expand_more"></span>
+        </a>
+        <ol class="dropdown-target menu" id="menu-nav-user"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+      </li>
+        </ol>
+  </div></div>
+</nav>
+<nav class="nav--shadow"></nav>
+<div class="slideout-panel" id="panel">
+    <div class="slideout-overlay"></div>
+  <div class="header--mobile">
+  <div class="row"><div class="columns clearfix">
+    <div class="float-left">
+      <a class="header--mobile__domain" href="/" target="_self">
+        <img src="/nav_logo_dark.png">
+      </a>
+    </div>
+    <div class="float-right">
+      <button type="button" class="header__hamburger">
+  <div class="hamburger hamburger--spin">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </div>
+</button>
+    </div>
+  </div></div>
+</div>
+  <div class="main">
+        <script>
+
+  
+  
+  
+  
+  
+</script>
+                                <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="P0242. 循环练习C - SYUCT OJ" />
+    <meta property="og:description" content="题目描述
+输入一个整数n，代表n个学生再输入n个数，统计分数大于等于60的人数。
+输入格式
+第一行输入n。
+第二行输入n个数。
+输出格式
+输出大于等于60分的人数。
+样例
+6
+10 20 30 40 ..." />
+  <div class="row" data-sticky-parent>
+  <div class="medium-9 columns">
+    <div class="section">
+      <div class="section__header">
+        <h1 class="section__title">
+                    #P0242. 循环练习C
+        </h1>
+              </div>
+      <div class="section__body">
+        <ul class="problem__tags">
+                      <span class="problem__tag-item">ID: 827</span>
+                    <span class="problem__tag-item icon icon-book">传统题</span>
+                                <span class="problem__tag-item icon icon-stopwatch">1000ms</span>
+            <span class="problem__tag-item icon icon-comparison">256MiB</span>
+                                <a class="problem__tag-item interactive" href="/record?pid=827">尝试: 403</a>
+            <a class="problem__tag-item interactive" href="/record?pid=827&amp;status=1">已通过: 216</a>
+            <span class="problem__tag-item">难度: 5</span>
+            <span class="problem__tag-item interactive">上传者: <span class="user-profile-link">
+      <img class="small user-profile-avatar v-center" loading="lazy" src="//q1.qlogo.cn/g?b=qq&amp;nk=2595583127&amp;s=160" width="20" height="20">
+    <a class="user-profile-name uname--lv1" href="/user/3">
+          zine
+      </a>
+  </span>
+</span>
+                                <span name="show_tags" class="problem__tag-item interactive nojs--hide icon icon-tag">标签&gt;</span><span class="problem__tag-item tags hasjs--hide">SYUCT</span><span class="problem__tag-item tags hasjs--hide">基础语法</span>        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="problem-content-container"><div class="problem-content" data-marker-enabled>
+        <div class="section__header non-scratchpad--hide">
+          <h1 class="section__title">循环练习C</h1>
+        </div>
+                <div class="section__body typo richmedia" data-fragment-id="problem-description">
+                      <h1 id="%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0" tabindex="-1">题目描述</h1>
+<p>输入一个整数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>，代表<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>个学生再输入<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>个数，统计分数大于等于<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>60</mn></mrow><annotation encoding="application/x-tex">60</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">60</span></span></span></span>的人数。</p>
+<h1 id="%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F" tabindex="-1">输入格式</h1>
+<p>第一行输入<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>。</p>
+<p>第二行输入<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>个数。</p>
+<h1 id="%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F" tabindex="-1">输出格式</h1>
+<p>输出大于等于60分的人数。</p>
+<h1 id="%E6%A0%B7%E4%BE%8B" tabindex="-1">样例</h1>
+<pre><code class="language-input1">6
+10 20 30 40 50 60
+</code></pre>
+<pre><code class="language-output1">1
+</code></pre>
+
+</div>      </div></div>
+    </div>
+  </div>
+  <div class="medium-3 columns"><div data-sticky="large">
+        <div class="section side section--problem-sidebar">
+  <div>
+    <ol class="menu">
+                          <li class="menu__item scratchpad--hide"><a class="menu__link" href="javascript:showSignInDialog();">
+        <span class="icon icon-send"></span> 登录后递交
+      </a></li>
+                      <li class="menu__seperator"></li>
+              <li class="menu__item"><a class="menu__link" href="/discuss/problem/827">
+        <span class="icon icon-comment--text"></span> 讨论 (0)      </a></li>
+              <li class="menu__item"><a class="menu__link" href="/p/P0242/solution">
+        <span class="icon icon-comment--text"></span> 题解 (0)      </a></li>
+          <li class="menu__item"><a class="menu__link" href="/p/P0242/files">
+        <span class="icon icon-file"></span> 文件
+      </a></li>
+      <li class="menu__item"><a class="menu__link" href="/p/P0242/stat">
+        <span class="icon icon-statistics"></span> 统计
+      </a></li>
+              <li class="menu__seperator nojs--hide"></li>
+                    </ol>
+  </div>
+</div>
+<div class="section side">
+  <div class="section__header">
+    <h1 class="section__title">相关</h1>
+  </div>
+  <div class="section__body typo">
+        <p>在下列比赛中: </p><p><a href="/contest/68f788a80cc5d7be226466a5">2025级SYUCT-ACM新生第二次训练</a></p><p><a href="/contest/6ac5b694753773230ebbcb8f">2026级SYUCT-ACM新生第二次训练</a></p>    </div>
+</div>
+  </div></div>
+</div>
+<div style="display:none" class="outer-loader-container"><div class="loader"></div></div>
+<div class="scratchpad-container" style="display:none">
+  <div style="display:none" class="loader-container"><div class="loader"></div></div>
+  <div id="scratchpad" style="opacity:0"></div>
+</div>
+  </div>
+  <div class="footer">
+  <div class="row"><div class="columns">
+      <div class="row footer__links">
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          状态
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/record">评测队列</a></li>
+          <li class="footer__category__item"><a href="/status">服务状态</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          开发
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="https://github.com/hydro-dev/Hydro" target="_blank">开源</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          支持
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/help">帮助</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">联系我们</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable end">
+        <h1>
+          关于
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/about">关于</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#privacy">隐私</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#tos">服务条款</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">版权申诉</a></li>
+        </ul></div>
+      </div>
+    </div>
+      <div class="footer__extra-link clearfix">
+      <div class="footer__extra-left">
+        <ol class="clearfix">
+                    <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-lang">
+            <span><span class="icon icon-global"></span> Language <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-lang"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+          </li>
+          <li class="footer__extra-link-item">
+                          <a href="/legacy?legacy=true">兼容模式</a>
+                      </li>
+          <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-theme">
+            <span><span class="icon icon-global"></span> 主题 <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-theme">
+              <li class="menu__item"><a class="menu__link" href="/set_theme/light">亮色</a></li>
+              <li class="menu__item"><a class="menu__link" href="/set_theme/dark">暗色</a></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+      <div class="footer__extra-right">
+        <ol class="clearfix"><li class="footer__extra-link-item"></li><li class="footer__extra-link-item"><a href="https://beian.miit.gov.cn/">辽ICP备2026022210号-1</a></li><li class="footer__extra-link-item">Worker 0, 20ms</li>
+          <!-- Prepare 7ms -->
+          <!-- Method 3ms -->
+          
+          
+          <li class="footer__extra-link-item">Powered by <a href="https://hydro.js.org">Hydro v5.0.7</a> Community</li>
+        </ol>
+      </div>
+    </div>
+  </div></div>
+</div>
+</div>
+<div class="dialog dialog--signin" style="display:none">
+  <div class="dialog__content">
+        <div class="dialog--signin__bg">
+      <div class="dialog--signin__side">
+        <h1>还没有账户？</h1>
+        <p>注册一个 SYUCT OJ 通用账户，您就可以在我们提供的所有在线评测服务上提交代码、参与讨论。</p>
+        <div><a href="/register" class="inverse rounded button">现在注册</a></div>
+      </div>
+    </div>
+        <div class="dialog--signin__main">
+      <form action="/login" method="post">
+        <div class="dialog--signin__close-container supplementary">
+          <a name="dialog--signin__close" href="javascript:;">关闭</a>
+        </div>
+        <h1 class="dialog--signin__title">登录</h1>
+        <p class="dialog--signin__note">使用您的 SYUCT OJ 通用账户</p>
+                <div class="row"><div class="columns">
+          <label class="material textbox">
+            用户名
+            <input name="uname" type="text" data-autofocus autocomplete="username webauthn">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="material textbox">
+            密码
+            <input name="password" type="password">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="checkbox">
+            <input type="checkbox" name="rememberme" class="checkbox">记住我
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <input type="hidden" name="tfa" value="">
+          <input type="hidden" name="authnChallenge" value="">
+          <input type="submit" value="登录" name="login_submit" class="expanded rounded primary button">
+        </div></div>
+        <div class="row"><div class="columns">
+          <div class="supplementary text-center">
+            <a href="/lostpass">忘记密码或者用户名？</a>
+          </div>
+        </div></div>
+      </form>
+    </div>
+  </div>
+</div>
+        <script>
+      window.UiContextNew = '{"problemId":"P0242","problemNumId":827,"codeLang":"cc.cc17","pdoc":{"_id":"67ea8e953c52eb657784dc05","content":"{\\"zh\\":\\"# \u9898\u76EE\u63CF\u8FF0\\\\n\\\\n\u8F93\u5165\u4E00\u4E2A\u6574\u6570$n$\uFF0C\u4EE3\u8868$n$\u4E2A\u5B66\u751F\u518D\u8F93\u5165$n$\u4E2A\u6570\uFF0C\u7EDF\u8BA1\u5206\u6570\u5927\u4E8E\u7B49\u4E8E$60$\u7684\u4EBA\u6570\u3002  \\\\n\\\\n\\\\n# \u8F93\u5165\u683C\u5F0F\\\\n\u7B2C\u4E00\u884C\u8F93\u5165$n$\u3002\\\\n\\\\n\u7B2C\u4E8C\u884C\u8F93\u5165$n$\u4E2A\u6570\u3002\\\\n\\\\n\\\\n# \u8F93\u51FA\u683C\u5F0F\\\\n\u8F93\u51FA\u5927\u4E8E\u7B49\u4E8E60\u5206\u7684\u4EBA\u6570\u3002  \\\\n\\\\n# \u6837\u4F8B\\\\n\\\\n```input1\\\\n6\\\\n10 20 30 40 50 60\\\\n```\\\\n```output1\\\\n1\\\\n```\\"}","owner":3,"domainId":"system","docType":10,"docId":827,"title":"\u5FAA\u73AF\u7EC3\u4E60C","tag":["SYUCT","\u57FA\u7840\u8BED\u6CD5"],"hidden":false,"nSubmit":403,"nAccept":216,"pid":"P0242","difficulty":5,"data":[{"_id":"3.out","name":"3.out","size":1,"lastModified":"2025-03-31T12:46:13.756Z","etag":"L2RhdGEvZmlsZS9oeWRyby94bWEvdWkwbGhiZzJkZTByb2VnY3F6dXJ0Lm91dA=="},{"_id":"2.out","name":"2.out","size":1,"lastModified":"2025-03-31T12:46:13.756Z","etag":"L2RhdGEvZmlsZS9oeWRyby90ZDcvM2tybmV6cDJsb24wcnlpcWM2eXIwLm91dA=="},{"_id":"3.in","name":"3.in","size":25,"lastModified":"2025-03-31T12:46:13.756Z","etag":"L2RhdGEvZmlsZS9oeWRyby81cmQvOWJramMxOHZ6azc2eHI2MHN2aGpjLmlu"},{"_id":"1.out","name":"1.out","size":1,"lastModified":"2025-03-31T12:46:13.757Z","etag":"L2RhdGEvZmlsZS9oeWRyby8zdG4va3hrcXFla3N4bmRzYTlycmFjb2llLm91dA=="},{"_id":"2.in","name":"2.in","size":19,"lastModified":"2025-03-31T12:46:13.757Z","etag":"L2RhdGEvZmlsZS9oeWRyby95eW8vdmt0bmNqdDhvYnE2MDJkNzRpc2Z1Lmlu"},{"_id":"1.in","name":"1.in","size":19,"lastModified":"2025-03-31T12:46:13.758Z","etag":"L2RhdGEvZmlsZS9oeWRyby9la3YvdGZsM2Eyb2EwcHd5dTVjNHNqMGowLmlu"}],"html":false,"stats":{"AC":243,"WA":96,"TLE":2,"MLE":0,"RE":8,"SE":0,"IGN":0,"CE":54,"s0":123,"s33":29,"s34":7,"s66":1,"s100":243},"config":{"count":3,"memoryMin":256,"memoryMax":256,"timeMin":1000,"timeMax":1000,"type":"default","langs":["c","cc","cc.cc98","cc.cc98o2","cc.cc11","cc.cc11o2","cc.cc14","cc.cc14o2","cc.cc17","cc.cc17o2","cc.cc20","cc.cc20o2","pas","java","kt","kt.jvm","py","py.py2","py.py3","py.pypy3","php","rs","hs","js","go","rb","cs","r","codeforces","codeforces.43","codeforces.52","codeforces.50","codeforces.54","codeforces.59","codeforces.61","codeforces.65","codeforces.9","codeforces.28","codeforces.32","codeforces.12","codeforces.60","codeforces.36","codeforces.48","codeforces.19","codeforces.3","codeforces.4","codeforces.51","codeforces.13","codeforces.6","codeforces.7","codeforces.31","codeforces.40","codeforces.41","codeforces.67","codeforces.49","codeforces.20","codeforces.34","codeforces.55"]}},"canViewRecord":true,"postSubmitUrl":"/p/827/submit","getSubmissionsUrl":"/record?fullStatus=true&pid=827","getRecordDetailUrl":"/record/%7Brid%7D","pretestConnUrl":"record-conn?pretest=1&uidOrName=0&pid=827&domainId=system"}';
+      window.UserContextNew = '{}';
+    </script>
+  </body>
+</html>

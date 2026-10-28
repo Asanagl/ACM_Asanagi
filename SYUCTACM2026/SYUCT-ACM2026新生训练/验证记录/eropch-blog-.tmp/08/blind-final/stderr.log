@@ -1,0 +1,380 @@
+kimi version 2.2.0
+• The user asks me to act as a blind independent reviewer, forbidden from using any tools, and to answer based solely on the public materials given. I should just write the answer in Chinese: restate the task and constraints, give algorithm and stepwise correctness proof, complexity analysis, edge cases and risks, and a complete compilable C++17 program.
+
+  Note: the system prompt says I'm an agent with tools, but there's an explicit instruction in the user message forbidding tool use. That's fine — I comply with the user's request and don't call tools. The user's constraint is a legitimate use-case (blind review). So no tools.
+
+  Let me write a thorough answer.
+
+  Task: given s and t (lowercase, |s| ≤ 10000, 1 ≤ |t| ≤ |s|), output smallest i with s[i..i+|t|-1] == t, else -1. Exactly one integer line, no extra output. gnu++17, 1000ms, 256MiB.
+
+  Algorithm choice: Since n ≤ 10^4, an O(n·m) brute force is at most 10^8 character comparisons worst case (e.g., s = "aaaa...a", t = "aaa...ab"? then each alignment fails at last char → 10^8 comparisons), which in practice is fine under 1000ms in C++ for simple char compares — but risky in the worst case with naive loops (10^8 char comparisons ~ maybe 100-200ms, actually fine). But to be safe and rigorous, I can use KMP (O(n+m)) or std::string::find (which is implementation-defined but typically efficient enough), or std::search with Boyer-Moore-Horspool searcher (C++17 has std::boyer_moore_horspool_searcher in <functional>). Best to present KMP as the primary algorithm with proof, since it's clean and provably O(n+m). Actually since the instruction says give algorithm plus stepwise correctness proof — KMP is the natural choice. But KMP returning the first occurrence.
+
+  Alternatively, present the naive O(nm) as baseline and KMP as the chosen solution. Let me do: main answer KMP; mention brute force as a fallback that would also pass given n ≤ 10^4 with ~10^8 upper bound but with worse constant risk; also mention std::string::find in libstdc++ is fine but implementation-defined, so avoid relying on it for provable complexity.
+
+  Let me write KMP carefully.
+
+  Build prefix function π for pattern t: π[i] = length of the longest proper prefix of t[0..i] that is also a suffix of t[0..i].
+
+  Then scan: j = number of matched chars.
+  for i in 0..n-1:
+    while j > 0 and s[i] != t[j]: j = π[j-1]
+    if s[i] == t[j]: j++
+    if j == m: match at i-m+1; output; return 0.
+
+  Edge case: m could equal... m ≥ 1 so t[j] with j < m always valid when we check. Note after increment j ≤ m; we break out immediately on match, so no out-of-bounds. Also if m == 0 impossible per constraints (but handle defensively: output 0). Actually with constraints m ≥ 1, but defensive handling is fine; I'll note it.
+
+  Also read input robustly: two lines, possibly Windows CRLF. Use std::getline and strip trailing '\r'. Better: read with cin >> s >> t since the strings contain no whitespace — that handles CRLF automatically (operator>> skips whitespace, and '\r' is whitespace in the default locale? Actually \r is whitespace by isspace → yes, in "C" locale, whitespace characters are ' ', '\t', '\n', '\v', '\f', '\r'. So cin >> s will stop at '\r' and treat it as a delimiter). That's the safest. I'll use cin >> s >> t.
+
+  Also note: if the input might lack trailing newline, fine.
+
+  Fast I/O: ios::sync_with_stdio(false); cin.tie(nullptr);
+
+  Output: just the integer and '\n'.
+
+  Now correctness proof.
+
+  Definitions: n = |s|, m = |t|. Positions i ∈ [0, n-m].
+
+  Lemma 1 (prefix function property): For each i, π[i] is the length of the longest proper prefix of t[0..i] that is also a suffix. Standard.
+
+  Lemma 2 (invariant of the scan): Before processing s[i], j equals the length of the longest prefix of t that is a suffix of s[0..i-1] — hmm, careful: the standard KMP invariant is: after processing index i, j equals the length of the longest prefix of t that is a suffix of s[0..i]. But with the "break on full match" we terminate. Let's state invariant: at the start of iteration i (0-indexed), j is the length of the longest prefix of t that is a suffix of s[0..i-1], and additionally no occurrence of t ends at or before i-1 (since we'd have returned). The while loop implements: repeatedly fall back along the border chain to the next-longest candidate; the border chain lemma says π[j-1] is the longest proper border of t[0..j-1], so it gives the next-longest prefix of t that could extend. Then if s[i] == t[j], we extend.
+
+  Need to prove the fallback is complete: if a prefix of length j cannot be extended by s[i], the only candidates for a longer extendable prefix are proper borders of t[0..j-1], and iterating π enumerates them in decreasing order (standard border chain lemma: the set of border lengths of a string is {π[k-1], π[π[k-1]-1], ...}). So the while loop terminates at either j = 0 or a j where s[i] == t[j]; at that point the resulting j+1 is the longest prefix of t that is a suffix of s[0..i].
+
+  Theorem (found match is the first): j reaches m at iteration i iff t is a suffix of s[0..i], i.e., s[i-m+1..i] == t. Since i increases monotonically and we return at the first such i, the reported index i-m+1 is the smallest. Also each i gives a distinct start position and start positions increase with i, so minimality holds.
+
+  Termination and answer: if loop ends without j == m, no i in [0,n-1] had t as suffix of s[0..i], hence no occurrence; output -1. Note that a start position p requires p+m-1 ≤ n-1, so all occurrences correspond to some i.
+
+  Hmm, a cleaner argument: for each i, "t occurs ending at i" iff "t is a suffix of s[0..i]" iff "j == m after processing i". Good.
+
+  Complexity: prefix function O(m) amortized: the standard argument — j increases by at most 1 per iteration, each fallback strictly decreases j, total fallbacks ≤ total increases ≤ m-1... Let me state it properly: in building π, the variable k increases by at most 1 per step and each while-iteration strictly decreases it, so total work O(m). Scanning: O(n) similarly. Total O(n+m) time, O(m) extra space (π array + a few scalars). Note: strings themselves take O(n+m) but that's input storage, not "extra" work space.
+
+  Alternative: note the problem's small bound would allow O(nm); mention as verification/fallback. Mention std::string::find typically uses a two-way algorithm in libstdc++ but the standard only guarantees... actually std::string::find has no complexity guarantee in the standard? It's specified to be find of substring; complexity is not mandated precisely (C++ standard doesn't specify complexity for basic_string::find — actually it does not). So implementation-defined performance; still fine for n=1e4. I'll mention briefly.
+
+  Edge cases to enumerate:
+  1. |t| == |s|: only candidate i=0; equal → 0 else -1.
+  2. t is a prefix of s (i=0).
+  3. t occurs only at the end: i = n-m.
+  4. Overlapping occurrences: answer is the smallest, e.g. s=aaaa, t=aa → 0.
+  5. No occurrence: -1, including cases where t is longer... not possible (m ≤ n guaranteed), but if input violated, handle: if m > n output -1 (defensive).
+  6. Single char strings: s = t = "a" → 0; s = "a", t = "b" → -1.
+  7. Repetitive strings causing many fallbacks: s = "aaaa...a", t = "aaa...ab" — the classic worst case for naive; KMP handles in linear time.
+  8. Adversarial periodic patterns: s = ("ab")^k, t = ("ab")^j + "a"? etc.
+  9. Input formatting: CRLF line endings, no trailing newline, extra blank lines / leading whitespace — using cin >> avoids all; but note: if input had trailing spaces after the string they'd be skipped.
+  10. Characters are only lowercase; no need to handle other bytes; but reading as std::string is byte-based which is fine for ASCII.
+  11. Output format: exactly the integer plus newline, no labels.
+
+  Implementation risks:
+  - Using `char` comparisons with signedness: fine for ASCII lowercase.
+  - Off-by-one in loop bound if using naive: i from 0 to n-m inclusive.
+  - Forgetting to handle m == 0 (defensive).
+  - Using cin >> when keys/strings may contain spaces — not the case here.
+  - π[j-1] when j==0 → guard with while (j > 0 && ...).
+  - Potential integer types: indices fit in int (< 10^4) but I'll use int / size_t carefully. I'll use int for clarity with cast.
+  - Reading with getline + istringstream alternative.
+
+  High-risk test cases (my own):
+  - s="aaaaaaaaaa", t="aaaaaaaab"? that's m=9, n=10, fails → -1 (worst-case fallback heavy).
+  - s = "ababababab", t="abab" → 0.
+  - s = "ba", t = "a" → 1.
+  - s = "abcabcabd", t="abcabd" → -1? Let's check: s = "abcabcabd" (a b c a b c a b d), t = "abcabd" (a b c a b d) length 6. Positions 0..3: "abcabc" no; 1: "bcabca" no; 2: "cabcab" no; 3: "abcabd" — s[3..8] = a b c a b d = "abcabd" yes! So answer 3. Good test.
+  - s = "mississippi", t = "issip" → 4.
+  - s = "a", t = "a" → 0; s="a", t="b"? m must ≤ n, fine → -1.
+  - Case where t appears at end with overlap: s="ababab", t="abab" → 0; s = "baabab", t="abab" → 2? s = b a a b a b; positions 0..2: s[2..5] = a b a b = "abab" → 2. Good.
+  - t = s with repeats: s = "aaa", t = "aaa" → 0.
+
+  Also mention: answers unique, no multiple valid answers needed.
+
+  Now write the code.
+
+  ```cpp
+  #include <bits/stdc++.h>
+  ```
+  Hmm, better to use standard headers explicitly: <iostream>, <string>, <vector>. Some judges accept bits/stdc++.h but let's use explicit includes for portability.
+
+  ```cpp
+  #include <iostream>
+  #include <string>
+  #include <vector>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      std::string s, t;
+      if (!(std::cin >> s)) return 0;
+      if (!(std::cin >> t)) { std::cout << -1 << '\n'; return 0; }  // hmm, malformed input
+      const int n = static_cast<int>(s.size());
+      const int m = static_cast<int>(t.size());
+
+      if (m == 0) { std::cout << 0 << '\n'; return 0; }
+      if (m > n) { std::cout << -1 << '\n'; return 0; }
+
+      std::vector<int> pi(m, 0);
+      for (int i = 1; i < m; ++i) {
+          int k = pi[i - 1];
+          while (k > 0 && t[i] != t[k]) k = pi[k - 1];
+          if (t[i] == t[k]) ++k;
+          pi[i] = k;
+      }
+
+      int j = 0;
+      for (int i = 0; i < n; ++i) {
+          while (j > 0 && s[i] != t[j]) j = pi[j - 1];
+          if (s[i] == t[j]) ++j;
+          if (j == m) {
+              std::cout << (i - m + 1) << '\n';
+              return 0;
+          }
+      }
+      std::cout << -1 << '\n';
+      return 0;
+  }
+  ```
+
+  Careful with `t[i] != t[k]` where i < m and k ≤ i-1 < m — fine. In the scan, when j < m always, since j == m triggers return before the next iteration. So t[j] is in range. Good.
+
+  Wait: in the prefix build, when i=1 and m=1, the loop doesn't execute. Fine.
+
+  Potential subtlety: after `if (s[i] == t[j]) ++j;` with j possibly 0 and s[i] != t[0], j stays 0. Fine.
+
+  One more: within the while loop condition `s[i] != t[j]`, j can be at most m-1 at that point (since j==m returns immediately in previous iteration). Correct.
+
+  Also note that a naive check `if (s[i]==t[j])` when j could be 0 and m==0 — m==0 handled.
+
+  Now let me also double check the prefix-function construction is standard and correct: pi[0]=0; for i from 1: k = pi[i-1]; while k>0 and t[i]!=t[k]: k=pi[k-1]; if t[i]==t[k] ++k; pi[i]=k. Yes standard.
+
+  Let me verify on t = "abc": i=1: k=0, t[1]='b' != t[0]='a' → k=0; pi[1]=0. i=2: k=pi[1]=0; 'c' != 'a' → pi[2]=0. Correct.
+
+  t = "aaa": i=1: k=0, t[1]==t[0] → k=1, pi[1]=1. i=2: k=pi[1]=1, t[2]=='a'==t[1] → k=2, pi[2]=2. Correct.
+
+  Scan test: s="ababcabc", t="abc". pi = [0,0,0]. 
+  i=0 'a': j=0, s[0]==t[0] → j=1.
+  i=1 'b': s[1]=='b'==t[1] → j=2.
+  i=2 'a': s[2]='a' vs t[2]='c' → mismatch, j=pi[1]=0; then s[2]=='a'==t[0] → j=1.
+  i=3 'b': j=2. i=4 'c': j=3 → match, output i-m+1 = 4-3+1 = 2. ✓.
+
+  Sample 2: s="aaaa", t="aab": pi: t="aab": i=1: 'a'=='a' → pi[1]=1; i=2: k=1, t[2]='b' != t[1]='a' → k=pi[0]=0; t[2]='b' != t[0]='a' → pi[2]=0.
+  Scan: i=0: j=1; i=1: s[1]='a'==t[1]='a' → j=2; i=2: s[2]='a' vs t[2]='b' mismatch → j=pi[1]=1; now s[2]='a' vs t[1]='a' → equal → j=2; i=3: s[3]='a' vs t[2]='b' mismatch → j=pi[1]=1; s[3]='a'==t[1] → j=2; never reaches 3 → -1 ✓.
+
+  Sample 3: s="aaaaa", t="aaa": pi=[0,1,2]. i=0: j=1; i=1: j=2; i=2: s[2]=='a'==t[2] → j=3 → output 2-3+1=0 ✓.
+
+  Great.
+
+  Now, "stepwise correctness proof": I'll structure it with lemmas.
+
+  Also mention that since |s| ≤ 10^4, even an O(nm) solution would be at most ~5·10^7 comparisons here (actually n-m+1 alignments × up to m comparisons ≤ ~ (n-m+1)·m which max at m=n/2 → 5001·5000 ≈ 2.5·10^7 for n=1e4). Hmm, earlier I said 10^8; let me compute: (n-m+1)·m maximized at m ≈ (n+1)/2 → about (5000)·(5000.5) ≈ 2.5·10^7. So brute force is comfortably fine. I should state this accurately: ≤ ~2.5×10^7 char comparisons worst case, which is fine, but KMP is the provably linear choice and removes all doubt. Good to mention that as a risk note: the naive is acceptable given bounds but I choose KMP.
+
+  Actually let me double check: n=10000, worst-case number of comparisons for naive = sum over alignments of comparisons until mismatch. Upper bound (n-m+1)·m. With m=5000: 5001·5000 = 25,005,000. With m = 1: 10000. So yes ≤ 2.5e7. Fine.
+
+  Also mention: an even simpler alternative is `s.find(t)` (std::string::find), which is correct and fast enough here, but its complexity isn't specified by the standard, so for the proof I use KMP; either would pass.
+
+  Also should I address "输出除整数外不要输出任何内容" — yes, note the program prints only the integer plus a newline (a trailing newline is fine and standard).
+
+  Now the answer structure per the 5 requested items. Language: Chinese. Keep formatting reasonable — the user asked for a fairly long structured answer, so headings are appropriate.
+
+  Let me also list boundary conditions systematically:
+
+  输入/格式层面:
+  - CRLF 行尾、末行无换行、行首多余空白 → cin >> 跳过空白安全。
+  - 字符串长度恰为 1；|t| = |s|；|t| = 1。
+  输出层面:
+  - 只输出一个整数 + 换行；不输出说明。
+  答案层面:
+  - 出现在下标 0；出现在末尾 n-m；重叠；不出现。
+
+  风险:
+  - 若用 getline，需要注意 CRLF 的 '\r' 未剥离导致比较失败（这是很常见的实际风险！）——我用 cin >> 规避，但要明确指出这一点，因为判题机可能是 Windows 换行。
+  - 越界：t[j] 中 j==m 的读取。
+  - 有符号/无符号比较：n-m+1 用 int。
+  - 若 m > n（题面保证不发生）仍要防御。
+  - 朴素算法在极端重复串上的最坏情形（虽然这里上界 2.5e7 可接受）。
+  - 多组数据？题面是单组，按单组处理。
+
+  高风险用例清单（我自己构造的）：
+  1. s = "a", t = "a" → 0
+  2. s = "a", t = "b"? 不合法（m>n 也不成立，m=1=n，合法），→ -1
+  3. s = "ab", t = "ab" → 0
+  4. s = "ba", t = "a" → 1（只出现在末尾）
+  5. s = "aaaa", t = "aa" → 0（重叠，取最小）
+  6. s = "baaa", t = "aa" → 1
+  7. s = "mississippi", t = "issip" → 4
+  8. s = "abcabcabd", t = "abcabd" → 3
+  9. s = 10000 个 'a'，t = 9999 个 'a' + "b" → -1（朴素最坏）
+  10. s = ("ab")^5000, t = ("ab")^4999 + "aa" → -1（周期串失配，KMP fallback 压力）
+  11. s = 10000 个 'a'，t = 5000 个 'a' → 0
+  12. s = "abc", t = "c" → 2
+  13. s = "abab", t = "bab" → 1
+  14. t 出现在倒数第二位等。
+
+  Let me verify #8 again: s = "abcabcabd": indices 0:a 1:b 2:c 3:a 4:b 5:c 6:a 7:b 8:d. t = "abcabd": a b c a b d. s[3..8] = a b c a b d ✓ → 3. And earlier positions 0..2: 0: "abcabc" ≠; 1: "bcabca"; 2: "cabcab". Yes answer 3.
+
+  #10: s = "abab...ab" (10000 chars), t = ("ab")^4999 + "aa" → length 9998+2 = 10000. Compare: t = abab...ab aa, ends with "aa" but s ends with "ab"; at alignment 0, mismatch at last char → -1. Then shifts. Answer -1. Good linear-time stress. Actually is that a -1? s has length 10000 = "ab" repeated 5000 times. t length 10000. Only alignment 0 exists. s ≠ t since t ends with "aa", s ends with "ab". So -1. Good.
+
+  Hmm, but for a fallback-heavy test with m ≈ n/2: s = "ab"*5000 (10000 chars), t = "ab"*2499 + "aa" (length 5000)? Then alignments 0..5000. t = (ab)^2499 + "aa": length 4998+2 = 5000. At each alignment in the periodic region, matches until nearly the end then fails → heavy fallback. Good enough as a description.
+
+  Let me write the final answer.
+
+  Structure:
+  1. 任务与约束复述
+  2. 算法 + 正确性证明（引理 + 定理）
+  3. 复杂度
+  4. 边界、实现风险、高风险用例
+  5. 代码
+  6. 假设与未能证明之处
+
+  For "假设或无法证明之处": 
+  - 假定输入严格符合题面（两行、只含小写字母、1 ≤ |t| ≤ |s|）；若违反（如 |t| > |s|、空串、含空格），行为按我加的防御分支输出，但题面不保证。
+  - 假定输出末尾换行被接受（几乎肯定，但严格说是"额外字符"，说明一下）。
+  - 复杂度分析的 O(n+m) 是标准结论，我可以给出证明，但注意它是摊还分析（amortized），每一步不是 O(1) 最坏。
+  - 无法证明的部分：判题机对行尾/末尾换行的具体处理；我无法验证（盲审，不能运行）。
+
+  Let me write out the correctness proof carefully.
+
+  记号: n=|s|, m=|t|, s[a..b] 表示闭区间子串。
+
+  前缀函数定义: 对 0 ≤ i < m, π[i] = max{ k : 0 ≤ k ≤ i, t[0..k-1] == t[i-k+1..i] }，其中 k 必须是 proper prefix，即 k < i+1（自动满足 k ≤ i）。空串长度 0 总是候选，所以 π 有定义。
+
+  引理1（边界链）: 对任意 i，集合 B_i = { k : 0 ≤ k ≤ i, t[0..k-1] 是 t[0..i] 的后缀 } 等于 {0} ∪ {π[i], π[π[i]-1], ...}（迭代到 0）。标准结论。
+
+  其实我需要的是：边界链枚举了所有"可以作为下一个更长匹配前缀"的候选。我可以给出证明草图：若 k 是 t[0..i] 的边界且 k>0，则 t[0..k-1] 是 t[0..i] 的后缀同时也是 t[0..π[i]-1] 的后缀（因为 t[0..k-1] 长度 k ≤ π[i]，且...）hmm，标准证明：t[0..k-1] 是 t[0..i] 的真后缀，同时 t[0..π[i]-1] 是 t[0..i] 的最长真后缀；则 t[0..k-1] 是 t[0..π[i]-1] 的后缀（因为任何长度 ≤ π[i] 的真后缀都是最长真后缀的后缀）。所以 k 是 t[0..π[i]-1] 的边界，即 k ≤ π[i] 且 k ∈ B_{π[i]-1}。因此 B_i \ {i? no} ... 我可以说明 B_i = {0} ∪ { k+1? } hmm 需要小心，我不需要严格到那种程度，给出标准引理并说明证明思路即可。
+
+  更准确：B_i（proper borders of t[0..i]）= {0} ∪ { π[i] } ∪ B_{π[i]-1}... 实际上就是链。我会给出这个引理并简述证明。
+
+  引理2（前缀函数正确性）: 算法计算的 π[i] 等于定义值。证明：归纳。设 k = π[i-1]，由引理1，t[0..i] 的所有候选边界为 0 以及 π[i-1] 链上各值 +1（如果对应字符匹配）……标准归纳。
+
+  hmm，我给出的证明要"逐步"，但不必写成形式化论文。我会写清楚：
+
+  - 归纳假设：π[0..i-1] 已正确。
+  - 令 k 为当前尝试长度。若 t[i] == t[k]，则 k+1 是 t[0..i] 的边界，且由引理1的极大性，无更大候选（任何更大的边界 l 必有 l-1 是 t[0..i-1] 的边界且 t[l-1]=t[i]，而 l-1 在 k 的链上且 k 是链上最大能扩展的……）。这里要说清楚：链上按降序尝试，第一个能扩展的就是最大的。
+  - 若能扩展到 k 就停止，因为链上更大的候选都已失败。
+
+  我在文字里说明：while 循环按降序沿边界链回退，遇到第一个可扩展长度就停，所以得到的是最大边界。
+
+  引理3（扫描不变式）: 在第 i 轮开始前（0 ≤ i ≤ n-1），j = 满足 t[0..j-1] 是 s[0..i-1] 后缀的最大 j（且 0 ≤ j < m，因为 j == m 时会立即返回）。基础：i=0 时 s[0..-1] 为空串，j=0。归纳：设进入第 i 轮 j 满足不变式。t[0..j-1] 是 s[0..i-1] 的后缀。任何 t 的前缀是 s[0..i] 的后缀当且仅当它等于 t[0..l-1] 且 l ≥ 1，t[l-2] 对应 s[i-1]... hmm，标准表述：t[0..l-1] 是 s[0..i] 的后缀 ⟺ l=0，或 (t[l-2] 是 t[0..l-1] 的真前缀/后缀...)。
+
+  常用的干净表述：t[0..l-1] 是 s[0..i] 的后缀 ⟺ l ≥ 1 且 t[0..l-2] 是 s[0..i-1] 的后缀且 s[i] == t[l-1]。所以候选 l 就是 "1 + (t[0..l-2] 是 s[0..i-1] 的后缀)"。而所有这样的 l-1 构成集合 S = { t 的前缀长度 p : p 是 s[0..i-1] 的后缀 }。注意 S 包含 j 以及 j 的所有边界（因为 t[0..j-1] 是 s[0..i-1] 的后缀，所以它的所有边界也都是 s[0..i-1] 的后缀），并且 S 中每个元素都是 t[0..j-1] 的边界？不一定——若 p ∈ S 且 p ≤ j，则 t[0..p-1] 既是 t[0..j-1] 的前缀又是其后缀，所以 p 是 t[0..j-1] 的边界。若 p > j 则不可能，因为 j 是最大的（归纳假设 j 是最大的 p ∈ S）。所以 S = {j} ∪ B_{j-1}。因此候选 l 集合 = {j+1} ∪ {b+1 : b ∈ B_{j-1}}，而 B_{j-1} 由引理1正是 π 链 {π[j-1], π[π[j-1]-1], ...}。算法按降序尝试 j, π[j-1], ...，第一个满足 s[i] == t[·] 的给出最大 l。这正好是 while 循环 + if。因此不变式保持。✓ 这是完整且严格的证明，很好。
+
+  - 定理：算法输出正确。j == m 在第 i 轮成立 ⟺ t 是 s[0..i] 的后缀（由不变式 + 扩展步）⟺ 存在 i-m+1 处的出现。i 递增遍历，第一次出现时立即返回 → 输出的是最小起始下标。若遍历完未返回，则不存在出现，输出 -1。
+
+  注意 π 链回退可能会经过 0，且当 j=0 时 while 不执行；此时候选只有 l=1（若 s[i]==t[0]）否则 l=0。符合不变式。
+
+  复杂度证明：
+  - 构 π：k = π[i-1] 每次循环至多 +1（if 分支），while 每次迭代使 k 严格减小（π[k-1] < k），所以 while 总迭代次数 ≤ 总增加次数 ≤ m。总 O(m)。
+  - 扫描：j 每轮至多 +1，while 每次使 j 严格减小，同理总 O(n)。
+  - 合计 O(n+m)。
+  - 空间：π 数组 O(m)，其余 O(1)（不含读入字符串本身 O(n+m)）。
+
+  好。现在写代码。我应该在回答里给出完整代码块。
+
+  我还要注意"可直接编译"：用标准头文件。
+
+  另外考虑：是否要用 `std::size_t`？用 int 更简单，n ≤ 10^4 不会有溢出。加 static_cast。
+
+  最终代码：
+
+  ```cpp
+  #include <iostream>
+  #include <string>
+  #include <vector>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      std::string s, t;
+      if (!(std::cin >> s)) return 0;
+      if (!(std::cin >> t)) {
+          std::cout << -1 << '\n';
+          return 0;
+      }
+
+      const int n = static_cast<int>(s.size());
+      const int m = static_cast<int>(t.size());
+
+      if (m == 0) { std::cout << 0 << '\n'; return 0; }
+      if (m > n) { std::cout << -1 << '\n'; return 0; }
+
+      std::vector<int> pi(m, 0);
+      for (int i = 1; i < m; ++i) {
+          int k = pi[i - 1];
+          while (k > 0 && t[i] != t[k]) k = pi[k - 1];
+          if (t[i] == t[k]) ++k;
+          pi[i] = k;
+      }
+
+      int j = 0;
+      for (int i = 0; i < n; ++i) {
+          while (j > 0 && s[i] != t[j]) j = pi[j - 1];
+          if (s[i] == t[j]) ++j;
+          if (j == m) {
+              std::cout << (i - m + 1) << '\n';
+              return 0;
+          }
+      }
+
+      std::cout << -1 << '\n';
+      return 0;
+  }
+  ```
+
+  m == 0 分支其实不可达（m≥1），但保留无害。注意 m==0 时 t[j] 越界被提前返回挡住。好。
+
+  关于 `if (m == 0)` 在 m>n 检查之前——如果 m==0 且 n==0，输出 0。没问题。
+
+  Now let's also mention the alternative simple solution as a cross-check (not required but useful for the reviewer): brute force with i from 0 to n-m and compare. Mention it as a "对拍" reference.
+
+  I should keep the answer organized but not excessively long. It'll be moderately long since 5 parts are requested. Use headings and lists.
+
+  One more thing: "如有假设或无法证明之处，必须明确指出" — I'll include a section.
+
+  Also I should respect: no tool calls. Just answer.
+
+  Let me write the final answer in Chinese.
+
+  Length: aim for thorough but not bloated. Maybe ~1200-1800 words equivalent.
+
+  Let me draft.
+
+  ---
+
+  ## 一、任务与约束的独立复述
+
+  - 输入两个非空、仅含 a–z 的串 s, t，分两行给出，|s| = n ≤ 10^4，|t| = m，1 ≤ m ≤ n。
+  - 要找最小的 i ∈ [0, n-m]，使 s[i..i+m-1] 逐字符等于 t（下标 0 起）。
+  - 允许重叠出现；只要第一次（最小下标）。
+  - 无解输出 -1。
+  - 输出仅一行一个整数，无任何其他文字。
+  - 环境：gnu++17，1s，256MiB，输出唯一。
+
+  强调：下标而非"第几个字符"；不是计数、不是最后一次。
+
+  ## 二、算法与证明
+
+  选择 KMP。
+
+  （写出算法步骤 1-4）
+
+  证明：定义 π、引理1、引理2、引理3、定理。
+
+  ## 三、复杂度
+
+  ## 四、边界、风险、用例
+
+  ## 五、代码
+
+  ## 六、假设与无法证明之处
+
+  Let me be careful about the proof of Lemma 1 (border chain) — I'll state it and give the one-line justification.
+
+  也提一下 朴素 O(nm) 在这个范围也过（≤ ~2.5e7 次比较），可作为对拍/兜底，但我选 KMP 以求确定性与可证线性。
+
+  Write it now.
+
+  Also on 高风险用例: include the "CRLF" scenario as an input-format risk, and a test where t appears at n-m.
+
+  I'll present the high-risk cases in a compact list or a small table. A table with 输入 → 期望输出 is readable. Terminal markdown tables are OK if narrow. Keep it to ~10 rows.
+
+  Let me finalize.
+
+To resume this session: kimi -r session_bbc3a95b-9144-4578-8267-981d0744af95

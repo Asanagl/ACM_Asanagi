@@ -1,0 +1,258 @@
+kimi version 2.2.0
+• The user asks me to act as a blind reviewer/solver, no tools, no file reading. Just answer from the problem statement. I must output in strict order 7 sections including a complete C++17 program.
+
+  Let me carefully comply: no tools. Just produce the answer in Chinese (the user wrote Chinese). Follow the order.
+
+  Let me think about the algorithm and proof.
+
+  Task: sum of border cells of n×m matrix.
+
+  Algorithm: read n, m; for each cell (i,j) read x; if i==1 || i==n || j==1 || j==m, add x to long long sum. Output sum.
+
+  Correctness: For each cell, show indicator matches the union condition. Since we iterate each cell exactly once and add exactly when the predicate holds, each border cell counted once, each non-border cell never counted. Also note requirement: for n=1, all cells border; the predicate i==1||i==n covers all i. For m=1 similarly. The set of border cells = union of four sets; the predicate is exactly the membership condition. Since each cell is visited once in the loop, inclusion is exactly once (no double counting despite corners belonging to two edges, because we test the predicate, not accumulate per edge).
+
+  Formal proof: 
+  Lemma 1: A cell (i,j) with 1≤i≤n,1≤j≤m is a border cell iff P(i,j): i=1 ∨ i=n ∨ j=1 ∨ j=m. By definition.
+  Lemma 2: The loop body executes exactly once for each pair (i,j) in [1..n]×[1..m] — since nested loops with i from 1 to n and j from 1 to m, each pair once.
+  Lemma 3: For each iteration, the added value is x_{ij}·[P(i,j)], so total = Σ_{i,j} a_{ij}[P(i,j)] = Σ over border cells a_{ij}, each border cell appearing once in the sum (since pairs are distinct), non-border cells contribute zero.
+  Corner: corner cell satisfies multiple disjuncts but [P] is a single boolean 0/1 and the cell is added once — no double counting.
+  Completeness: non-border cell means i≠1, i≠n, j≠1, j≠m, so P false, contributes 0.
+  Also if n=1: every i=1 satisfies i=1, all cells counted, consistent with "all cells are border".
+  If m=1 similarly.
+
+  Edge cases: n=1 (single row, the whole row is border, predicate covers all), m=1, 1×1 (one cell, counted once; predicate true), n=2 (no interior rows; all cells in columns also border? Careful: n=2, m large: rows 1 and 2 are both border rows, so all cells are border; predicate true for all i∈{1,2}, correct), m=2 similarly. Negative values: sum as long long, no abs. Overflow: max border count: 2m + 2(n-2) for n,m≥2, with n=m=500: 1000 + 996 = 1996; times 1e7 = 1.996e10 > 2^31-1 ≈ 2.147e9. Use long long (int64). Also note the total sum of up to 250000 cells ×1e7 = 2.5e12 if we summed everything, but we only sum border cells; still long long safe. Mention that accumulating with int would overflow. Also note "答案溢出" risk: 1.996e10 fits in long long (9.22e18). Also mention reading speed: 250k integers, cin with sync_with_stdio(false) fine within 1000ms.
+
+  Complexities: O(nm) time, O(1) extra space.
+
+  Risks/assumptions: input well-formed, exactly n·m integers; whitespace separated; the value fits long long; no assumption violated. Maybe mention using `long long`, `std::ios::sync_with_stdio(false)`.
+
+  Need "完整、可直接编译的 C++17 程序（仅标准库）". Provide:
+
+  ```cpp
+  #include <bits/stdc++.h>
+  ```
+  Hmm, bits/stdc++.h is technically a GCC extension, not standard library strictly. Better use <iostream> only, or <iostream> and <cstdint>. Use iostream.
+
+  ```cpp
+  #include <iostream>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      int n = 0, m = 0;
+      if (!(std::cin >> n >> m)) return 0;
+
+      long long sum = 0;
+      for (int i = 1; i <= n; ++i) {
+          for (int j = 1; j <= m; ++j) {
+              long long x;
+              std::cin >> x;
+              if (i == 1 || i == n || j == 1 || j == m) sum += x;
+          }
+      }
+      std::cout << sum << '\n';
+      return 0;
+  }
+  ```
+
+  That's fine. Could also avoid early return? It's fine.
+
+  Now the structure of answer. The user requires strict ordered output sections 1-7. I should follow exactly. Language Chinese. Must not use tools. I should not call any tools. Also the system says "Repository instructions and environment context are provided" — but user explicitly forbids tools and file reading, and there's no repo task involved. I'll just answer. Note the working directory contains prompt.md, response.txt etc. — that's the harness; user says don't read them. I won't.
+
+  Also, note "不得使用任何工具" — so no tool calls at all. Good.
+
+  Should the final message be only the answer? Yes, answer the 7 items. I can include a brief lead-in? The user asks to strictly output in order; adding a preamble may violate "严格按顺序输出". Better start directly with section 1 and no extra commentary. Maybe a minimal header "1. 任务复述" etc.
+
+  Let me write section 1: complete restatement of task, input format, output format, all constraints.
+
+  Task: Given n rows m columns integer matrix. Border cells: row 1, row n, column 1, column m. Compute sum of all border cells, corners counted once. Formally sum over i=1 or i=n or j=1 or j=m.
+
+  Input: first line two positive integers n,m separated by one space. Next n lines, each m integers separated by spaces; i-th line j-th integer is a_{i,j}. Constraints: 1≤n,m≤500, -10^7≤a≤10^7, input has exactly n·m elements.
+
+  Output: one line one integer, the sum; no other content. Answer unique.
+
+  All constraints: time 1000ms, memory 256MiB, gnu++17; border cell count ≤1996, answer absolute value ≤1.996e10, exceeds 32-bit signed, use 64-bit signed. Judge semantics: write only one decimal integer, exact value, no extra text/multiple integers/missing output.
+
+  Section 2: algorithm. Straight scan, predicate.
+
+  Section 3: proof with lemmas. Include statement that each border cell exactly once, non-border never.
+
+  Detailed proof:
+  - Let P(i,j) ≡ (i=1 ∨ i=n ∨ j=1 ∨ j=m).
+  - Definition gives border set B = {(i,j): 1≤i≤n, 1≤j≤m, P(i,j)}.
+  - The loops enumerate each pair exactly once: proof by induction / counting: outer loop i takes each value 1..n exactly once; inner takes each 1..m exactly once per i; pairs (i,j) are distinct across iterations because (i,j) determined by loop variables.
+  - Invariant: after processing all pairs up to some point, sum equals Σ over processed pairs of a_{ij}[P(i,j)]. Base empty sum 0; step adds a_{ij} iff P, so invariant holds. At end, sum = Σ_{all pairs} a_{ij}[P(i,j)].
+  - Each (i,j)∈B contributes exactly a_{ij} once (appears once in the sum, indicator 1); each (i,j)∉B contributes 0. Hence sum = Σ_{B} a_{ij} exactly.
+  - Corner: a corner satisfies ≥2 disjuncts, but the indicator [P] is a single 0/1 decision per cell, evaluated once per cell; no separate accumulation per edge — hence no duplicate.
+  - n=1: predicate true for all cells since i=1 always; matches all cells border. m=1 similar. n=2: both rows are border rows; predicate true for every cell; matches: no interior row. Similarly m=2, and 1×1.
+
+  Also prove the program's arithmetic equals mathematical sum: all a fit in long long, and partial sums bounded by 1996×1e7 = 1.996e10 << 9.22e18, so no overflow; hence exact.
+
+  Maybe prove the bound on border count: for n,m≥2, |B| = 2m + 2(n−2) = 2n+2m−4 ≤ 1996; if n=1 or m=1, |B| = nm ≤ 500; max is 1996. Good.
+
+  Section 4: O(nm) time (each cell read once, O(1) work), O(1) extra space besides input not stored. Input reading cost Θ(nm).
+
+  Section 5: edge case list: 1 row; 1 column; 1×1; n=2; m=2; n=2,m=2 (all cells border, corners all four cells); negative values and all-negative matrices; large magnitudes causing int overflow (answer up to 1.996e10) — must use long long; max size 500×500 = 250000 integers, input size ~ up to ~2.5MB, reading speed; answer exactly at extremes -1.996e10; potential trailing whitespace/newline — output single integer with newline acceptable (judge ignores whitespace); zero answer; matrix with all zeros; corners counted once check (3×4 sample); a case where n=1, m=500 all elements -1e7 → -5e9 (within long long, overflows int); n=500,m=1 similar; 500×500 all -1e7 → border -1.996e10. Also reading failure/EOF not expected.
+
+  Maybe include a small table of high-risk cases with expected values. Could give concrete small test examples:
+  - "1 1 / -7" → -7.
+  - "1 3 / 1 2 3" → 6.
+  - "3 1 / 1 2 3" → 6.
+  - "2 2 / 1 2 3 4" → 10.
+  - "3 3 / 1 2 3 4 5 6 7 8 9" → 1+2+3+4+6+7+8+9 = 40.
+  - 2×3 all -1 → -6.
+  - overflow-ish: 500×500 all 1e7 → 1996×1e7 = 19960000000.
+
+  Section 6: code.
+
+  Section 7: assumptions/risks: input strictly follows format, exactly n·m integers; no extra tokens needed; long long sufficient; using only <iostream>; no reliance on implementation-defined behavior; no unproven claims. Maybe note one assumption: judge compares numeric value, trailing newline is standard and acceptable; if judge demanded absolutely no newline, newline still whitespace, typically fine — but I can say the output is a single integer followed by a newline (a single trailing whitespace), which is conventional; if the judge is byte-strict, remove '\n'. Hmm, the problem says "输出一行一个整数" — newline is fine. I'll state as assumption that trailing newline is allowed as customary.
+
+  Also mention reading with cin after sync_with_stdio(false) is fast enough for 250k integers within 1000ms. And mention memory O(1).
+
+  Potential risk: none else. Also the "do not assume other materials" — fine.
+
+  Let me make sure the proof specifically addresses "每个边框格子恰好被计入一次" and "任何非边框格子都不会被计入". Yes.
+
+  One subtlety: The user says "答案溢出" as an edge case to cover — that's about overflow risk, cover with long long and bound proof.
+
+  Also should include the count of border cells formula and the corner overcount issue (inclusion-exclusion: 2n+2m−4).
+
+  Write the code with long long x; input might be read into long long directly. Fine.
+
+  Maybe avoid `if (!(std::cin >> n >> m)) return 0;` because it's extra logic but harmless. Could keep simple: `std::cin >> n >> m;`. Since input guaranteed. I'll keep minimal but robust. Either is fine. I'll include the check? "完整、可直接编译" — both fine. I'll do simple read without check to keep it clean, but mention assumption input valid. Actually defensive check doesn't hurt. I'll keep simple: `int n, m; std::cin >> n >> m;`.
+
+  Use `'\n'` at end.
+
+  Let me write the answer with headings numbered 1..7. Keep formatting readable, not overly deep. Markdown headings fine.
+
+  Length: moderate. Include full proof.
+
+  Let me draft.
+
+  Section 1 restatement:
+
+  任务：给定 n 行 m 列整数矩阵 a，定义边框格子为满足 i=1 或 i=n 或 j=1 或 j=m 的格子 (i,j)。求所有边框格子元素之和；角落格子同时属于两条边但只算一次。
+
+  输入格式：第一行两个正整数 n,m，空格分隔。接下来 n 行，每行 m 个整数，空格分隔，第 i 行第 j 个数是 a_{i,j}。输入恰好含 n·m 个元素。
+
+  输出格式：仅一行一个十进制整数，即边框元素之和；唯一答案，不得输出任何其他内容。
+
+  约束/限制：1≤n,m≤500；-1e7≤a≤1e7；时间 1000ms，内存 256MiB，gnu++17；边框格子数 ≤1996，|答案| ≤ 1.996e10，超过 32 位有符号范围，须用 64 位有符号整数；Judge 要求标准输出中恰有一个十进制整数，数值精确相等，不接受多余文本、多整数、缺失输出。
+
+  Section 2 algorithm:
+
+  Read n,m. sum=0 (long long). For i=1..n, for j=1..m: read x; if (i==1||i==n||j==1||j==m) sum+=x. Print sum.
+
+  Key point: single boolean decision per cell rather than summing four sides then subtracting corners — avoids double counting.
+
+  Section 3 proof.
+
+  I'll write it cleanly.
+
+  Lemma 1 (border characterization). By definition.
+
+  Lemma 2 (enumeration). The nested loops visit each ordered pair exactly once. Proof: outer index takes each value once; for fixed i inner takes each j once; distinct iterations have distinct (i,j) since values of loop counters determine the pair; total n·m iterations = number of pairs.
+
+  Lemma 3 (invariant). After processing a set S of pairs (in loop order), sum = Σ_{(i,j)∈S} a_{ij}[P(i,j)]. Induction: initially S=∅, sum 0. Each step processes exactly one new pair (i,j), adds a_{ij} iff P(i,j) true; since [P] is 0/1 and the pair is new (not processed before), the equality is preserved. At termination S is all pairs.
+
+  Theorem. sum = Σ_{all} a_{ij}[P] = Σ_{B} a_{ij}, each border cell once: each (i,j)∈B appears exactly once among the n·m enumerated pairs and its indicator is 1, hence contributes exactly a_{ij}; no other term contributes. Non-border: P false for all four disjuncts (i≠1, i≠n, j≠1, j≠m), so indicator 0, contributes nothing. Corners: satisfies two disjuncts but [P] is one boolean for the cell, and the cell is enumerated once, so no double count — this is precisely why we use a per-cell OR test instead of summing the four sides (which would count corners twice and require subtracting them).
+
+  Consistency for degenerate dimensions: if n=1 then i=1 for every cell so P true for all; indeed every cell lies in row 1 (also row n). If m=1 similarly. If n=2, no row satisfies 1<i<n, so every cell is on row 1 or 2, P true for all; consistent. Same m=2. Thus the predicate implements the definition in all 1≤n,m≤500 without special-casing.
+
+  Arithmetic correctness: Each a_{ij} ∈ [-1e7,1e7] and every partial sum is a sum of at most 1996 border values (actually at most |B| terms), so |partial| ≤ 1996·1e7 = 1.996e10 < 2^63−1; long long additions are exact, no overflow, so computed value equals mathematical sum.
+
+  Section 4 complexity: time Θ(nm) (n·m reads and O(1) per cell), space O(1) extra (only n,m,sum,x); no matrix stored. Under limits: 250000 cells, trivial for 1000ms.
+
+  Section 5 edge cases: table.
+
+  | 情形 | 说明 / 期望 |
+  - n=1: 全部格子都在第 1 行（也是第 n 行），谓词恒真；答案=整行和。例 "1 3 / 1 2 3" → 6.
+  - m=1: 同理，答案=整列和。例 "3 1 / 1 2 3" → 6.
+  - 1×1: 唯一格子四个条件全满足，只加一次。例 "1 1 / -7" → -7.
+  - n=2: 两行都是边框行，所有格子都是边框格；谓词对所有 i 为真。例 2×3 全 -1 → -6.
+  - m=2: 同理所有格子都是边框格。
+  - 2×2: 四个格子全是角，各算一次。
+  - 负数/全负: 直接累加，不做绝对值；示例 3×4 样例答案 13；全 -1e7 的 3×3 边框 8 格 → -8e7.
+  - 溢出: 最坏 500×500 全是 1e7：边框 1996 格 → 19960000000，超过 int；用 long long。反向 -19960000000。若误用 int 会得到错误值/UB。
+  - 答案恰为 0.
+  - 数值边界 -1e7/1e7。
+  - 输入规模 250000 个整数，需快速读入；cin 关闭同步即可，避免逐字符慢读。
+  - 行末空格/换行：用 >> 自动跳过空白，稳健。
+  - 模板不要假设 n,m≥2；不要写"四边和减去四角"这种容易在 n=1 或 m=1 时出错的公式（虽然也可做对，但更容易漏特判）。
+
+  Hmm, the "four sides minus corners" formula: if done carefully it's fine but has pitfalls. Mention as risk alternative.
+
+  Section 6 code.
+
+  Section 7: assumptions:
+  - 输入严格符合题面（n,m 后有恰好 n·m 个整数，均为 [-1e7,1e7] 内整数），无额外/缺失数据；程序不检查非法输入。
+  - Judge 按数值比较，允许输出末尾换行（常规）；若要求字节级完全一致，可去掉 '\n'，但题面"输出一行"通常含换行。 Actually, adding this caveat is reasonable but maybe unnecessary. The problem says output one line; newline accepted. I'd state: 程序输出一个整数后跟一个换行符，符合"一行"的要求。
+  - long long 至少 64 位（gnu++17 在主流平台成立；标准只保证 ≥64 位? Actually C++ standard guarantees long long at least 64 bits, so fine).
+  - 时间：250k 次读取在 1000ms 内充足。
+  - 无法证明之处：无（在题面保证的输入范围内，正确性与复杂度均有证明）。
+  - 实现风险：未处理输入失败（题面保证有效输入）；若 judge 使用极其严格的"无换行"比较则不适用，但这与常规 OJ 语义不符。
+
+  Maybe say "无" for unprovable, but there are assumptions. The user asks: 若没有，请明确写"无" — referring to assumptions/unprovable/risks. Since I do have assumptions, list them; can say 无无法证明的数学命题.
+
+  Let me also double-check the count 2n+2m−4 for n,m≥2: |B| = n*m - (n-2)(m-2) = 2n+2m-4. With n=m=500: 1000+1000-4 = 1996. Yes. For n=1 or m=1: |B| = nm ≤ 500. So max 1996. Good.
+
+  Sample 1 verification: 1+2+3+4=10, row3 -1-2-3-4=-10, plus 5+8=13 → 10-10+13=13. Yes.
+
+  Sample 2: -7.
+
+  Maybe verify code logic with sample 1: i=1 all four added: 10; i=2: j=1 add 5, j=2 no, j=3 no, j=4 add 8 → 13; i=3: -10 → 3? Wait 10+13-10 = 13. Yes 13. Good.
+
+  Now write final answer in Chinese, no tool use. Ensure section 1 "用你自己的话完整复述" — restate in own words, not copy verbatim. Fine.
+
+  Make sure not to include any other text outside the numbered sections, other than perhaps headings. Use "## 1. 任务与格式复述" etc.
+
+  The proof must be "逐步、闭合" — step-by-step and closed (complete). I'll use numbered steps.
+
+  I should be careful about "每个边框格子恰好被计入一次" — my proof covers.
+
+  Let me write out the final answer now.
+
+  Code:
+
+  ```cpp
+  #include <iostream>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      int n, m;
+      std::cin >> n >> m;
+
+      long long sum = 0;
+      for (int i = 1; i <= n; ++i) {
+          for (int j = 1; j <= m; ++j) {
+              long long x;
+              std::cin >> x;
+              if (i == 1 || i == n || j == 1 || j == m) {
+                  sum += x;
+              }
+          }
+      }
+
+      std::cout << sum << '\n';
+      return 0;
+  }
+  ```
+
+  Good. Only <iostream>. Standard.
+
+  One consideration: `std::cin.tie(nullptr)` requires <iostream>, fine.
+
+  Section 5 maybe include a small table; tables render okay-ish. Keep it a list to be safe, or a compact table. The instructions say tables only when content calls for it; a case list is fine. I'll use a bullet list with bold case names.
+
+  Let me finalize.
+
+  Also mention in complexity: reading input is Θ(nm) which dominates; extra space O(1) (not counting input stream buffers).
+
+  Time 1000ms fine.
+
+  Write final.
+
+To resume this session: kimi -r session_4519c56c-3a13-4df8-8b91-4f465232973b

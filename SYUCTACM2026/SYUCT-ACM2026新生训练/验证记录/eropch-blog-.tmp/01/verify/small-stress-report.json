@@ -1,0 +1,47 @@
+{
+  "seed": 12345,
+  "max_len": 20,
+  "rounds_requested": 200,
+  "rounds_completed": 200,
+  "status": "passed",
+  "failures": [],
+  "wrong_killed": {
+    "w-reverse": true,
+    "w-onlylen": true,
+    "w-offby": true,
+    "w-char": true,
+    "w-first2": true
+  },
+  "wrong_first_kill": {
+    "w-reverse": {
+      "round": 1,
+      "input": "zjlgisnfldniru",
+      "exit": 0,
+      "got": "14 u z\n"
+    },
+    "w-onlylen": {
+      "round": 1,
+      "input": "zjlgisnfldniru",
+      "exit": 0,
+      "got": "14\n"
+    },
+    "w-offby": {
+      "round": 1,
+      "input": "zjlgisnfldniru",
+      "exit": 0,
+      "got": "13 z u\n"
+    },
+    "w-char": {
+      "round": 1,
+      "input": "zjlgisnfldniru",
+      "exit": 0,
+      "got": "1 z z\n"
+    },
+    "w-first2": {
+      "round": 1,
+      "input": "zjlgisnfldniru",
+      "exit": 0,
+      "got": "14 z z\n"
+    }
+  }
+}

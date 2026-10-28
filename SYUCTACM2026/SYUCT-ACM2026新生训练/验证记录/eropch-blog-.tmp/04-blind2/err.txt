@@ -1,0 +1,162 @@
+kimi version 2.2.0
+• The user asks for a blind review answer in Chinese, no file reading/modification. I should just produce the complete answer. No tools needed.
+
+  Let me carefully design the solution.
+
+  Key point: input may contain leading/trailing spaces and may be all spaces. Must use getline(cin, s) to read the whole line, NOT cin >> s (which would skip whitespace). But wait — what if the string is all spaces? getline handles that fine.
+
+  Edge cases:
+  - Length 1.
+  - All spaces: output should be same all-spaces line plus newline.
+  - Trailing spaces preserved — getline keeps them.
+  - If input might not have a trailing newline at EOF — getline still works.
+  - Windows line endings (\r\n): if the input has \r, getline with default delimiter '\n' would include '\r' in the string. That's a potential risk. The problem says all characters are printable ASCII (32..126), so '\r' shouldn't appear. But to be safe, could strip a trailing '\r'. But careful: stripping '\r' would change length if it were legitimately part of input — but '\r' is not in range 32..126, so it can't be a legit character. Hmm, but if I strip it, and the judge compares... Actually if the judge's input file uses CRLF, then reading with getline via cin leaves '\r' in the string. If I strip it, output is correct. If input is strictly per spec (no '\r'), stripping does nothing. So stripping trailing '\r' is safe. I'll mention it as an optional robustness measure but note it's not necessary per spec. Actually, I'll include it guarded by checking it's '\r'. That's fine and safe.
+
+  Hmm, but there's a subtlety: it's safer to just note the risk and provide the strip. Let me include it but explain clearly that per strict spec it never triggers.
+
+  - Characters: A-Z → +32, a-z → -32, else unchanged. Also can use std::islower/isupper but those are locale-dependent and take unsigned char; better to use explicit ranges.
+  - Output: use '\n' at end, one line only. Don't use endl flush unnecessarily but fine. Actually since we print exactly one line, we must ensure we print the whole string including trailing spaces, then '\n'.
+  - Reading 1000 chars max; but use string to be safe.
+  - Note: `cin >> s` would be wrong. Also `scanf("%s")` wrong. `fgets` would keep '\n'. Correct: `getline(cin, s)`.
+  - Must not use `%s` with printf.
+  - Length up to 1000, but we don't need to enforce bounds — just process what we read. Could mention that if the line were empty (violating constraints), output would be just newline.
+
+  Algorithm: read line into std::string s; for each char &c in s: if 'A'<=c<='Z' c += 32 ('a'-'A'); else if 'a'<=c<='z' c -= 32; output s and '\n'.
+
+  Correctness proof: 
+  - Claim 1: reading — getline reads exactly the characters of the line up to but not including '\n', preserving spaces including leading/trailing. By the input format, the input is one line whose content is exactly s followed by newline. So s (as read) equals the input string. Proof by the definition of getline.
+  - Claim 2: for each position i, output char = f(input char). Case analysis:
+    - If c ∈ [A,Z], then replacement is c + 32 which is c - 'A' + 'a' ∈ [a,z], the corresponding lowercase. Correct.
+    - If c ∈ [a,z], then c - 32 ∈ [A,Z], corresponding uppercase. Correct.
+    - Otherwise c is unchanged. Correct.
+    The two branches are mutually exclusive because uppercase and lowercase ranges are disjoint; so the transformation is a well-defined function applied independently at each position.
+  - Claim 3: position/length preserved: we modify in place, never insert/delete, so length is |s| and each output char at position i derives from input char at position i.
+  - Claim 4: output format: we write exactly s' followed by a single '\n', nothing else.
+  - Therefore output equals required answer character by character.
+
+  Also need to check that all-space input: no character falls into A-Z/a-z, so output equals input, correct. And length preserved.
+
+  Complexities: O(n) time, O(n) space (the string itself); auxiliary O(1) beyond input storage.
+
+  Edge cases:
+  1. All spaces / leading / trailing spaces → use getline not >>.
+  2. Empty-ish (n=1) single character.
+  3. Characters that look like letters but aren't: digits, punctuation, `@`, `[`, `\`, `]`, `^`, `_`, `` ` ``, `{`, `|`, `}`, `~` — must be unchanged. Important: ASCII arithmetic must not be done using ctype with locale; also note `[` is 91 which is 'Z'+6, `@` 64 is 'A'-1 — naive approaches like `if (c >= 'A' && c <= 'z')` would wrongly convert those (there are 6 chars between 'Z' and 'a': [ \ ] ^ _ `). That's a classic trap. My implementation uses two disjoint ranges.
+  4. `char` signedness: not an issue since we only compare with ASCII literals and add/subtract small constants without overflow (all values in 32..126). But if using functions from <cctype>, must cast to unsigned char. I avoid them.
+  5. Trailing newline of the input line — getline strips it. Don't print an extra blank line.
+  6. Possible '\r' if test data uses CRLF — mention, strip defensively. Per spec it's not present.
+  7. Don't use `cin >> s`; don't use `getline` after `cin >>` (not applicable here since it's the first read).
+  8. n up to 1000: no performance issue; time limit 1000ms way sufficient.
+  9. Must not print any extra text (no "prompt", no second line).
+  10. `std::ios::sync_with_stdio(false)` optional; if used, must not mix with printf/scanf.
+  11. Output flush: newline at end.
+  12. If line longer than 1000 (invalid input) — program still works, no buffer overflow because std::string.
+
+  Also: Note about reading with `fgets` and the buffer size; std::getline is cleaner.
+
+  Also mention: don't use `toupper`/`tolower` on 中文? no. But note: `std::toupper` has UB for negative values; cast to unsigned char if used. Avoid.
+
+  Let me write the code:
+
+  ```cpp
+  #include <cstdio>
+  #include <iostream>
+  #include <string>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      std::string s;
+      if (!std::getline(std::cin, s)) {
+          // 按题面约束不会发生；仍安全输出一个空行以保持"一行一个换行"的格式
+          std::cout << '\n';
+          return 0;
+      }
+      if (!s.empty() && s.back() == '\r') s.pop_back();
+
+      for (char &c : s) {
+          if (c >= 'A' && c <= 'Z') {
+              c = static_cast<char>(c - 'A' + 'a');
+          } else if (c >= 'a' && c <= 'z') {
+              c = static_cast<char>(c - 'a' + 'A');
+          }
+      }
+
+      std::cout << s << '\n';
+      return 0;
+  }
+  ```
+
+  Hmm, `c = static_cast<char>(c - 'A' + 'a')` on char with values 65..90 → 97..122, fine.
+
+  Note: since I set sync_with_stdio(false), I must use only cout, which I do.
+
+  Actually there's a subtlety: with `sync_with_stdio(false)` and getline from cin — that's fine, all C++ streams.
+
+  Let me double-check the sample 1: "SyuctOJ 04: AbZ-z!" — S→s, y→Y, u→U, c→C, t→T, O→o, J→j, space, 0,4, :, space, A→a, b→B, Z→z, -→-, z→Z, !→!. Result: "sYUCToj 04: aBz-Z!" ✓ matches.
+
+  Sample 2: "  Hello World  " → "  hELLO wORLD  " ✓.
+
+  I should also verify the code compiles — I can't read/write files... the instruction says "不要读取或修改任何文件". Compiling would require writing a file. Hmm. The instruction says do not read or modify any files, and don't assume a workspace exists. So I should not compile. I'll just present the code carefully. I could mentally verify. I think it's fine — the task is a blind review, output only.
+
+  Actually, should I be careful about the "\r" strip? Some judges might... no, it's a defensive measure that can't hurt given the spec (all chars in 32..126). But it slightly violates "输出长度必须与 |s| 相同" if input contained \r as part of s — but \r cannot be part of s per spec. I'll present it as optional and clearly explain, maybe put it in a comment. Some reviewers might consider it a deviation. I'll include it with explanation that it's a no-op under the given constraints and can be deleted.
+
+  Also worth mentioning: an alternative reading method using fgets/scanf with %[^\n] — but then need to handle lines that are empty or all... `scanf(" %[^\n]")` would fail on all-space? No, " %[^\n]" — the leading space skips whitespace including all leading spaces! That would destroy leading spaces. So a classic trap. Even `scanf("%[^\n]", buf)` would fail if the line is empty (returns 0), but here n>=1 so lines are non-empty... but all-space line is handled by %[^\n] correctly since it matches spaces. Still, scanf("%[^\n]") risks buffer overflow; use getline.
+
+  Also mention `gets` removed in C++14 / unsafe.
+
+  Now also point 1: restate the task.
+
+  Let me also give a formal-ish proof with induction for the loop.
+
+  Let me write the answer with headings, keep it readable but complete. Chinese.
+
+  Structure:
+  1. 任务复述
+  2. 算法设计（伪代码）
+  3. 正确性证明（引理1读取、引理2逐字符映射、引理3长度与位置、定理）
+  4. 复杂度
+  5. 边界情况与风险表
+  6. 参考实现
+
+  Table for edge cases is reasonable — but instruction says avoid heavy tables in terminal. One moderate table is fine, but maybe use a bulleted list instead for readability. I'll use a compact list with bolded items. Actually a small table for 边界情况 is genuinely tabular (字符/风险/处理). I'll use a list to be safe — the guidance says use structure only when content calls for it. A list with 10 items is fine.
+
+  I'll write it now.
+
+  For the proof, be precise.
+
+  定义 f(c):
+  - c ∈ ['A','Z'] → c + 32
+  - c ∈ ['a','z'] → c - 32
+  - 其他 → c
+
+  引理 1（读入无损）：std::getline(std::cin, s) 读取当前行中直到（但不包含）第一个 '\n' 的全部字符，包含所有空格，不做任何裁剪。题面保证输入恰为 s + '\n'，且 s 的字符均 ∈ [32,126] 不含 '\n'，故 s 读完即等于题面字符串；首尾空格、全空格均保留。（若末字符为 '\r' 则删除，因 32..126 不含 13，该操作在合法输入上是恒等变换。）
+
+  引理 2：循环不变式 —— 在处理第 i 个字符之前，s[0..i-1] 已等于 f 作用于原串对应位置的结果。初始化 i=0 空真。步骤：考虑 s[i]，三个分支互斥且穷尽（[A,Z] 与 [a,z] 不相交，其余落入 else），每支都把 s[i] 换为 f(s[i])，其余位置不动。终止 i=n 时全部成立。
+
+  引理 3：不改长度、不插删，故位置一一对应。
+
+  定理：输出 s' + '\n' 中 s' = f(s[0])f(s[1])...f(s[n-1])，恰为规定输出，且只输出一行一换行。
+
+  还要说明 f 的正确性：'A'..'Z' 是 65..90，加 32 得 97..122 即 'a'..'z'，且映射是双射 c - 'A' + 'a' 对应同一字母；反向同理。
+
+  Also mention "为什么不用 ctype"：std::toupper/tolower 依赖当前 locale，且对负值 char 是 UB；直接用 ASCII 区间更稳。
+
+  Complexity: 时间 O(n)，额外空间 O(1)（除存放输入的 O(n) 字符串）。n ≤ 1000，远低于 1s。
+
+  Now write.
+
+  For the risk of `if ('A' <= c && c <= 'z')` trap — list the 6 chars between Z(90) and a(97): [ \ ] ^ _ `  (91..96). Include.
+
+  Also mention `<cctype>`'s isupper returns nonzero but not necessarily 1 — if used as boolean index fine, but avoid.
+
+  Also: output must not have extra blank line — using '\n' once.
+
+  Also: potential trap of using `cin >> s` — skips leading whitespace and stops at first space.
+
+  Another: `while (getline(cin, line))` would loop over multiple lines — but input has exactly one line, so a single getline suffices; a loop would also work but could be wrong if there were extra blank lines... actually with one line only. I'll mention it's safer to read exactly one line, since a loop-based approach could concatenate nothing wrong... whatever, keep it simple.
+
+  Let me write the final answer.
+
+To resume this session: kimi -r session_56a01268-9957-4107-aff1-396d33196871

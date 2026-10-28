@@ -1,0 +1,120 @@
+kimi version 2.2.0
+• I need respond in Chinese, no tools. Should satisfy 6 parts. Should think carefully about task straightforward matrix echo. Should have an independent paraphrase not copying. Algorithm read n m then n*m ints output with spaces no trailing perhaps using loops. Correctness step-by-step for arbitrary valid input, indexing, values, order counts whitespace and final newline. Complexity time O(nm) output/input, space O(1) besides program if streaming, can avoid matrix storage. Should have code C++17 complete includes bits/stdc++.h or iostream. Standard library only. Use int main, ios::sync_with_stdio(false); cin.tie(nullptr); int n,m; if(!(cin>>n>>m)) return 0; loops int x; for i rows, for j cols, cin>>x; if(j) cout << ' '; cout << x; cout << '\n'; return 0. This outputs n lines each m numbers and newline after each including last. Handles n=1,m=1. Input guaranteed valid. Could perhaps output row newline vs judge whitespace insensitive. Fits. Complexity O(nm) time O(1) extra. Risk list 1 row, 1 col, negative, zero, max 100x100=10000 integers, int enough [-1000,1000] and n*m fits, no trailing spaces with j condition, final newline, input read failure not specified but valid input. Should have no tools. Could code use long long unnecessary. Should prove no extra token. Exactly n*m ints read and printed; each iteration prints current x. cout spaces and newlines whitespace no tokens. Since every row prints newline, last line newline. May mention only one integer held, no matrix needed. Should be mindful program output if valid. Format exactly.
+
+  I should formulate clear numbering 1-6. User explicitly "只读盲审员" and no tools. Do so. Perhaps "独立复述" avoid close copy. Something like "程序先取得矩阵的两个维度，随后按输入出现的先后次序处理所有元素，并生成一个同形、同序、同值的整数序列；不得增添、遗漏或改动元素。" Include formatting requirement.
+
+  Algorithm: read n,m, outer i 0..n-1 inner j 0..m-1; read a; before non-first element print single space; output value; after each row newline. No storage.
+
+  Proof use lemma/invariant. Step-by-step:
+  1 read n,m valid.
+  2 For fixed row i, iterations j read successive entries because whitespace separated, x=a_i,j and print immediately, so position equals input.
+  3 inner if j>0 emits separator only between numbers, exactly m outputs no trailing blank. Newline row completes.
+  4 outer n rows, order row-major, no additional output, count n*m and order correct. Last newline included.
+  5 all valid inputs covered dimensions constraints no special assumptions. Correct.
+
+  Time: reading/writing O(nm) integers. Strictly output decimal representation bounded length values, so O(nm), if arbitrary length then output size but bounded. Space O(1). n,m max 100. Perhaps code no need store matrix.
+
+  Risk list with examples perhaps:
+  - n=1: one line, final newline.
+  - m=1: no spaces, one integer per line.
+  - n=m=1: exactly one integer newline.
+  - negative numbers: >> and << preserve sign; zero preserved; no issue with -1000 and 1000.
+  - maximum: 10000 ints, int and loops safe; stream O(1).
+  - whitespace: extraction ignores arbitrary legal whitespace; output uses exact single spaces; trailing spaces none.
+  - no extra tokens: only matrix values, no debug text.
+  - I/O success: assumes valid input as guaranteed; initial read guard handles empty file harmless but not required. For elements no check; legal input ensures. Do I need risk of sync? no.
+  Should have "特别是 1 行、1 列、负数、最大规模" all explicit.
+
+  Code use #include <iostream> with using namespace std. C++17 direct compile. Potential Windows newline translation \n outputs CRLF? Judge whitespace insensitive and standard environment Linux. No need. Last newline yes.
+
+  Do I need code output all n rows even m etc. Yes.
+
+  No tools. Respond in Chinese. I should not mention inability to compile due no tools; User asks complete program, not tested. Should not claim compiled. Could simply respond. I must not run tests due instruction. Good.
+
+  I'll produce ~1000 Chinese chars perhaps 1300. Should have no excessive explanation. Use heading numbered. Code. Ensure algorithm code uses output '\n' after inner, so if m=1 no spaces. Code:
+
+  #include <iostream>
+  using namespace std;
+
+  int main() {
+   ios...
+   int n,m;
+   if (!(cin>>n>>m)) return 0;
+   for (int i=0; i<n; ++i) {
+     for (int j=0; j<m; ++j) {
+       int value;
+       cin >> value;
+       if (j>0) cout << ' ';
+       cout << value;
+     }
+     cout << '\n';
+   }
+   return 0;
+  }
+
+  Potential variable declaration inside each loop no issue. Complexity constant stack. Correctness read exactly sequence. Note output ints same value, streaming canonical decimal (e.g. input +001? Legal integer format perhaps not explicit canonical, judge numerical not textual) okay. "原样输出" numeric same, judge token int compare. Input -0? Output 0 same numerical token. Fine.
+
+  Could use if(j !=0) for no trailing. End line every row. Fine.
+
+  Proof "第 i 行第 j 列" zero-index inconsistency clarify use 0-based indices matching mathematical values a_{i+1,j+1}. Could use 1-based loops for easier proof:
+  for (int i=1;i<=n;++i) {
+   for(int j=1;j<=m;++j) { int x; cin>>x; if(j>1) cout << ' '; cout<<x; }
+   cout << '\n';
+  }
+  n max 100 so no issue. Easier proof. Use i and j 1-based, output exactly. Good.
+
+  I can say after processing k rows etc. Inductive invariant:
+  Before row i, first i-1 rows output exactly; base i=1 none; inner outputs row; induction all. Within row input sequential. This rigorous enough. Number count. Final line newline. No extras.
+
+  Time Θ(nm) better than O; space Θ(1) auxiliary. Could say including input/output operations; no matrix storage. "时间复杂度 Θ(nm)，额外空间复杂度 Θ(1)" standard.
+
+  Risk mention values fit int. n*m <=10000 also. No overflow. All good.
+
+  Now respond only.
+
+• ### 1. 任务复述
+
+  程序需要读取矩阵的行数、列数以及全部元素，然后按照原来的行列顺序输出这些元素。输出不能遗漏、增加或修改任何数值；每行元素之间用单个空格分隔，行末没有多余空格，最后一行以换行符结束。
+
+  ### 2. 算法思路
+
+  不需要保存整个矩阵，可以边读边输出：
+
+  1. 读入 `n` 和 `m`。
+  2. 对第 `1` 行至第 `n` 行依次处理。
+  3. 每行读入并立即输出 `m` 个整数；从每行第二个整数开始，先输出一个空格。
+  4. 每行处理完后输出换行符。
+
+  ### 3. 正确性证明
+
+  **第一步：读入的元素顺序正确。**  
+  输入按照行优先顺序给出矩阵元素。程序同样使用从 `1` 到 `n` 的外层循环和从 `1` 到 `m` 的内层循环，因此第 `(i,j)` 次循环读到的正是 `a[i][j]`。
+
+  **第二步：每个输出的数值正确。**  
+  每次循环将当前元素读入 `x`，随后不对其进行任何修改，直接输出 `x`。因此输出第 `i` 行第 `j` 个整数等于 `a[i][j]`。
+
+  **第三步：输出的数量和顺序正确。**  
+  内层循环恰好执行 `m` 次，外层循环恰好执行 `n` 次，所以总共输出恰好 `n*m` 个整数。循环顺序保证这些整数按第 1 行到第 `n` 行、每行第 1 列到第 `m` 列排列。
+
+  **第四步：输出格式正确。**  
+  仅当 `j > 1` 时先输出空格，因此空格只出现在同一行相邻整数之间，不会产生行首或行末多余空格。每行结束后输出 `'\n'`，所以共有 `n` 行，且最后一行末尾也有换行符。程序没有其他输出，因此不存在额外 token。
+
+  综上，程序对任意合法输入都能输出正确的矩阵。
+
+  ### 4. 复杂度
+
+  - **时间复杂度：** `Θ(n*m)`，每个元素只读入、输出一次。
+  - **额外空间复杂度：** `Θ(1)`，只保存维度、循环变量和当前元素，不存储整个矩阵。
+
+  ### 5. 边界情况与风险清单
+
+  - **只有一行（`n=1`）：** 外层循环执行一次，输出一行并以换行符结束。
+  - **只有一列（`m=1`）：** 每行只输出一个整数，不会输出空格。
+  - **`n=m=1`：** 输出唯一元素及一个换行符。
+  - **负数和零：** `cin` 与 `cout` 能正确处理负号及零，不会进行数值转换以外的修改。
+  - **最大规模：** 最多 `100*100=10000` 个元素，循环次数和整数范围都很小；`int` 足以保存 `[-1000,1000]` 内的元素。
+  - **空格风险：** 通过 `j > 1` 控制分隔符，避免行末多余空格。
+  - **额外输出风险：** 程序不输出提示语或调试信息，只输出矩阵元素及必要空白。
+
+  ### 6. C++17 程序
+

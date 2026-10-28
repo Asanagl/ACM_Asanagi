@@ -1,0 +1,125 @@
+kimi version 2.2.0
+• The user asks me to act as a blind independent solver, with no tools, no file access, etc. They want a structured answer with 7 sections, including a complete C++17 program.
+
+  I should just answer directly in Chinese, no tool calls. This is a pure reasoning/writing task. Let me produce a thorough answer.
+
+  Let me double check the task: read n, m, then n rows of m integers, output sum of each column, space separated, using wide integer type (long long). Complexity O(nm) time, O(m) space (or O(1) extra if we accumulate into an array of size m — that's O(m) auxiliary). Note m ≤ 1000, n ≤ 1000, so at most 10^6 elements, fits in 1000ms.
+
+  Proof: The column sums. Need to prove each column accumulates exactly n elements and no elements from other columns. Key: input is read in row-major order: for each i from 1..n, read a_{i,1}...a_{i,m}. When we read the j-th number of row i, we add it to sum[j]. Induction: after processing rows 1..i, sum[j] = Σ_{k=1}^{i} a_{k,j}. This uses the fact that reading sequentially the ((i-1)*m + j)-th token corresponds to a_{i,j} — this is the standard assumption that the input is given in row-major order, exactly as the format states ("接下来 n 行，每行 m 个整数，第 i 行第 j 个数为 a_{i,j}").
+
+  Output order: loop j from 1 to m, printing sum[j] separated by single spaces, no trailing space (or trailing space acceptable per judge, but I'll avoid it).
+
+  Wide type: each element up to 1e9 in absolute value, n ≤ 1000, so column sum up to 1e12 which needs 64-bit. long long holds up to ~9.22e18, so no overflow. Also note intermediate partial sums bounded by 1e12 in absolute value too.
+
+  Edge cases: 1 row, 1 column, 1×1, non-square (3×4, 4×3), negatives, zeros, duplicates, sum exceeding 32-bit (3e9), all -1e9 with n=1000 → -1e12, mixed.
+
+  Also mention reading with fast IO (ios::sync_with_stdio(false), cin.tie(nullptr)) — 10^6 integers, fine.
+
+  Wait — one thing: input might have trailing whitespace; fine.
+
+  Also should mention assumption: input tokens are whitespace-separated; the row structure is implied by the count, and since every row has exactly m integers, reading token-by-token and taking index mod m gives row-major mapping. That's a point worth noting: even if line breaks varied, the token order determines the mapping, consistent with the problem statement.
+
+  Also mention possible risk: if n*m tokens missing → not our problem per judge guarantees. If input is malformed, program reads garbage; not required.
+
+  Section 7: assumptions/risks — 
+  - Input is exactly n*m integers in row-major order, whitespace separated.
+  - Reading with cin without sync may be slow? 10^6 numbers with cin is fine under 1000ms usually (~100-200ms). To be safe could use scanf or custom fast reader. Since 1000ms and 10^6 integers, cin with sync off is typically <100ms. I'll use cin with sync off, but could mention alternative. Actually to be maximally safe I might use a hand-rolled fast reader? The problem says "仅标准库" — a fast reader using getchar_unlocked is not standard (it's POSIX). Using getchar is standard-ish. I'll use cin with sync disabled — it's simplest and reliable. Maybe mention that if a harsh time limit existed, a manual buffer would help, but 10^6 ints is small.
+
+  Let me write the final answer in Chinese, well-organized but not too heavy nesting. The user asked for strict ordering 1-7.
+
+  Let me write the proof carefully.
+
+  Section 3 proof structure:
+
+  Setup: Let the input token sequence be t_1, t_2, ..., t_{nm} (after n, m). Define the row-major index: token with index k = (i-1)m + j is a_{i,j}, for i∈[1,n], j∈[1,m]. This is exactly what the input format prescribes (each of the n lines has exactly m numbers, the j-th number of line i is a_{i,j}).
+
+  Program structure:
+
+  ```
+  read n, m
+  sum[1..m] = 0
+  for i = 1..n:
+     for j = 1..m:
+        read x
+        sum[j] += x
+  ```
+  Note that in this loop, the token read at (i,j) is exactly the ((i-1)m+j)-th token, because the total number of tokens read before iteration (i,j) is (i-1)m + (j-1).
+
+  Claim 1 (correct accumulation, invariant): After completing the inner loop for rows 1..i, sum[j] = Σ_{k=1}^{i} a_{k,j} for all j.
+  Proof by induction on i. Base i=0: all sums 0 = empty sum. Step: assume for i-1. In row i, for j = 1..m in increasing order, the token read is a_{i,j} by the token-order lemma, and sum[j] becomes Σ_{k=1}^{i-1} a_{k,j} + a_{i,j} = Σ_{k=1}^{i} a_{k,j}. Other entries untouched. QED.
+
+  Corollary (exactly n terms, no foreign terms): For fixed j, sum[j] is modified exactly once in each row, n times total; the value added at row i is a_{i,j}. Since a_{i,j'} for j'≠j is added to sum[j'] (a different array slot) — slots are indexed by j, and only the read position j determines the slot — no element from another column enters sum[j]. Hence sum[j] = a_{1,j}+...+a_{n,j} exactly, and nothing else.
+
+  Also need: no element is lost or double counted — each token causes exactly one addition; the inner loop runs exactly n·m times; total additions n·m, and column j gets exactly n.
+
+  Claim 2 (output order and count): Output loop j=1..m prints sum[j] exactly once, in order. Separate by space so that each pair adjacent has exactly one space; number of integers printed equals m. Hence output matches required format: the j-th integer is Σ_i a_{i,j}.
+
+  Also the values are unique as required — problem says the answer is unique; each is a mathematically determined sum, and our computation matches it, so uniqueness holds.
+
+  Overflow: bound |sum[j]| ≤ n·max|a| ≤ 1000·10^9 = 10^12 < 2^63-1 ≈ 9.22·10^18. Partial sums also bounded by 10^12 in absolute value at each step (since they're sums of ≤ n terms from one column) — actually partial sums after k rows sum of |a| ≤ k*1e9 ≤ 1e12. So no overflow at any moment.
+
+  Section 4: time O(nm), space O(m) extra (or O(1) besides the output array; the output array is necessary — well, could be O(m)). Input reading O(nm). Total 10^6 ops, well within 1000ms.
+
+  Section 5: edge case list.
+
+  Now the C++17 program.
+
+  ```cpp
+  #include <iostream>
+  #include <vector>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      int n, m;
+      if (!(std::cin >> n >> m)) return 0;
+
+      std::vector<long long> col(m, 0);
+      for (int i = 0; i < n; ++i) {
+          for (int j = 0; j < m; ++j) {
+              long long x;
+              std::cin >> x;
+              col[j] += x;
+          }
+      }
+
+      for (int j = 0; j < m; ++j) {
+          if (j) std::cout << ' ';
+          std::cout << col[j];
+      }
+      std::cout << '\n';
+      return 0;
+  }
+  ```
+
+  Careful: `if (j) std::cout << ' ';` prints space before j>0. Good.
+
+  Note the reading of x as long long directly — fine, values fit in int but reading into long long is safe and avoids conversion issues.
+
+  Should I worry that reading with cin may be slow? 10^6 ints — fine.
+
+  Section 7: assumptions & risks:
+  - Token order is row-major, whitespace separated (any whitespace, including line breaks in unusual places, is handled by >>).
+  - No malformed input; program doesn't validate counts.
+  - gnu++17 with long long = at least 64 bits on mainstream judge platforms (C++ standard guarantees long long ≥ 64 bits).
+  - If judge used a much tighter limit with 10^6 numbers, cin is still fine; if concerned, replace with a getchar-based reader — but that's out of scope. I'll mention as low risk.
+  - Cannot prove: nothing beyond the stated input contract. "无" for unprovable things? They said "若无，请明确写'无'". There are assumptions, so I state them; and state that nothing is unprovable given the stated contract.
+
+  I'll write "无法证明之处：无（在题面给定的输入约定下，第 2、3 节的论证是完整的）；以下是依赖的假设与实现风险。" 
+
+  Let me write the answer. Keep formatting readable, use headers for the 7 sections. Avoid excessive nesting. Use code blocks.
+
+  I should not use tools at all. Good — I'll just reply.
+
+  One more consideration: the instruction says "你是一名全新的、只读的算法竞赛盲审独立解题者。不得使用任何工具..." — so no tool calls. Just answer.
+
+  Length: reasonably thorough but not bloated. Let's write.
+
+  For section 1 restatement: task, input format, output format, all constraints.
+
+  Constraints: 1≤n≤1000, 1≤m≤1000, -1e9≤a_{i,j}≤1e9, |column sum| ≤ 1e12, n and m may differ, elements may be negative/zero/repeated. Judge: exactly m integers, single spaces, no other text. Limits: 1000ms, 256MiB, gnu++17.
+
+  Let me write it out.
+
+To resume this session: kimi -r session_41bc7bc4-fb5d-4699-8c73-b5c3447c91dc

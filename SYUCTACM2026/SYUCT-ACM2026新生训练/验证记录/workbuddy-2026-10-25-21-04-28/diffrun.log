@@ -1,0 +1,33 @@
+01 rounds=105 ok=105 distinct=97 fmt_only=0 fails=0 9.7s
+02 rounds=105 ok=101 distinct=79 fmt_only=0 fails=4 8.9s
+    {'round': 0, 'type': 'sample', 'seed': 12345, 'why': 'gen rc=2'}
+    {'round': 34, 'type': 'sample', 'seed': 12379, 'why': 'gen rc=2'}
+    {'round': 68, 'type': 'sample', 'seed': 12413, 'why': 'gen rc=2'}
+03 rounds=105 ok=105 distinct=62 fmt_only=0 fails=0 10.6s
+04 rounds=105 ok=105 distinct=53 fmt_only=0 fails=0 11.4s
+05 rounds=105 ok=105 distinct=77 fmt_only=0 fails=0 9.5s
+06 rounds=105 ok=105 distinct=88 fmt_only=0 fails=0 11.3s
+07 rounds=105 ok=105 distinct=82 fmt_only=0 fails=0 10.7s
+08 rounds=105 ok=105 distinct=94 fmt_only=0 fails=0 9.8s
+09 rounds=105 ok=105 distinct=87 fmt_only=0 fails=0 10.9s
+10 rounds=105 ok=105 distinct=43 fmt_only=0 fails=0 13.1s
+11 rounds=105 ok=101 distinct=49 fmt_only=0 fails=4 11.5s
+    {'round': 0, 'type': 'sample', 'seed': 12345, 'why': 'gen rc=2'}
+    {'round': 32, 'type': 'sample', 'seed': 12377, 'why': 'gen rc=2'}
+    {'round': 64, 'type': 'sample', 'seed': 12409, 'why': 'gen rc=2'}
+12 rounds=105 ok=105 distinct=89 fmt_only=0 fails=0 16.1s
+13 rounds=105 ok=105 distinct=99 fmt_only=0 fails=0 18.9s
+14 rounds=105 ok=105 distinct=67 fmt_only=0 fails=0 20.5s
+15 rounds=105 ok=105 distinct=100 fmt_only=0 fails=0 9.9s
+16 rounds=105 ok=105 distinct=86 fmt_only=0 fails=0 10.2s
+17 rounds=105 ok=105 distinct=55 fmt_only=0 fails=0 12.1s
+18 rounds=105 ok=105 distinct=63 fmt_only=0 fails=0 10.9s
+19 rounds=105 ok=105 distinct=58 fmt_only=0 fails=0 11.6s
+20 rounds=105 ok=105 distinct=75 fmt_only=0 fails=0 12.1s
+21 rounds=105 ok=105 distinct=84 fmt_only=0 fails=0 10.3s
+22 rounds=105 ok=105 distinct=85 fmt_only=0 fails=0 12.4s
+23 rounds=105 ok=105 distinct=74 fmt_only=0 fails=0 13.5s
+24 rounds=105 ok=105 distinct=51 fmt_only=0 fails=0 9.4s
+25 COMPILE_FAIL:main:
+
+PROBLEMS WITH ISSUES: ['02', '11', '25']

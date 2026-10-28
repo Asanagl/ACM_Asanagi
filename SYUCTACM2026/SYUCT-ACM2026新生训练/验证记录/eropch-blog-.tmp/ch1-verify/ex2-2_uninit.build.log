@@ -1,0 +1,7 @@
+ex2-2_uninit.cpp: In function 'int main()':
+ex2-2_uninit.cpp:7:18: warning: 'x' is used uninitialized [-Wuninitialized]
+    7 |     cout << x << '\n';   // 输出的是垃圾值，不可预测
+      |                  ^~~~
+ex2-2_uninit.cpp:6:9: note: 'x' was declared here
+    6 |     int x;          // 声明了，但没有初始化
+      |         ^

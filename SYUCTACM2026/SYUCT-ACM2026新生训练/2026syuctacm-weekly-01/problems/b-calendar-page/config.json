@@ -1,0 +1,40 @@
+{
+  "slug": "b-calendar-page",
+  "title": "日历翻页",
+  "interactive": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "standard": "gnu++20",
+  "statement": "docs/statement.md",
+  "tutorial": "docs/tutorial.md",
+  "validator": "src/validator/validator.cpp",
+  "generator": {
+    "path": "src/generator/generator.cpp",
+    "cases": [
+      { "name": "sample-1", "type": "sample", "seed": 1, "group": "sample" },
+      { "name": "zero-days-1", "type": "zero-days", "seed": 2, "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "month-end-1", "type": "month-end", "seed": 3, "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "leap-1", "type": "leap", "seed": 4, "group": "secret" },
+      { "name": "century-1", "type": "century", "seed": 5, "group": "secret" },
+      { "name": "random-1", "type": "random", "seed": 6, "group": "secret" },
+      { "name": "random-2", "type": "random", "seed": 7, "group": "secret" },
+      { "name": "large-k-1", "type": "large-k", "seed": 8, "group": "secret" }
+    ]
+  },
+  "checker": "src/checker/checker.cpp",
+  "build": {
+    "cppCompiler": "g++",
+    "cppFlags": ["-std=gnu++20", "-O2", "-pipe"],
+    "pythonCommand": "python"
+  },
+  "solutions": [
+    { "name": "main", "path": "src/solution.cpp", "language": "cpp", "role": "main" },
+    { "name": "solution2", "path": "src/solution2.cpp", "language": "cpp", "role": "reference" },
+    { "name": "python", "path": "src/solution.py", "language": "python", "role": "reference" }
+  ],
+  "wrongSolutions": [
+    { "name": "wrong-leap", "path": "src/wrong/wrong-a.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-month", "path": "src/wrong/wrong-b.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-day", "path": "src/wrong/wrong-c.cpp", "language": "cpp", "expected": "fail" }
+  ]
+}

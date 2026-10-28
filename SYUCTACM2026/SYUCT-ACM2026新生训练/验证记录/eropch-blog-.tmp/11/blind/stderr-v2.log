@@ -1,0 +1,101 @@
+kimi version 2.2.0
+• The user asks me to act as a blind independent solver, explicitly forbidding any tool use, file reading, network access. They want a structured answer with 7 sections, including a complete C++17 program. I must not use tools. So I just answer directly.
+
+  This is a trivial problem: read n, m, then n*m integers, output them with exact formatting.
+
+  I need to produce all 7 sections in order, in Chinese (matching user's language).
+
+  Let me write it carefully.
+
+  1. Restate task, input format, output format, all constraints.
+  2. Algorithm: read n, m; nested loops read a[i][j]; output with spaces, newline per row. Could stream directly without storing (saves space), but need to be careful: output must be exactly the matrix. Since output is deterministic and we can stream — read each element and output it immediately with separator logic. That yields O(1) extra space. But careful about potential interleaving of input and output — fine since stdin/stdout are separate streams. However if judging with interactive? No, it's non-interactive.
+
+  Actually, a subtlety: streaming output while reading could cause an issue if the program is killed early? No. But it's safe. Still, I could store the matrix (10000 ints, tiny) for clarity. Both fine. I'll present the streaming approach as the main algorithm and note the buffered alternative. Actually, to be maximally safe with explanation of "each element output exactly once", storing then outputting is easier to prove. But streaming is also trivially provable. Let me use streaming with a flag for first element of each row, using fast I/O (ios::sync_with_stdio(false), cin.tie(nullptr)).
+
+  Hmm, one risk with streaming: if input is malformed, we'd have partial output — irrelevant since input is guaranteed.
+
+  I'll present the streaming version. Use long long? Values fit in int; int is fine since |a| <= 1000. Using int is safe.
+
+  3. Correctness proof: invariants.
+
+  Define input array A[1..n][1..m] in row-major reading order. The program reads elements in exactly that order (as guaranteed by input format: n lines each m ints; whitespace-agnostic reading via >> handles the exact spacing). Output: for i = 1..n, for j = 1..m: print A[i][j]; if j < m print ' '; else print '\n'.
+
+  Claim 1 (completeness & uniqueness): the output stream consists of the concatenation over (i,j) in lexicographic row-major order of token(A[i][j]) followed by separator. Each pair (i,j) appears exactly once in the loop, so each element is output exactly once; no element skipped, no element repeated.
+
+  Claim 2 (position): loop order is row-major, so the k-th output token is A[i][j] with i,j determined by k = (i-1)m + j; hence position preserved.
+
+  Claim 3 (value & sign): `cout << a` for int outputs the decimal representation per the standard, with '-' for negative values, and no leading '+', no leading zeros; the value equals the read integer since >> parses the same decimal representation back exactly (no overflow since |a| ≤ 1000 < 2^31).
+
+  Claim 4 (format): exactly one space between adjacent tokens in a row because separator is printed once after every token except the last in its row; no trailing space because when j == m we print '\n' instead of ' '; each of the n rows terminated by '\n' including last; nothing else is printed (no n, m, no extra text). Total output = n lines.
+
+  Also mention total byte-level determinism: the program has no branching depending on data other than j == m and i == n... actually only j vs m.
+
+  4. Complexity: O(nm) time, O(1) extra space (streaming). Note the input itself is O(nm) but not stored.
+
+  5. Edge cases: n=1 m=1; single row; single column; negatives; zero; duplicates; 1000/-1000; max size 100x100 = 10000 elements; also note -0 not possible; value 0 printed as "0"; ensure no trailing space after last element of each row; last row newline.
+
+  Maybe provide a table of small tests.
+
+  6. C++17 code:
+
+  ```cpp
+  #include <iostream>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      int n, m;
+      if (!(std::cin >> n >> m)) return 0;
+      for (int i = 0; i < n; ++i) {
+          for (int j = 0; j < m; ++j) {
+              int a;
+              std::cin >> a;
+              std::cout << a;
+              if (j + 1 < m) std::cout << ' ';
+              else std::cout << '\n';
+          }
+      }
+      return 0;
+  }
+  ```
+
+  That's it. Compile: g++ -std=gnu++17 -O2 -o main main.cpp.
+
+  Should I flush? At program exit cout flushes. Fine.
+
+  Note: `if (!(cin >> n >> m)) return 0;` — extra safety, doesn't change behavior on valid input.
+
+  7. Assumptions/risks: 
+  - Assumes input matches the stated format exactly (whitespace-separated integers); reading with >> is whitespace-agnostic so it tolerates \r\n (CRLF) — good.
+  - If the judge's input had Windows line endings, output uses '\n' only (no CR), which is standard for such judges; note as a minor risk only if the judge required CRLF (extremely unusual, and the statement says newline).
+  - Streaming output while reading assumes no interactivity constraints — false for standard judges.
+  - No overflow; int sufficient.
+  - "无法证明之处": none within the stated model.
+  - Note: language standard gnu++17, only <iostream>.
+
+  Let me write it in Chinese, well-structured but not too deeply nested (it's a chat, headings fine). The user asked for 7 numbered sections, so I'll use numbered headings.
+
+  I should keep it reasonably concise but complete. Let me write.
+
+  For the proof, I want to be rigorous and "闭合" (closed/complete). Let me formalize:
+
+  Let the input token sequence after the first line be t_1, t_2, ..., t_{nm}, where t_{(i-1)m+j} = a_{i,j} (guaranteed by input format). Loop reads exactly nm tokens in this order: the read at iteration (i,j) obtains t_{(i-1)m+j}=a_{i,j}.
+
+  Let the output byte stream be S. For each (i,j), the program writes the token s_{(i-1)m+j} = decimal(a_{i,j}), then writes the byte ' ' if j<m, else '\n'. Hence S = s_1 b_1 s_2 b_2 ... s_{nm} b_{nm} where b_k = ' ' if k mod m != 0 else '\n'.
+
+  Then: number of tokens = nm, and the k-th token = a corresponding element; thus each printed exactly once, in order.
+
+  Number of '\n' = number of k with k ≡ 0 mod m = n, in the right positions: after every m-th token, so exactly n lines each containing exactly m tokens.
+
+  Spaces: exactly m-1 per row, all between tokens, no leading (first token of row has nothing before it, since previous byte is '\n' or nothing) nor trailing space (byte after last token in row is '\n').
+
+  Value: decimal(a) with sign.
+
+  Byte-level uniqueness: S determined solely by input.
+
+  Good. Also mention output size: at most ~10000 tokens × ~6 bytes ≈ 60 KB, well within time.
+
+  Write the answer now.
+
+To resume this session: kimi -r session_24cb18e1-1b8a-4f3e-82fb-c039b3a4390b

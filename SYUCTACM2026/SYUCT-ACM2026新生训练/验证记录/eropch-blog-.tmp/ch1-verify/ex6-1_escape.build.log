@@ -1,0 +1,4 @@
+ex6-1_escape.cpp: In function 'int main()':
+ex6-1_escape.cpp:8:13: error: incomplete universal character name \U
+    8 |     cout << "C:\Users\name\n";
+      |             ^~~~~~~~~~~~~~~~~

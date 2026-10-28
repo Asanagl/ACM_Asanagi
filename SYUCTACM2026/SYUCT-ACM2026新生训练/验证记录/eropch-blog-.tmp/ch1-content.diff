@@ -1,0 +1,1280 @@
+--- previous
++++ current
+@@ -1,3 +1,2 @@
+-WARNING
+ 第 1 章 变量、数据类型与基本输入输出
+ 本文是《XCPCer 从零开始的 C/C++ 入门指南（算法竞赛向）》系列第 1 章，系列训练大纲见
+@@ -37,6 +36,5 @@
+ 关闭已经打开的 VS Code 和终端窗口
+ ，重新打开一个 PowerShell，依次输入：
+-g++
+---version
++g++ --version
+ where.exe g++
+ 第一条会显示 g++ 的版本号，第二条会显示编译器的位置。本文验证时使用的是 MinGW-Builds g++ 16.1.0，路径为
+@@ -86,22 +84,9 @@
+ ：
+ {
+-"code-runner.runInTerminal"
+-:
+-true
+-,
+-"code-runner.saveFileBeforeRun"
+-:
+-true
+-,
+-"code-runner.ignoreSelection"
+-:
+-true
+-,
+-"code-runner.executorMap"
+-:
+-{
+-"cpp"
+-:
+-"cd \"$dir\" ; g++ -std=c++17 -O2 -Wall \"$fileName\" -o \"$fileNameWithoutExt.exe\" ; if ($?) { & \".\\$fileNameWithoutExt.exe\" }"
++"code-runner.runInTerminal": true,
++"code-runner.saveFileBeforeRun": true,
++"code-runner.ignoreSelection": true,
++"code-runner.executorMap": {
++"cpp": "cd \"$dir\" ; g++ -std=c++17 -O2 -Wall \"$fileName\" -o \"$fileNameWithoutExt.exe\" ; if ($?) { & \".\\$fileNameWithoutExt.exe\" }"
+ }
+ }
+@@ -139,21 +124,10 @@
+ 所有的标点都是英文半角
+ ）：
+-#
+-include
+-<iostream>
+-// 示例 1-1：Hello World
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-cout <<
+-"Hello, World!\n"
+-;
+-return
+-0
+-;
++#include <iostream> // 示例 1-1：Hello World
++using namespace std;
++int main()
++{
++cout << "Hello, World!\n";
++return 0;
+ }
+ 保存后，点击编辑器右上角的三角形
+@@ -272,8 +246,8 @@
+ 类型选错是算法竞赛中最隐蔽的错误来源之一：算法完全正确，仅仅因为变量类型装不下答案，评测结果就是 Wrong Answer（WA，表示程序输出与标准答案不符）。更常见的情况是：程序在本地小数据上一切正常，一提交就在大数据上出错。
+ 所以本章的主线只有两件事：
+-搞懂几种基本类型的脾气
++搞懂几种基本类型
+ ，以及
+ 学会让程序读入数据、输出答案
+-。这是之后每一次训练的地基。
++。
+ 1.2 变量的声明、初始化与命名
+ 1.2.1 声明
+@@ -281,8 +255,6 @@
+ 类型 变量名;
+ 示例 2-1：一次声明多个变量。
+-int
+-a, b, c;
+-int
+-totalScore, solvedCount, wrongAnswers;
++int a, b, c;
++int totalScore, solvedCount, wrongAnswers;
+ 一条语句可以声明同类型的多个变量，以逗号分隔。算法竞赛代码中常见
+ int a, b, c;
+@@ -292,21 +264,7 @@
+ 1.2.2 初始化
+ 声明的同时给定初值称为初始化，常见写法有三种：
+-int
+-a =
+-0
+-;
+-// 赋值式，我们最常用的是这一种
+-int
+-b
+-(
+-0
+-)
+-;
+-// 括号式
+-int
+-c{
+-0
+-};
+-// 花括号式（C++11）
++int a = 0; // 赋值式，我们最常用的是这一种
++int b(0); // 括号式
++int c{0}; // 花括号式（C++11）
+ 必须养成的习惯：定义变量后立即初始化。
+ 函数内部的局部变量如果不初始化，它的值不是 0，而是一块
+@@ -314,24 +272,11 @@
+ ——使用它是未定义行为，程序不会报错，但结果不可预测。
+ 示例 2-2：未初始化局部变量的错误示范。
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-int
+-x;
+-// 声明了，但没有初始化
+-cout << x <<
+-'\n'
+-;
+-// 输出的是垃圾值，不可预测
+-return
+-0
+-;
++#include <iostream>
++using namespace std;
++int main()
++{
++int x; // 声明了，但没有初始化
++cout << x << '\n'; // 输出的是垃圾值，不可预测
++return 0;
+ }
+ 用
+@@ -497,43 +442,15 @@
+ 存储就可能开始丢精度。
+ 示例 3-1：float 存储大整数丢精度。
+-#
+-include
+-<iomanip>
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-float
+-f =
+-123456789.0f
+-;
+-// 后缀 f 表示 float 字面量
+-double
+-d =
+-123456789.0
+-;
+-cout << fixed <<
+-setprecision
+-(
+-0
+-);
+-// 按整数格式输出（用法见 1.6.5）
+-cout << f <<
+-'\n'
+-;
+-// 输出 123456792，末三位已经不是原数
+-cout << d <<
+-'\n'
+-;
+-// 输出 123456789，分毫不差
+-return
+-0
+-;
++#include <iomanip>
++#include <iostream>
++using namespace std;
++int main()
++{
++float f = 123456789.0f; // 后缀 f 表示 float 字面量
++double d = 123456789.0;
++cout << fixed << setprecision(0); // 按整数格式输出（用法见 1.6.5）
++cout << f << '\n'; // 输出 123456792，末三位已经不是原数
++cout << d << '\n'; // 输出 123456789，分毫不差
++return 0;
+ }
+ 运行结果：
+@@ -597,47 +514,14 @@
+ 。
+ 示例 3-2：字符与它的编码可以互相换算。
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-char
+-c =
+-'A'
+-;
+-cout << c <<
+-'\n'
+-;
+-// 输出 A
+-cout << c +
+-1
+-<<
+-'\n'
+-;
+-// 输出 66：字符先转成编码 65，再加 1
+-cout <<
+-char
+-(c +
+-1
+-) <<
+-'\n'
+-;
+-// 输出 B：66 转回字符
+-cout <<
+-'C'
+--
+-'A'
+-<<
+-'\n'
+-;
+-// 输出 2：两个字符编码相减
+-return
+-0
+-;
++#include <iostream>
++using namespace std;
++int main()
++{
++char c = 'A';
++cout << c << '\n'; // 输出 A
++cout << c + 1 << '\n'; // 输出 66：字符先转成编码 65，再加 1
++cout << char(c + 1) << '\n'; // 输出 B：66 转回字符
++cout << 'C' - 'A' << '\n'; // 输出 2：两个字符编码相减
++return 0;
+ }
+ 逐行演算：
+@@ -662,5 +546,5 @@
+ B
+ 2
+-“字符减字符得到距离”是本章配套练习一定会用到的技巧，第 2 章还会用它处理字母表问题。书写字符字面量用单引号
++“字符减字符得到距离”是oj习题中一定会用到的技巧，第 2 章还会用它处理字母表问题。书写字符字面量用单引号
+ 'A'
+ ；双引号
+@@ -687,44 +571,17 @@
+ 。
+ 示例 3-3：bool 与整数的互转规则。
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-bool
+-a =
+-true
+-;
+-// 显式的真
+-bool
+-b =
+-42
+-;
+-// 非零整数 → true
+-bool
+-c =
+-0
+-;
+-// 只有 0 是 false
+-cout << a <<
+-' '
+-<< b <<
+-' '
+-<< c <<
+-'\n'
+-;
+-// 输出 1 1 0
+-return
+-0
+-;
++#include <iostream>
++using namespace std;
++int main()
++{
++bool a = true; // 显式的真
++bool b = 42; // 非零整数 → true
++bool c = 0; // 只有 0 是 false
++cout << a << ' ' << b << ' ' << c << '\n'; // 输出 1 1 0
++return 0;
+ }
+ 算法竞赛中
+ bool
+-最常见的用途是标记（visited、flag），配合数组使用将在第 3 章大量出现。
++最常见的用途是标记（visited、flag），常常配合数组使用。
+ 1.4 溢出：合理选择数据范围的原因
+ 1.4.1 什么是溢出
+@@ -744,34 +601,13 @@
+ long long
+ 里完成。
+-#
+-include
+-<climits>
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-int
+-x = INT_MAX;
+-// int 能表示的最大值 2147483647
+-long
+-long
+-safe =
+-1LL
+-* x +
+-1
+-;
+-// 先转成 long long 再加
+-cout << safe <<
+-'\n'
+-;
+-return
+-0
+-;
++#include <climits>
++#include <iostream>
++using namespace std;
++int main()
++{
++int x = INT_MAX; // int 能表示的最大值 2147483647
++long long safe = 1LL * x + 1; // 先转成 long long 再加
++cout << safe << '\n';
++return 0;
+ }
+ 演算：
+@@ -802,39 +638,14 @@
+ long long
+ 仍然溢出。
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-int
+-a =
+-100000
+-, b =
+-100000
+-;
+-long
+-long
+-wrong = a * b;
+-// 危险：乘法先在 int 里做
+-long
+-long
+-right =
+-1LL
+-* a * b;
+-// 正确：先提升成 long long 再乘
+-cout << wrong <<
+-'\n'
+-;
+-cout << right <<
+-'\n'
+-;
+-return
+-0
+-;
++#include <iostream>
++using namespace std;
++int main()
++{
++int a = 100000, b = 100000;
++long long wrong = a * b; // 危险：乘法先在 int 里做
++long long right = 1LL * a * b; // 正确：先提升成 long long 再乘
++cout << wrong << '\n';
++cout << right << '\n';
++return 0;
+ }
+ 运行结果（g++
+@@ -843,5 +654,5 @@
+ 1410065408
+ 10000000000
+-逐步演算这个问题出在哪：
++我们来逐步模拟一下：
+ a * b
+ 的两个操作数都是
+@@ -871,16 +682,10 @@
+ 10000000000
+ 被完整保留。
+-一句话总结：
++总结：
+ 表达式的类型由参与运算的操作数决定，与赋值给谁无关。
+ 防止中间溢出的唯一办法，是在运算发生之前完成类型提升。
+-竞赛中有一条朴素而有效的经验法则：看数据范围时，
+-拿不准就先用
+-long long
+-守住答案
+-。但这不等于“所有变量一律
+-long long
+-”——循环下标、计数等明确不超界的量用
+-int
+-即可；答案或中间结果可能超界时，再升级类型并确保运算开始前已经提升。
++算法竞赛中有一条朴素而有效的经验：看数据范围时，**拿不准就用
++long long
++**。
+ 1.4.3 数据范围 → 类型选择
+ 比赛中看题的第一步永远是
+@@ -971,142 +776,32 @@
+ 1.5.2 强制转换
+ 需要主动转换类型时，使用强制转换运算符，有两种等价写法：
+-(
+-int
+-)x
+-// C 风格
+-static_cast
+-<
+-int
+->(x)
+-// C++ 风格
++(int)x // C 风格 （最常用同时最显然）
++static_cast<int>(x) // C++ 风格 （不推荐在算法竞赛中使用）
+ 示例 5-1：两种写法效果相同。
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-cout <<
+-static_cast
+-<
+-int
+->(
+-3.9
+-) <<
+-' '
+-<< (
+-int
+-)
+-3.9
+-<<
+-'\n'
+-;
+-// 输出 3 3
+-cout <<
+-static_cast
+-<
+-double
+->(
+-7
+-) /
+-2
+-<<
+-'\n'
+-;
+-// 输出 3.5
+-return
+-0
+-;
+-}
+-在本节这种普通数值转换中，两者会得到相同结果，但 C 风格转换能悄悄执行更多种类的转换，检查力度更弱。正式 C++ 代码更推荐
+-static_cast<int>(x)
+-；读旧代码时也要认识
+-(int)x
+-。
++#include <iostream>
++using namespace std;
++int main()
++{
++cout << static_cast<int>(3.9) << ' ' << (int)3.9 << '\n'; // 输出 3 3
++cout << static_cast<double>(7) / 2 << '\n'; // 输出 3.5
++return 0;
++}
++在本节这种普通数值转换中，两者会得到相同结果。大部分情况下请选择C风格的类型转换，这是经验之谈。
+ 1.5.3 三个经典场景
+ 示例 5-2：整数除法、截断与四舍五入。
+-#
+-include
+-<cmath>
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
++#include <cmath>
++#include <iostream>
++using namespace std;
++int main()
+ {
+ // 场景一：整数除法转浮点
+-cout <<
+-7
+-/
+-2
+-<<
+-'\n'
+-;
+-// 输出 3：整数除法直接舍去小数
+-cout <<
+-7.0
+-/
+-2
+-<<
+-'\n'
+-;
+-// 输出 3.5：至少一个操作数是浮点
+-cout << (
+-double
+-)(
+-7
+-/
+-2
+-) <<
+-'\n'
+-;
+-// 输出 3：先算完 7/2=3，再转已经晚了
++cout << 7 / 2 << '\n'; // 输出 3：整数除法直接舍去小数
++cout << 7.0 / 2 << '\n'; // 输出 3.5：至少一个操作数是浮点
++cout << (double)(7 / 2) << '\n'; // 输出 3：先算完 7/2=3，再转已经晚了
+ // 场景二：浮点转整型的截断规则
+-cout << (
+-int
+-)
+-3.9
+-<<
+-' '
+-<< (
+-int
+-)
+--3.9
+-<<
+-'\n'
+-;
+-// 输出 3 -3：向零取整
++cout << (int)3.9 << ' ' << (int)-3.9 << '\n'; // 输出 3 -3：向零取整
+ // 场景三：四舍五入
+-cout <<
+-round
+-(
+-3.4
+-) <<
+-' '
+-<<
+-round
+-(
+-3.5
+-) <<
+-' '
+-<<
+-round
+-(
+--3.5
+-) <<
+-'\n'
+-;
+-// 输出 3 4 -4
+-return
+-0
+-;
++cout << round(3.4) << ' ' << round(3.5) << ' ' << round(-3.5) << '\n'; // 输出 3 4 -4
++return 0;
+ }
+ 三个场景的演算要点：
+@@ -1207,33 +902,14 @@
+ >>
+ 把输入读进变量，一次可以连读多个：
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-int
+-a;
+-long
+-long
+-b;
+-double
+-c;
+-cin >> a >> b >> c;
+-// 依次读入，用空格、换行或 Tab 分隔都可以
+-cout << a <<
+-' '
+-<< b <<
+-' '
+-<< c <<
+-'\n'
+-;
+-return
+-0
+-;
++#include <iostream>
++using namespace std;
++int main()
++{
++int a;
++long long b;
++double c;
++cin >> a >> b >> c; // 依次读入，用空格、换行或 Tab 分隔都可以
++cout << a << ' ' << b << ' ' << c << '\n';
++return 0;
+ }
+ 示例输入与输出：
+@@ -1287,20 +963,7 @@
+ <<
+ 依次拼接要打印的内容，字符串原样输出，变量的值自动替换：
+-int
+-a =
+-7
+-;
+-long
+-long
+-sum =
+-123456789012
+-;
+-cout <<
+-"a = "
+-<< a <<
+-", sum = "
+-<< sum <<
+-"\n"
+-;
++int a = 7;
++long long sum = 123456789012;
++cout << "a = " << a << ", sum = " << sum << "\n";
+ 输出：
+ a = 7, sum = 123456789012
+@@ -1338,29 +1001,13 @@
+ ，否则编译器会把它们当成转义序列的开始，导致格式串解析混乱。
+ 示例 6-1：转义字符的输出效果。
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-cout <<
+-"line1\nline2\n"
+-;
+-cout <<
+-"a\tb\n"
+-;
+-cout <<
+-"C:\\Users\\name\n"
+-;
+-cout <<
+-"She said: \"Hello\"\n"
+-;
+-return
+-0
+-;
++#include <iostream>
++using namespace std;
++int main()
++{
++cout << "line1\nline2\n";
++cout << "a\tb\n";
++cout << "C:\\Users\\name\n";
++cout << "She said: \"Hello\"\n";
++return 0;
+ }
+ 运行结果（第二行中
+@@ -1385,15 +1032,6 @@
+ <iomanip>
+ 同样能做到：
+-printf
+-(
+-"%.2f\n"
+-, x);
+-// C 风格：保留两位小数
+-cout << fixed <<
+-setprecision
+-(
+-2
+-) << x;
+-// C++ 风格：需头文件 <iomanip>
++printf("%.2f\n", x); // C 风格：保留两位小数
++cout << fixed << setprecision(2) << x; // C++ 风格：需头文件 <iomanip>
+ %.2f
+ 按
+@@ -1409,56 +1047,17 @@
+ 。
+ 示例 6-2：两种写法的对照。
+-#
+-include
+-<cstdio>
+-#
+-include
+-<iomanip>
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-double
+-pi =
+-3.1415926
+-;
+-double
+-x =
+-2.5
+-;
+-cout << pi <<
+-'\n'
+-;
+-// 默认 6 位有效数字
+-cout << fixed <<
+-setprecision
+-(
+-2
+-) << pi <<
+-'\n'
+-;
+-// 四舍五入保留两位
+-cout << fixed <<
+-setprecision
+-(
+-2
+-) << x <<
+-'\n'
+-;
+-// 2.5 → 2.50
+-printf
+-(
+-"%.2f\n"
+-, pi);
+-// printf 写法
+-return
+-0
+-;
++#include <cstdio>
++#include <iomanip>
++#include <iostream>
++using namespace std;
++int main()
++{
++double pi = 3.1415926;
++double x = 2.5;
++cout << pi << '\n'; // 默认 6 位有效数字
++cout << fixed << setprecision(2) << pi << '\n'; // 四舍五入保留两位
++cout << fixed << setprecision(2) << x << '\n'; // 2.5 → 2.50
++printf("%.2f\n", pi); // printf 写法
++return 0;
+ }
+ 运行结果：
+@@ -1499,77 +1098,18 @@
+ 设置填充字符。
+ 示例 6-3：时间与定宽编号。
+-#
+-include
+-<cstdio>
+-#
+-include
+-<iomanip>
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-int
+-hour =
+-9
+-, minute =
+-5
+-;
+-printf
+-(
+-"%02d:%02d\n"
+-, hour, minute);
+-// 09:05
+-cout <<
+-setw
+-(
+-2
+-) <<
+-setfill
+-(
+-'0'
+-) << hour <<
+-':'
+-<<
+-setw
+-(
+-2
+-) <<
+-setfill
+-(
+-'0'
+-) << minute <<
+-'\n'
+-;
+-// 09:05
+-int
+-rank =
+-7
+-;
+-printf
+-(
+-"%03d\n"
+-, rank);
+-// 007
+-cout <<
+-setw
+-(
+-3
+-) <<
+-setfill
+-(
+-'0'
+-) << rank <<
+-'\n'
+-;
+-// 007
+-return
+-0
+-;
++#include <cstdio>
++#include <iomanip>
++#include <iostream>
++using namespace std;
++int main()
++{
++int hour = 9, minute = 5;
++printf("%02d:%02d\n", hour, minute); // 09:05
++cout << setw(2) << setfill('0') << hour << ':'
++<< setw(2) << setfill('0') << minute << '\n'; // 09:05
++int rank = 7;
++printf("%03d\n", rank); // 007
++cout << setw(3) << setfill('0') << rank << '\n'; // 007
++return 0;
+ }
+ 运行结果：
+@@ -1666,15 +1206,9 @@
+ ，算法竞赛代码中两种都很常见，都需要掌握。
+ 1.7.2 const 定义常量
+-const
+-int
+-MAXN =
+-100005
+-;
++const int MAXN = 100005;
+ const
+ 定义的常量有明确的类型，遵守普通变量的作用域规则，定义之后不允许再赋值（再赋值会直接编译报错）。它在本质上是一个“只读变量”。
+ 1.7.3 #define 宏定义
+-#
+-define
+-MAXN 100005
++#define MAXN 100005
+ #define
+ 是预处理指令，在编译之前把代码中的名字
+@@ -1684,41 +1218,14 @@
+ ；替换是纯粹的文本操作，因此宏的内容若涉及运算，参与表达式时可能因优先级产生意外。
+ 示例 7-1：const、#define，以及宏的经典陷阱。
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-const
+-int
+-MAXN =
+-100005
+-;
+-#
+-define
+-MOD 1000000007
+-#
+-define
+-A 1 + 2
+-// 反例：内容没有整体加括号
+-int
+-main
+-()
+-{
+-cout << MAXN <<
+-' '
+-<< MOD <<
+-'\n'
+-;
+-// 输出 100005 1000000007
+-cout <<
+-2
+-* A <<
+-'\n'
+-;
+-// 输出 4，而不是 6！
+-return
+-0
+-;
++#include <iostream>
++using namespace std;
++const int MAXN = 100005;
++#define MOD 1000000007
++#define A 1 + 2 // 反例：内容没有整体加括号
++int main()
++{
++cout << MAXN << ' ' << MOD << '\n'; // 输出 100005 1000000007
++cout << 2 * A << '\n'; // 输出 4，而不是 6！
++return 0;
+ }
+ 演算陷阱所在：
+@@ -1742,9 +1249,5 @@
+ 1.7.4 【拓展】眼熟即可：INF = 0x3f3f3f3f
+ 在之后的数组、图论章节里，你会经常看到下面这个常量：
+-const
+-int
+-INF =
+-0x3f3f3f3f
+-;
++const int INF = 0x3f3f3f3f;
+ 它表示“无穷大”，用来标记“还没算出来”或“走不到”。
+ 0x3f3f3f3f
+@@ -1789,51 +1292,18 @@
+ 外层变量——在内层作用域中访问该名字，看到的是内层的值；离开内层后，外层变量恢复可见。
+ 示例 8-1：三层作用域与遮蔽。
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-g =
+-10
+-;
+-// 全局变量
+-int
+-main
+-()
+-{
+-cout << g <<
+-'\n'
+-;
+-// 输出 10：此时只有全局的 g
+-int
+-g =
+-20
+-;
+-// 局部 g 遮蔽了全局 g
+-cout << g <<
+-'\n'
+-;
+-// 输出 20
+-{
+-int
+-g =
+-30
+-;
+-// 块级 g 又遮蔽了局部 g
+-cout << g <<
+-'\n'
+-;
+-// 输出 30
+-}
+-// 块级 g 在这里失效
+-cout << g <<
+-'\n'
+-;
+-// 输出 20：局部 g 恢复可见
+-return
+-0
+-;
++#include <iostream>
++using namespace std;
++int g = 10; // 全局变量
++int main()
++{
++cout << g << '\n'; // 输出 10：此时只有全局的 g
++int g = 20; // 局部 g 遮蔽了全局 g
++cout << g << '\n'; // 输出 20
++{
++int g = 30; // 块级 g 又遮蔽了局部 g
++cout << g << '\n'; // 输出 30
++} // 块级 g 在这里失效
++cout << g << '\n'; // 输出 20：局部 g 恢复可见
++return 0;
+ }
+ 遮蔽规则保证了局部命名的自由，但也容易写出“以为改的是全局、实际改的是局部”的错觉代码。
+@@ -1881,25 +1351,11 @@
+ 错误一（CE）：中文标点混入
+ 示例 9-1：使用了中文分号的代码。
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-int
+-a =
+-1
+-；
+-// ← 这个分号是全角的
+-cout << a <<
+-'\n'
+-;
+-return
+-0
+-;
++#include <iostream>
++using namespace std;
++int main()
++{
++int a = 1； // ← 这个分号是全角的
++cout << a << '\n';
++return 0;
+ }
+ 现象
+@@ -1933,27 +1389,11 @@
+ &
+ 的代码。
+-#
+-include
+-<cstdio>
+-int
+-main
+-()
+-{
+-int
+-a =
+-0
+-;
+-scanf
+-(
+-"%d"
+-, a);
+-// 漏了 &：把 a 的值当成了地址
+-printf
+-(
+-"%d\n"
+-, a);
+-return
+-0
+-;
++#include <cstdio>
++int main()
++{
++int a = 0;
++scanf("%d", a); // 漏了 &：把 a 的值当成了地址
++printf("%d\n", a);
++return 0;
+ }
+ 现象
+@@ -1989,36 +1429,16 @@
+ int
+ 的代码。
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-int
+-n;
++#include <iostream>
++using namespace std;
++int main()
++{
++int n;
+ cin >> n;
+-int
+-sum =
+-0
+-;
+-for
+-(
+-int
+-i =
+-1
+-; i <= n; i++) {
+-sum += i + i * i;
+-// i*i 与累加都可能超出 int 的范围
+-}
+-cout << sum <<
+-'\n'
+-;
+-return
+-0
+-;
++int sum = 0;
++for (int i = 1; i <= n; i++) {
++sum += i + i * i; // i*i 与累加都可能超出 int 的范围
++}
++cout << sum << '\n';
++return 0;
+ }
+ 现象
+@@ -2128,11 +1548,8 @@
+ 本次训练题目已发布在
+ SYUCTOJ：2026 SYUCTACM 新生训练 第一次
+-，请注册账号后加入比赛。题单中的题目按
+-基础 / 拓展
+-分级（另有挑战题，本次不要求），
++，请注册账号后加入比赛。
+ 先读数据范围，再选类型，最后写代码
+ 。
+-【基础练习】（必做）
+-对应题单中标注为“基础”的题目，覆盖本章主线。交题之前用这张表自查——每道题至少用到其中一行：
++【基础练习】
+ 需要的技能
+ 对应小节
+@@ -2179,105 +1596,2 @@
+ ）
+ 1.4
+-题单中的 A 题「逐级加训」（求
+-1 + 2 + ... + n
+-与
+-1² + 2² + ... + n²
+-的总和）是本章的综合考题：输入只有 10⁶，但
+-i*i
+-最高 10¹²、答案约 3.3×10¹⁷，
+-int
+-必炸——完整解法见下文示例 10-1。
+-【拓展练习】（选做）
+-对应题单中标注为“拓展”的题目，学有余力再挑战：
+-尝试把基础题的
+-cin
+-/
+-cout
+-改写为
+-scanf
+-/
+-printf
+-版本，体会两套工具的差异（格式符速查见 1.6.7）；
+-计算并输出
+-1.0 / 3.0
+-保留 3、6、9 位小数的结果，观察最后一位的取舍，想想为什么（浮点误差的成因与处理见第 2 章 2.1.9）；
+-挑战题涉及尚未学习的知识，本次不要求完成，有兴趣可以先收藏。
+-训练中会对题目逐题讲评。下次训练前，请确保基础练习全部 AC；遇到 WA 时，先回头查数据范围。
+-示例 10-1：本章综合——A 题「逐级加训」完整程序
+-作为本章的收尾，把 1.2～1.6 的所有知识串成一个真正能交的程序。题目：读入
+-n
+-，求
+-1 + 2 + ... + n
+-与
+-1² + 2² + ... + n²
+-的总和（即
+-sum(i + i*i)
+-）。
+-#
+-include
+-<iostream>
+-using
+-namespace
+-std;
+-int
+-main
+-()
+-{
+-long
+-long
+-n;
+-cin >> n;
+-// 读入等级数
+-long
+-long
+-sum =
+-0
+-;
+-for
+-(
+-long
+-long
+-i =
+-1
+-; i <= n; i++) {
+-sum += i + i * i;
+-// i 是 long long，乘法与累加全程不溢出
+-}
+-cout << sum <<
+-'\n'
+-;
+-// 输出答案
+-return
+-0
+-;
+-}
+-以样例
+-n = 3
+-逐步演算：
+-循环到
+-i
+-i + i*i
+-sum
+-变化
+-第 1 次
+-1
+-1 + 1 = 2
+-0 → 2
+-第 2 次
+-2
+-2 + 4 = 6
+-2 → 8
+-第 3 次
+-3
+-3 + 9 = 12
+-8 → 20
+-输出
+-20
+-，与样例一致。再用大数验证：
+-n = 1000000
+-时输出
+-333334333334000000
+-——全程
+-long long
+-，没有一步溢出。这就是本章想让你养成的习惯：
+-读题先算最大值，类型一次选对。

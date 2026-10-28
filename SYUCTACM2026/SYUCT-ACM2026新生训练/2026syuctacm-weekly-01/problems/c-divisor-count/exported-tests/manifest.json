@@ -1,0 +1,76 @@
+{
+  "slug": "c-divisor-count",
+  "title": "约数清点",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-16 13:22:28 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-01\\problems\\c-divisor-count",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-01\\problems\\c-divisor-count\\exported-tests",
+  "caseCount": 8,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample",
+      "seed": "1",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "one-1",
+      "type": "one",
+      "seed": "2",
+      "group": "secret",
+      "input": "secret\\one-1.in",
+      "answer": "secret\\one-1.ans"
+    },
+    {
+      "name": "square-1",
+      "type": "square",
+      "seed": "3",
+      "group": "secret",
+      "input": "secret\\square-1.in",
+      "answer": "secret\\square-1.ans"
+    },
+    {
+      "name": "prime-1",
+      "type": "prime",
+      "seed": "4",
+      "group": "secret",
+      "input": "secret\\prime-1.in",
+      "answer": "secret\\prime-1.ans"
+    },
+    {
+      "name": "highly-composite-1",
+      "type": "highly-composite",
+      "seed": "5",
+      "group": "secret",
+      "input": "secret\\highly-composite-1.in",
+      "answer": "secret\\highly-composite-1.ans"
+    },
+    {
+      "name": "random-1",
+      "type": "random",
+      "seed": "6",
+      "group": "secret",
+      "input": "secret\\random-1.in",
+      "answer": "secret\\random-1.ans"
+    },
+    {
+      "name": "random-2",
+      "type": "random",
+      "seed": "7",
+      "group": "secret",
+      "input": "secret\\random-2.in",
+      "answer": "secret\\random-2.ans"
+    },
+    {
+      "name": "max-1",
+      "type": "max",
+      "seed": "8",
+      "group": "secret",
+      "input": "secret\\max-1.in",
+      "answer": "secret\\max-1.ans"
+    }
+  ]
+}

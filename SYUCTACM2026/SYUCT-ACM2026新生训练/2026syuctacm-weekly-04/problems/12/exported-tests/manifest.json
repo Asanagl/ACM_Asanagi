@@ -1,0 +1,332 @@
+{
+  "slug": "04-12",
+  "title": "矩阵加法",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-26 14:35:01 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\12",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\12\\exported-tests",
+  "caseCount": 40,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample",
+      "seed": "1",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "min-1",
+      "type": "min",
+      "seed": "2",
+      "group": "secret",
+      "input": "secret\\min-1.in",
+      "answer": "secret\\min-1.ans"
+    },
+    {
+      "name": "row-1",
+      "type": "row",
+      "seed": "3",
+      "group": "secret",
+      "input": "secret\\row-1.in",
+      "answer": "secret\\row-1.ans"
+    },
+    {
+      "name": "col-1",
+      "type": "col",
+      "seed": "4",
+      "group": "secret",
+      "input": "secret\\col-1.in",
+      "answer": "secret\\col-1.ans"
+    },
+    {
+      "name": "thin-wide-1",
+      "type": "thin-wide",
+      "seed": "5",
+      "group": "secret",
+      "input": "secret\\thin-wide-1.in",
+      "answer": "secret\\thin-wide-1.ans"
+    },
+    {
+      "name": "thin-tall-1",
+      "type": "thin-tall",
+      "seed": "6",
+      "group": "secret",
+      "input": "secret\\thin-tall-1.in",
+      "answer": "secret\\thin-tall-1.ans"
+    },
+    {
+      "name": "rect-small-1",
+      "type": "rect-small",
+      "seed": "7",
+      "group": "secret",
+      "input": "secret\\rect-small-1.in",
+      "answer": "secret\\rect-small-1.ans"
+    },
+    {
+      "name": "rect-small-t-1",
+      "type": "rect-small-t",
+      "seed": "8",
+      "group": "secret",
+      "input": "secret\\rect-small-t-1.in",
+      "answer": "secret\\rect-small-t-1.ans"
+    },
+    {
+      "name": "square-small-1",
+      "type": "square-small",
+      "seed": "9",
+      "group": "secret",
+      "input": "secret\\square-small-1.in",
+      "answer": "secret\\square-small-1.ans"
+    },
+    {
+      "name": "zero-1",
+      "type": "zero",
+      "seed": "10",
+      "group": "secret",
+      "input": "secret\\zero-1.in",
+      "answer": "secret\\zero-1.ans"
+    },
+    {
+      "name": "const-pos-1",
+      "type": "const-pos",
+      "seed": "11",
+      "group": "secret",
+      "input": "secret\\const-pos-1.in",
+      "answer": "secret\\const-pos-1.ans"
+    },
+    {
+      "name": "const-neg-1",
+      "type": "const-neg",
+      "seed": "12",
+      "group": "secret",
+      "input": "secret\\const-neg-1.in",
+      "answer": "secret\\const-neg-1.ans"
+    },
+    {
+      "name": "cancel-1",
+      "type": "cancel",
+      "seed": "13",
+      "group": "secret",
+      "input": "secret\\cancel-1.in",
+      "answer": "secret\\cancel-1.ans"
+    },
+    {
+      "name": "dup-pool-1",
+      "type": "dup-pool",
+      "seed": "14",
+      "group": "secret",
+      "input": "secret\\dup-pool-1.in",
+      "answer": "secret\\dup-pool-1.ans"
+    },
+    {
+      "name": "dup-const-1",
+      "type": "dup-const",
+      "seed": "15",
+      "group": "secret",
+      "input": "secret\\dup-const-1.in",
+      "answer": "secret\\dup-const-1.ans"
+    },
+    {
+      "name": "mixed-sign-1",
+      "type": "mixed-sign",
+      "seed": "16",
+      "group": "secret",
+      "input": "secret\\mixed-sign-1.in",
+      "answer": "secret\\mixed-sign-1.ans"
+    },
+    {
+      "name": "directed-1",
+      "type": "directed",
+      "seed": "17",
+      "group": "secret",
+      "input": "secret\\directed-1.in",
+      "answer": "secret\\directed-1.ans"
+    },
+    {
+      "name": "directed-t-1",
+      "type": "directed-t",
+      "seed": "18",
+      "group": "secret",
+      "input": "secret\\directed-t-1.in",
+      "answer": "secret\\directed-t-1.ans"
+    },
+    {
+      "name": "small-random-1",
+      "type": "small-random",
+      "seed": "21",
+      "group": "secret",
+      "input": "secret\\small-random-1.in",
+      "answer": "secret\\small-random-1.ans"
+    },
+    {
+      "name": "small-random-2",
+      "type": "small-random",
+      "seed": "22",
+      "group": "secret",
+      "input": "secret\\small-random-2.in",
+      "answer": "secret\\small-random-2.ans"
+    },
+    {
+      "name": "small-random-3",
+      "type": "small-random",
+      "seed": "23",
+      "group": "secret",
+      "input": "secret\\small-random-3.in",
+      "answer": "secret\\small-random-3.ans"
+    },
+    {
+      "name": "small-random-4",
+      "type": "small-random",
+      "seed": "24",
+      "group": "secret",
+      "input": "secret\\small-random-4.in",
+      "answer": "secret\\small-random-4.ans"
+    },
+    {
+      "name": "small-random-5",
+      "type": "small-random",
+      "seed": "25",
+      "group": "secret",
+      "input": "secret\\small-random-5.in",
+      "answer": "secret\\small-random-5.ans"
+    },
+    {
+      "name": "small-random-6",
+      "type": "small-random",
+      "seed": "26",
+      "group": "secret",
+      "input": "secret\\small-random-6.in",
+      "answer": "secret\\small-random-6.ans"
+    },
+    {
+      "name": "random-1",
+      "type": "random",
+      "seed": "27",
+      "group": "secret",
+      "input": "secret\\random-1.in",
+      "answer": "secret\\random-1.ans"
+    },
+    {
+      "name": "random-2",
+      "type": "random",
+      "seed": "28",
+      "group": "secret",
+      "input": "secret\\random-2.in",
+      "answer": "secret\\random-2.ans"
+    },
+    {
+      "name": "random-3",
+      "type": "random",
+      "seed": "29",
+      "group": "secret",
+      "input": "secret\\random-3.in",
+      "answer": "secret\\random-3.ans"
+    },
+    {
+      "name": "random-4",
+      "type": "random",
+      "seed": "30",
+      "group": "secret",
+      "input": "secret\\random-4.in",
+      "answer": "secret\\random-4.ans"
+    },
+    {
+      "name": "random-5",
+      "type": "random",
+      "seed": "31",
+      "group": "secret",
+      "input": "secret\\random-5.in",
+      "answer": "secret\\random-5.ans"
+    },
+    {
+      "name": "random-6",
+      "type": "random",
+      "seed": "32",
+      "group": "secret",
+      "input": "secret\\random-6.in",
+      "answer": "secret\\random-6.ans"
+    },
+    {
+      "name": "near-max-wide-1",
+      "type": "near-max-wide",
+      "seed": "33",
+      "group": "secret",
+      "input": "secret\\near-max-wide-1.in",
+      "answer": "secret\\near-max-wide-1.ans"
+    },
+    {
+      "name": "near-max-tall-1",
+      "type": "near-max-tall",
+      "seed": "34",
+      "group": "secret",
+      "input": "secret\\near-max-tall-1.in",
+      "answer": "secret\\near-max-tall-1.ans"
+    },
+    {
+      "name": "near-max-both-1",
+      "type": "near-max-both",
+      "seed": "35",
+      "group": "secret",
+      "input": "secret\\near-max-both-1.in",
+      "answer": "secret\\near-max-both-1.ans"
+    },
+    {
+      "name": "max-pos-1",
+      "type": "max-pos",
+      "seed": "36",
+      "group": "secret",
+      "input": "secret\\max-pos-1.in",
+      "answer": "secret\\max-pos-1.ans"
+    },
+    {
+      "name": "max-neg-1",
+      "type": "max-neg",
+      "seed": "37",
+      "group": "secret",
+      "input": "secret\\max-neg-1.in",
+      "answer": "secret\\max-neg-1.ans"
+    },
+    {
+      "name": "max-random-1",
+      "type": "max-random",
+      "seed": "38",
+      "group": "secret",
+      "input": "secret\\max-random-1.in",
+      "answer": "secret\\max-random-1.ans"
+    },
+    {
+      "name": "max-random-2",
+      "type": "max-random",
+      "seed": "39",
+      "group": "secret",
+      "input": "secret\\max-random-2.in",
+      "answer": "secret\\max-random-2.ans"
+    },
+    {
+      "name": "max-mixed-1",
+      "type": "max-mixed",
+      "seed": "40",
+      "group": "secret",
+      "input": "secret\\max-mixed-1.in",
+      "answer": "secret\\max-mixed-1.ans"
+    },
+    {
+      "name": "max-mixed-2",
+      "type": "max-mixed",
+      "seed": "41",
+      "group": "secret",
+      "input": "secret\\max-mixed-2.in",
+      "answer": "secret\\max-mixed-2.ans"
+    },
+    {
+      "name": "square-max-1",
+      "type": "square-max",
+      "seed": "42",
+      "group": "secret",
+      "input": "secret\\square-max-1.in",
+      "answer": "secret\\square-max-1.ans"
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "slug": "04-07",
+  "title": "回文判断",
+  "interactive": false,
+  "timeLimitMs": 1000,
+  "memoryLimitMb": 256,
+  "standard": "gnu++17",
+  "statement": "docs/statement.md",
+  "tutorial": "docs/tutorial.md",
+  "validator": "src/validator/validator.cpp",
+  "generator": {
+    "path": "src/generator/generator.cpp",
+    "cases": [
+      { "name": "sample-1", "type": "sample-1", "seed": 1, "group": "sample" },
+      { "name": "sample-2", "type": "sample-2", "seed": 2, "group": "sample" },
+      { "name": "sample-3", "type": "sample-3", "seed": 3, "group": "sample" },
+      { "name": "sample-4", "type": "sample-4", "seed": 4, "group": "sample" },
+      { "name": "sample-5", "type": "sample-5", "seed": 5, "group": "sample" },
+
+      { "name": "min-a", "type": "min-a", "seed": 11, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "min-z", "type": "min-z", "seed": 12, "group": "secret" },
+      { "name": "len2-yes-1", "type": "len2-yes", "seed": 13, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "len2-no-1", "type": "len2-no", "seed": 15, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "len2-no-2", "type": "len2-no", "seed": 16, "group": "secret" },
+
+      { "name": "odd-pal-1", "type": "odd-pal", "seed": 21, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "odd-pal-2", "type": "odd-pal", "seed": 22, "group": "secret" },
+      { "name": "odd-pal-3", "type": "odd-pal", "seed": 23, "group": "secret" },
+      { "name": "odd-pal-center-z", "type": "odd-pal-center-z", "seed": 24, "group": "secret" },
+      { "name": "even-pal-1", "type": "even-pal", "seed": 25, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "even-pal-2", "type": "even-pal", "seed": 26, "group": "secret" },
+      { "name": "even-pal-3", "type": "even-pal", "seed": 27, "group": "secret" },
+
+      { "name": "odd-inner-no-1", "type": "odd-inner-no", "seed": 31, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "odd-inner-no-2", "type": "odd-inner-no", "seed": 32, "group": "secret" },
+      { "name": "even-inner-no-1", "type": "even-inner-no", "seed": 33, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "even-inner-no-2", "type": "even-inner-no", "seed": 34, "group": "secret" },
+      { "name": "even-inner-no-3", "type": "even-inner-no", "seed": 35, "group": "secret" },
+      { "name": "odd-outer-no-1", "type": "odd-outer-no", "seed": 36, "group": "secret" },
+      { "name": "even-outer-no-1", "type": "even-outer-no", "seed": 37, "group": "secret" },
+      { "name": "border-no-1", "type": "border-no", "seed": 38, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "border-no-2", "type": "border-no", "seed": 39, "group": "secret" },
+      { "name": "mid-no-1", "type": "mid-no", "seed": 40, "group": "secret" },
+      { "name": "mid-no-2", "type": "mid-no", "seed": 41, "group": "secret" },
+
+      { "name": "same-1", "type": "same", "seed": 51, "group": "secret" },
+      { "name": "same-2", "type": "same", "seed": 52, "group": "secret" },
+      { "name": "same-max", "type": "same-max", "seed": 53, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "alt-1", "type": "alt", "seed": 54, "group": "secret" },
+      { "name": "alt-2", "type": "alt", "seed": 55, "group": "secret" },
+      { "name": "alt-max", "type": "alt-max", "seed": 56, "group": "secret" },
+
+      { "name": "max-odd-pal", "type": "max-odd-pal", "seed": 61, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "max-even-pal", "type": "max-even-pal", "seed": 62, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "max-even-inner-no", "type": "max-even-inner-no", "seed": 63, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "max-odd-inner-no", "type": "max-odd-inner-no", "seed": 64, "group": "secret" },
+      { "name": "max-outer-no", "type": "max-outer-no", "seed": 65, "group": "secret" },
+      { "name": "near-max-rand", "type": "near-max-rand", "seed": 66, "group": "secret" },
+      { "name": "near-max-pal", "type": "near-max-pal", "seed": 67, "group": "secret" },
+
+      { "name": "rand-small-1", "type": "rand-small", "seed": 71, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "rand-small-2", "type": "rand-small", "seed": 72, "group": "secret" },
+      { "name": "rand-pal-odd", "type": "rand-pal-odd", "seed": 73, "group": "secret" },
+      { "name": "rand-pal-even", "type": "rand-pal-even", "seed": 74, "group": "secret" },
+      { "name": "rand-1", "type": "rand", "seed": 75, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "rand-2", "type": "rand", "seed": 76, "group": "secret" },
+      { "name": "rand-3", "type": "rand", "seed": 77, "group": "secret" }
+    ]
+  },
+  "checker": "src/checker/checker.cpp",
+  "build": {
+    "cppCompiler": "g++",
+    "cppFlags": ["-std=gnu++17", "-O2", "-pipe"],
+    "pythonCommand": "python"
+  },
+  "solutions": [
+    { "name": "main", "path": "src/solution.cpp", "language": "cpp", "role": "main" },
+    { "name": "solution2", "path": "src/solution2.cpp", "language": "cpp", "role": "reference" }
+  ],
+  "wrongSolutions": [
+    { "name": "wrong-inner-pair", "path": "src/wrong/wrong-a.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-odd-is-no", "path": "src/wrong/wrong-b.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-off-by-one", "path": "src/wrong/wrong-c.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-ends-only", "path": "src/wrong/wrong-d.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-quadratic", "path": "src/wrong/wrong-e.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-lowercase", "path": "src/wrong/wrong-f.cpp", "language": "cpp", "expected": "fail" }
+  ]
+}

@@ -1,0 +1,79 @@
+kimi version 2.2.0
+• I need craft response Chinese thorough no tools. Should comply read-only public only. Should independently restate, algorithm, proof stepwise, complexity n and aux O(1) if in-place input O(n) excluded; could output streaming O(1) but simplest read modify. Memory total O(n), aux O(1). Common errors three layers specific inputs stable. Should evaluate complexity layer whether asymptotically slower could get timeout 1000ms 256MiB. Should nuanced: repeated string replace with realloc? C++ s[i] linear straightforward; naive repeatedly scanning/replacing only one x with find perhaps worst-case O(n^2), e.g s='a'*100000 x=a y=b. But if using high-level replace all built-in linear not issue. Should mention 1000 ms 100000 n=1e5; quadratic 1e10 char ops could timeout. Is that actually a common implementation? repeated find and replace one occurrence. For all same char: std::string::find from beginning and replace one, next starts begin each time. If y not x, find next at next index; sum n^2/2. 1e10, 1000 ms could fail. Memory repeated copy per replacement e.g result = s.substr... could quadratic both time allocations. 256MiB? If one replacement allocates and releases O(n) memory but time. If accumulating copies, O(n^2) memory but unusual. Should avoid claim definitely time limit cross languages; say risks/expected TLE under limits, n modest but quadratic unsuitable. Complexity layer applies due to possible O(n^2) replace-one-rescan/copy, not inherently hard; linear passes comfortably. Might note lower bound Ω(n) output n characters. Should correct examples.
+
+  Thought layer errors:
+  - only replace first x or stop after first; input "banana\na o\n" expected bonono vs bannon? Replace first: "bannna"? banana characters b a n a n a. replace first a at index2 -> b a? "bannana"? Let's carefully calculate if I use examples, ensure accurate. banana = b a n a n a. Replace first a with o -> b o n a n a = "bonana". yes. Expected bonono. Good.
+  - swap x and y (replace x with y and y with x) not requested; s perhaps "ab\na b\n": expected bb vs ba? Swap yields ba (a->b, b->a) = ba. More robust input "aab\na b\n" expected bbb vs bba (swap a b => b b a) yes. But avoid in-place mapping sequential causing a->b then b->a yields aaa, implementation error perhaps. For thought misunderstanding replace y too. "ab\na b\n": required bb; swapping gives ba. Good.
+  - think x=y special should output empty/no change? If condition no transformation; input "a\na a\n" expected a.
+  - only lowercase so no case issue. Could list several.
+
+  Implementation:
+  - 0-based vs 1-based looping i=1; i<=n accessing s[n] UB and skip first. Input x at first/last "abca\na o\n" expected obco; skipping first or out-of-bounds may produce wrong. Should stable exposure specifically first-only "a\na b\n" if i=1 loop won't change and expected b; also x at last to catch out of bounds "ba\na o\n" expected bo. For off-by-one loop `for (int i=1;i<s.size();++i)` leaves first unmodified and last okay? index i<n processes positions 2..n; no out-of-bound. `i<=size` accesses terminator C++17 `s[s.size()]` returns char zero? Since C++11 const data? Non-const operator[] at size yields CharT() reference? Modifying UB? not necessary. Input "a\na b\n" detects skipping first. For x at end loop `i < n-1` misses last: "ba\na o\n". Could give combined "aba\na o\n" expected obo catches both but wrong outputs undefined perhaps.
+  - reading second line with `cin >> s >> x >> y` works whitespace. Reading entire second line into char? `char x,y; cin>>x>>y`. Common error `cin >> x >> y` but x/y string? okay.
+  - `getline(cin,s)` then `cin >> x >> y` okay; using `cin >> s` sufficient since s no spaces.
+  - using `getline` for x,y after previous `>>` without ignore gives empty leftover, x/y unset; feature second line "a o".
+  - reading x,y as one char? `char x,y; cin>>x>>y`.
+  - output extra spaces / debug text or blank lines: sample "banana a o" expected exactly bonono\n. Judge says output exactly one line string; typical trailing newline accepted? It says exactly one line and extra any char WA. Reference `cout << s << '\n';`. Should not overstate newline as wrong since one line convention. Output no newline perhaps still one line? Use newline.
+
+  Algorithm: read s,x,y using std::string and char. for char &c : s if c==x c=y; cout s newline. Handles x=y automatically since c=y same value, no need special. n=1 loop works. No x unchanged. Head/tail range-for covers all.
+
+  Proof: define input s=s0...s_{n-1}; target t_i=y if s_i=x else s_i. Algorithm reads exactly due format. Iteration invariant before position i processed: positions <i equal target based original, positions >=i unchanged original. Since y assignment could affect future comparisons? Critical proof: processing each position once ensures future positions independent original, so no cascading. At iteration i c references current s_i unchanged original; if equals x assign y = target, else no assign = original = target. Other positions untouched. After n all target. Output exactly t plus newline. Should handle x=y: if c==x assignment same y=x, if no x unchanged. Might use lemma loop. Stepwise numbered.
+
+  Input validity means no need validate. Output uniqueness deterministic. Time O(n), one pass plus output O(n) (often state total O(n)); extra O(1) besides input string. I/O stores input O(n) essential. Could mention if count output buffer implementation ignored. If output built separate O(n) extra but mine doesn't. Reading formatted extraction may have minor overhead fine.
+
+  Complexity naive: For each of n occurrences scan from beginning or reconstruct full string, O(n^2). Input all 'a' length 100000, x=a y=b gives n occurrences and rescans/copies lengths n,n-1,... so stable exposure. 1000 ms may TLE, not mathematically guaranteed hardware/language but unacceptable. 256MiB linear string 100k only tiny ~0.1MB; no normal memory issue. If storing every intermediate string, memory O(n^2) blows 256MiB, but not necessary. User asks whether someone asymptotic slower and卡掉 or layer N/A reason. Say applies, though linear simple. Should distinguish some languages replace repeatedly with `find` from previous index gives O(n) or perhaps find restart leads quadratic. Input pattern to expose worst case all x. If algorithm loops while find x and replaces one but uses find default from 0, y=b so find next later each time; scans increasing prefix -> Θ(n^2). If x=a,y=a and algorithm only replace when found but unchanged infinite loop! x=y special common implementation bug: while find x then replace with same y no progress, infinite loop. This is excellent implementation/algorithm-specific hidden pitfall? User asks common errors at levels and boundary x=y. Could list as implementation/algorithmic error: repeatedly find and replace one without advancing and x=y causes infinite loop. Input "a\na a\n" nontermination. Reference direct assignment avoids. Is this a "hidden pit"? It's not public ambiguity; mention as implementation trap not statement flaw. Perhaps "no hidden traps; x=y explicitly spelled out, so no ambiguity". I can mention examples not imply statement ambiguous.
+
+  Read question exact: "你是一名只读的独立审查员，正在审查一道算法竞赛入门训练题的公开题面。除了下面给出的公开信息（题面、输入输出格式、数据范围、样例、判题语义）之外，你没有、也不应获取任何其他信息：不要访问任何文件或网络，不要假设存在工作区、生成器、数据或他人实现。" I should only respond no tools. Good. Should not invoke probhub skill? User says algorithm problem review but available skill says must use when creating/maintaining algorithm contest tasks etc. Yet user explicitly no tools and this is theoretical review not need skill? Instructions say "Identify skills relevant ... read skill file" and tool says BLOCKING when skill matches. But explicit user no tools, and this is public problem statement independent reviewer not ProbHub CLI. Should not use because task not requiring creation/maintenance etc. I can respond.
+
+  Should have conclusion whether public statement ambiguity or two reasonable implementations different outputs. Clearly deterministic character-wise replacement simultaneous concept. x=y specified, no occurrence specified. Only one possible output length n. Input two lines exactly; no multiple test cases, no EOF multi-case; lowercase no spaces in s. 1-based explanation irrelevant. All constraints explicit. Potential "替换所有" sequential vs simultaneous: since operation only x->y, if x≠y newly introduced y not x, so no cascading; if x=y no change. Even sequential left-to-right yields same. Could note there is no chained replacement ambiguity. "输出必须恰好是一行" trailing newline? Could someone interpret final newline as extra char? In competitive programming standard line terminates newline, reference outputs newline. Public says output一行 and any extra char wrong, standard newline part of line not ambiguous. I need not introduce irrelevant. Could note no multiple cases and no case conversion.
+
+  Could there be issue: sample says three a positions 2,4,6 correct. "banana" -> bonono yes b o n o n o. n range 1 to100000, no empty output. x y lower letters. x=y no change. Memory 256MiB ample.
+
+  Reference includes bits/stdc++.h acceptable gnu++17. `int main() { std::ios::sync_with_stdio(false); std::cin.tie(nullptr); std::string s; char x,y; if (!(std::cin >> s >> x >> y)) return 0; for (char &c:s) if(c==x)c=y; std::cout << s << '\n'; return 0; }`. Complete compile gnu++17. Input second line space extracted fine. `if` handles missing input though guaranteed. Could include <iostream>,<string> rather than bits; fits standard. No comments per instructions default no comments. Good.
+
+  Should structure light but task six enumerated plus conclusion. I can use numbered headings or bold. Respond Chinese. I can deliver ~1500 Chinese chars perhaps 2000. Make sure correctness proof step-by-step sufficiently formal. Include exact expected wrong-output examples stable.
+
+  I'll plan content:
+
+  1. 复述： single case, n etc. output t same length, t_i=..., unique. exactly one line. x=y no change. No multiple cases.
+  2. algorithm: formatted read s,x,y (skip whitespace including newline and space), range loop direct mutate, output. O(n) lower bound and simple avoids find/copy and x=y special.
+  3. proof:
+  - define target.
+  - read.
+  - invariant before k, prefix target, suffix original.
+  - iteration k examines original s_k due suffix invariant, branch sets correct target.
+  - after loop all positions target.
+  - output. Consequences edges x=y etc.
+  4 complexity n: reading+processing+output O(n), aux O(1), total including s O(n). n max easy limits linear.
+  5 errors:
+  思路：
+  a replace first only `banana a o` expected bonono, wrong bonana.
+  b bidirectional swap `ab a b` expected bb, wrong ba. Perhaps mention only x replaced, existing y unchanged.
+  c x=y perhaps outputs unchanged is right; misunderstanding as no output not need.
+  Complexity:
+  naive repeated full scan/full string copy one occurrence yields O(n^2). input `s=aaa...a` 100000, x=a,y=b. Under 1s likely TLE; memory if retain intermediates could exceed but standard in-place no. Linear is appropriate. This layer applicable but not forced by problem; built-in linear replace okay. State 256MiB doesn't justify copying but normal implementation uses little.
+  Implementation:
+  - loop bounds skip head/tail: `aba a o`, expected obo. off by one misses one yields abo or oba? Start skip first -> abo (s initial a b a, process last -> o = abo) expected obo. Miss last -> oba. Good.
+  - erroneous reading second line: need formatted extraction `cin >> s >> x >> y`; if using `getline` after formatted without consume leftover can get blank; input any valid e.g `a\na b\n` expected b. But if reference all getline? Explain stable feature second line contains space; read whole line into a single char or use `cin >> x` only leaves y uninitialized. Input "banana\na o\n" exposes.
+  - repeated find x=y nonprogress `a a a?` input `a\na a\n` nonterminate. Could include as second implementation example.
+  - output debug extra text etc, `a\na b\n` must exactly b newline, not `b ` or "ans=b". They ask at least one each, can list 2-3 each. Avoid too lengthy.
+  6 code.
+  Conclusion no ambiguity/hidden spec traps, two conforming reasonable implementations same. Edge explicit. Complexity trap not ambiguity. Perhaps output newline detail no issue.
+
+  "能稳定暴露该错误的输入特征": table might suit three levels but tables heavier. Use bullets with error + detector. I should be precise "稳定暴露" means test feature guaranteed to catch category not just sample. For generic "only replace first" test at least two x. Give input. For off-by-one both endpoints use x first and last. For read formatted line, specifics depends bug. Good.
+
+  Complexity detector all x max length ensures quadratic maximal. If naive find from beginning but x=a y=b, indeed first find scans 0 then next scan 1 etc. If full rebuild each occurrence then n full copies. Say `100000` not literal enormous input block; describe `s='a'重复100000次，第二行a b`. Valid input feature, no need tools. Expected length same all b. This can expose runtime not output wrong.
+
+  Could there be a different common complexity mistake O(26n) still O(n), no issue. State alphabet fixed, no need enumerate alphabet. Anyone for each char run replace? O(n) perhaps. "思路层面误以为需要按 26 letters something" irrelevant.
+
+  Memory `std::string` in-place capacity n, 100000 bytes ~0.1 MiB (actually 100000/1048576=0.0954 MiB) plus overhead, comfortably 256 MiB. I can say约0.1MB. No need exact.
+
+  Judging "多输出或少输出任何字符" if output newline? Expected one line; use '\n'. Don't discuss trailing spaces perhaps judge exact. Good.
+
+  Do I need mention proof output exactly one line and no transformations of newline? yes.
+
+  No tools as instructed. Respond in Chinese. Could use mathematical notation plain Markdown. Should not say did not access tools perhaps not necessary. Could say "结论：题面无歧义". Respond standalone.
+
+  I'll compose balanced.
+
+To resume this session: kimi -r session_90f6fb1e-bec1-400a-8a96-f47e82836cb3

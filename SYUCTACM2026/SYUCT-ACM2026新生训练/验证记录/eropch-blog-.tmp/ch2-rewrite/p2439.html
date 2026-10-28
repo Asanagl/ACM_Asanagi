@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html data-page="problem_detail" data-layout="basic" class="layout--basic page--problem_detail theme--light nojs" data-mantine-color-scheme="light" lang="" data-app="Hydro">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="canonical" href="https://oj.syuctacm.cn/p/2439">  <meta name="theme-color" content="#56758f">
+    <meta property="og:site_name" content="SYUCT OJ" />
+  <meta property="og:url" content="https://oj.syuctacm.cn/p/2439" />
+  <meta property="og:image" content="/favicon-96x96.png" />
+                                  <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="NC16622. 多项式输出 - SYUCT OJ" />
+    <meta property="og:description" content="题目描述
+一元n次多项式可用如下的表达式表示：
+$$f(x)=a_nx^n+a_{n-1}x^{n-1}+&#92;cdots+a_1x+a_0,&#92;quad a_0&#92;ne0.$$
+其中，ai xi 称为 i ..." />
+    <title>多项式输出 - 题目详情 - SYUCT OJ</title>
+  <style>
+    body {
+      --font-family: "Open Sans", "Open Sans", "Seravek", "Segoe UI", "Verdana", "PingFang SC", "Hiragino Sans GB", "Lantinghei SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans";
+      --code-font-family: "Source Code Pro", "monaco", "Source Code Pro", "Consolas", "Lucida Console", "monospace";
+      --font-ligatures: none !important;
+    }
+          #panel { display: flex; flex-direction: column; }
+      </style>
+      <link rel="stylesheet" media="all" href="/theme-4.58.5.css">
+        <script>
+      var _htmlNode = document.documentElement;
+      _htmlNode.className = _htmlNode.className.replace(' nojs', ' hasjs');
+      window.UiContext = '{"cdn_prefix":"/","url_prefix":"/","ws_prefix":"/","constantVersion":"afaf5740","domainId":"system","domainVersion":1792848814990,"extraTitleContent":"\u591A\u9879\u5F0F\u8F93\u51FA","SWConfig":{"preload":"","hosts":["http://oj.syuctacm.cn","https://oj.syuctacm.cn","https://oj.syuctacm.cn/","/"],"assets":[],"domains":[]}}';
+      window.UserContext = '{"_id":0,"mail":"Guest@hydro.local","uname":"Guest","hashType":"hydro","priv":8,"regat":"2025-03-06T12:26:22.389Z","loginat":"2026-03-07T10:35:53.368Z","perm":"BigInt::1291862133704988065921","role":"guest","scope":"BigInt::-1","tfa":false,"authn":false,"group":[],"domains":[],"timeZone":"Asia/Shanghai","codeLang":"cc.cc17","avatar":"gravatar:Guest@hydro.local","gender":2,"backgroundImage":"/components/profile/backgrounds/1.jpg","pinnedDomains":[],"checkin_time":"1997-01-11","showTimeAgo":true,"fontFamily":"Open Sans","codeFontFamily":"Source Code Pro","theme":"light","preferredEditorType":"sv","formatCode":true,"avatarUrl":"//cn.gravatar.com/avatar/97119d3d15d5201ab506330ed4bab0f7?d=mm&s=128"}';
+    </script>
+      </head>
+<body>
+      <script type="text/javascript" src="/resource/afaf5740/entry.js"></script>
+    <script type="text/javascript" src="/resource/4.58.5/lang-zh.js"></script>
+    <script type="text/javascript" src="/hydro-4.58.5.js"></script>
+    <nav class="nav slideout-menu" id="menu">
+  <div class="row"><div class="columns clearfix">
+    <ol class="nav__list nav__list--main clearfix">
+      <li class="nav__list-item">
+        <a href="/"><img class="nav__logo" src="/nav_logo_dark.png"></a>
+      </li>        <li class="nav__list-item">
+  <a href="/" class="nav__item">
+    首页
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/p" class="nav__item nav--active">
+    题库
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/training" class="nav__item">
+    训练
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/contest" class="nav__item">
+    比赛
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/homework" class="nav__item">
+    作业
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/discuss" class="nav__item">
+    讨论
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/record" class="nav__item">
+    评测记录
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/ranking" class="nav__item">
+    排名
+  </a>
+</li>
+      </ol>
+    <ol class="nav__list nav__list--secondary clearfix">
+          <li class="nav__list-item"><a href="/login" class="nav__item" name="nav_login">登录</a></li>
+            <li class="nav__list-item"><a href="/register" class="nav__item--round">注册</a></li>
+            <li class="nav__list-item nojs--hide" data-dropdown-pos="bottom right" data-dropdown-custom-class="nav__dropdown" data-dropdown-target="#menu-nav-user" data-dropdown-disabledconstrainToWindow data-dropdown-trigger-desktop-only>
+        <a href="javascript:;" class="nav__item">
+          <span class="icon icon-global"></span>Language <span class="icon icon-expand_more"></span>
+        </a>
+        <ol class="dropdown-target menu" id="menu-nav-user"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+      </li>
+        </ol>
+  </div></div>
+</nav>
+<nav class="nav--shadow"></nav>
+<div class="slideout-panel" id="panel">
+    <div class="slideout-overlay"></div>
+  <div class="header--mobile">
+  <div class="row"><div class="columns clearfix">
+    <div class="float-left">
+      <a class="header--mobile__domain" href="/" target="_self">
+        <img src="/nav_logo_dark.png">
+      </a>
+    </div>
+    <div class="float-right">
+      <button type="button" class="header__hamburger">
+  <div class="hamburger hamburger--spin">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </div>
+</button>
+    </div>
+  </div></div>
+</div>
+  <div class="main">
+        <script>
+
+  
+  
+  
+  
+  
+</script>
+                                <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="NC16622. 多项式输出 - SYUCT OJ" />
+    <meta property="og:description" content="题目描述
+一元n次多项式可用如下的表达式表示：
+$$f(x)=a_nx^n+a_{n-1}x^{n-1}+&#92;cdots+a_1x+a_0,&#92;quad a_0&#92;ne0.$$
+其中，ai xi 称为 i ..." />
+  <div class="row" data-sticky-parent>
+  <div class="medium-9 columns">
+    <div class="section">
+      <div class="section__header">
+        <h1 class="section__title">
+                    #NC16622. 多项式输出
+        </h1>
+              </div>
+      <div class="section__body">
+        <ul class="problem__tags">
+                      <span class="problem__tag-item">ID: 2439</span>
+                    <span class="problem__tag-item icon icon-book">传统题</span>
+                                <span class="problem__tag-item icon icon-stopwatch">1000ms</span>
+            <span class="problem__tag-item icon icon-comparison">128MiB</span>
+                                <a class="problem__tag-item interactive" href="/record?pid=2439">尝试: 24</a>
+            <a class="problem__tag-item interactive" href="/record?pid=2439&amp;status=1">已通过: 8</a>
+            <span class="problem__tag-item">难度: 7</span>
+            <span class="problem__tag-item interactive">上传者: <span class="user-profile-link">
+      <img class="small user-profile-avatar v-center" loading="lazy" src="//q1.qlogo.cn/g?b=qq&amp;nk=3643001679&amp;s=160" width="20" height="20">
+    <a class="user-profile-name uname--lv1" href="/user/114514">
+          Asanagi
+      </a>
+  </span>
+</span>
+                                <span name="show_tags" class="problem__tag-item interactive nojs--hide icon icon-tag">标签&gt;</span><span class="problem__tag-item tags hasjs--hide">牛客竞赛</span><span class="problem__tag-item tags hasjs--hide">模拟</span>        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="problem-content-container"><div class="problem-content" data-marker-enabled>
+        <div class="section__header non-scratchpad--hide">
+          <h1 class="section__title">多项式输出</h1>
+        </div>
+                <div class="section__body typo richmedia" data-fragment-id="problem-description">
+                      <h2 id="%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0" tabindex="-1">题目描述</h2>
+<p>一元n次多项式可用如下的表达式表示：</p>
+$$f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0,\quad a_0\ne0.$$<p>其中，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub><msup><mi>x</mi><mi>i</mi></msup></mrow><annotation encoding="application/x-tex">a_ix^i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.9747em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8247em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span></span></span></span></span></span></span></span> 称为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span> 次项，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>a</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">a_i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.5806em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 称为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi></mrow><annotation encoding="application/x-tex">i</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span> 次项的系数。给出一个一元多项式各项的次数和系数，请按照如下规定的格式要求输出该多项式：</p>
+<ol>
+<li>多项式中自变量为x，从左到右按照次数递减顺序给出多项式。</li>
+<li>多项式中只包含系数不为0的项。</li>
+<li>如果多项式n次项系数为正，则多项式开头不出现“+”号，如果多项式 n 次项系数为负，则多项式以“-”号开头。</li>
+<li>对于不是最高次的项，以“+”号或者“-”号连接此项与前一项，分别表示此项系数为正或者系数为负。紧跟一个正整数，表示此项系数的绝对值（如果一个高于0 次的项，其系数的绝对值为1，则无需输出1）。如果x的指数大于1，则接下来紧跟的指数部分的形式为“x^b”，其中b为x的指数；如果x的指数为1，则接下来紧跟的指数部分形式为“x”；如果x的指数为0，则仅需输出系数即可。</li>
+<li>多项式中，多项式的开头、结尾不含多余的空格。</li>
+</ol>
+<h2 id="%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F" tabindex="-1">输入格式</h2>
+<p>第一行1个整数，n，表示一元多项式的次数。
+第二行有n+1 个整数，其中第i 个整数表示第n-i+1 次项的系数，每两个整数之间用空格隔开。</p>
+<h2 id="%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F" tabindex="-1">输出格式</h2>
+<p>共1行，按题目所述格式输出多项式。</p>
+<h2 id="%E6%95%B0%E6%8D%AE%E8%8C%83%E5%9B%B4" tabindex="-1">数据范围</h2>
+<p>1≤n≤100，多项式各次项系数的绝对值均不超过100。</p>
+<h2 id="%E6%A0%B7%E4%BE%8B-1" tabindex="-1">样例 1</h2>
+<pre><code class="language-input1">5
+100 -1 1 -3 0 10
+</code></pre>
+<pre><code class="language-output1">100x^5-x^4+x^3-3x^2+10
+</code></pre>
+<h2 id="%E6%A0%B7%E4%BE%8B-2" tabindex="-1">样例 2</h2>
+<pre><code class="language-input2">3
+-50 0 0 1
+</code></pre>
+<pre><code class="language-output2">-50x^3+1
+</code></pre>
+<h2 id="%E6%9D%A5%E6%BA%90" tabindex="-1">来源</h2>
+<p><a href="https://ac.nowcoder.com/acm/problem/16622">牛客原题</a></p>
+
+</div>      </div></div>
+    </div>
+  </div>
+  <div class="medium-3 columns"><div data-sticky="large">
+        <div class="section side section--problem-sidebar">
+  <div>
+    <ol class="menu">
+                          <li class="menu__item scratchpad--hide"><a class="menu__link" href="javascript:showSignInDialog();">
+        <span class="icon icon-send"></span> 登录后递交
+      </a></li>
+                      <li class="menu__seperator"></li>
+              <li class="menu__item"><a class="menu__link" href="/discuss/problem/2439">
+        <span class="icon icon-comment--text"></span> 讨论 (0)      </a></li>
+              <li class="menu__item"><a class="menu__link" href="/p/NC16622/solution">
+        <span class="icon icon-comment--text"></span> 题解 (0)      </a></li>
+          <li class="menu__item"><a class="menu__link" href="/p/NC16622/files">
+        <span class="icon icon-file"></span> 文件
+      </a></li>
+      <li class="menu__item"><a class="menu__link" href="/p/NC16622/stat">
+        <span class="icon icon-statistics"></span> 统计
+      </a></li>
+              <li class="menu__seperator nojs--hide"></li>
+                    </ol>
+  </div>
+</div>
+<div class="section side">
+  <div class="section__header">
+    <h1 class="section__title">相关</h1>
+  </div>
+  <div class="section__body typo">
+        <p>在下列比赛中: </p><p><a href="/contest/6ac5b694753773230ebbcb8f">2026级SYUCT-ACM新生第二次训练</a></p>    </div>
+</div>
+  </div></div>
+</div>
+<div style="display:none" class="outer-loader-container"><div class="loader"></div></div>
+<div class="scratchpad-container" style="display:none">
+  <div style="display:none" class="loader-container"><div class="loader"></div></div>
+  <div id="scratchpad" style="opacity:0"></div>
+</div>
+  </div>
+  <div class="footer">
+  <div class="row"><div class="columns">
+      <div class="row footer__links">
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          状态
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/record">评测队列</a></li>
+          <li class="footer__category__item"><a href="/status">服务状态</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          开发
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="https://github.com/hydro-dev/Hydro" target="_blank">开源</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          支持
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/help">帮助</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">联系我们</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable end">
+        <h1>
+          关于
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/about">关于</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#privacy">隐私</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#tos">服务条款</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">版权申诉</a></li>
+        </ul></div>
+      </div>
+    </div>
+      <div class="footer__extra-link clearfix">
+      <div class="footer__extra-left">
+        <ol class="clearfix">
+                    <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-lang">
+            <span><span class="icon icon-global"></span> Language <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-lang"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+          </li>
+          <li class="footer__extra-link-item">
+                          <a href="/legacy?legacy=true">兼容模式</a>
+                      </li>
+          <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-theme">
+            <span><span class="icon icon-global"></span> 主题 <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-theme">
+              <li class="menu__item"><a class="menu__link" href="/set_theme/light">亮色</a></li>
+              <li class="menu__item"><a class="menu__link" href="/set_theme/dark">暗色</a></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+      <div class="footer__extra-right">
+        <ol class="clearfix"><li class="footer__extra-link-item"></li><li class="footer__extra-link-item"><a href="https://beian.miit.gov.cn/">辽ICP备2026022210号-1</a></li><li class="footer__extra-link-item">Worker 0, 25ms</li>
+          <!-- Prepare 7ms -->
+          <!-- Method 2ms -->
+          
+          
+          <li class="footer__extra-link-item">Powered by <a href="https://hydro.js.org">Hydro v5.0.7</a> Community</li>
+        </ol>
+      </div>
+    </div>
+  </div></div>
+</div>
+</div>
+<div class="dialog dialog--signin" style="display:none">
+  <div class="dialog__content">
+        <div class="dialog--signin__bg">
+      <div class="dialog--signin__side">
+        <h1>还没有账户？</h1>
+        <p>注册一个 SYUCT OJ 通用账户，您就可以在我们提供的所有在线评测服务上提交代码、参与讨论。</p>
+        <div><a href="/register" class="inverse rounded button">现在注册</a></div>
+      </div>
+    </div>
+        <div class="dialog--signin__main">
+      <form action="/login" method="post">
+        <div class="dialog--signin__close-container supplementary">
+          <a name="dialog--signin__close" href="javascript:;">关闭</a>
+        </div>
+        <h1 class="dialog--signin__title">登录</h1>
+        <p class="dialog--signin__note">使用您的 SYUCT OJ 通用账户</p>
+                <div class="row"><div class="columns">
+          <label class="material textbox">
+            用户名
+            <input name="uname" type="text" data-autofocus autocomplete="username webauthn">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="material textbox">
+            密码
+            <input name="password" type="password">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="checkbox">
+            <input type="checkbox" name="rememberme" class="checkbox">记住我
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <input type="hidden" name="tfa" value="">
+          <input type="hidden" name="authnChallenge" value="">
+          <input type="submit" value="登录" name="login_submit" class="expanded rounded primary button">
+        </div></div>
+        <div class="row"><div class="columns">
+          <div class="supplementary text-center">
+            <a href="/lostpass">忘记密码或者用户名？</a>
+          </div>
+        </div></div>
+      </form>
+    </div>
+  </div>
+</div>
+        <script>
+      window.UiContextNew = '{"problemId":"NC16622","problemNumId":2439,"codeLang":"cc.cc17","pdoc":{"_id":"6abcfd70753773230ebac803","content":"{\\"zh\\":\\"## \u9898\u76EE\u63CF\u8FF0\\\\r\\\\n\\\\r\\\\n\u4E00\u5143n\u6B21\u591A\u9879\u5F0F\u53EF\u7528\u5982\u4E0B\u7684\u8868\u8FBE\u5F0F\u8868\u793A\uFF1A\\\\r\\\\n\\\\r\\\\n$$\\\\r\\\\nf(x)=a_nx^n+a_{n-1}x^{n-1}+\\\\\\\\cdots+a_1x+a_0,\\\\\\\\quad a_0\\\\\\\\ne0.\\\\r\\\\n$$\\\\r\\\\n\\\\r\\\\n\u5176\u4E2D\uFF0C$a_ix^i$ \u79F0\u4E3A $i$ \u6B21\u9879\uFF0C$a_i$ \u79F0\u4E3A $i$ \u6B21\u9879\u7684\u7CFB\u6570\u3002\u7ED9\u51FA\u4E00\u4E2A\u4E00\u5143\u591A\u9879\u5F0F\u5404\u9879\u7684\u6B21\u6570\u548C\u7CFB\u6570\uFF0C\u8BF7\u6309\u7167\u5982\u4E0B\u89C4\u5B9A\u7684\u683C\u5F0F\u8981\u6C42\u8F93\u51FA\u8BE5\u591A\u9879\u5F0F\uFF1A\\\\r\\\\n1. \u591A\u9879\u5F0F\u4E2D\u81EA\u53D8\u91CF\u4E3Ax\uFF0C\u4ECE\u5DE6\u5230\u53F3\u6309\u7167\u6B21\u6570\u9012\u51CF\u987A\u5E8F\u7ED9\u51FA\u591A\u9879\u5F0F\u3002\\\\r\\\\n2. \u591A\u9879\u5F0F\u4E2D\u53EA\u5305\u542B\u7CFB\u6570\u4E0D\u4E3A0\u7684\u9879\u3002\\\\r\\\\n3. \u5982\u679C\u591A\u9879\u5F0Fn\u6B21\u9879\u7CFB\u6570\u4E3A\u6B63\uFF0C\u5219\u591A\u9879\u5F0F\u5F00\u5934\u4E0D\u51FA\u73B0\u201C+\u201D\u53F7\uFF0C\u5982\u679C\u591A\u9879\u5F0F n \u6B21\u9879\u7CFB\u6570\u4E3A\u8D1F\uFF0C\u5219\u591A\u9879\u5F0F\u4EE5\u201C-\u201D\u53F7\u5F00\u5934\u3002\\\\r\\\\n4. \u5BF9\u4E8E\u4E0D\u662F\u6700\u9AD8\u6B21\u7684\u9879\uFF0C\u4EE5\u201C+\u201D\u53F7\u6216\u8005\u201C-\u201D\u53F7\u8FDE\u63A5\u6B64\u9879\u4E0E\u524D\u4E00\u9879\uFF0C\u5206\u522B\u8868\u793A\u6B64\u9879\u7CFB\u6570\u4E3A\u6B63\u6216\u8005\u7CFB\u6570\u4E3A\u8D1F\u3002\u7D27\u8DDF\u4E00\u4E2A\u6B63\u6574\u6570\uFF0C\u8868\u793A\u6B64\u9879\u7CFB\u6570\u7684\u7EDD\u5BF9\u503C\uFF08\u5982\u679C\u4E00\u4E2A\u9AD8\u4E8E0 \u6B21\u7684\u9879\uFF0C\u5176\u7CFB\u6570\u7684\u7EDD\u5BF9\u503C\u4E3A1\uFF0C\u5219\u65E0\u9700\u8F93\u51FA1\uFF09\u3002\u5982\u679Cx\u7684\u6307\u6570\u5927\u4E8E1\uFF0C\u5219\u63A5\u4E0B\u6765\u7D27\u8DDF\u7684\u6307\u6570\u90E8\u5206\u7684\u5F62\u5F0F\u4E3A\u201Cx^b\u201D\uFF0C\u5176\u4E2Db\u4E3Ax\u7684\u6307\u6570\uFF1B\u5982\u679Cx\u7684\u6307\u6570\u4E3A1\uFF0C\u5219\u63A5\u4E0B\u6765\u7D27\u8DDF\u7684\u6307\u6570\u90E8\u5206\u5F62\u5F0F\u4E3A\u201Cx\u201D\uFF1B\u5982\u679Cx\u7684\u6307\u6570\u4E3A0\uFF0C\u5219\u4EC5\u9700\u8F93\u51FA\u7CFB\u6570\u5373\u53EF\u3002\\\\r\\\\n5. \u591A\u9879\u5F0F\u4E2D\uFF0C\u591A\u9879\u5F0F\u7684\u5F00\u5934\u3001\u7ED3\u5C3E\u4E0D\u542B\u591A\u4F59\u7684\u7A7A\u683C\u3002\\\\r\\\\n\\\\r\\\\n## \u8F93\u5165\u683C\u5F0F\\\\r\\\\n\\\\r\\\\n\u7B2C\u4E00\u884C1\u4E2A\u6574\u6570\uFF0Cn\uFF0C\u8868\u793A\u4E00\u5143\u591A\u9879\u5F0F\u7684\u6B21\u6570\u3002\\\\r\\\\n\u7B2C\u4E8C\u884C\u6709n+1 \u4E2A\u6574\u6570\uFF0C\u5176\u4E2D\u7B2Ci \u4E2A\u6574\u6570\u8868\u793A\u7B2Cn-i+1 \u6B21\u9879\u7684\u7CFB\u6570\uFF0C\u6BCF\u4E24\u4E2A\u6574\u6570\u4E4B\u95F4\u7528\u7A7A\u683C\u9694\u5F00\u3002\\\\r\\\\n\\\\r\\\\n## \u8F93\u51FA\u683C\u5F0F\\\\r\\\\n\\\\r\\\\n\u51711\u884C\uFF0C\u6309\u9898\u76EE\u6240\u8FF0\u683C\u5F0F\u8F93\u51FA\u591A\u9879\u5F0F\u3002\\\\r\\\\n\\\\r\\\\n## \u6570\u636E\u8303\u56F4\\\\r\\\\n\\\\r\\\\n1\u2264n\u2264100\uFF0C\u591A\u9879\u5F0F\u5404\u6B21\u9879\u7CFB\u6570\u7684\u7EDD\u5BF9\u503C\u5747\u4E0D\u8D85\u8FC7100\u3002\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n## \u6837\u4F8B 1\\\\r\\\\n\\\\r\\\\n```input1\\\\r\\\\n5\\\\r\\\\n100 -1 1 -3 0 10\\\\r\\\\n```\\\\r\\\\n\\\\r\\\\n```output1\\\\r\\\\n100x^5-x^4+x^3-3x^2+10\\\\r\\\\n```\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n## \u6837\u4F8B 2\\\\r\\\\n\\\\r\\\\n```input2\\\\r\\\\n3\\\\r\\\\n-50 0 0 1\\\\r\\\\n```\\\\r\\\\n\\\\r\\\\n```output2\\\\r\\\\n-50x^3+1\\\\r\\\\n```\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n## \u6765\u6E90\\\\r\\\\n\\\\r\\\\n[\u725B\u5BA2\u539F\u9898](https://ac.nowcoder.com/acm/problem/16622)\\\\r\\\\n\\"}","owner":114514,"domainId":"system","docType":10,"docId":2439,"title":"\u591A\u9879\u5F0F\u8F93\u51FA","tag":["\u725B\u5BA2\u7ADE\u8D5B","\u6A21\u62DF"],"hidden":false,"nSubmit":24,"nAccept":8,"data":[{"_id":"001.in","name":"001.in","size":18,"lastModified":"2026-09-30T12:15:44.650Z","etag":"L2RhdGEvZmlsZS9oeWRyby95angvdHlxamx1dm5rbnlxbXJ3YnlkMmJ4Lmlu"},{"_id":"001.out","name":"001.out","size":22,"lastModified":"2026-09-30T12:15:44.651Z","etag":"L2RhdGEvZmlsZS9oeWRyby80N3MvMGUyZWFpdXVqNnl2dW92bm1xYnh5Lm91dA=="},{"_id":"002.in","name":"002.in","size":11,"lastModified":"2026-09-30T12:15:44.652Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xN2ovcjlraGV0a2ZycXZvZHlhZGs2dWpiLmlu"},{"_id":"002.out","name":"002.out","size":8,"lastModified":"2026-09-30T12:15:44.653Z","etag":"L2RhdGEvZmlsZS9oeWRyby8wa2MvanRiYXUwdzB4bG50MGZ4bmlnZ2VxLm91dA=="},{"_id":"003.in","name":"003.in","size":8,"lastModified":"2026-09-30T12:15:44.654Z","etag":"L2RhdGEvZmlsZS9oeWRyby9yMGovMGVkNTJ6M3cwMnF4bmx4MHJqMHlmLmlu"},{"_id":"003.out","name":"003.out","size":5,"lastModified":"2026-09-30T12:15:44.655Z","etag":"L2RhdGEvZmlsZS9oeWRyby96a2Uvc2Fld3llZ2pvZnBncXNhcTM4ZjN4Lm91dA=="},{"_id":"004.in","name":"004.in","size":9,"lastModified":"2026-09-30T12:15:44.656Z","etag":"L2RhdGEvZmlsZS9oeWRyby8wbHYvdjdzdWF4dmd3ZXhqbWF5bWxtcjh1Lmlu"},{"_id":"004.out","name":"004.out","size":6,"lastModified":"2026-09-30T12:15:44.657Z","etag":"L2RhdGEvZmlsZS9oeWRyby80bHIvanp0Y29za3NweGJiZGFveWhnbmw0Lm91dA=="},{"_id":"005.in","name":"005.in","size":21,"lastModified":"2026-09-30T12:15:44.658Z","etag":"L2RhdGEvZmlsZS9oeWRyby9qZWEvZHo3bWlkMXMwbXRqdzhvaHlleGNzLmlu"},{"_id":"005.out","name":"005.out","size":24,"lastModified":"2026-09-30T12:15:44.659Z","etag":"L2RhdGEvZmlsZS9oeWRyby9mY2IvZ3BlbXVwNDM0YWJhcmpuZXFzZDR1Lm91dA=="},{"_id":"006.in","name":"006.in","size":11,"lastModified":"2026-09-30T12:15:44.660Z","etag":"L2RhdGEvZmlsZS9oeWRyby9oeHEvdmkydzQ4c2wwc25wdTFneG02YmRwLmlu"},{"_id":"006.out","name":"006.out","size":9,"lastModified":"2026-09-30T12:15:44.661Z","etag":"L2RhdGEvZmlsZS9oeWRyby81M2QveHZ3dmdlY2UwejB6eDBseGp1MmJyLm91dA=="},{"_id":"007.in","name":"007.in","size":27,"lastModified":"2026-09-30T12:15:44.662Z","etag":"L2RhdGEvZmlsZS9oeWRyby9tYTMvZ2t5ZGRiMGNhZ2o3dW00dDJrdzBxLmlu"},{"_id":"007.out","name":"007.out","size":38,"lastModified":"2026-09-30T12:15:44.663Z","etag":"L2RhdGEvZmlsZS9oeWRyby8xdXgvcW10MGhreTB6cDB3dXRmMmZwdTg5Lm91dA=="},{"_id":"008.in","name":"008.in","size":70,"lastModified":"2026-09-30T12:15:44.663Z","etag":"L2RhdGEvZmlsZS9oeWRyby93bmcvM2NscHl3dHowNDZla2p1OGYwdGV4Lmlu"},{"_id":"008.out","name":"008.out","size":112,"lastModified":"2026-09-30T12:15:44.664Z","etag":"L2RhdGEvZmlsZS9oeWRyby90aW0vaWFrM3VzMmlueXVnMXV4a2syMHVzLm91dA=="},{"_id":"009.in","name":"009.in","size":22,"lastModified":"2026-09-30T12:15:44.665Z","etag":"L2RhdGEvZmlsZS9oeWRyby9vbG0vajhyb2VpNm1ldTZtbGVkNXBnZWJ6Lmlu"},{"_id":"009.out","name":"009.out","size":26,"lastModified":"2026-09-30T12:15:44.666Z","etag":"L2RhdGEvZmlsZS9oeWRyby9wY2Ivb3RvM2xhYnUxcDZ1MnFuaGwwYjA1Lm91dA=="},{"_id":"010.in","name":"010.in","size":71,"lastModified":"2026-09-30T12:15:44.667Z","etag":"L2RhdGEvZmlsZS9oeWRyby9rb3AvbjE2eHdwZXlsMHAzeGxzcWt0aDN4Lmlu"},{"_id":"010.out","name":"010.out","size":125,"lastModified":"2026-09-30T12:15:44.668Z","etag":"L2RhdGEvZmlsZS9oeWRyby9qdnQveXdrenRxYm5sZ2V1eXVuZjR5M3RyLm91dA=="},{"_id":"checker.cpp","name":"checker.cpp","size":287,"lastModified":"2026-09-30T12:15:44.669Z","etag":"L2RhdGEvZmlsZS9oeWRyby9tMDIvN2g4ZmEweDZpa3I5eXp2ZTY4NXg1LmNwcA=="},{"_id":"config.yaml","name":"config.yaml","size":761,"lastModified":"2026-09-30T12:15:44.670Z","etag":"L2RhdGEvZmlsZS9oeWRyby9tMmgvOGF5ZDRxMXM5MHh0a29hNzBqbzB3LnlhbWw="}],"additional_file":[],"pid":"NC16622","config":{"count":10,"memoryMin":128,"memoryMax":128,"timeMin":1000,"timeMax":1000,"type":"default","langs":["c","cc","cc.cc98","cc.cc98o2","cc.cc11","cc.cc11o2","cc.cc14","cc.cc14o2","cc.cc17","cc.cc17o2","cc.cc20","cc.cc20o2","pas","java","kt","kt.jvm","py","py.py2","py.py3","py.pypy3","php","rs","hs","js","go","rb","cs","r","codeforces","codeforces.43","codeforces.52","codeforces.50","codeforces.54","codeforces.59","codeforces.61","codeforces.65","codeforces.9","codeforces.28","codeforces.32","codeforces.12","codeforces.60","codeforces.36","codeforces.48","codeforces.19","codeforces.3","codeforces.4","codeforces.51","codeforces.13","codeforces.6","codeforces.7","codeforces.31","codeforces.40","codeforces.41","codeforces.67","codeforces.49","codeforces.20","codeforces.34","codeforces.55"]},"stats":{"AC":8,"WA":16,"TLE":0,"MLE":0,"RE":0,"SE":0,"IGN":0,"CE":0,"s10":1,"s20":1,"s30":5,"s40":2,"s50":3,"s70":1,"s80":2,"s90":1,"s100":8}},"canViewRecord":true,"postSubmitUrl":"/p/2439/submit","getSubmissionsUrl":"/record?fullStatus=true&pid=2439","getRecordDetailUrl":"/record/%7Brid%7D","pretestConnUrl":"record-conn?pretest=1&uidOrName=0&pid=2439&domainId=system"}';
+      window.UserContextNew = '{}';
+    </script>
+  </body>
+</html>

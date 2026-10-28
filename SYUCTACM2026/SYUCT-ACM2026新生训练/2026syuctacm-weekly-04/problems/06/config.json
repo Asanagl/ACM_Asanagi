@@ -1,0 +1,305 @@
+{
+  "slug": "04-06",
+  "title": "反转字符串",
+  "interactive": false,
+  "timeLimitMs": 1000,
+  "memoryLimitMb": 256,
+  "standard": "gnu++17",
+  "statement": "docs/statement.md",
+  "tutorial": "docs/tutorial.md",
+  "validator": "src/validator/validator.cpp",
+  "generator": {
+    "path": "src/generator/generator.cpp",
+    "cases": [
+      {
+        "name": "sample-1",
+        "type": "sample",
+        "seed": 1,
+        "group": "sample"
+      },
+      {
+        "name": "sample-2",
+        "type": "sample-2",
+        "seed": 2,
+        "group": "sample"
+      },
+      {
+        "name": "min-digit",
+        "type": "min-digit",
+        "seed": 1001,
+        "group": "secret"
+      },
+      {
+        "name": "min-letter",
+        "type": "min-letter",
+        "seed": 1002,
+        "group": "secret"
+      },
+      {
+        "name": "len2-distinct",
+        "type": "len2-distinct",
+        "seed": 1003,
+        "group": "secret"
+      },
+      {
+        "name": "len2-same",
+        "type": "len2-same",
+        "seed": 1004,
+        "group": "secret"
+      },
+      {
+        "name": "len3",
+        "type": "len3",
+        "seed": 1005,
+        "group": "secret"
+      },
+      {
+        "name": "four-distinct",
+        "type": "four-distinct",
+        "seed": 1006,
+        "group": "secret"
+      },
+      {
+        "name": "digits-leading",
+        "type": "digits-leading",
+        "seed": 1007,
+        "group": "secret"
+      },
+      {
+        "name": "digits-zeros",
+        "type": "digits-zeros",
+        "seed": 1008,
+        "group": "secret"
+      },
+      {
+        "name": "digits-long",
+        "type": "digits-long",
+        "seed": 1009,
+        "group": "secret"
+      },
+      {
+        "name": "pal-odd",
+        "type": "pal-odd",
+        "seed": 1010,
+        "group": "secret"
+      },
+      {
+        "name": "pal-even",
+        "type": "pal-even",
+        "seed": 1011,
+        "group": "secret"
+      },
+      {
+        "name": "pal-odd-large",
+        "type": "pal-odd-large",
+        "seed": 1012,
+        "group": "secret"
+      },
+      {
+        "name": "same-small",
+        "type": "same-small",
+        "seed": 1013,
+        "group": "secret"
+      },
+      {
+        "name": "same-large",
+        "type": "same-large",
+        "seed": 1014,
+        "group": "secret"
+      },
+      {
+        "name": "alternating-small",
+        "type": "alternating-small",
+        "seed": 1015,
+        "group": "secret"
+      },
+      {
+        "name": "alternating-large",
+        "type": "alternating-large",
+        "seed": 1016,
+        "group": "secret"
+      },
+      {
+        "name": "ascending",
+        "type": "ascending",
+        "seed": 1017,
+        "group": "secret"
+      },
+      {
+        "name": "descending",
+        "type": "descending",
+        "seed": 1018,
+        "group": "secret"
+      },
+      {
+        "name": "nonpal-odd",
+        "type": "nonpal-odd",
+        "seed": 1019,
+        "group": "secret"
+      },
+      {
+        "name": "nonpal-even",
+        "type": "nonpal-even",
+        "seed": 1020,
+        "group": "secret"
+      },
+      {
+        "name": "mixed-runs",
+        "type": "mixed-runs",
+        "seed": 1021,
+        "group": "secret"
+      },
+      {
+        "name": "kill-even-mid",
+        "type": "kill-even-mid",
+        "seed": 1022,
+        "group": "secret"
+      },
+      {
+        "name": "random-binary",
+        "type": "random-binary",
+        "seed": 2001,
+        "group": "secret"
+      },
+      {
+        "name": "random-digits",
+        "type": "random-digits",
+        "seed": 2002,
+        "group": "secret"
+      },
+      {
+        "name": "random-small-1",
+        "type": "random-small",
+        "seed": 2003,
+        "group": "secret"
+      },
+      {
+        "name": "random-small-2",
+        "type": "random-small",
+        "seed": 2004,
+        "group": "secret"
+      },
+      {
+        "name": "random-alnum",
+        "type": "random-alnum",
+        "seed": 2005,
+        "group": "secret"
+      },
+      {
+        "name": "random-large",
+        "type": "random-large",
+        "seed": 3001,
+        "group": "secret"
+      },
+      {
+        "name": "near-max",
+        "type": "near-max",
+        "seed": 3002,
+        "group": "secret"
+      },
+      {
+        "name": "max-random",
+        "type": "max-random",
+        "seed": 3003,
+        "group": "secret"
+      },
+      {
+        "name": "max-same",
+        "type": "max-same",
+        "seed": 3004,
+        "group": "secret"
+      },
+      {
+        "name": "max-alternating",
+        "type": "max-alternating",
+        "seed": 3005,
+        "group": "secret"
+      },
+      {
+        "name": "max-ascending",
+        "type": "max-ascending",
+        "seed": 3006,
+        "group": "secret"
+      },
+      {
+        "name": "max-pal",
+        "type": "max-pal",
+        "seed": 3007,
+        "group": "secret"
+      },
+      {
+        "name": "max-digits",
+        "type": "max-digits",
+        "seed": 3008,
+        "group": "secret"
+      },
+      {
+        "name": "max-nonpal",
+        "type": "max-nonpal",
+        "seed": 3009,
+        "group": "secret"
+      }
+    ]
+  },
+  "checker": "src/checker/checker.cpp",
+  "build": {
+    "cppCompiler": "g++",
+    "cppFlags": [
+      "-std=gnu++17",
+      "-O2",
+      "-pipe"
+    ]
+  },
+  "solutions": [
+    {
+      "name": "main",
+      "path": "src/solution.cpp",
+      "language": "cpp",
+      "role": "main"
+    },
+    {
+      "name": "solution2",
+      "path": "src/solution2.cpp",
+      "language": "cpp",
+      "role": "reference"
+    }
+  ],
+  "wrongSolutions": [
+    {
+      "name": "wrong-a",
+      "path": "src/wrong/wrong-a.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    },
+    {
+      "name": "wrong-b",
+      "path": "src/wrong/wrong-b.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    },
+    {
+      "name": "wrong-c",
+      "path": "src/wrong/wrong-c.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    },
+    {
+      "name": "wrong-even-mid",
+      "path": "src/wrong/wrong-even-mid.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    },
+    {
+      "name": "wrong-middle-drop",
+      "path": "src/wrong/wrong-middle-drop.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    },
+    {
+      "name": "wrong-sort",
+      "path": "src/wrong/wrong-sort.cpp",
+      "language": "cpp",
+      "expected": "fail"
+    }
+  ]
+}

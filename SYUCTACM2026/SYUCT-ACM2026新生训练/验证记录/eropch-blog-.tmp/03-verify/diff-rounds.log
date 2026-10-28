@@ -1,0 +1,33 @@
+seed=12345 rounds=120
+oracle = explicit 10-char membership table (no case folding, no shared code)
+
+round  20 len=2841  expected='113 109 99 108 103'             main='113 109 99 108 103'             s2='113 109 99 108 103'             blind3='113 109 99 108 103' OK
+round  40 len=3451  expected='125 154 100 138 134'            main='125 154 100 138 134'            s2='125 154 100 138 134'            blind3='125 154 100 138 134' OK
+round  60 len=1528  expected='70 67 58 56 70'                 main='70 67 58 56 70'                 s2='70 67 58 56 70'                 blind3='70 67 58 56 70' OK
+round  80 len=624   expected='30 15 17 29 21'                 main='30 15 17 29 21'                 s2='30 15 17 29 21'                 blind3='30 15 17 29 21' OK
+round 100 len=1347  expected='50 51 46 47 45'                 main='50 51 46 47 45'                 s2='50 51 46 47 45'                 blind3='50 51 46 47 45' OK
+round 120 len=976   expected='29 29 25 34 37'                 main='29 29 25 34 37'                 s2='29 29 25 34 37'                 blind3='29 29 25 34 37' OK
+
+=== directed boundary cases ===
+single-a       len=1        expected='1 0 0 0 0'                    main='1 0 0 0 0'                    s2='1 0 0 0 0'                    blind3='1 0 0 0 0' OK
+single-A       len=1        expected='1 0 0 0 0'                    main='1 0 0 0 0'                    s2='1 0 0 0 0'                    blind3='1 0 0 0 0' OK
+single-y       len=1        expected='0 0 0 0 0'                    main='0 0 0 0 0'                    s2='0 0 0 0 0'                    blind3='0 0 0 0 0' OK
+single-Y       len=1        expected='0 0 0 0 0'                    main='0 0 0 0 0'                    s2='0 0 0 0 0'                    blind3='0 0 0 0 0' OK
+single-z       len=1        expected='0 0 0 0 0'                    main='0 0 0 0 0'                    s2='0 0 0 0 0'                    blind3='0 0 0 0 0' OK
+sample1        len=10       expected='0 1 0 2 0'                    main='0 1 0 2 0'                    s2='0 1 0 2 0'                    blind3='0 1 0 2 0' OK
+sample2        len=10       expected='2 2 2 2 2'                    main='2 2 2 2 2'                    s2='2 2 2 2 2'                    blind3='2 2 2 2 2' OK
+sample3        len=3        expected='0 1 0 0 0'                    main='0 1 0 0 0'                    s2='0 1 0 0 0'                    blind3='0 1 0 0 0' OK
+all-consonant  len=21       expected='0 0 0 0 0'                    main='0 0 0 0 0'                    s2='0 0 0 0 0'                    blind3='0 0 0 0 0' OK
+all-y          len=6        expected='0 0 0 0 0'                    main='0 0 0 0 0'                    s2='0 0 0 0 0'                    blind3='0 0 0 0 0' OK
+uoiea          len=5        expected='1 1 1 1 1'                    main='1 1 1 1 1'                    s2='1 1 1 1 1'                    blind3='1 1 1 1 1' OK
+reverse-order  len=10       expected='2 2 2 2 2'                    main='2 2 2 2 2'                    s2='2 2 2 2 2'                    blind3='2 2 2 2 2' OK
+max-a          len=1000000  expected='1000000 0 0 0 0'              main='1000000 0 0 0 0'              s2='1000000 0 0 0 0'              blind3='1000000 0 0 0 0' OK
+max-A          len=1000000  expected='1000000 0 0 0 0'              main='1000000 0 0 0 0'              s2='1000000 0 0 0 0'              blind3='1000000 0 0 0 0' OK
+max-u          len=1000000  expected='0 0 0 0 1000000'              main='0 0 0 0 1000000'              s2='0 0 0 0 1000000'              blind3='0 0 0 0 1000000' OK
+max-U          len=1000000  expected='0 0 0 0 1000000'              main='0 0 0 0 1000000'              s2='0 0 0 0 1000000'              blind3='0 0 0 0 1000000' OK
+max-cons       len=1000000  expected='0 0 0 0 0'                    main='0 0 0 0 0'                    s2='0 0 0 0 0'                    blind3='0 0 0 0 0' OK
+max-y          len=1000000  expected='0 0 0 0 0'                    main='0 0 0 0 0'                    s2='0 0 0 0 0'                    blind3='0 0 0 0 0' OK
+max-mix        len=1000000  expected='200000 200000 200000 200000 200000' main='200000 200000 200000 200000 200000' s2='200000 200000 200000 200000 200000' blind3='200000 200000 200000 200000 200000' OK
+near-max       len=999999   expected='38289 38986 38495 38654 38354' main='38289 38986 38495 38654 38354' s2='38289 38986 38495 38654 38354' blind3='38289 38986 38495 38654 38354' OK
+
+TOTAL_ROUNDS=120 (seed 12345, small-data biased) DIRECTED=20 FAILS=0

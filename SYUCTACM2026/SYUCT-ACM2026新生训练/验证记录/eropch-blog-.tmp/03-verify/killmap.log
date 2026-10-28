@@ -1,0 +1,51 @@
+=== generation / validation / main ===
+sample-1               group=sample type=sample             len=10       ans=0 1 0 2 0
+sample-2               group=sample type=sample2            len=10       ans=2 2 2 2 2
+sample-3               group=sample type=sample3            len=3        ans=0 1 0 0 0
+min-a                  group=secret type=min                len=1        ans=1 0 0 0 0
+min-consonant          group=secret type=min-consonant      len=1        ans=0 0 0 0 0
+min-y                  group=secret type=single-y           len=1        ans=0 0 0 0 0
+single-u               group=secret type=single-u           len=1        ans=0 0 0 0 1
+small-mixed-1          group=secret type=small-mixed        len=19       ans=4 3 2 4 1
+small-mixed-2          group=secret type=small-mixed        len=7        ans=0 2 0 0 0
+small-mixed-3          group=secret type=small-mixed        len=11       ans=0 0 2 1 0
+all-lower-vowels       group=secret type=all-lower-vowels   len=1000     ans=200 200 200 200 200
+all-upper-vowels       group=secret type=all-upper-vowels   len=1000     ans=200 200 200 200 200
+no-vowels-1            group=secret type=no-vowels          len=500      ans=0 0 0 0 0
+no-vowels-2            group=secret type=no-vowels          len=500      ans=0 0 0 0 0
+y-heavy-1              group=secret type=y-heavy            len=2000     ans=127 127 141 122 134
+y-heavy-2              group=secret type=y-heavy            len=2000     ans=111 107 148 125 111
+y-heavy-3              group=secret type=y-heavy            len=2000     ans=121 112 116 112 100
+upper-heavy-1          group=secret type=upper-heavy        len=2000     ans=78 79 72 81 80
+upper-heavy-2          group=secret type=upper-heavy        len=2000     ans=72 78 91 89 61
+u-heavy-1              group=secret type=u-heavy            len=2000     ans=42 43 50 50 977
+u-heavy-2              group=secret type=u-heavy            len=2000     ans=50 40 43 42 926
+u-heavy-3              group=secret type=u-heavy            len=2000     ans=37 49 44 46 961
+boundary-near-max-1    group=secret type=boundary-near-max  len=999999   ans=38390 38378 38536 38459 38257
+boundary-near-max-2    group=secret type=boundary-near-max  len=999999   ans=38467 38832 38560 38402 38770
+boundary-max           group=secret type=boundary-max       len=1000000  ans=38439 38296 38300 38358 38612
+max-same-lower         group=secret type=max-same-lower     len=1000000  ans=1000000 0 0 0 0
+max-same-upper         group=secret type=max-same-upper     len=1000000  ans=1000000 0 0 0 0
+random-small-1         group=secret type=random-small       len=330      ans=6 9 9 17 5
+random-small-2         group=secret type=random-small       len=598      ans=32 21 29 21 28
+random-small-3         group=secret type=random-small       len=842      ans=32 20 24 38 38
+random-mid-1           group=secret type=random-mid         len=14100    ans=548 553 583 515 550
+random-mid-2           group=secret type=random-mid         len=56976    ans=2131 2054 2160 2238 2197
+random-mid-3           group=secret type=random-mid         len=41175    ans=1567 1600 1549 1506 1576
+random-large-1         group=secret type=random-large       len=628371   ans=23947 24206 23999 24181 24019
+random-large-2         group=secret type=random-large       len=808553   ans=30839 31135 31268 31149 30895
+random-large-3         group=secret type=random-large       len=434608   ans=16569 16495 16757 16560 16732
+random-max-1           group=secret type=random-max         len=1000000  ans=38623 38258 38540 38259 38220
+random-max-2           group=secret type=random-max         len=1000000  ans=38453 38643 38236 38184 38479
+random-max-3           group=secret type=random-max         len=1000000  ans=38324 38321 38652 38785 38602
+
+=== wrong solution kill map ===
+wrong-y            KILLED    at ('min-y', 'WA')                          
+wrong-case         KILLED    at ('small-mixed-1', 'WA')                  
+wrong-total        KILLED    at ('min-a', 'WA')                          
+wrong-miss-u       KILLED    at ('single-u', 'WA')                       
+wrong-or-literal   KILLED    at ('min-a', 'WA')                          
+wrong-last         KILLED    at ('min-a', 'WA')                          
+
+sample=3 secret=36 total=39
+ALL_KILLED=True

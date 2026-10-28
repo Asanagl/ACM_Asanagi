@@ -1,0 +1,251 @@
+kimi version 2.2.0
+• The user asks for a review/solution write-up of a simple matrix addition problem. Strict constraints: no tools, no file reads, no commands. Just answer in Chinese with seven parts.
+
+  Let me carefully compose.
+
+  1. Task restatement: input format, output format, all data ranges and answer ranges.
+
+  2. Algorithm: read n,m; read n*m integers for A; read n*m for B; output sum. But note: since input gives A fully then B, and output is row-major c[i][j] = a+b, we can store A (90,000 ints) then read B and output sums immediately. Or store both. Provide pseudocode.
+
+  Actually to be careful: output order is row-major over full matrix; B comes in the same order, so streaming works: store A in a 2D array, then for each i,j read b and immediately output a[i][j]+b[i][j]. That's fine — output while reading is fine since input order matches.
+
+  3. Correctness proof: invariant, induction, uniqueness.
+
+  4. Complexity: O(nm) time, O(nm) extra space (or O(nm) for A). With n,m ≤ 300, nm ≤ 90,000, so 90,000 additions — trivially safe within 1s; memory 90,000 * 4 bytes = 360 KB ≪ 256 MiB. Note that reading input with cin might be a concern but 180,000 integers is trivial; still recommend fast IO.
+
+  5. Edge cases: 1x1; n=1, m=300; n=300, m=1; all zeros; all max 10^6 → 2,000,000 (fits int); all min -10^6 → -2,000,000; mixed giving 0; negative results; large 300x300 maximum; values at boundary ±10^6; trailing newline absent? The statement says input ends with newline. Also single row/column formatting (no extra spaces). Also possibility of '\r' line endings? Not stated, but reading with >> handles whitespace anyway.
+
+  6. Risks: ambiguity: statement says "整数" and ranges given; no ambiguity about ordering since explicitly row-major and A then B. Risks: (a) reading A into array of size 300x300 with int — fine; (b) using short/int overflow — not an issue for sums but intermediate if combined; (c) printing extra spaces / missing newline at end — actually per judging semantics intra-line whitespace doesn't matter, but statement requires exact format; (d) forgetting that output must be n lines; (e) reading with scanf("%d") loop count errors; (f) if using streaming output, must flush/not interleave incorrectly — with printf/cout fine; (g) potential memory if declaring static arrays per test — only one test case; (h) not handling multiple test cases — statement says only one; reading until EOF would also work but must not loop incorrectly; (i) 32-bit int sufficient as stated, but note that if someone uses `char`/`short` they'd overflow; (j) statement says "输出 n 行" but judging ignores line breaks — so no risk of WA from line breaks, but still follow spec; (k) end-of-line "最后一行末尾是否需要换行" — statement says each line no trailing space; trailing newline after last line generally accepted. (l) The claim "答案唯一" is true.
+
+  Also mention: the "评测时会按顺序把这 n*m 个整数与标准答案逐个比较" and judge semantics say whitespace flexible — so both fine.
+
+  7. Complete C++17 implementation.
+
+  Let me write clean code:
+
+  ```cpp
+  #include <cstdio>
+  #include <vector>
+
+  int main() {
+      int n, m;
+      if (std::scanf("%d %d", &n, &m) != 2) return 0;
+
+      std::vector<int> a(static_cast<size_t>(n) * m);
+      for (int i = 0; i < n; ++i)
+          for (int j = 0; j < m; ++j)
+              std::scanf("%d", &a[static_cast<size_t>(i) * m + j]);
+
+      std::vector<int> c(static_cast<size_t>(n) * m);
+      for (int i = 0; i < n; ++i)
+          for (int j = 0; j < m; ++j) {
+              int b;
+              std::scanf("%d", &b);
+              c[static_cast<size_t>(i) * m + j] = a[static_cast<size_t>(i) * m + j] + b;
+          }
+
+      std::string out;
+      ...
+  }
+  ```
+
+  Simplest: use printf with formatting; or build a string. Let's write straightforward:
+
+  ```cpp
+  #include <cstdio>
+  #include <vector>
+
+  int main() {
+      int n = 0, m = 0;
+      if (std::scanf("%d %d", &n, &m) != 2) return 0;
+      const std::size_t total = static_cast<std::size_t>(n) * static_cast<std::size_t>(m);
+      std::vector<int> a(total), c(total);
+      for (std::size_t k = 0; k < total; ++k) std::scanf("%d", &a[k]);
+      for (std::size_t k = 0; k < total; ++k) {
+          int b = 0;
+          std::scanf("%d", &b);
+          c[k] = a[k] + b;
+      }
+      for (int i = 0; i < n; ++i) {
+          for (int j = 0; j < m; ++j) {
+              if (j) std::putchar(' ');
+              std::printf("%d", c[static_cast<std::size_t>(i) * m + j]);
+          }
+          std::putchar('\n');
+      }
+      return 0;
+  }
+  ```
+
+  This is correct since B is given in the same row-major order as A and output.
+
+  Should I worry about scanning returning != 1? Input guaranteed valid.
+
+  Alternatively use iostream with sync_with_stdio(false). Either is fine. I'll use scanf/printf, mention it's fast enough.
+
+  Actually maybe better to show the version storing both matrices for clarity in proof. But streaming is fine and I'll prove it. Maybe use both: store A, read B, compute. I'll justify.
+
+  Let me also be careful with complexity statement: extra space O(nm) = 90,000 ints = 360 KB (a and c), plus trivial. Under 256 MiB trivially.
+
+  Time: 180,000 integer reads + 90,000 additions + 90,000 integer writes ≈ well under 1 s, even with slow IO (cin without sync could handle ~10^5 ints easily; scanf fine).
+
+  Actually if using cin without sync_with_stdio(false), 180k ints still fine (~ tens of ms). Fine.
+
+  Let me write the correctness proof:
+
+  - Invariant after processing: for each k, a[k] holds the k-th input value of matrix A; c[k] holds A[k] + B[k] where B[k] is the k-th value of B.
+  - The k-th value of matrix A in row-major is a[i][j] with i = ⌊k/m⌋+1, j = k mod m + 1. Both A and B are given in this same order (statement: n lines of m each, A completely then B completely).
+  - So c[k] = a[i][j]+b[i][j] = c[i][j] by definition.
+  - Output loops emit k = 0..nm-1 in exactly that order, so output is row-major c[1][1]...c[n][m].
+  - Formatting: single space between adjacent in a row, exactly one '\n' after each row, no trailing spaces. Thus output matches spec.
+  - Uniqueness: each c[i][j] determined by input; the program outputs each exactly once, no extras, hence unique correct.
+
+  Edge cases list:
+
+  1. n = m = 1 — minimal size, checks no off-by-one and format for single token/no space.
+  2. n = 1, m = 300 — single row, 299 spaces, no newline between rows; checks per-row separator and that we don't drop the line.
+  3. n = 300, m = 1 — single column, each line has one token; checks that lines aren't merged and no trailing space.
+  4. n = m = 300 — max size; checks no index/array overflow (90,000 elements), performance.
+  5. All zeros — sum 0, checks zero handling and that 0 prints as "0" not "-0" or empty.
+  6. All a = b = 10^6 — max answer 2,000,000; checks int range and no overflow at upper bound.
+  7. All a = b = -10^6 — min answer -2,000,000; checks negative formatting and no unsigned wrap.
+  8. Mixed signs summing to zero, e.g. 10^6 and -10^6 — checks exact cancellation printing "0" (not "-0", not "0.0").
+  9. Results like -1 vs 1 among positives/negatives — checks sign printing.
+  10. Random small 3x4 etc. for cross-check.
+  11. Values at both bounds mixed within one matrix (heterogeneous) — checks per-element handling.
+  12. n ≠ m (e.g. 2x5) — the statement warns n and m may differ; catches bugs where a single index size used wrongly, or loops swap.
+  13. Only one test case; input ends with newline — checks we don't hang waiting for more input (e.g., using while(cin>>...) incorrectly or reading an extra matrix).
+
+  Hmm, 13 could be a "risk" too.
+
+  Risks:
+
+  - The statement says "整数" with bounds; no float involved. Fine.
+  - Reading via `cin >> ` handles arbitrary whitespace including '\r' (Windows CRLF) — using `scanf("%d")` also skips whitespace. But if someone reads lines with getline and parses, CRLF could break naive parsing. That's an implementation risk, not stated in statement though. Statement says format precisely; CRLF not guaranteed. Mention as implementation risk (judge files on Windows may have CRLF).
+  - Trailing newline after last line: some strict checkers might complain? Judge semantics says whitespace insensitive. Still output '\n' after each line, which is standard.
+  - Extra output (e.g., printing n m, or debug text) → wrong.
+  - Confusing the order: reading interleaved (read row of A, row of B) → wrong. Emphasized in 说明.
+  - Using `int` arrays declared `[300][300]` okay; but declaring `a[305][305]` as local variable on stack: 305*305*4 ≈ 372 KB per array — 2 arrays ~744 KB, may exceed default stack on some judges (often 1 MB or 8 MB). Actually 300x300 static local arrays are fine but 2D local arrays of 300x300 int = 360KB each; two = 720KB; Windows default stack 1MB — risky but typically okay; recommend global or std::vector. This is a real practical risk worth mentioning.
+  - Overflow: sums fit in int; but if someone uses `short` or `char`, or `unsigned`, wrong. Also if someone multiplies n*m as int — 300*300 = 90,000 fits.
+  - Off-by-one in loops (using <= n).
+  - Not printing newline at end of last line: generally accepted (judge whitespace-insensitive), but spec-wise add it.
+  - Forgetting that there is exactly one test case and looping "while (scanf(...)==2)" would be okay actually; but if reading extra data it may output extra matrix — wrong. Hmm with single test, looping while input exists would only run once. Fine.
+  - Potential ambiguity: statement says output n lines; judge ignores line breaks — so both are accepted; no risk of WA on line-break choices, but don't rely on it — follow spec.
+  - Potential ambiguity in "答案唯一" — true.
+  - Another: statement's constraint "同一行内相邻整数之间恰好有一个空格" describes input; input may actually have different whitespace in practice, so read tokens with `>>`/`scanf`, not by fixed columns.
+  - 32-bit int suffices; but be careful not to print with `%u` or `%ld` mismatched to int (undefined behavior) — use `%d` or cout.
+  - If using printf with `%d` and passing int — fine.
+  - Beware of mixing printf and cout with sync off — not relevant here.
+
+  I should also note the judge semantics say integer count must be exactly n*m — our output has exactly nm tokens.
+
+  Now write the final answer in Chinese, seven sections. Keep it reasonably concise but complete. No tools.
+
+  Format: use headings 1..7. Code block for C++.
+
+  Let me draft.
+
+  Section 1: 任务复述
+  - 输入：只有一组测试数据。第一行两个正整数 n, m（1 ≤ n,m ≤ 300），空格分隔。接着 n 行，每行 m 个整数，为矩阵 A 的全部元素，按行优先顺序给出；A 给完后，再给 n 行、每行 m 个整数，为矩阵 B，同样按行优先顺序。元素范围 -10^6..10^6。行内恰好一个空格，行末无多余空格，输入以换行结束。
+  - 输出：n 行，每行 m 个整数，第 i 行第 j 个数是 a[i][j]+b[i][j]；行内恰好一个空格分隔，行末无多余空格；不输出 n,m 和任何提示。按行优先顺序逐个整数比较，个数必须恰为 n*m。
+  - 数据范围：1 ≤ n,m ≤ 300；-10^6 ≤ a,b ≤ 10^6。
+  - 答案范围：每个 c[i][j] ∈ [-2·10^6, 2·10^6]，可用 32 位有符号 int 表示。
+
+  Section 2: 算法
+  Store A (nm ints). Then read B in same order, compute into C or output directly. Pseudocode.
+
+  I'll write:
+
+  ```
+  read n, m
+  total = n*m
+  for k = 0..total-1: read a[k]
+  for k = 0..total-1:
+      read b
+      c[k] = a[k] + b
+  for i = 0..n-1:
+      for j = 0..m-1:
+          if j > 0: print ' '
+          print c[i*m+j]
+      print '\n'
+  ```
+
+  Key point: row-major index k = (i-1)*m + (j-1) matches matrix element (i,j) for both A and B because input order is identical.
+
+  Section 3: proof as above. Maybe number steps: Lemma 1 (index correspondence), Lemma 2 (values), Theorem (output correctness), plus uniqueness.
+
+  Section 4: complexity
+  Time O(nm), max 90,000 additions + 180,000 reads + 90,000 writes; space O(nm) ints = 360 KB with two vectors; safe.
+
+  Actually if I compute into c and also keep a, that's 2*90,000*4 = 720 KB. Still trivial. Or I could reuse a: a[k] += b and print a. Let's use single vector to reduce (or just say 720 KB). I'll keep two vectors for clarity but note could reuse. Actually simpler: read A into a, then read b and do a[k] += b, then print a. Then extra space is just one vector 360 KB. Nice.
+
+  Let me use that in the code:
+
+  ```cpp
+  std::vector<int> a(total);
+  // read A
+  for each k: read b; a[k] += b;
+  // print a
+  ```
+
+  That is clean and O(nm) space.
+
+  Section 5: edge cases as list.
+
+  Section 6: risks.
+
+  Section 7: code.
+
+  Code final:
+
+  ```cpp
+  #include <cstdio>
+  #include <vector>
+
+  int main() {
+      int n = 0, m = 0;
+      if (std::scanf("%d %d", &n, &m) != 2) return 0;
+
+      const std::size_t total = static_cast<std::size_t>(n) * static_cast<std::size_t>(m);
+      std::vector<int> a(total);
+
+      for (std::size_t k = 0; k < total; ++k) {
+          if (std::scanf("%d", &a[k]) != 1) return 0;
+      }
+      for (std::size_t k = 0; k < total; ++k) {
+          int b = 0;
+          if (std::scanf("%d", &b) != 1) return 0;
+          a[k] += b;
+      }
+
+      for (int i = 0; i < n; ++i) {
+          for (int j = 0; j < m; ++j) {
+              if (j > 0) std::putchar(' ');
+              std::printf("%d", a[static_cast<std::size_t>(i) * static_cast<std::size_t>(m) + static_cast<std::size_t>(j)]);
+          }
+          std::putchar('\n');
+      }
+      return 0;
+  }
+  ```
+
+  This compiles under gnu++17, standard library only. Note: <cstdio> and <vector>. std::size_t needs <cstddef> technically, but <cstdio>/<vector> provide it. To be safe include <cstddef>.
+
+  Verify sample: n=2,m=3, A = 1 -2 3 4 5 -6; B = -1 2 -3 7 -8 9. a becomes 0 0 0 11 -3 3. Output:
+  0 0 0
+  11 -3 3
+  Matches.
+
+  I'll mention I traced the sample.
+
+  Now write the final response. Keep headings shallow. Use Chinese.
+
+  Length: moderately detailed but not bloated. Seven sections required.
+
+  One more consideration: "复杂度...并判断在 1 秒时限、256 MiB 内存下是否安全" — 90,000 additions trivially safe; mention even with slow IO it's fine.
+
+  Also mention max output size: 90,000 numbers up to 8 chars → ~810 KB output; fine.
+
+  Write it.
+
+To resume this session: kimi -r session_fc55f2c3-eef9-4778-80bd-89719fb7679e

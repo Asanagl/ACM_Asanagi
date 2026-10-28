@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html data-page="problem_detail" data-layout="basic" class="layout--basic page--problem_detail theme--light nojs" data-mantine-color-scheme="light" lang="" data-app="Hydro">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="canonical" href="https://oj.syuctacm.cn/p/388">  <meta name="theme-color" content="#56758f">
+    <meta property="og:site_name" content="SYUCT OJ" />
+  <meta property="og:url" content="https://oj.syuctacm.cn/p/388" />
+  <meta property="og:image" content="/favicon-96x96.png" />
+                        <meta property="og:title" content="P0726. 幸运UID - SYUCT OJ" />
+    <meta property="og:description" content="DESCRIPTION
+一款跨时代游戏即将开服，小K学长认为6个位置上的数字之和可以刚好被他的幸运数字n整除的UID会给他带来幸运
+请问，6位数字的UID中，有多少个UID是小K学长的幸运UID呢？
+..." />
+    <title>幸运UID - 题目详情 - SYUCT OJ</title>
+  <style>
+    body {
+      --font-family: "Open Sans", "Open Sans", "Seravek", "Segoe UI", "Verdana", "PingFang SC", "Hiragino Sans GB", "Lantinghei SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans";
+      --code-font-family: "Source Code Pro", "monaco", "Source Code Pro", "Consolas", "Lucida Console", "monospace";
+      --font-ligatures: none !important;
+    }
+          #panel { display: flex; flex-direction: column; }
+      </style>
+      <link rel="stylesheet" media="all" href="/theme-4.58.5.css">
+        <script>
+      var _htmlNode = document.documentElement;
+      _htmlNode.className = _htmlNode.className.replace(' nojs', ' hasjs');
+      window.UiContext = '{"cdn_prefix":"/","url_prefix":"/","ws_prefix":"/","constantVersion":"afaf5740","domainId":"system","domainVersion":1792848814990,"extraTitleContent":"\u5E78\u8FD0UID","SWConfig":{"preload":"","hosts":["http://oj.syuctacm.cn","https://oj.syuctacm.cn","https://oj.syuctacm.cn/","/"],"assets":[],"domains":[]}}';
+      window.UserContext = '{"_id":0,"mail":"Guest@hydro.local","uname":"Guest","hashType":"hydro","priv":8,"regat":"2025-03-06T12:26:22.389Z","loginat":"2026-03-07T10:35:53.368Z","perm":"BigInt::1291862133704988065921","role":"guest","scope":"BigInt::-1","tfa":false,"authn":false,"group":[],"domains":[],"timeZone":"Asia/Shanghai","codeLang":"cc.cc17","avatar":"gravatar:Guest@hydro.local","gender":2,"backgroundImage":"/components/profile/backgrounds/1.jpg","pinnedDomains":[],"checkin_time":"1997-01-11","showTimeAgo":true,"fontFamily":"Open Sans","codeFontFamily":"Source Code Pro","theme":"light","preferredEditorType":"sv","formatCode":true,"avatarUrl":"//cn.gravatar.com/avatar/97119d3d15d5201ab506330ed4bab0f7?d=mm&s=128"}';
+    </script>
+      </head>
+<body>
+      <script type="text/javascript" src="/resource/afaf5740/entry.js"></script>
+    <script type="text/javascript" src="/resource/4.58.5/lang-zh.js"></script>
+    <script type="text/javascript" src="/hydro-4.58.5.js"></script>
+    <nav class="nav slideout-menu" id="menu">
+  <div class="row"><div class="columns clearfix">
+    <ol class="nav__list nav__list--main clearfix">
+      <li class="nav__list-item">
+        <a href="/"><img class="nav__logo" src="/nav_logo_dark.png"></a>
+      </li>        <li class="nav__list-item">
+  <a href="/" class="nav__item">
+    首页
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/p" class="nav__item nav--active">
+    题库
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/training" class="nav__item">
+    训练
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/contest" class="nav__item">
+    比赛
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/homework" class="nav__item">
+    作业
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/discuss" class="nav__item">
+    讨论
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/record" class="nav__item">
+    评测记录
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/ranking" class="nav__item">
+    排名
+  </a>
+</li>
+      </ol>
+    <ol class="nav__list nav__list--secondary clearfix">
+          <li class="nav__list-item"><a href="/login" class="nav__item" name="nav_login">登录</a></li>
+            <li class="nav__list-item"><a href="/register" class="nav__item--round">注册</a></li>
+            <li class="nav__list-item nojs--hide" data-dropdown-pos="bottom right" data-dropdown-custom-class="nav__dropdown" data-dropdown-target="#menu-nav-user" data-dropdown-disabledconstrainToWindow data-dropdown-trigger-desktop-only>
+        <a href="javascript:;" class="nav__item">
+          <span class="icon icon-global"></span>Language <span class="icon icon-expand_more"></span>
+        </a>
+        <ol class="dropdown-target menu" id="menu-nav-user"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+      </li>
+        </ol>
+  </div></div>
+</nav>
+<nav class="nav--shadow"></nav>
+<div class="slideout-panel" id="panel">
+    <div class="slideout-overlay"></div>
+  <div class="header--mobile">
+  <div class="row"><div class="columns clearfix">
+    <div class="float-left">
+      <a class="header--mobile__domain" href="/" target="_self">
+        <img src="/nav_logo_dark.png">
+      </a>
+    </div>
+    <div class="float-right">
+      <button type="button" class="header__hamburger">
+  <div class="hamburger hamburger--spin">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </div>
+</button>
+    </div>
+  </div></div>
+</div>
+  <div class="main">
+        <script>
+
+  
+  
+  
+  
+  
+</script>
+                      <meta property="og:title" content="P0726. 幸运UID - SYUCT OJ" />
+    <meta property="og:description" content="DESCRIPTION
+一款跨时代游戏即将开服，小K学长认为6个位置上的数字之和可以刚好被他的幸运数字n整除的UID会给他带来幸运
+请问，6位数字的UID中，有多少个UID是小K学长的幸运UID呢？
+..." />
+  <div class="row" data-sticky-parent>
+  <div class="medium-9 columns">
+    <div class="section">
+      <div class="section__header">
+        <h1 class="section__title">
+                    #P0726. 幸运UID
+        </h1>
+              </div>
+      <div class="section__body">
+        <ul class="problem__tags">
+                      <span class="problem__tag-item">ID: 388</span>
+                    <span class="problem__tag-item icon icon-book">传统题</span>
+                                <span class="problem__tag-item icon icon-stopwatch">1000ms</span>
+            <span class="problem__tag-item icon icon-comparison">256MiB</span>
+                                <a class="problem__tag-item interactive" href="/record?pid=388">尝试: 525</a>
+            <a class="problem__tag-item interactive" href="/record?pid=388&amp;status=1">已通过: 174</a>
+            <span class="problem__tag-item">难度: 5</span>
+            <span class="problem__tag-item interactive">上传者: <span class="user-profile-link">
+      <img class="small user-profile-avatar v-center" loading="lazy" src="//q1.qlogo.cn/g?b=qq&amp;nk=2595583127&amp;s=160" width="20" height="20">
+    <a class="user-profile-name uname--lv1" href="/user/3">
+          zine
+      </a>
+  </span>
+</span>
+                                <span name="show_tags" class="problem__tag-item interactive nojs--hide icon icon-tag">标签&gt;</span><span class="problem__tag-item tags hasjs--hide">SYUCT</span><span class="problem__tag-item tags hasjs--hide">数学</span>        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="problem-content-container"><div class="problem-content" data-marker-enabled>
+        <div class="section__header non-scratchpad--hide">
+          <h1 class="section__title">幸运UID</h1>
+        </div>
+                <div class="section__body typo richmedia" data-fragment-id="problem-description">
+                      <h1 id="description" tabindex="-1">Description</h1>
+<p>一款跨时代游戏即将开服，小K学长认为6个位置上的数字之和可以刚好被他的幸运数字n整除的UID会给他带来幸运</p>
+<p>请问，6位数字的UID中，有多少个UID是小K学长的幸运UID呢？</p>
+<h1 id="format" tabindex="-1">Format</h1>
+<h2 id="input" tabindex="-1">Input</h2>
+<p>输入一个整型数字n(1&lt;=n&lt;=100)</p>
+<h2 id="output" tabindex="-1">Output</h2>
+<p>输出6位UID中有多少个小K学长的幸运UID</p>
+<h1 id="samples" tabindex="-1">Samples</h1>
+<pre><code class="language-input1">55
+</code></pre>
+<pre><code class="language-output1">0
+</code></pre>
+<pre><code class="language-input2">1
+</code></pre>
+<pre><code class="language-output2">999999
+</code></pre>
+<h1 id="hint" tabindex="-1">Hint</h1>
+<p>UID的编号是从1开始的哦</p>
+
+</div>      </div></div>
+    </div>
+  </div>
+  <div class="medium-3 columns"><div data-sticky="large">
+        <div class="section side section--problem-sidebar">
+  <div>
+    <ol class="menu">
+                          <li class="menu__item scratchpad--hide"><a class="menu__link" href="javascript:showSignInDialog();">
+        <span class="icon icon-send"></span> 登录后递交
+      </a></li>
+                      <li class="menu__seperator"></li>
+              <li class="menu__item"><a class="menu__link" href="/discuss/problem/388">
+        <span class="icon icon-comment--text"></span> 讨论 (0)      </a></li>
+              <li class="menu__item"><a class="menu__link" href="/p/P0726/solution">
+        <span class="icon icon-comment--text"></span> 题解 (0)      </a></li>
+          <li class="menu__item"><a class="menu__link" href="/p/P0726/files">
+        <span class="icon icon-file"></span> 文件
+      </a></li>
+      <li class="menu__item"><a class="menu__link" href="/p/P0726/stat">
+        <span class="icon icon-statistics"></span> 统计
+      </a></li>
+              <li class="menu__seperator nojs--hide"></li>
+                    </ol>
+  </div>
+</div>
+<div class="section side">
+  <div class="section__header">
+    <h1 class="section__title">相关</h1>
+  </div>
+  <div class="section__body typo">
+        <p>在下列比赛中: </p><p><a href="/contest/68f788a80cc5d7be226466a5">2025级SYUCT-ACM新生第二次训练</a></p><p><a href="/contest/6ac5b694753773230ebbcb8f">2026级SYUCT-ACM新生第二次训练</a></p>    </div>
+</div>
+  </div></div>
+</div>
+<div style="display:none" class="outer-loader-container"><div class="loader"></div></div>
+<div class="scratchpad-container" style="display:none">
+  <div style="display:none" class="loader-container"><div class="loader"></div></div>
+  <div id="scratchpad" style="opacity:0"></div>
+</div>
+  </div>
+  <div class="footer">
+  <div class="row"><div class="columns">
+      <div class="row footer__links">
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          状态
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/record">评测队列</a></li>
+          <li class="footer__category__item"><a href="/status">服务状态</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          开发
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="https://github.com/hydro-dev/Hydro" target="_blank">开源</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          支持
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/help">帮助</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">联系我们</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable end">
+        <h1>
+          关于
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/about">关于</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#privacy">隐私</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#tos">服务条款</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">版权申诉</a></li>
+        </ul></div>
+      </div>
+    </div>
+      <div class="footer__extra-link clearfix">
+      <div class="footer__extra-left">
+        <ol class="clearfix">
+                    <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-lang">
+            <span><span class="icon icon-global"></span> Language <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-lang"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+          </li>
+          <li class="footer__extra-link-item">
+                          <a href="/legacy?legacy=true">兼容模式</a>
+                      </li>
+          <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-theme">
+            <span><span class="icon icon-global"></span> 主题 <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-theme">
+              <li class="menu__item"><a class="menu__link" href="/set_theme/light">亮色</a></li>
+              <li class="menu__item"><a class="menu__link" href="/set_theme/dark">暗色</a></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+      <div class="footer__extra-right">
+        <ol class="clearfix"><li class="footer__extra-link-item"></li><li class="footer__extra-link-item"><a href="https://beian.miit.gov.cn/">辽ICP备2026022210号-1</a></li><li class="footer__extra-link-item">Worker 0, 22ms</li>
+          <!-- Prepare 7ms -->
+          <!-- Method 2ms -->
+          
+          
+          <li class="footer__extra-link-item">Powered by <a href="https://hydro.js.org">Hydro v5.0.7</a> Community</li>
+        </ol>
+      </div>
+    </div>
+  </div></div>
+</div>
+</div>
+<div class="dialog dialog--signin" style="display:none">
+  <div class="dialog__content">
+        <div class="dialog--signin__bg">
+      <div class="dialog--signin__side">
+        <h1>还没有账户？</h1>
+        <p>注册一个 SYUCT OJ 通用账户，您就可以在我们提供的所有在线评测服务上提交代码、参与讨论。</p>
+        <div><a href="/register" class="inverse rounded button">现在注册</a></div>
+      </div>
+    </div>
+        <div class="dialog--signin__main">
+      <form action="/login" method="post">
+        <div class="dialog--signin__close-container supplementary">
+          <a name="dialog--signin__close" href="javascript:;">关闭</a>
+        </div>
+        <h1 class="dialog--signin__title">登录</h1>
+        <p class="dialog--signin__note">使用您的 SYUCT OJ 通用账户</p>
+                <div class="row"><div class="columns">
+          <label class="material textbox">
+            用户名
+            <input name="uname" type="text" data-autofocus autocomplete="username webauthn">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="material textbox">
+            密码
+            <input name="password" type="password">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="checkbox">
+            <input type="checkbox" name="rememberme" class="checkbox">记住我
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <input type="hidden" name="tfa" value="">
+          <input type="hidden" name="authnChallenge" value="">
+          <input type="submit" value="登录" name="login_submit" class="expanded rounded primary button">
+        </div></div>
+        <div class="row"><div class="columns">
+          <div class="supplementary text-center">
+            <a href="/lostpass">忘记密码或者用户名？</a>
+          </div>
+        </div></div>
+      </form>
+    </div>
+  </div>
+</div>
+        <script>
+      window.UiContextNew = '{"problemId":"P0726","problemNumId":388,"codeLang":"cc.cc17","pdoc":{"_id":"67ea8d4e3c52eb657784da43","content":"# Description\\n\\n\u4E00\u6B3E\u8DE8\u65F6\u4EE3\u6E38\u620F\u5373\u5C06\u5F00\u670D\uFF0C\u5C0FK\u5B66\u957F\u8BA4\u4E3A6\u4E2A\u4F4D\u7F6E\u4E0A\u7684\u6570\u5B57\u4E4B\u548C\u53EF\u4EE5\u521A\u597D\u88AB\u4ED6\u7684\u5E78\u8FD0\u6570\u5B57n\u6574\u9664\u7684UID\u4F1A\u7ED9\u4ED6\u5E26\u6765\u5E78\u8FD0\\n\\n\u8BF7\u95EE\uFF0C6\u4F4D\u6570\u5B57\u7684UID\u4E2D\uFF0C\u6709\u591A\u5C11\u4E2AUID\u662F\u5C0FK\u5B66\u957F\u7684\u5E78\u8FD0UID\u5462\uFF1F\\n\\n\\n# Format\\n\\n## Input\\n\u8F93\u5165\u4E00\u4E2A\u6574\u578B\u6570\u5B57n(1<=n<=100)  \\n  \\n\\n\\n## Output\\n\u8F93\u51FA6\u4F4DUID\u4E2D\u6709\u591A\u5C11\u4E2A\u5C0FK\u5B66\u957F\u7684\u5E78\u8FD0UID\\n\\n# Samples\\n\\n```input1\\n55\\n```\\n```output1\\n0\\n```\\n```input2\\n1\\n```\\n```output2\\n999999\\n```\\n# Hint\\n\\nUID\u7684\u7F16\u53F7\u662F\u4ECE1\u5F00\u59CB\u7684\u54E6","owner":3,"domainId":"system","docType":10,"docId":388,"title":"\u5E78\u8FD0UID","tag":["SYUCT","\u6570\u5B66"],"hidden":false,"nSubmit":525,"nAccept":174,"pid":"P0726","difficulty":5,"data":[{"_id":"14.out","name":"14.out","size":4,"lastModified":"2025-03-31T12:40:46.565Z","etag":"L2RhdGEvZmlsZS9oeWRyby9oZ3cvM2k3N3plZWh2cWZpeW5yempiNnR3Lm91dA=="},{"_id":"8.in","name":"8.in","size":2,"lastModified":"2025-03-31T12:40:46.565Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xaXUvamlrNWUwemw4eXQwdDdkc3EyYmFpLmlu"},{"_id":"12.in","name":"12.in","size":1,"lastModified":"2025-03-31T12:40:46.565Z","etag":"L2RhdGEvZmlsZS9oeWRyby92NDAvMGI4eGowb3ExdWh4ZDVia3NrdmEwLmlu"},{"_id":"6.in","name":"6.in","size":2,"lastModified":"2025-03-31T12:40:46.565Z","etag":"L2RhdGEvZmlsZS9oeWRyby8ycWUvaWswY3p5cWJvb2F6aGtobmJvbmRkLmlu"},{"_id":"13.out","name":"13.out","size":1,"lastModified":"2025-03-31T12:40:46.566Z","etag":"L2RhdGEvZmlsZS9oeWRyby84YTQvaXhyeWdsemcxdm1pMGFwNG5kZWJnLm91dA=="},{"_id":"11.out","name":"11.out","size":1,"lastModified":"2025-03-31T12:40:46.566Z","etag":"L2RhdGEvZmlsZS9oeWRyby9vMXgvY3NhNnJqZTByaXZteWJzdDBveHUwLm91dA=="},{"_id":"2.out","name":"2.out","size":4,"lastModified":"2025-03-31T12:40:46.566Z","etag":"L2RhdGEvZmlsZS9oeWRyby9kdXovendsNmN4aTdhcnVvanFlcjBveW9yLm91dA=="},{"_id":"3.in","name":"3.in","size":2,"lastModified":"2025-03-31T12:40:46.566Z","etag":"L2RhdGEvZmlsZS9oeWRyby9veDMvY3gwd2Nudm4ybWJ3MWtxNjdscW9wLmlu"},{"_id":"5.out","name":"5.out","size":1,"lastModified":"2025-03-31T12:40:46.569Z","etag":"L2RhdGEvZmlsZS9oeWRyby93YTAvN2UwZGpodTR4bm5iaHBrNDd2MHYwLm91dA=="},{"_id":"1.out","name":"1.out","size":1,"lastModified":"2025-03-31T12:40:46.569Z","etag":"L2RhdGEvZmlsZS9oeWRyby9sa3cvdGRucnZseDBnbjkwOG1peWdnaGUwLm91dA=="},{"_id":"4.out","name":"4.out","size":1,"lastModified":"2025-03-31T12:40:46.596Z","etag":"L2RhdGEvZmlsZS9oeWRyby9jdGsvcGphb2Zzc3Bxbm12YjRzaW8zaTFiLm91dA=="},{"_id":"2.in","name":"2.in","size":2,"lastModified":"2025-03-31T12:40:46.596Z","etag":"L2RhdGEvZmlsZS9oeWRyby9ibmgvend3eHVjNTk2ZmxjcTV6YTVzd3B3Lmlu"},{"_id":"7.in","name":"7.in","size":2,"lastModified":"2025-03-31T12:40:46.596Z","etag":"L2RhdGEvZmlsZS9oeWRyby9qaDAvbTJvajd2b3hkZW50Njc1NXU1cnlyLmlu"},{"_id":"4.in","name":"4.in","size":2,"lastModified":"2025-03-31T12:40:46.596Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xajcvYm8wOHFlZnpqZHF1ZGlrZ2xwM2o0Lmlu"},{"_id":"6.out","name":"6.out","size":1,"lastModified":"2025-03-31T12:40:46.596Z","etag":"L2RhdGEvZmlsZS9oeWRyby9uZHEvdHl0aWl1dG1idHZoOG4wZmJpbWR1Lm91dA=="},{"_id":"9.in","name":"9.in","size":2,"lastModified":"2025-03-31T12:40:46.609Z","etag":"L2RhdGEvZmlsZS9oeWRyby9wcjIvZ3B6dXB4M21qdnd6cnp4dW5ibWQxLmlu"},{"_id":"12.out","name":"12.out","size":6,"lastModified":"2025-03-31T12:40:46.609Z","etag":"L2RhdGEvZmlsZS9oeWRyby8xNnYvZGl6cmlzdDFleGlzM3l4d3U1OWIyLm91dA=="},{"_id":"15.out","name":"15.out","size":1,"lastModified":"2025-03-31T12:40:46.609Z","etag":"L2RhdGEvZmlsZS9oeWRyby84cGQvaDNxZGRqc25rdGloOG9jYTBxMDA4Lm91dA=="},{"_id":"8.out","name":"8.out","size":3,"lastModified":"2025-03-31T12:40:46.610Z","etag":"L2RhdGEvZmlsZS9oeWRyby9vaGgvbm9zZGp3YnFtbXllZXBpcG9tdmh2Lm91dA=="},{"_id":"14.in","name":"14.in","size":2,"lastModified":"2025-03-31T12:40:46.610Z","etag":"L2RhdGEvZmlsZS9oeWRyby9wY2MvZ3dwbHU3YmZ3YnNmYzdyaXNlcG5iLmlu"},{"_id":"11.in","name":"11.in","size":2,"lastModified":"2025-03-31T12:40:46.655Z","etag":"L2RhdGEvZmlsZS9oeWRyby90dTAvejF3dDh4eWd3d2hqZ3ZuYWJud3VhLmlu"},{"_id":"15.in","name":"15.in","size":2,"lastModified":"2025-03-31T12:40:46.655Z","etag":"L2RhdGEvZmlsZS9oeWRyby91MXkvdHBzbnR4eG1uaWlicHNra2d0d3ViLmlu"},{"_id":"13.in","name":"13.in","size":2,"lastModified":"2025-03-31T12:40:46.655Z","etag":"L2RhdGEvZmlsZS9oeWRyby9tMnMvMXpyZGVkMGh2YzBpMGhxem96NHEyLmlu"},{"_id":"10.in","name":"10.in","size":1,"lastModified":"2025-03-31T12:40:46.655Z","etag":"L2RhdGEvZmlsZS9oeWRyby91aHEveW8yc2ZndndlenNjdnJjd2l4eDB5Lmlu"},{"_id":"9.out","name":"9.out","size":5,"lastModified":"2025-03-31T12:40:46.656Z","etag":"L2RhdGEvZmlsZS9oeWRyby9jNWovdTFoYmtkMHhtbDlpeGM1ZGNwdW5sLm91dA=="},{"_id":"10.out","name":"10.out","size":6,"lastModified":"2025-03-31T12:40:46.747Z","etag":"L2RhdGEvZmlsZS9oeWRyby9nZjgvdzRocmhlZWJkYmF4YTVmYjB3ZGkzLm91dA=="},{"_id":"7.out","name":"7.out","size":5,"lastModified":"2025-03-31T12:40:46.747Z","etag":"L2RhdGEvZmlsZS9oeWRyby9qcW0vbXFhbzFzMHY5ZHZwaXZ2N3F4MXk2Lm91dA=="},{"_id":"5.in","name":"5.in","size":2,"lastModified":"2025-03-31T12:40:46.748Z","etag":"L2RhdGEvZmlsZS9oeWRyby9nYnkvMHNnaHplYmR2cHlwNmR5ZXNtbmkzLmlu"},{"_id":"3.out","name":"3.out","size":5,"lastModified":"2025-03-31T12:40:46.749Z","etag":"L2RhdGEvZmlsZS9oeWRyby94MGQvd2RxYzFub3NqbTRmazBoOGh5cmwzLm91dA=="},{"_id":"1.in","name":"1.in","size":2,"lastModified":"2025-03-31T12:40:46.749Z","etag":"L2RhdGEvZmlsZS9oeWRyby96M3AvbGVwZ3V0ZGoyZjI4YXNhd2RtOHA0Lmlu"}],"stats":{"AC":192,"WA":249,"TLE":13,"MLE":0,"RE":3,"SE":0,"IGN":0,"CE":68,"s0":155,"s6":7,"s7":1,"s13":11,"s39":1,"s46":44,"s53":111,"s86":1,"s93":1,"s94":1,"s100":192},"config":{"count":15,"memoryMin":256,"memoryMax":256,"timeMin":1000,"timeMax":1000,"type":"default","langs":["c","cc","cc.cc98","cc.cc98o2","cc.cc11","cc.cc11o2","cc.cc14","cc.cc14o2","cc.cc17","cc.cc17o2","cc.cc20","cc.cc20o2","pas","java","kt","kt.jvm","py","py.py2","py.py3","py.pypy3","php","rs","hs","js","go","rb","cs","r","codeforces","codeforces.43","codeforces.52","codeforces.50","codeforces.54","codeforces.59","codeforces.61","codeforces.65","codeforces.9","codeforces.28","codeforces.32","codeforces.12","codeforces.60","codeforces.36","codeforces.48","codeforces.19","codeforces.3","codeforces.4","codeforces.51","codeforces.13","codeforces.6","codeforces.7","codeforces.31","codeforces.40","codeforces.41","codeforces.67","codeforces.49","codeforces.20","codeforces.34","codeforces.55"]}},"canViewRecord":true,"postSubmitUrl":"/p/388/submit","getSubmissionsUrl":"/record?fullStatus=true&pid=388","getRecordDetailUrl":"/record/%7Brid%7D","pretestConnUrl":"record-conn?pretest=1&uidOrName=0&pid=388&domainId=system"}';
+      window.UserContextNew = '{}';
+    </script>
+  </body>
+</html>

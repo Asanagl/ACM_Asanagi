@@ -1,0 +1,30 @@
+所在位置 C:\Users\Asanagi\.codex\skills\icpc-problem-creator\scripts\run-all-tests.ps1:100 字符: 44
++     $runnerPath = Join-Path $artifactRoot "interactive-runner.py"
++                                            ~~~~~~~~~~~~~~~~~~~~~~
+表达式或语句中包含意外的标记“interactive-runner.py"
+    $runnerTemplatePath = Join-Path $PSScriptRoot "lib/interactive-runner.py"
+    $runnerLibPath = Join-Path $artifactRoot "interactlib.py"
+    Copy-Item -LiteralPath $runnerTemplatePath -Destination $runnerPath -Force
+    Copy-Item -LiteralPath (Join-Path $PSScriptRoot "lib/interactlib.py") -Destination $runnerLibPath -Force
+    $contestantList = @($ContestantFilePath) + $ContestantArguments
+    $interactorList = @($InteractorFilePath) + $InteractorArguments
+    $runnerResult = Invoke-External -RepoRoot $repoRoot -FilePath $python -Arguments @($runnerPath, (ConvertTo-Json $co
+ntestantList -Compress), (ConvertTo-Json $interactorList -Compress), $WorkingDirectory, ([string]([Math]::Max($TimeoutM
+s, 1) / 1000.0))) -WorkingDirectory $repoRoot -TimeoutMs ([Math]::Max($TimeoutMs + 5000, 10000)) -MemoryLimitMb 256
+    if ($runnerResult.ExitCode -ne 0) {
+        throw "浜や簰”。
+所在位置 C:\Users\Asanagi\.codex\skills\icpc-problem-creator\scripts\run-all-tests.ps1:680 字符: 50
++     if ([RLimit]::setrlimit(3, [ref]$val) -ne 0) {
++                                                  ~
+语句块或类型定义中缺少右“}”。
+所在位置 C:\Users\Asanagi\.codex\skills\icpc-problem-creator\scripts\run-all-tests.ps1:673 字符: 33
++ if (-not $script:IsWindowsHost) {
++                                 ~
+语句块或类型定义中缺少右“}”。
+所在位置 C:\Users\Asanagi\.codex\skills\icpc-problem-creator\scripts\run-all-tests.ps1:72 字符: 33
++ function Invoke-InteractivePair {
++                                 ~
+语句块或类型定义中缺少右“}”。
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnexpectedToken
+ 

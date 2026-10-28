@@ -1,0 +1,142 @@
+kimi version 2.2.0
+• The user asks me to act as a read-only blind reviewer/solver, no tools, answer from the problem statement alone. I must output the 7 required sections in order, in Chinese (user wrote Chinese). Include a complete compilable C++17 program.
+
+  No tools needed. Let me write a thorough answer.
+
+  Structure:
+  1. Restate task, input format, output format, constraints.
+  2. Algorithm.
+  3. Step-by-step, closed correctness proof, especially each element output exactly once, position/value/sign unchanged.
+  4. Time and extra space complexity.
+  5. Edge cases and high-risk test list covering 1 row, 1 column, 1×1, negatives, 0, duplicates, max and min values.
+  6. Complete C++17 program.
+  7. Assumptions, unprovable points, implementation risks; if none, say "无".
+
+  The program: read n, m, then loop i, j reading int, output with space separator, newline at end of line. Must not output n,m.
+
+  A minimal one:
+
+  ```cpp
+  #include <bits/stdc++.h>
+  ```
+  Better to use only standard headers explicitly: <iostream>.
+
+  Implementation:
+
+  ```cpp
+  #include <iostream>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      int n = 0, m = 0;
+      if (!(std::cin >> n >> m)) return 0;
+
+      for (int i = 0; i < n; ++i) {
+          for (int j = 0; j < m; ++j) {
+              int a = 0;
+              std::cin >> a;
+              if (j > 0) std::cout << ' ';
+              std::cout << a;
+          }
+          std::cout << '\n';
+      }
+      return 0;
+  }
+  ```
+
+  This handles constraints. Note `std::cout << '\n'` flushes? No, '\n' doesn't flush (unlike std::endl). Good.
+
+  Edge: 1×1 works: prints single number + newline. 1 column: each line one number, no spaces. Negative values: int handles -1000..1000. Output format fine.
+
+  Correctness proof:
+
+  Let input matrix A with dimensions n,m. Define the reading process: the loop reads exactly n*m tokens in row-major order: iteration (i,j) reads the (i*m + j + 1)-th integer token after the first line. Since the input contains exactly n*m integers in row-major order with i being line index, read value equals a_{i,j}. [Standard stream extraction of int with whitespace skipping; input well-formed.]
+
+  Output: iteration (i,j) writes a_{i,j} to the stream, preceded by a single space iff j>0, and after the inner loop writes '\n'. So line i consists of a_{i,0} then for each subsequent a_{i,j} a single space then the value; no leading space (j=0 no space), no trailing space (the newline is written immediately after the last value, no space after). And n lines total, each terminated by '\n', including the last. No other output: n and m never written, no debug output. Every element appears exactly once (each loop iteration exactly one write, iterations bijective with pairs (i,j) since i from 0..n-1, j from 0..m-1 each exactly once). Value/sign: integers are written as decimal representation; operator<< for int writes the standard decimal form with '-' for negative, 0 as "0"; no arithmetic modification (value passes through unchanged, no conversion). So value and position unchanged.
+
+  Also need to justify that the produced output equals the required output character-for-character: sequential writes to cout concatenate; standard formatting of int introduces no padding and no thousands separators (default flags, no setw applied). Since the numbers come from input which itself was given with exactly one space separator and no spaces at line ends, and each token has the canonical decimal representation the judge expects... Well, actually the input could have forms like "+5" or "005"? The problem guarantees input format with integers; output must be the decimal representation. Standard `<<` writes canonical form, which matches the expected output since expected output presumably canonical decimal. That's a small assumption — mention it in section 7, but actually the statement says "原样输出" and samples show canonical; the standard interpretation is canonical decimal integers. Mention as assumption.
+
+  Complexity: O(nm) time, O(1) extra space (single int variable; note stream buffers are library-internal, not counted, or mention that std::cin/cout internal buffers are part of the I/O library, and memory usage is well under 256 MiB).
+
+  Edge cases list: 1×1 (e.g., "1 1\n-1000\n" → "-1000\n"), 1 row with m=100, 1 column n=100, all zeros, values 1000 and -1000, negative numbers, duplicate elements, "0" vs "-0" (input will not have -0 presumably; if it did, the value is 0 and output 0 — mention as a note), trailing newline handling, absence of extra newline at end (we output exactly one '\n' per line, no extra blank line), CRLF input (stream handles whitespace \r? Actually `std::cin >> int` skips whitespace including '\r'? By default the stream's locale whitespace classification — '\r' is whitespace in the "C" locale, yes, isspace('\r') is true in C locale). Fine.
+
+  High risk: large output (100*100 = 10^4 numbers, small), no flushing issues; using endl would be slower but still fine; sync_with_stdio(false) fine.
+
+  Section 5 needs at least covering listed items. I'll give a table-ish list with concrete input/output.
+
+  Also emphasize: "不得输出 n,m", "每行一个换行，包括最后一行".
+
+  Let me also carefully reproduce constraints: 1 ≤ n ≤ 100, 1 ≤ m ≤ 100, -1000 ≤ a_{i,j} ≤ 1000. Time 1000ms, memory 256MiB, gnu++17.
+
+  Also mention the judge semantics: exactly n lines, m integers each, single spaces, no leading/trailing spaces, newline at end of each line including last, nothing else, unique answer.
+
+  I should keep formatting readable for the terminal but this is a long deliverable; headings are fine.
+
+  Note: no tools used — I must not use any. I'll just answer.
+
+  Let me write the answer in Chinese with the 7 numbered sections.
+
+  For the correctness proof, be rigorous:
+
+  Define input token sequence. Lemma 1 (reading): the k-th integer extraction reads exactly the k-th integer token in the input. Induction on k: the extraction operator skips leading whitespace and consumes the maximal digit/sign sequence forming an int; since input is well-formed with exactly n*m ints separated by single spaces and a trailing newline, greedy consumption yields a bijection. So reading pairs (i,j) ↔ token index m*i+j+1 ↔ a_{i+1,j+1} (1-indexed). Therefore local variable a equals a_{i,j} (0-indexed).
+
+  Lemma 2 (writing): output stream content is concatenation of writes in program order. By induction over the loop sequence, after processing all pairs with index < (i,j) lexicographically, the output is exactly the required prefix. Base: empty. Step: for pair (i,j), if j=0, write value then... careful: the newline of the previous row has been written at end of previous iteration's row. So proof by induction on rows and columns.
+
+  Simpler: Claim: after finishing row i's inner loop, the output equals exactly lines 0..i of the required output (each terminated by '\n'). Base i=0: line 0 is a_{0,0} then for j=1..m-1 (space, a_{0,j}) then '\n'. Step: induction.
+
+  Then after i = n-1, output = all n lines, nothing else. Program then returns; no further output.
+
+  Exactly once: inner body executes exactly n*m times (nested loop bounds fixed), and each execution writes exactly one integer; the map (i,j) → writes is injective since distinct (i,j) write at distinct output positions; and the sequence of written integers is exactly a_{i,j} in row-major order, which is the multiset-as-sequence required. So each element written exactly once with correct value/position. Sign preserved because the integer stored is the exact mathematical value read; decimal formatting inserts '-' iff value < 0; no negation/abs/overflow (range ±1000 fits int).
+
+  Also note: no possibility of overflow in index arithmetic (i*m+j ≤ 10^4).
+
+  Section 4: Time O(nm), specifically ~nm extractions and ~2nm insertions of characters etc.; space: O(1) auxiliary (a single int and two loop counters), plus I/O library buffers which are constant-size; ≪ 256 MiB.
+
+  Section 7 assumptions: (a) output integers in canonical decimal form without leading zeros/plus sign, matching the judge's expectation (statement's "原样" read as value-preserving, not byte-preserving); (b) input ends with exactly what stated, no extra tokens — if extra tokens existed we'd ignore them anyway which is fine since we stop after n*m; (c) `std::cin` failure not handled beyond graceful return, but input valid; (d) the judge compares bytes strictly — our program emits no extra whitespace; (e) "-0" in input would be printed as "0" (value equal, but statement guarantees standard integers; the frozen tests presumably don't include "-0"); note this is a genuine risk but tiny. Should I list it? It's honest. Actually, statement says the input has between -1000 and 1000, standard integer representation; "-0" would be a weird encoding, and the expected output would then... ambiguous. Mention as an assumption.
+
+  Also risk: buffering/flush at exit — std::cout flushed at normal termination by static destructor; return from main → flush. Fine.
+
+  Also: reading with `int` — good.
+
+  Let's write it.
+
+  Also section 1 must "用你自己的话完整复述任务、输入格式、输出格式和全部约束" — paraphrase fully in my own words, including judge semantics and limits.
+
+  I'll write the final answer now. Keep it organized but not overly nested. Use headings for the 7 numbered parts.
+
+  For edge cases, maybe compact table: input → output → note. Tables render okay-ish but instructions say heavy tables read poorly; a moderate table is acceptable. I'll use a list format with code blocks maybe. Let me use a compact list with inline code showing input → output. Keep it manageable.
+
+  Let me draft.
+
+  Edge case list:
+  1. 1×1, value -1000: `1 1` / `-1000` → `-1000⏎`; checks single element, sign, no space, newline.
+  2. 1×1, value 1000 and 0.
+  3. n=1, m=5 (sample 2): single line no leading/trailing spaces.
+  4. m=1, n=4 (sample 3): one integer per line, no spaces anywhere.
+  5. n=1, m=100 all 1000: longest single line; check no trailing space.
+  6. n=100, m=1.
+  7. All zeros (n×m) — must print "0" not "-0"/"00".
+  8. All -1000 (n×m).
+  9. Duplicate elements e.g. sample 1 has 5 5 and 0s, 8 8 — no dedup/compaction.
+  10. Mixed sign symmetric values like 1000 -1000 1000 -1000 to catch sign loss.
+  11. Max size 100×100 with alternating max/min: total 10^4 numbers, ~ up to 5 chars each ≈ 60 KB output; check no line-splitting and last newline.
+  12. Numbers adjacent in value like 1 11 111 to catch formatting/space bugs.
+  13. First column negative / last column negative (trailing-space checks).
+  14. 0 in first and last column.
+  15. Input without trailing newline (tolerant readers) — our reader handles EOF fine; not required but robust.
+
+  Also note output must not include trailing blank line: exactly n newlines total.
+
+  OK. Write.
+
+  For section 6, the program in a cpp code block. Make sure it compiles: includes <iostream>.
+
+  Maybe also handle the degenerate case where cin fails — return 0 without output; but statement guarantees valid input. Actually if read fails, n,m remain 0 and the loop doesn't run — no output. Fine, use `if (!(std::cin >> n >> m)) return 0;`.
+
+  One more consideration: should I guard `j > 0` for space — yes.
+
+  Write the final answer.
+
+To resume this session: kimi -r session_01b19d83-7b84-4930-9026-aec8783a3011

@@ -1,0 +1,68 @@
+{
+  "slug": "04-23",
+  "title": "回文修补",
+  "interactive": false,
+  "timeLimitMs": 1000,
+  "memoryLimitMb": 256,
+  "standard": "gnu++17",
+  "statement": "docs/statement.md",
+  "tutorial": "docs/tutorial.md",
+  "validator": "src/validator/validator.cpp",
+  "generator": {
+    "path": "src/generator/generator.cpp",
+    "cases": [
+      { "name": "sample-1", "type": "sample-even", "seed": "101", "group": "sample", "checkWith": ["solution2", "python"] },
+      { "name": "sample-2", "type": "sample-odd", "seed": "102", "group": "sample", "checkWith": ["solution2", "python"] },
+      { "name": "min-odd-1", "type": "min-1", "seed": "201", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "min-even-diff-1", "type": "min-2", "seed": "202", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "min-even-same-1", "type": "min-2-same", "seed": "203", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "pal-odd-small-1", "type": "pal-odd-small", "seed": "204", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "pal-even-small-1", "type": "pal-even-small", "seed": "205", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "one-diff-small-1", "type": "one-diff-small", "seed": "206", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "two-diff-small-1", "type": "two-diff-small", "seed": "207", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "all-same-even-1", "type": "all-same-even", "seed": "208", "group": "secret" },
+      { "name": "all-same-odd-1", "type": "all-same-odd", "seed": "209", "group": "secret" },
+      { "name": "alt-even-1", "type": "alt-even", "seed": "210", "group": "secret" },
+      { "name": "alt-odd-1", "type": "alt-odd", "seed": "211", "group": "secret" },
+      { "name": "two-blocks-1", "type": "two-blocks", "seed": "212", "group": "secret" },
+      { "name": "period-3-1", "type": "period-3", "seed": "213", "group": "secret" },
+      { "name": "half-mismatch-1", "type": "half-mismatch", "seed": "214", "group": "secret" },
+      { "name": "random-small-1", "type": "random-small", "seed": "215", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "random-small-2", "type": "random-small", "seed": "216", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "random-small-3", "type": "random-small", "seed": "217", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "random-small-4", "type": "random-small", "seed": "218", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "random-small-5", "type": "random-small", "seed": "219", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "random-small-6", "type": "random-small", "seed": "220", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "random-small-7", "type": "random-small", "seed": "221", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "random-small-8", "type": "random-small", "seed": "222", "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "random-med-1", "type": "random-med", "seed": "223", "group": "secret" },
+      { "name": "random-med-2", "type": "random-med", "seed": "224", "group": "secret" },
+      { "name": "random-med-3", "type": "random-med", "seed": "225", "group": "secret" },
+      { "name": "random-med-4", "type": "random-med", "seed": "226", "group": "secret" },
+      { "name": "random-med-5", "type": "random-med", "seed": "227", "group": "secret" },
+      { "name": "near-max-even-1", "type": "near-max-even", "seed": "228", "group": "secret" },
+      { "name": "near-max-odd-1", "type": "near-max-odd", "seed": "229", "group": "secret" },
+      { "name": "pal-random-even-1", "type": "pal-random-even", "seed": "230", "group": "secret" },
+      { "name": "pal-random-odd-1", "type": "pal-random-odd", "seed": "231", "group": "secret" },
+      { "name": "one-diff-max-1", "type": "one-diff-max", "seed": "232", "group": "secret" },
+      { "name": "max-even-1", "type": "max-even", "seed": "233", "group": "secret" },
+      { "name": "max-odd-1", "type": "max-odd", "seed": "234", "group": "secret" }
+    ]
+  },
+  "checker": "src/checker/checker.cpp",
+  "build": {
+    "cppCompiler": "g++",
+    "cppFlags": ["-std=gnu++17", "-O2", "-pipe"],
+    "pythonCommand": "python"
+  },
+  "solutions": [
+    { "name": "main", "path": "src/solution.cpp", "language": "cpp", "role": "main" },
+    { "name": "solution2", "path": "src/solution2.cpp", "language": "cpp", "role": "reference" },
+    { "name": "python", "path": "src/solution.py", "language": "python", "role": "reference" }
+  ],
+  "wrongSolutions": [
+    { "name": "wrong-center", "path": "src/wrong/wrong-a.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-double", "path": "src/wrong/wrong-b.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-index", "path": "src/wrong/wrong-c.cpp", "language": "cpp", "expected": "fail" }
+  ]
+}

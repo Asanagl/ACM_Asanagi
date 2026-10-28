@@ -1,0 +1,68 @@
+{
+  "slug": "a-step-up-training",
+  "title": "逐级加训",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-16 13:22:28 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-01\\problems\\a-step-up-training",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-01\\problems\\a-step-up-training\\exported-tests",
+  "caseCount": 7,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample",
+      "seed": "1",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "min-1",
+      "type": "min",
+      "seed": "2",
+      "group": "secret",
+      "input": "secret\\min-1.in",
+      "answer": "secret\\min-1.ans"
+    },
+    {
+      "name": "small-1",
+      "type": "small",
+      "seed": "3",
+      "group": "secret",
+      "input": "secret\\small-1.in",
+      "answer": "secret\\small-1.ans"
+    },
+    {
+      "name": "int-limit-1",
+      "type": "int-limit",
+      "seed": "4",
+      "group": "secret",
+      "input": "secret\\int-limit-1.in",
+      "answer": "secret\\int-limit-1.ans"
+    },
+    {
+      "name": "random-1",
+      "type": "random",
+      "seed": "5",
+      "group": "secret",
+      "input": "secret\\random-1.in",
+      "answer": "secret\\random-1.ans"
+    },
+    {
+      "name": "random-2",
+      "type": "random",
+      "seed": "6",
+      "group": "secret",
+      "input": "secret\\random-2.in",
+      "answer": "secret\\random-2.ans"
+    },
+    {
+      "name": "max-1",
+      "type": "max",
+      "seed": "7",
+      "group": "secret",
+      "input": "secret\\max-1.in",
+      "answer": "secret\\max-1.ans"
+    }
+  ]
+}

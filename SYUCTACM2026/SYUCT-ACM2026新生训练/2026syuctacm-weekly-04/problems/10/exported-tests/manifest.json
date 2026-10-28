@@ -1,0 +1,268 @@
+{
+  "slug": "04-10",
+  "title": "数字串求和",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-26 14:46:42 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\10",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\10\\exported-tests",
+  "caseCount": 32,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample",
+      "seed": "1",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "sample-2",
+      "type": "sample",
+      "seed": "2",
+      "group": "sample",
+      "input": "sample\\sample-2.in",
+      "answer": "sample\\sample-2.ans"
+    },
+    {
+      "name": "min-zero",
+      "type": "min-zero",
+      "seed": "11",
+      "group": "secret",
+      "input": "secret\\min-zero.in",
+      "answer": "secret\\min-zero.ans"
+    },
+    {
+      "name": "min-nine",
+      "type": "min-nine",
+      "seed": "12",
+      "group": "secret",
+      "input": "secret\\min-nine.in",
+      "answer": "secret\\min-nine.ans"
+    },
+    {
+      "name": "small-random-1",
+      "type": "small-random",
+      "seed": "13",
+      "group": "secret",
+      "input": "secret\\small-random-1.in",
+      "answer": "secret\\small-random-1.ans"
+    },
+    {
+      "name": "small-random-2",
+      "type": "small-random",
+      "seed": "14",
+      "group": "secret",
+      "input": "secret\\small-random-2.in",
+      "answer": "secret\\small-random-2.ans"
+    },
+    {
+      "name": "small-random-3",
+      "type": "small-random",
+      "seed": "15",
+      "group": "secret",
+      "input": "secret\\small-random-3.in",
+      "answer": "secret\\small-random-3.ans"
+    },
+    {
+      "name": "small-random-4",
+      "type": "small-random",
+      "seed": "16",
+      "group": "secret",
+      "input": "secret\\small-random-4.in",
+      "answer": "secret\\small-random-4.ans"
+    },
+    {
+      "name": "directed-ascii",
+      "type": "directed-ascii",
+      "seed": "17",
+      "group": "secret",
+      "input": "secret\\directed-ascii.in",
+      "answer": "secret\\directed-ascii.ans"
+    },
+    {
+      "name": "directed-skip-first",
+      "type": "directed-skip-first",
+      "seed": "18",
+      "group": "secret",
+      "input": "secret\\directed-skip-first.in",
+      "answer": "secret\\directed-skip-first.ans"
+    },
+    {
+      "name": "directed-break-zero",
+      "type": "directed-break-zero",
+      "seed": "19",
+      "group": "secret",
+      "input": "secret\\directed-break-zero.in",
+      "answer": "secret\\directed-break-zero.ans"
+    },
+    {
+      "name": "directed-digital-root",
+      "type": "directed-digital-root",
+      "seed": "20",
+      "group": "secret",
+      "input": "secret\\directed-digital-root.in",
+      "answer": "secret\\directed-digital-root.ans"
+    },
+    {
+      "name": "directed-parse",
+      "type": "directed-parse",
+      "seed": "21",
+      "group": "secret",
+      "input": "secret\\directed-parse.in",
+      "answer": "secret\\directed-parse.ans"
+    },
+    {
+      "name": "boundary-len-19",
+      "type": "boundary-len-19",
+      "seed": "22",
+      "group": "secret",
+      "input": "secret\\boundary-len-19.in",
+      "answer": "secret\\boundary-len-19.ans"
+    },
+    {
+      "name": "boundary-len-20",
+      "type": "boundary-len-20",
+      "seed": "23",
+      "group": "secret",
+      "input": "secret\\boundary-len-20.in",
+      "answer": "secret\\boundary-len-20.ans"
+    },
+    {
+      "name": "all-zero-100",
+      "type": "all-zero-100",
+      "seed": "24",
+      "group": "secret",
+      "input": "secret\\all-zero-100.in",
+      "answer": "secret\\all-zero-100.ans"
+    },
+    {
+      "name": "alternating-01",
+      "type": "alternating-01",
+      "seed": "26",
+      "group": "secret",
+      "input": "secret\\alternating-01.in",
+      "answer": "secret\\alternating-01.ans"
+    },
+    {
+      "name": "alternating-98",
+      "type": "alternating-98",
+      "seed": "27",
+      "group": "secret",
+      "input": "secret\\alternating-98.in",
+      "answer": "secret\\alternating-98.ans"
+    },
+    {
+      "name": "repeated-123",
+      "type": "repeated-123",
+      "seed": "28",
+      "group": "secret",
+      "input": "secret\\repeated-123.in",
+      "answer": "secret\\repeated-123.ans"
+    },
+    {
+      "name": "trailing-zeros",
+      "type": "trailing-zeros",
+      "seed": "29",
+      "group": "secret",
+      "input": "secret\\trailing-zeros.in",
+      "answer": "secret\\trailing-zeros.ans"
+    },
+    {
+      "name": "leading-zeros-tail",
+      "type": "leading-zeros-tail",
+      "seed": "30",
+      "group": "secret",
+      "input": "secret\\leading-zeros-tail.in",
+      "answer": "secret\\leading-zeros-tail.ans"
+    },
+    {
+      "name": "zero-heavy",
+      "type": "zero-heavy",
+      "seed": "31",
+      "group": "secret",
+      "input": "secret\\zero-heavy.in",
+      "answer": "secret\\zero-heavy.ans"
+    },
+    {
+      "name": "nine-heavy",
+      "type": "nine-heavy",
+      "seed": "32",
+      "group": "secret",
+      "input": "secret\\nine-heavy.in",
+      "answer": "secret\\nine-heavy.ans"
+    },
+    {
+      "name": "mid-random-1",
+      "type": "mid-random",
+      "seed": "33",
+      "group": "secret",
+      "input": "secret\\mid-random-1.in",
+      "answer": "secret\\mid-random-1.ans"
+    },
+    {
+      "name": "mid-random-2",
+      "type": "mid-random",
+      "seed": "34",
+      "group": "secret",
+      "input": "secret\\mid-random-2.in",
+      "answer": "secret\\mid-random-2.ans"
+    },
+    {
+      "name": "mid-random-3",
+      "type": "mid-random",
+      "seed": "35",
+      "group": "secret",
+      "input": "secret\\mid-random-3.in",
+      "answer": "secret\\mid-random-3.ans"
+    },
+    {
+      "name": "mid-random-4",
+      "type": "mid-random",
+      "seed": "41",
+      "group": "secret",
+      "input": "secret\\mid-random-4.in",
+      "answer": "secret\\mid-random-4.ans"
+    },
+    {
+      "name": "max-random-1",
+      "type": "max-random",
+      "seed": "36",
+      "group": "secret",
+      "input": "secret\\max-random-1.in",
+      "answer": "secret\\max-random-1.ans"
+    },
+    {
+      "name": "max-random-2",
+      "type": "max-random",
+      "seed": "37",
+      "group": "secret",
+      "input": "secret\\max-random-2.in",
+      "answer": "secret\\max-random-2.ans"
+    },
+    {
+      "name": "near-max-1",
+      "type": "near-max",
+      "seed": "38",
+      "group": "secret",
+      "input": "secret\\near-max-1.in",
+      "answer": "secret\\near-max-1.ans"
+    },
+    {
+      "name": "all-zero-max",
+      "type": "all-zero-max",
+      "seed": "39",
+      "group": "secret",
+      "input": "secret\\all-zero-max.in",
+      "answer": "secret\\all-zero-max.ans"
+    },
+    {
+      "name": "all-nine-max",
+      "type": "all-nine-max",
+      "seed": "40",
+      "group": "secret",
+      "input": "secret\\all-nine-max.in",
+      "answer": "secret\\all-nine-max.ans"
+    }
+  ]
+}

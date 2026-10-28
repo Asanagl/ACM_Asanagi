@@ -1,0 +1,17 @@
+after cin >>: []
+next line:    [hello world]
+with ignore:  [good morning]
+at cells=4
+adjacent pairs=2
+row sum 0=6
+row sum 1=15
+col sum 0=5
+col sum 1=7
+col sum 2=9
+1 4
+2 5
+3 6
+4 1
+5 2
+6 3
+submatrices sum=6: 2

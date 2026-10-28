@@ -1,0 +1,69 @@
+{
+  "slug": "04-05",
+  "title": "字符替换",
+  "interactive": false,
+  "timeLimitMs": 1000,
+  "memoryLimitMb": 256,
+  "standard": "gnu++17",
+  "statement": "docs/statement.md",
+  "tutorial": "docs/tutorial.md",
+  "validator": "src/validator/validator.cpp",
+  "generator": {
+    "path": "src/generator/generator.cpp",
+    "cases": [
+      { "name": "sample-1", "type": "sample", "seed": 1001, "group": "sample" },
+      { "name": "sample-2", "type": "sample-same", "seed": 1002, "group": "sample" },
+      { "name": "min-1", "type": "min", "seed": 2001, "group": "secret" },
+      { "name": "min-nooccur-1", "type": "min-nooccur", "seed": 2002, "group": "secret" },
+      { "name": "single-1", "type": "single", "seed": 2003, "group": "secret" },
+      { "name": "single-2", "type": "single", "seed": 2004, "group": "secret" },
+      { "name": "two-occur-1", "type": "two-occur", "seed": 2005, "group": "secret" },
+      { "name": "small-1", "type": "small", "seed": 2006, "group": "secret" },
+      { "name": "small-2", "type": "small", "seed": 2007, "group": "secret" },
+      { "name": "small-3", "type": "small", "seed": 2008, "group": "secret" },
+      { "name": "repeated-1", "type": "repeated", "seed": 2009, "group": "secret" },
+      { "name": "repeated-nooccur-1", "type": "repeated-nooccur", "seed": 2010, "group": "secret" },
+      { "name": "first-pos-1", "type": "first-pos", "seed": 2011, "group": "secret" },
+      { "name": "last-pos-1", "type": "last-pos", "seed": 2012, "group": "secret" },
+      { "name": "same-char-1", "type": "same-char", "seed": 2013, "group": "secret" },
+      { "name": "same-char-2", "type": "same-char", "seed": 2014, "group": "secret" },
+      { "name": "dense-1", "type": "dense", "seed": 2015, "group": "secret" },
+      { "name": "sparse-1", "type": "sparse", "seed": 2016, "group": "secret" },
+      { "name": "swap-kill-1", "type": "swap-kill", "seed": 2017, "group": "secret" },
+      { "name": "swap-kill-2", "type": "swap-kill", "seed": 2018, "group": "secret" },
+      { "name": "delete-kill-1", "type": "delete-kill", "seed": 2019, "group": "secret" },
+      { "name": "binary-alphabet-1", "type": "binary-alphabet", "seed": 2020, "group": "secret" },
+      { "name": "alternating-1", "type": "alternating", "seed": 2021, "group": "secret" },
+      { "name": "boundary-az-1", "type": "boundary-az", "seed": 2022, "group": "secret" },
+      { "name": "boundary-za-1", "type": "boundary-za", "seed": 2023, "group": "secret" },
+      { "name": "directed-mixed-1", "type": "directed-mixed", "seed": 2024, "group": "secret" },
+      { "name": "directed-mixed-2", "type": "directed-mixed", "seed": 2025, "group": "secret" },
+      { "name": "random-1", "type": "random", "seed": 2026, "group": "secret" },
+      { "name": "random-2", "type": "random", "seed": 2027, "group": "secret" },
+      { "name": "random-3", "type": "random", "seed": 2028, "group": "secret" },
+      { "name": "random-4", "type": "random", "seed": 2029, "group": "secret" },
+      { "name": "near-max-1", "type": "near-max", "seed": 2030, "group": "secret" },
+      { "name": "near-max-2", "type": "near-max", "seed": 2031, "group": "secret" },
+      { "name": "max-all-1", "type": "max-all", "seed": 2032, "group": "secret" },
+      { "name": "max-random-1", "type": "max-random", "seed": 2033, "group": "secret" },
+      { "name": "max-random-2", "type": "max-random", "seed": 2034, "group": "secret" },
+      { "name": "max-same-1", "type": "max-same", "seed": 2035, "group": "secret" },
+      { "name": "max-nooccur-1", "type": "max-nooccur", "seed": 2036, "group": "secret" }
+    ]
+  },
+  "checker": "src/checker/checker.cpp",
+  "build": {
+    "cppCompiler": "g++",
+    "cppFlags": ["-std=gnu++17", "-O2", "-pipe", "-static"]
+  },
+  "solutions": [
+    { "name": "main", "path": "src/solution.cpp", "language": "cpp", "role": "main" },
+    { "name": "solution2", "path": "src/solution2.cpp", "language": "cpp", "role": "reference" }
+  ],
+  "wrongSolutions": [
+    { "name": "wrong-delete", "path": "src/wrong/wrong-delete.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-first", "path": "src/wrong/wrong-first.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-last", "path": "src/wrong/wrong-last.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-swap", "path": "src/wrong/wrong-swap.cpp", "language": "cpp", "expected": "fail" }
+  ]
+}

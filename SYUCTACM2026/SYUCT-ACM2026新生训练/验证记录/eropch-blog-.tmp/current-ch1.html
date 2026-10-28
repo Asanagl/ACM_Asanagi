@@ -1,0 +1,923 @@
+<h1 id="第-1-章-变量、数据类型与基本输入输出">第 1 章 变量、数据类型与基本输入输出</h1>
+<blockquote>
+<p>本文是《XCPCer 从零开始的 C/C++ 入门指南（算法竞赛向）》系列第 1 章，系列训练大纲见<a href="/2026/09/20/xcpc-cpp-guide-outline/">本文</a>。</p>
+</blockquote>
+<h2 id="10-环境搭建：windows--algo-bootstrap--mingw">1.0 环境搭建：Windows + Algo Bootstrap + MinGW</h2>
+<h3 id="101-我们要准备的三个东西">1.0.1 我们要准备的三个东西</h3>
+<p>写 C++ 程序只需要三样东西，各司其职：</p>
+<table>
+<thead>
+<tr>
+<th>东西</th>
+<th>作用</th>
+<th>类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>g++（编译器）</strong></td>
+<td>把人能读懂的 <code>.cpp</code> 源代码翻译成电脑能执行的 <code>.exe</code></td>
+<td>翻译官</td>
+</tr>
+<tr>
+<td><strong>VS Code（编辑器）</strong></td>
+<td>用来打字、改代码的工具，带语法高亮和报错提示</td>
+<td>纸和笔（高级版）</td>
+</tr>
+<tr>
+<td><strong>Code Runner / cph（运行插件）</strong></td>
+<td>自动完成编译和运行，提供按钮、输入区与结果面板</td>
+<td>一键操作按钮</td>
+</tr>
+</tbody></table>
+<p>市面上常见的 IDE 还有 Visual Studio、CLion、Code::Blocks 等。本讲义在 Windows 上统一使用 <strong>Algo Bootstrap 一键配置的 MinGW（MinGW-w64）与 VS Code</strong>，安装依赖和配置环境都由它一次完成。</p>
+<h3 id="102-第一步：用-algo-bootstrap-一键配置">1.0.2 第一步：用 Algo Bootstrap 一键配置</h3>
+<ol>
+<li><p>打开 <a href="https://ab.algoux.cn/">Algo Bootstrap 官网</a>，下载 Windows 版本并运行安装程序；</p>
+</li>
+<li><p>按安装界面的提示选择 <strong>C++ / MinGW 与 VS Code 环境</strong>，点击一键配置。不同版本的按钮文字可能略有变化，以官网“安装教程”为准；</p>
+</li>
+<li><p>配置完成后，编译器通常位于 <code>C:\Algo Bootstrap\mingw64\bin\g++.exe</code>。如果安装时选择了其他位置，以你的实际安装目录为准；</p>
+</li>
+<li><p><strong>关闭已经打开的 VS Code 和终端窗口</strong>，重新打开一个 PowerShell，依次输入：</p>
+<pre><code class="language-powershell">g++ --version
+where.exe g++
+</code></pre>
+<p>第一条会显示 g++ 的版本号，第二条会显示编译器的位置。本文验证时使用的是 MinGW-Builds g++ 16.1.0，路径为 <code>C:\Algo Bootstrap\mingw64\bin\g++.exe</code>。你的版本号和构建信息不同也没关系，只要能正常显示即可。</p>
+</li>
+</ol>
+<blockquote>
+<p>如果提示“g++ 不是内部或外部命令”，先确认上述 <code>g++.exe</code> 文件确实存在，再重开 VS Code 和终端。仍不行时，检查 PATH 是否包含 <code>C:\Algo Bootstrap\mingw64\bin</code>；不要急着重新安装，也不要同时安装另一套编译器。</p>
+</blockquote>
+<h3 id="103-第二步：初始化项目并安装运行插件">1.0.3 第二步：初始化项目并安装运行插件</h3>
+<ol>
+<li>打开 Algo Bootstrap，选择 <strong>新建或初始化旧项目</strong>；</li>
+<li>选择一个用于存放代码的文件夹，例如 <code>D:\code</code>，确认后会为你初始化项目并打开 VS Code；</li>
+<li>在 VS Code 中按 <code>Ctrl + Shift + X</code> 打开扩展面板，搜索并安装 <strong>Code Runner</strong>（发布标识为 <code>formulahendry.code-runner</code>）；</li>
+<li>确认扩展面板里还有 Microsoft 的 <strong>C/C++</strong> 扩展。前者负责“点按钮编译运行”，后者负责代码高亮、错误提示和跳转，两者作用不同。</li>
+</ol>
+<p>以后把 <code>.cpp</code> 文件放在这个项目文件夹里。我们先只用 Code Runner；cph 留到 1.0.6，避免一开始同时背两套界面。</p>
+<h3 id="104-第三步：让-code-runner-使用本讲编译参数">1.0.4 第三步：让 Code Runner 使用本讲编译参数</h3>
+<p>第一次使用 Code Runner 前，只需要配置一次。它以后会自动完成编译，不需要你手敲编译命令。</p>
+<ol>
+<li>按 <code>Ctrl + ,</code> 打开 VS Code 设置，搜索 <code>code-runner.executorMap</code>；</li>
+<li>点击 <strong>Edit in settings.json</strong>（在 settings.json 中编辑）；</li>
+<li>如果文件是空的，填入下面内容。如果已经有其他设置，只添加这些项目，或在 <code>executorMap</code> 中替换 <code>cpp</code> 这一项，<strong>不要覆盖其他设置，注意各项之间的逗号</strong>：</li>
+</ol>
+<pre><code class="language-json">{
+    &quot;code-runner.runInTerminal&quot;: true,
+    &quot;code-runner.saveFileBeforeRun&quot;: true,
+    &quot;code-runner.ignoreSelection&quot;: true,
+    &quot;code-runner.executorMap&quot;: {
+        &quot;cpp&quot;: &quot;cd \&quot;$dir\&quot; ; g++ -std=c++17 -O2 -Wall \&quot;$fileName\&quot; -o \&quot;$fileNameWithoutExt.exe\&quot; ; if ($?) { &amp; \&quot;.\\$fileNameWithoutExt.exe\&quot; }&quot;
+    }
+}
+</code></pre>
+<p>这几项分别表示：</p>
+<ul>
+<li><code>runInTerminal</code>：程序在 TERMINAL（终端）面板中运行，以后可以在这里给 <code>cin</code> 输入数据；<strong>编译由插件自动完成，不需要你输入命令</strong>；</li>
+<li><code>saveFileBeforeRun</code>：点击运行前自动保存当前文件，避免运行到旧版本；</li>
+<li><code>ignoreSelection</code>：即使选中了一部分代码，也运行整个文件；</li>
+<li><code>executorMap</code>：C++ 文件的编译方式。<code>g++</code> 后面的 <code>-std=c++17</code> 表示使用 C++17，<code>-O2</code> 表示开启优化，<code>-Wall</code> 表示尽量显示可疑写法的警告。</li>
+</ul>
+<p>上面的 <code>cpp</code> 配置使用 PowerShell 语法。如果 VS Code 默认终端不是 PowerShell，请在终端右上角的下拉菜单中新建一个 <strong>PowerShell</strong> 终端，再点击 Run Code。</p>
+<p>如果保存后配置报错，先检查 JSON 的引号、花括号和逗号，不要急着重装插件。</p>
+<h3 id="105-第一个程序：点击-run-code">1.0.5 第一个程序：点击 Run Code</h3>
+<p>在 VS Code 里新建文件 <code>main.cpp</code>，输入下面的代码（<strong>所有的标点都是英文半角</strong>）：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;   // 示例 1-1：Hello World
+using namespace std;
+
+int main()
+{
+    cout &lt;&lt; &quot;Hello, World!\n&quot;;
+    return 0;
+}
+</code></pre>
+<p>保存后，点击编辑器右上角的三角形 <strong>Run Code</strong> 按钮；也可以在代码区域右键，选择 <strong>Run Code</strong>。插件会自动编译并运行当前文件，稍等片刻，终端面板就会显示：</p>
+<pre><code class="language-text">Hello, World!
+</code></pre>
+<p>如果程序要求输入，直接在 TERMINAL 面板中键入数据并按回车，不需要手动编译。若点击按钮后没有任何输出或异常退出，可能是多套 MinGW 的运行库冲突：先执行 <code>where.exe libstdc++-6.dll</code>，若第一条不是 Algo Bootstrap 的路径，就在 Windows 环境变量中把 <code>C:\Algo Bootstrap\mingw64\bin</code> 移到其他 MinGW（例如 Git 自带的 <code>C:\Program Files\Git\mingw64\bin</code>）前面，<strong>完全退出并重新打开 VS Code</strong>，再点击 Run Code。</p>
+<p>恭喜，你的第一个 C++ 程序跑起来了。现在<strong>逐行拆解</strong>这段程序骨架，之后每一章的每个程序都由这几部分组成：</p>
+<table>
+<thead>
+<tr>
+<th>代码</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>#include &lt;iostream&gt;</code></td>
+<td><strong>包含头文件</strong>。<code>iostream</code> 是输入输出流库，<code>cin</code>、<code>cout</code> 都住在里面。想用什么库功能，就先包含对应的头文件，<code>#include</code> 必须写在程序最顶上。</td>
+</tr>
+<tr>
+<td><code>using namespace std;</code></td>
+<td><strong>使用标准命名空间</strong>。标准库的东西都带 <code>std::</code> 前缀，这句相当于声明“后面写的 <code>cin</code>、<code>cout</code> 都指标准库的”，省得每次都写 <code>std::cout</code>。</td>
+</tr>
+<tr>
+<td><code>int main()</code></td>
+<td><strong>主函数，程序的入口</strong>。电脑执行你的程序时，永远从 <code>main</code> 的第一行开始。<code>int</code> 表示它结束时返回一个整数。</td>
+</tr>
+<tr>
+<td><code>{ }</code></td>
+<td><strong>花括号成对出现</strong>，括起来的部分叫函数体，是 <code>main</code> 里要执行的语句。写代码时养成“先写一对括号再往里填”的习惯，可以避免大量低级错误。</td>
+</tr>
+<tr>
+<td><code>cout &lt;&lt; &quot;Hello, World!\n&quot;;</code></td>
+<td><strong>输出语句</strong>。<code>cout</code> 是标准输出（屏幕），<code>&lt;&lt;</code> 是“送出”方向，把右边的内容依次打印到屏幕；<code>\n</code> 是换行；行尾的分号 <code>;</code> 表示语句结束，<strong>每条语句末尾都要有</strong>。</td>
+</tr>
+<tr>
+<td><code>return 0;</code></td>
+<td><strong>返回 0，表示程序正常结束</strong>。写在 <code>main</code> 的最后。</td>
+</tr>
+</tbody></table>
+<p>如果编译没有通过，面板会打印错误信息：<strong>从第一条错误看起</strong>，多半是上一行的标点写错了（分号、引号、括号），本章 1.9 节会专门讲最常见的三种错误。</p>
+<blockquote>
+<p>程序里的双斜杠 <code>//</code> 是<strong>注释</strong>：从 <code>//</code> 到这一行结尾的内容只是给人看的说明，编译器完全不理会。善用注释标记自己的思路。</p>
+</blockquote>
+<h3 id="106-【可选】用-cph-管理题目和样例">1.0.6 【可选】用 cph 管理题目和样例</h3>
+<p>当你已经能用 Code Runner 跑通程序，再考虑是否使用 <strong>Competitive Programming Helper（cph）</strong>。它更适合算法竞赛：可以为一道题保存多组输入和期望输出，并自动判断通过与否。</p>
+<ol>
+<li>在扩展面板搜索并安装 **Competitive Programming Helper (cph)**，发布标识为 <code>DivyanshuAgrawal.competitive-programming-helper</code>；</li>
+<li>在 VS Code 设置中搜索 <code>cph.language.cpp.Args</code>，填入 <code>-std=c++17 -O2 -Wall</code>。<code>cph.language.cpp.Command</code> 保持默认的 <code>g++</code> 即可；</li>
+<li>打开一个 <code>.cpp</code> 文件，点击 <strong>Run Testcases</strong>，或按 <code>Ctrl + Alt + B</code>，手动添加输入与期望输出，再运行并查看每组样例的结果。</li>
+</ol>
+<p>支持的 OJ 还可以配合浏览器扩展 Competitive Companion 导入题目和样例；无法导入时，像上面这样手动添加即可。<strong>刚开始学习时只用 Code Runner 就够了，不必同时配置 cph。</strong></p>
+<h2 id="11-导语">1.1 导语</h2>
+<p>程序处理的数据，必须先放进<strong>变量</strong>才能参与运算。变量不是一种通用容器——每一种变量都有确定的<strong>类型</strong>，类型决定了它能存什么、能存多大、参与运算时遵循什么规则。</p>
+<p>类型选错是算法竞赛中最隐蔽的错误来源之一：算法完全正确，仅仅因为变量类型装不下答案，评测结果就是 Wrong Answer（WA，表示程序输出与标准答案不符）。更常见的情况是：程序在本地小数据上一切正常，一提交就在大数据上出错。</p>
+<p>所以本章的主线只有两件事：<strong>搞懂几种基本类型</strong>，以及<strong>学会让程序读入数据、输出答案</strong>。</p>
+<h2 id="12-变量的声明、初始化与命名">1.2 变量的声明、初始化与命名</h2>
+<h3 id="121-声明">1.2.1 声明</h3>
+<p>声明一个变量的语法为：</p>
+<pre><code class="language-cpp">类型 变量名;
+</code></pre>
+<p>示例 2-1：一次声明多个变量。</p>
+<pre><code class="language-cpp">int a, b, c;
+int totalScore, solvedCount, wrongAnswers;
+</code></pre>
+<p>一条语句可以声明同类型的多个变量，以逗号分隔。算法竞赛代码中常见 <code>int a, b, c;</code> 的紧凑写法，但初学阶段建议<strong>一行一个变量、名字取完整</strong>，可读性更好。</p>
+<h3 id="122-初始化">1.2.2 初始化</h3>
+<p>声明的同时给定初值称为初始化，常见写法有三种：</p>
+<pre><code class="language-cpp">int a = 0;   // 赋值式，我们最常用的是这一种
+int b(0);    // 括号式
+int c{0};    // 花括号式（C++11）
+</code></pre>
+<p><strong>必须养成的习惯：定义变量后立即初始化。</strong> 函数内部的局部变量如果不初始化，它的值不是 0，而是一块<strong>不确定的旧数据（垃圾值）</strong>——使用它是未定义行为，程序不会报错，但结果不可预测。</p>
+<p>示例 2-2：未初始化局部变量的错误示范。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int x;          // 声明了，但没有初始化
+    cout &lt;&lt; x &lt;&lt; &#39;\n&#39;;   // 输出的是垃圾值，不可预测
+    return 0;
+}
+</code></pre>
+<p>用 <code>-Wall</code> 编译时，编译器会警告 <code>&#39;x&#39; is used uninitialized</code>。即使强行运行（本次运行恰好输出 <code>0</code>），也<strong>纯属巧合</strong>——下次编译、换台电脑、改一行代码，都可能变成乱码。这类错误的危险之处就在于：它不报错，甚至经常“碰巧”正确。</p>
+<p>唯一的例外是<strong>全局变量</strong>（定义在所有函数之外的变量）：不初始化时会被自动清零。这一点在数组上尤其有用，将在 1.8 节展开。</p>
+<h3 id="123-命名">1.2.3 命名</h3>
+<p>语法层面的规则只有四条：</p>
+<ol>
+<li>只能由字母、数字、下划线组成；</li>
+<li>不能以数字开头；</li>
+<li>不能使用 C/C++ 关键字（如 <code>int</code>、<code>return</code>）；</li>
+<li>区分大小写，<code>sum</code> 与 <code>Sum</code> 是两个变量。</li>
+</ol>
+<p>命名建议：用<strong>有意义的英文单词或拼音</strong>，<code>sum</code>、<code>score</code>、<code>nianFen</code> 都比 <code>a1</code>、<code>xx</code> 好；多个单词用驼峰或下划线连接。</p>
+<blockquote>
+<p><strong>避开库名</strong>是竞赛经验的另一条红线：<code>y1</code>、<code>j1</code>、<code>rank</code>、<code>index</code>、<code>time</code> 等名字容易与标准库或评测环境里的名称冲突，引发难以理解的编译错误，建议改写为 <code>yy1</code>、<code>rk</code>、<code>idx</code>。</p>
+</blockquote>
+<h2 id="13-基本数据类型">1.3 基本数据类型</h2>
+<h3 id="131-类型总表">1.3.1 类型总表</h3>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>字节</th>
+<th>表示范围</th>
+<th>printf / scanf</th>
+<th>字面量后缀</th>
+<th>典型场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>bool</code></td>
+<td>1</td>
+<td><code>true</code> / <code>false</code></td>
+<td><code>%d</code></td>
+<td>—</td>
+<td>标记、flag</td>
+</tr>
+<tr>
+<td><code>char</code></td>
+<td>1</td>
+<td>是否有符号由实现决定；至少能保存基本字符集</td>
+<td><code>%c</code></td>
+<td>—</td>
+<td>单个字符</td>
+</tr>
+<tr>
+<td><code>int</code></td>
+<td>4</td>
+<td>-2,147,483,648 ~ 2,147,483,647（约 ±2.1×10⁹）</td>
+<td><code>%d</code></td>
+<td>—</td>
+<td>默认整数</td>
+</tr>
+<tr>
+<td><code>unsigned int</code></td>
+<td>4</td>
+<td>0 ~ 4,294,967,295（约 4.2×10⁹）</td>
+<td><code>%u</code></td>
+<td><code>1u</code></td>
+<td>慎用，见 1.5 节</td>
+</tr>
+<tr>
+<td><code>long long</code></td>
+<td>8</td>
+<td>-9,223,372,036,854,775,808 ~ 9,223,372,036,854,775,807（约 ±9.2×10¹⁸）</td>
+<td><code>%lld</code></td>
+<td><code>1LL</code></td>
+<td>大整数、多数答案</td>
+</tr>
+<tr>
+<td><code>unsigned long long</code></td>
+<td>8</td>
+<td>0 ~ 18,446,744,073,709,551,615（约 1.8×10¹⁹）</td>
+<td><code>%llu</code></td>
+<td><code>1ULL</code></td>
+<td>位运算、哈希</td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>4</td>
+<td>有效数字约 7 位</td>
+<td><code>%f</code></td>
+<td><code>1.0f</code></td>
+<td>少用</td>
+</tr>
+<tr>
+<td><code>double</code></td>
+<td>8</td>
+<td>有效数字约 15~16 位</td>
+<td><code>%f</code>（输出）/ <code>%lf</code>（输入）</td>
+<td>—</td>
+<td>默认浮点</td>
+</tr>
+<tr>
+<td><code>long double</code></td>
+<td>实现相关</td>
+<td>精度不低于 <code>double</code>，具体取决于平台</td>
+<td><code>%Lf</code></td>
+<td><code>1.0L</code></td>
+<td>需要额外精度时先确认评测环境</td>
+</tr>
+</tbody></table>
+<p>注：表中的整数大小是常见竞赛评测环境的典型值。<code>char</code> 的符号性与 <code>long double</code> 的大小、精度由编译器和平台决定；需要依赖它们的具体范围时，应使用 <code>sizeof</code> 和 <code>&lt;limits&gt;</code> 实测，而不是凭操作系统猜测。</p>
+<h3 id="132-整型的选择">1.3.2 整型的选择</h3>
+<p>两条基本原则：</p>
+<ol>
+<li>**默认用 <code>int</code>**，预估结果可能超过 2.1×10⁹ 时直接用 <code>long long</code>，不要抱侥幸心理；</li>
+<li>**算法竞赛通常不写 <code>long</code>**。<code>long</code> 在 Windows 上常为 4 字节、在 64 位 Linux 评测机上常为 8 字节，容易产生跨平台误解；需要大整数时使用 <code>long long</code>，它在常见竞赛环境中保证至少 8 字节。</li>
+</ol>
+<h3 id="133-浮点型：float、double-与-long-double">1.3.3 浮点型：float、double 与 long double</h3>
+<p>浮点数除了表示范围，还要特别关注<strong>有效数字位数</strong>：常见环境中 <code>float</code> 约 6<del>7 位，<code>double</code> 约 15</del>16 位。这意味着一个 9 位整数（如 123456789）用 <code>float</code> 存储就可能开始丢精度。</p>
+<p>示例 3-1：float 存储大整数丢精度。</p>
+<pre><code class="language-cpp">#include &lt;iomanip&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    float f = 123456789.0f;   // 后缀 f 表示 float 字面量
+    double d = 123456789.0;
+    cout &lt;&lt; fixed &lt;&lt; setprecision(0);   // 按整数格式输出（用法见 1.6.5）
+    cout &lt;&lt; f &lt;&lt; &#39;\n&#39;;   // 输出 123456792，末三位已经不是原数
+    cout &lt;&lt; d &lt;&lt; &#39;\n&#39;;   // 输出 123456789，分毫不差
+    return 0;
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">123456792
+123456789
+</code></pre>
+<p>同一个数，装进 <code>float</code> 再取出来就变成了 <code>123456792</code>——<code>float</code> 只有约 7 位有效数字，装不下 9 位的精确值，只能保存最接近它的可表示值。而 <code>double</code> 有 15~16 位有效数字，通常可以精确表示绝对值不超过 2⁵³ 的整数。</p>
+<p>因此算法竞赛中的浮点数<strong>默认使用 <code>double</code>，<code>float</code> 基本可以忽略</strong>；涉及计算几何或累加大量小数时，可在确认评测环境后考虑 <code>long double</code>。</p>
+<p>输入输出有一个易错点：<code>printf</code> 输出 <code>float</code> 和 <code>double</code> 都用 <code>%f</code>，但 <code>scanf</code> 读入 <code>double</code> 必须用 <code>%lf</code>；写错格式符属于未定义行为，使用字面格式串并开启 <code>-Wall</code> 时编译器通常会警告。<code>long double</code> 的读写统一用 <code>%Lf</code>。</p>
+<h3 id="134-字符型-char">1.3.4 字符型 char</h3>
+<p><code>char</code> 的本质是一个 1 字节的整数，里面存的是字符编码。在 ASCII 编码中，常用字符按顺序连续编号：<code>&#39;A&#39;</code> 是 65，<code>&#39;B&#39;</code> 是 66，……，<code>&#39;a&#39;</code> 是 97，<code>&#39;0&#39;</code> 是 48。字符参与算术运算前会先提升为 <code>int</code>，所以 <code>&#39;A&#39; + 1</code> 的值是整数 <code>66</code>。</p>
+<p>示例 3-2：字符与它的编码可以互相换算。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    char c = &#39;A&#39;;
+    cout &lt;&lt; c &lt;&lt; &#39;\n&#39;;            // 输出 A
+    cout &lt;&lt; c + 1 &lt;&lt; &#39;\n&#39;;        // 输出 66：字符先转成编码 65，再加 1
+    cout &lt;&lt; char(c + 1) &lt;&lt; &#39;\n&#39;;  // 输出 B：66 转回字符
+    cout &lt;&lt; &#39;C&#39; - &#39;A&#39; &lt;&lt; &#39;\n&#39;;    // 输出 2：两个字符编码相减
+    return 0;
+}
+</code></pre>
+<p>逐行演算：<code>c</code> 的值是 <code>&#39;A&#39;</code>（编码 65）；<code>c + 1</code> 是 <code>65 + 1 = 66</code>；<code>char(66)</code> 是 <code>&#39;B&#39;</code>；<code>&#39;C&#39; - &#39;A&#39;</code> 是 <code>67 - 65 = 2</code>。运行结果：</p>
+<pre><code class="language-text">A
+66
+B
+2
+</code></pre>
+<p>“字符减字符得到距离”是oj习题中一定会用到的技巧，第 2 章还会用它处理字母表问题。书写字符字面量用单引号 <code>&#39;A&#39;</code>；双引号 <code>&quot;A&quot;</code> 是字符串，两者不是一回事。</p>
+<h3 id="135-布尔型-bool">1.3.5 布尔型 bool</h3>
+<p><code>bool</code> 只有两个值：<code>true</code> 和 <code>false</code>。与整数互换的规则是：<code>true</code> 转为整数是 1，<code>false</code> 是 0；反过来，<strong>任何非零整数</strong>赋给 <code>bool</code> 都是 <code>true</code>，只有 0 是 <code>false</code>。</p>
+<p>示例 3-3：bool 与整数的互转规则。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    bool a = true;   // 显式的真
+    bool b = 42;     // 非零整数 → true
+    bool c = 0;      // 只有 0 是 false
+    cout &lt;&lt; a &lt;&lt; &#39; &#39; &lt;&lt; b &lt;&lt; &#39; &#39; &lt;&lt; c &lt;&lt; &#39;\n&#39;;   // 输出 1 1 0
+    return 0;
+}
+</code></pre>
+<p>算法竞赛中 <code>bool</code> 最常见的用途是标记（visited、flag），常常配合数组使用。</p>
+<h2 id="14-溢出：合理选择数据范围的原因">1.4 溢出：合理选择数据范围的原因</h2>
+<h3 id="141-什么是溢出">1.4.1 什么是溢出</h3>
+<p>整数类型的存储空间是固定的，当运算结果超出类型能表示的范围时，就发生溢出。这里必须区分两种情况：</p>
+<ul>
+<li><strong>有符号整数溢出是未定义行为</strong>。例如计算 <code>INT_MAX + 1</code> 后，C++ 不保证得到某个固定结果，开启优化后甚至可能出现更意外的行为；</li>
+<li><strong>无符号整数按模运算回绕</strong>。例如 <code>unsigned int</code> 的最大值再加 1，会确定地回到 0。</li>
+</ul>
+<p>因此，竞赛代码不能依赖 <code>int</code> “从最大值绕到最小值”。需要更大结果时，应在运算发生前改用更宽的类型：</p>
+<p>示例 4-1：让加法在 <code>long long</code> 里完成。</p>
+<pre><code class="language-cpp">#include &lt;climits&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int x = INT_MAX;              // int 能表示的最大值 2147483647
+    long long safe = 1LL * x + 1; // 先转成 long long 再加
+    cout &lt;&lt; safe &lt;&lt; &#39;\n&#39;;
+    return 0;
+}
+</code></pre>
+<p>演算：<code>x</code> 是 <code>2147483647</code>；<code>1LL * x</code> 把它先提升成 <code>long long</code>；加 1 得到 <code>2147483648</code>，超出了 <code>int</code> 上限但在 <code>long long</code> 中安然无恙。运行结果：</p>
+<pre><code class="language-text">2147483648
+</code></pre>
+<h3 id="142-更隐蔽的：中间结果溢出">1.4.2 更隐蔽的：中间结果溢出</h3>
+<p>一个常见误区是“把结果存进 <code>long long</code> 就安全了”。看下面的写法：</p>
+<p>示例 4-2：<code>int</code> 乘 <code>int</code>，赋值给 <code>long long</code> 仍然溢出。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int a = 100000, b = 100000;
+    long long wrong = a * b;       // 危险：乘法先在 int 里做
+    long long right = 1LL * a * b; // 正确：先提升成 long long 再乘
+    cout &lt;&lt; wrong &lt;&lt; &#39;\n&#39;;
+    cout &lt;&lt; right &lt;&lt; &#39;\n&#39;;
+    return 0;
+}
+</code></pre>
+<p>运行结果（g++ <code>-O2</code>）：</p>
+<pre><code class="language-text">1410065408
+10000000000
+</code></pre>
+<p>我们来逐步模拟一下：</p>
+<ol>
+<li><code>a * b</code> 的两个操作数都是 <code>int</code>，于是乘法<strong>在 <code>int</code> 的世界里完成</strong>：<code>100000 × 100000 = 10000000000</code>，远远超过 <code>int</code> 上限 2147483647，溢出已经实实在在发生了（未定义行为）；</li>
+<li>溢出的残值（本环境下是 1410065408）被赋给左边的 <code>long long</code>——但错误已经铸成，<code>long long</code> 再大也只能忠实收下这个残值；</li>
+<li><code>1LL * a</code> 先得到一个 <code>long long</code>，再乘 <code>b</code> 时整个表达式按 <code>long long</code> 运算，<code>10000000000</code> 被完整保留。</li>
+</ol>
+<p>总结：<strong>表达式的类型由参与运算的操作数决定，与赋值给谁无关。</strong> 防止中间溢出的唯一办法，是在运算发生之前完成类型提升。</p>
+<p>算法竞赛中有一条朴素而有效的经验：看数据范围时，**拿不准就用 <code>long long</code>**。</p>
+<h3 id="143-数据范围-→-类型选择">1.4.3 数据范围 → 类型选择</h3>
+<p>比赛中看题的第一步永远是<strong>读数据范围</strong>，然后对照下表选类型：</p>
+<table>
+<thead>
+<tr>
+<th>答案与中间运算的最大值</th>
+<th>选择的类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>不超过 ±2.1×10⁹</td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td>不超过 ±9.2×10¹⁸</td>
+<td><code>long long</code></td>
+</tr>
+<tr>
+<td>更大</td>
+<td><code>__int128</code>（见 1.4.4）；再大需要手写高精度，本系列不展开</td>
+</tr>
+</tbody></table>
+<p>判断依据是“<strong>答案与中间运算可能到达的最大值</strong>”，而不只是输入的范围。比如本次训练中有一道求和题：输入的 <code>n</code> 本身不超过 10⁶，用 <code>int</code> 绰绰有余；但累加过程中答案约 3.3×10¹⁷，而且单独一项 <code>i²</code> 最高就有 10¹²——两者都远超 <code>int</code>，必须全程使用 <code>long long</code>。</p>
+<p>拿不准时先估算最大值；来不及精算且范围允许时，可以保守使用 <code>long long</code>，但仍要检查乘法等中间结果是否可能超过它。</p>
+<h3 id="144-【拓展】__int128">1.4.4 【拓展】__int128</h3>
+<p>g++ 内置了 128 位整数类型 <code>__int128</code>，可表示约 ±1.7×10³⁸ 的整数，作为乘法可能溢出 <code>long long</code> 时的中间计算工具非常顺手。需要注意它没有配套的 <code>scanf</code>/<code>printf</code> 格式符，读写需要自行转换。初学阶段只需知道它的存在，具体用法在需要时再查即可。</p>
+<h2 id="15-类型转换">1.5 类型转换</h2>
+<h3 id="151-隐式转换">1.5.1 隐式转换</h3>
+<p>混合类型参与运算时，编译器会自动完成类型转换，规则有三条：</p>
+<ol>
+<li><strong>小类型向大类型转换</strong>。<code>int</code> 与 <code>long long</code> 混合运算，<code>int</code> 先转为 <code>long long</code>；整型与浮点型混合运算，整型先转为浮点型。1.4.2 节“表达式前乘 <code>1LL</code>”利用的正是这条规则。</li>
+<li><strong>整型提升</strong>。<code>char</code>、<code>bool</code>、<code>short</code> 参与任何算术运算之前，先提升为 <code>int</code>。因此 <code>&#39;A&#39; + 1</code> 的类型是 <code>int</code>，值为 <code>66</code>；两个 <code>char</code> 相加，结果也是 <code>int</code>。</li>
+<li><strong>有符号与无符号混合时要格外小心</strong>。在常见的 <code>int</code> 与 <code>unsigned int</code> 混合比较中，<code>-1</code> 会转成一个很大的无符号数，导致 <code>-1 &lt; 1u</code> 为 <code>false</code>。初学阶段不必背完整规则，先做到不主动混用即可。</li>
+</ol>
+<h3 id="152-强制转换">1.5.2 强制转换</h3>
+<p>需要主动转换类型时，使用强制转换运算符，有两种等价写法：</p>
+<pre><code class="language-cpp">(int)x              // C 风格 （最常用同时最显然）
+static_cast&lt;int&gt;(x) // C++ 风格 （不推荐在算法竞赛中使用）
+</code></pre>
+<p>示例 5-1：两种写法效果相同。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    cout &lt;&lt; static_cast&lt;int&gt;(3.9) &lt;&lt; &#39; &#39; &lt;&lt; (int)3.9 &lt;&lt; &#39;\n&#39;;   // 输出 3 3
+    cout &lt;&lt; static_cast&lt;double&gt;(7) / 2 &lt;&lt; &#39;\n&#39;;                 // 输出 3.5
+    return 0;
+}
+</code></pre>
+<p>在本节这种普通数值转换中，两者会得到相同结果。大部分情况下请选择C风格的类型转换，这是经验之谈。</p>
+<h3 id="153-三个经典场景">1.5.3 三个经典场景</h3>
+<p>示例 5-2：整数除法、截断与四舍五入。</p>
+<pre><code class="language-cpp">#include &lt;cmath&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    // 场景一：整数除法转浮点
+    cout &lt;&lt; 7 / 2 &lt;&lt; &#39;\n&#39;;            // 输出 3：整数除法直接舍去小数
+    cout &lt;&lt; 7.0 / 2 &lt;&lt; &#39;\n&#39;;          // 输出 3.5：至少一个操作数是浮点
+    cout &lt;&lt; (double)(7 / 2) &lt;&lt; &#39;\n&#39;;  // 输出 3：先算完 7/2=3，再转已经晚了
+
+    // 场景二：浮点转整型的截断规则
+    cout &lt;&lt; (int)3.9 &lt;&lt; &#39; &#39; &lt;&lt; (int)-3.9 &lt;&lt; &#39;\n&#39;;   // 输出 3 -3：向零取整
+
+    // 场景三：四舍五入
+    cout &lt;&lt; round(3.4) &lt;&lt; &#39; &#39; &lt;&lt; round(3.5) &lt;&lt; &#39; &#39; &lt;&lt; round(-3.5) &lt;&lt; &#39;\n&#39;;  // 输出 3 4 -4
+    return 0;
+}
+</code></pre>
+<p>三个场景的演算要点：</p>
+<ul>
+<li><strong>场景一</strong>：<code>7 / 2</code> 中两个操作数都是 <code>int</code>，结果也是 <code>int</code>（3.5 的小数被直接舍去，不是四舍五入）；<code>7.0 / 2</code> 中 <code>7.0</code> 是 <code>double</code>，<code>2</code> 被自动提升，<code>3.5</code> 完整保留；而 <code>(double)(7 / 2)</code> 的括号让除法<strong>先</strong>完成，转换成 <code>double</code> 的只是结果 <code>3</code>。</li>
+<li><strong>场景二</strong>：浮点转 <code>int</code> 一律<strong>向零取整</strong>（直接砍掉小数部分），对负数也是如此：<code>-3.9</code> 变成 <code>-3</code>，而不是数学上的向下取整 <code>-4</code>。需要真正的向下取整，请使用 <code>&lt;cmath&gt;</code> 中的 <code>floor</code>。</li>
+<li><strong>场景三</strong>：<code>round</code> 按“四舍五入到最近整数，恰好一半时远离零”处理，所以 <code>round(3.5)</code> 是 <code>4</code>、<code>round(-3.5)</code> 是 <code>-4</code>。对非负浮点数，<code>(int)(x + 0.5)</code> 是等价的常用技巧。</li>
+</ul>
+<h2 id="16-输入与输出">1.6 输入与输出</h2>
+<h3 id="161-默认路线：cin--cout">1.6.1 默认路线：cin / cout</h3>
+<p>C++ 程序有两套输入输出工具，本讲义的默认路线是 **<code>cin</code> / <code>cout</code>**（头文件 <code>&lt;iostream&gt;</code>）：它们自动识别变量类型，不用记格式符，对初学者最友好。</p>
+<p>另一套是 C 风格的 <code>scanf</code> / <code>printf</code>（头文件 <code>&lt;cstdio&gt;</code>），用格式符精确控制读写。<strong>什么时候需要它？</strong> 当你要精确控制输出格式时——比如保留几位小数、不足几位补前导零——<code>printf</code> 的格式串往往一行搞定，<code>cin</code>/<code>cout</code> 则需要额外的工具（1.6.5、1.6.6 会给出两套对照写法）。两套工具都会讲，建议先以 <code>cin</code>/<code>cout</code> 为主练熟，再用 <code>printf</code> 补齐格式控制。</p>
+<p>初学阶段最稳妥的规则是：<strong>同一个程序只选一套</strong>，不要混用。混用本身不是语法错误，但会让缓冲与输出顺序变得难以理解；一旦使用 <code>ios::sync_with_stdio(false)</code> 解除同步（进阶写法，现在不需要用），就更不应再混用。</p>
+<h3 id="162-读入数据">1.6.2 读入数据</h3>
+<p><code>cin</code> 用 <code>&gt;&gt;</code> 把输入读进变量，一次可以连读多个：</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int a;
+    long long b;
+    double c;
+    cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;   // 依次读入，用空格、换行或 Tab 分隔都可以
+    cout &lt;&lt; a &lt;&lt; &#39; &#39; &lt;&lt; b &lt;&lt; &#39; &#39; &lt;&lt; c &lt;&lt; &#39;\n&#39;;
+    return 0;
+}
+</code></pre>
+<p>示例输入与输出：</p>
+<pre><code class="language-text">（输入）3 123456789012 2.5
+（输出）3 123456789012 2.5
+</code></pre>
+<p><code>cin</code> 遇到空白字符就切分，所以输入写成 <code>3␣123456789012␣2.5</code>、一行一个数、或者 Tab 分隔，效果完全一样。输入时程序会<strong>停在 <code>cin</code> 处等待</strong>，你在终端敲完一行按回车，它才继续往下走。</p>
+<p>如果题目用 C 风格，对应写法是 <code>scanf(&quot;%d%lld%lf&quot;, &amp;a, &amp;b, &amp;c);</code>——格式符与变量一一对应，<code>%d</code> 配 <code>int</code>、<code>%lld</code> 配 <code>long long</code>、<code>%lf</code> 配 <code>double</code>。它最大的特点（也是最大的坑）是<strong>严格按你写的格式串匹配输入</strong>：格式串里写什么，输入就必须原样出现什么，少一个字符都匹配不上。竞赛输入绝大多数是空白分隔的数字，所以 <code>cin</code> 连写是最省心的默认路线；格式串主要在输出侧发挥威力。</p>
+<h3 id="163-读入字符的坑（scanf-路线）">1.6.3 读入字符的坑（scanf 路线）</h3>
+<p>默认的 <code>cin &gt;&gt; ch</code> 会<strong>自动跳过空白字符</strong>，读字符没有坑。但如果走 <code>scanf</code> 路线要注意：<code>%c</code> <strong>不跳过空白字符</strong>，上一行末尾残留的换行会被它读走，而不是你想要的字符。解决办法是读字符统一写成 <code>scanf(&quot; %c&quot;, &amp;ch)</code>——格式串里 <code>%c</code> 前面的那个空格表示“先跳过所有空白”。更多字符处理技巧在第 4 章字符串中展开。</p>
+<h3 id="164-输出：普通输出与转义字符">1.6.4 输出：普通输出与转义字符</h3>
+<p><code>cout</code> 用 <code>&lt;&lt;</code> 依次拼接要打印的内容，字符串原样输出，变量的值自动替换：</p>
+<pre><code class="language-cpp">int a = 7;
+long long sum = 123456789012;
+cout &lt;&lt; &quot;a = &quot; &lt;&lt; a &lt;&lt; &quot;, sum = &quot; &lt;&lt; sum &lt;&lt; &quot;\n&quot;;
+</code></pre>
+<p>输出：</p>
+<pre><code class="language-text">a = 7, sum = 123456789012
+</code></pre>
+<p>换行用 <code>&#39;\n&#39;</code>（<code>cout</code> 也可以用 <code>endl</code>，它会强制刷新输出缓冲、明显拖慢速度，竞赛中统一写 <code>&#39;\n&#39;</code>）。字符串里以反斜杠 <code>\</code> 开头的字符序列称为<strong>转义字符</strong>，用来表示无法直接书写的特殊字符：</p>
+<table>
+<thead>
+<tr>
+<th>转义字符</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\n</code></td>
+<td>换行</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>水平制表（Tab）</td>
+</tr>
+<tr>
+<td><code>\\</code></td>
+<td>反斜杠本身</td>
+</tr>
+<tr>
+<td><code>\&quot;</code></td>
+<td>双引号</td>
+</tr>
+<tr>
+<td><code>\&#39;</code></td>
+<td>单引号</td>
+</tr>
+<tr>
+<td><code>\0</code></td>
+<td>空字符，字符串的结束标志（第 4 章会用到）</td>
+</tr>
+</tbody></table>
+<p>容易出错的是后三个：要输出一个反斜杠必须写 <code>\\</code>，要在字符串中输出双引号必须写 <code>\&quot;</code>，否则编译器会把它们当成转义序列的开始，导致格式串解析混乱。</p>
+<p>示例 6-1：转义字符的输出效果。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    cout &lt;&lt; &quot;line1\nline2\n&quot;;
+    cout &lt;&lt; &quot;a\tb\n&quot;;
+    cout &lt;&lt; &quot;C:\\Users\\name\n&quot;;
+    cout &lt;&lt; &quot;She said: \&quot;Hello\&quot;\n&quot;;
+    return 0;
+}
+</code></pre>
+<p>运行结果（第二行中 <code>a</code> 与 <code>b</code> 之间是一个制表位）：</p>
+<pre><code class="language-text">line1
+line2
+a	b
+C:\Users\name
+She said: &quot;Hello&quot;
+</code></pre>
+<blockquote>
+<p>小提示：竞赛题的输出一般是数字、英文和标点，不用中文；如果自行尝试输出中文，Windows 终端可能显示乱码，那是终端编码问题，与程序正确性无关，评测系统不受影响。</p>
+</blockquote>
+<h3 id="165-定点小数：保留几位小数">1.6.5 定点小数：保留几位小数</h3>
+<p>输出浮点数经常需要指定位数，这是 <code>printf</code> 的主场，但 <code>cin</code>/<code>cout</code> 配合 <code>&lt;iomanip&gt;</code> 同样能做到：</p>
+<pre><code class="language-cpp">printf(&quot;%.2f\n&quot;, x);                    // C 风格：保留两位小数
+cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; x;  // C++ 风格：需头文件 &lt;iomanip&gt;
+</code></pre>
+<ul>
+<li><code>%.2f</code> 按<strong>四舍五入</strong>保留两位小数，<code>%.nf</code> 即保留 n 位；</li>
+<li><code>fixed</code> 表示“固定小数点”输出（总是带小数部分），<code>setprecision(2)</code> 表示保留 2 位小数；两者<strong>一旦设置，对之后所有的浮点输出持续生效</strong>。</li>
+</ul>
+<p>示例 6-2：两种写法的对照。</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;iomanip&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    double pi = 3.1415926;
+    double x = 2.5;
+
+    cout &lt;&lt; pi &lt;&lt; &#39;\n&#39;;                              // 默认 6 位有效数字
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; pi &lt;&lt; &#39;\n&#39;;  // 四舍五入保留两位
+    cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; x &lt;&lt; &#39;\n&#39;;   // 2.5 → 2.50
+    printf(&quot;%.2f\n&quot;, pi);                            // printf 写法
+    return 0;
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">3.14159
+3.14
+2.50
+3.14
+</code></pre>
+<p>演算要点：直接 <code>cout &lt;&lt; pi</code> 默认只显示 <strong>6 位有效数字</strong>（<code>3.14159</code>），这不是“保留六位小数”，而是“从左边第一个非零数字算起一共六位”；<code>fixed &lt;&lt; setprecision(2)</code> 之后才是我们常说的“保留两位小数”，并且 <code>2.5</code> 会补齐成 <code>2.50</code>。</p>
+<h3 id="166-前导补零：宽度与填充">1.6.6 前导补零：宽度与填充</h3>
+<p>有些题目要求输出定宽格式，比如时间要写成 <code>09:05</code> 而不是 <code>9:5</code>，名次要输出 <code>007</code>。两套写法对照：</p>
+<ul>
+<li><code>printf(&quot;%02d&quot;, x)</code>：宽度至少 2 位，不足时在<strong>左侧补 0</strong>；</li>
+<li><code>cout &lt;&lt; setw(2) &lt;&lt; setfill(&#39;0&#39;) &lt;&lt; x</code>：<code>setw</code> 设置宽度，<code>setfill</code> 设置填充字符。</li>
+</ul>
+<p>示例 6-3：时间与定宽编号。</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+#include &lt;iomanip&gt;
+#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int hour = 9, minute = 5;
+    printf(&quot;%02d:%02d\n&quot;, hour, minute);                 // 09:05
+    cout &lt;&lt; setw(2) &lt;&lt; setfill(&#39;0&#39;) &lt;&lt; hour &lt;&lt; &#39;:&#39;
+         &lt;&lt; setw(2) &lt;&lt; setfill(&#39;0&#39;) &lt;&lt; minute &lt;&lt; &#39;\n&#39;;   // 09:05
+
+    int rank = 7;
+    printf(&quot;%03d\n&quot;, rank);                              // 007
+    cout &lt;&lt; setw(3) &lt;&lt; setfill(&#39;0&#39;) &lt;&lt; rank &lt;&lt; &#39;\n&#39;;     // 007
+    return 0;
+}
+</code></pre>
+<p>运行结果：</p>
+<pre><code class="language-text">09:05
+09:05
+007
+007
+</code></pre>
+<p>一个关键细节：<code>setw</code> <strong>只对紧接着的一次输出有效</strong>，所以 <code>hour</code> 和 <code>minute</code> 前面要各写一次；<code>setfill</code> 设置后持续生效。与之相关的还有对齐宽度 <code>%5d</code>（至少占 5 个字符宽、右对齐，<code>%-5d</code> 为左对齐），打印表格类对齐输出时非常有用。</p>
+<h3 id="167-scanf--printf-格式符速查">1.6.7 scanf / printf 格式符速查</h3>
+<table>
+<thead>
+<tr>
+<th>格式符</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>%d</code></td>
+<td><code>int</code></td>
+</tr>
+<tr>
+<td><code>%lld</code></td>
+<td><code>long long</code></td>
+</tr>
+<tr>
+<td><code>%u</code> / <code>%llu</code></td>
+<td><code>unsigned int</code> / <code>unsigned long long</code></td>
+</tr>
+<tr>
+<td><code>%f</code></td>
+<td>输出 <code>float</code>/<code>double</code>；<code>scanf</code> 中仅用于 <code>float</code></td>
+</tr>
+<tr>
+<td><code>%lf</code></td>
+<td><code>scanf</code> 读入 <code>double</code></td>
+</tr>
+<tr>
+<td><code>%Lf</code></td>
+<td><code>long double</code> 读写</td>
+</tr>
+<tr>
+<td><code>%c</code></td>
+<td>单个字符</td>
+</tr>
+<tr>
+<td><code>%s</code></td>
+<td>字符串（字符数组，读入时不加 <code>&amp;</code>）</td>
+</tr>
+<tr>
+<td><code>%nd</code></td>
+<td>至少占 n 个字符宽，右对齐（左对齐用 <code>%-nd</code>）</td>
+</tr>
+<tr>
+<td><code>%0nd</code></td>
+<td>宽度 n，不足时左侧补 0</td>
+</tr>
+<tr>
+<td><code>%.nf</code></td>
+<td>保留 n 位小数输出</td>
+</tr>
+<tr>
+<td><code>%%</code></td>
+<td>输出百分号本身</td>
+</tr>
+</tbody></table>
+<p><code>cin</code>/<code>cout</code> 不需要格式符，类型自动匹配。再次提醒三个易错点：<code>scanf</code> 读普通变量必须加 <code>&amp;</code>（<code>scanf(&quot;%d&quot;, &amp;a);</code>，<code>cin</code> 不需要）；读入 <code>double</code> 必须用 <code>%lf</code> 而不是 <code>%f</code>；<code>%c</code> 不跳过空白（1.6.3）。</p>
+<h2 id="17-常量：const-与-define">1.7 常量：const 与 #define</h2>
+<h3 id="171-为什么需要常量">1.7.1 为什么需要常量</h3>
+<p>程序中不应出现来路不明的“魔法数字”——一个没有名字的字面量，读者无法知道它代表什么。把有固定含义的值命名为常量，既让代码自解释，也让修改只需改动一处。</p>
+<p>C++ 中定义常量的两种方式：<code>const</code> 和 <code>#define</code>，算法竞赛代码中两种都很常见，都需要掌握。</p>
+<h3 id="172-const-定义常量">1.7.2 const 定义常量</h3>
+<pre><code class="language-cpp">const int MAXN = 100005;
+</code></pre>
+<p><code>const</code> 定义的常量有明确的类型，遵守普通变量的作用域规则，定义之后不允许再赋值（再赋值会直接编译报错）。它在本质上是一个“只读变量”。</p>
+<h3 id="173-define-宏定义">1.7.3 #define 宏定义</h3>
+<pre><code class="language-cpp">#define MAXN 100005
+</code></pre>
+<p><code>#define</code> 是预处理指令，在编译之前把代码中的名字<strong>原样替换成后面的文本</strong>。它没有类型、没有作用域、也不占内存。两个使用要点：行尾<strong>不加分号</strong>；替换是纯粹的文本操作，因此宏的内容若涉及运算，参与表达式时可能因优先级产生意外。</p>
+<p>示例 7-1：const、#define，以及宏的经典陷阱。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+const int MAXN = 100005;
+#define MOD 1000000007
+#define A 1 + 2   // 反例：内容没有整体加括号
+
+int main()
+{
+    cout &lt;&lt; MAXN &lt;&lt; &#39; &#39; &lt;&lt; MOD &lt;&lt; &#39;\n&#39;;   // 输出 100005 1000000007
+    cout &lt;&lt; 2 * A &lt;&lt; &#39;\n&#39;;                // 输出 4，而不是 6！
+    return 0;
+}
+</code></pre>
+<p>演算陷阱所在：<code>2 * A</code> 被原样替换成 <code>2 * 1 + 2</code>，按乘法优先级先算 <code>2 * 1</code>，再加 2，得到 <code>4</code>；而你可能期望的是 <code>2 * (1 + 2) = 6</code>。稳妥做法是宏的内容涉及运算时整体加括号：<code>#define A (1 + 2)</code>。</p>
+<blockquote>
+<p>本系列的使用习惯：数组容量等简单竞赛常量用 <code>#define</code>，需要类型与作用域语义时用 <code>const</code>，见 1.7.5 与第 3 章。</p>
+</blockquote>
+<h3 id="174-【拓展】眼熟即可：inf--0x3f3f3f3f">1.7.4 【拓展】眼熟即可：INF = 0x3f3f3f3f</h3>
+<p>在之后的数组、图论章节里，你会经常看到下面这个常量：</p>
+<pre><code class="language-cpp">const int INF = 0x3f3f3f3f;
+</code></pre>
+<p>它表示“无穷大”，用来标记“还没算出来”或“走不到”。<code>0x3f3f3f3f</code> 是一个十六进制写法（十六进制本身在第 6 章位运算中系统讲解），数值约 10.6 亿。现在<strong>不需要理解它为什么长这样</strong>，更不必使用；等学到相关章节再回来看，理由会水到渠成。</p>
+<h3 id="175-【拓展】constexpr">1.7.5 【拓展】constexpr</h3>
+<p>C++11 引入了 <code>constexpr</code>，表示“编译期就能确定值的常量”，约束比 <code>const</code> 更强，常用于数组长度等必须是编译期常量的场合。初学阶段遇到时能认识即可。</p>
+<h2 id="18-作用域与全局变量">1.8 作用域与全局变量</h2>
+<h3 id="181-三层作用域">1.8.1 三层作用域</h3>
+<p>变量的<strong>作用域</strong>是它从定义到失效的有效范围，C++ 中有三层：</p>
+<ol>
+<li><strong>全局变量</strong>：定义在所有函数之外，整个程序中都可以访问；</li>
+<li><strong>局部变量</strong>：定义在函数内（如 <code>main</code> 函数内），只在该函数中有效；</li>
+<li><strong>块级变量</strong>：定义在某一对花括号内（如 <code>for</code> 循环体、<code>if</code> 分支内），离开这对花括号立即失效。</li>
+</ol>
+<p>一个典型例子是循环变量：<code>for (int i = 0; ...)</code> 中定义的 <code>i</code> 只在循环体内有效，循环结束后即失效，因此两个并列的 <code>for</code> 循环可以各自定义自己的 <code>i</code> 而互不干扰。</p>
+<h3 id="182-同名遮蔽">1.8.2 同名遮蔽</h3>
+<p>内层作用域可以定义与外层同名的变量，此时内层变量<strong>遮蔽</strong>外层变量——在内层作用域中访问该名字，看到的是内层的值；离开内层后，外层变量恢复可见。</p>
+<p>示例 8-1：三层作用域与遮蔽。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int g = 10;   // 全局变量
+
+int main()
+{
+    cout &lt;&lt; g &lt;&lt; &#39;\n&#39;;   // 输出 10：此时只有全局的 g
+    int g = 20;          // 局部 g 遮蔽了全局 g
+    cout &lt;&lt; g &lt;&lt; &#39;\n&#39;;   // 输出 20
+    {
+        int g = 30;      // 块级 g 又遮蔽了局部 g
+        cout &lt;&lt; g &lt;&lt; &#39;\n&#39;;   // 输出 30
+    }                    // 块级 g 在这里失效
+    cout &lt;&lt; g &lt;&lt; &#39;\n&#39;;   // 输出 20：局部 g 恢复可见
+    return 0;
+}
+</code></pre>
+<p>遮蔽规则保证了局部命名的自由，但也容易写出“以为改的是全局、实际改的是局部”的错觉代码。<strong>建议避免重名变量</strong>；如果全局变量就叫 <code>g</code>，局部就不要再用这个名字。</p>
+<h3 id="183-全局变量自动清零">1.8.3 全局变量自动清零</h3>
+<p>回忆 1.2.2 节“局部变量不初始化是未定义行为”。全局变量（以及所有函数外定义的变量）则不同：<strong>不加初始化时，它们会被自动清零</strong>——数值型为 0，<code>bool</code> 为 <code>false</code>，<code>char</code> 为 <code>&#39;\0&#39;</code>。</p>
+<p>这条规则最实用的场景是数组：把数组定义为全局变量，所有元素自动为 0，免去了手动清零的循环；标记数组、计数数组在算法竞赛中几乎都这样使用。至于“大数组为什么建议开全局”（函数栈空间的限制），将在第 3 章数组中展开。</p>
+<h2 id="19-常见错误对照">1.9 常见错误对照</h2>
+<p>评测系统对一份提交只会给出有限几种结果，先记住它们的名字，后面每一章都会用到：</p>
+<table>
+<thead>
+<tr>
+<th>结果</th>
+<th>全称</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AC</td>
+<td>Accepted</td>
+<td>通过，输出全部正确</td>
+</tr>
+<tr>
+<td>WA</td>
+<td>Wrong Answer</td>
+<td>答案错误：能跑完，但输出不对</td>
+</tr>
+<tr>
+<td>RE</td>
+<td>Runtime Error</td>
+<td>运行崩溃：越界、非法内存访问等</td>
+</tr>
+<tr>
+<td>CE</td>
+<td>Compile Error</td>
+<td>编译失败：语法有错，根本没生成程序</td>
+</tr>
+<tr>
+<td>TLE</td>
+<td>Time Limit Exceeded</td>
+<td>超时：程序跑得太慢</td>
+</tr>
+<tr>
+<td>MLE</td>
+<td>Memory Limit Exceeded</td>
+<td>超内存</td>
+</tr>
+</tbody></table>
+<p>下面按新生最高频的三个错误逐一对照。</p>
+<h3 id="错误一（ce）：中文标点混入">错误一（CE）：中文标点混入</h3>
+<p>示例 9-1：使用了中文分号的代码。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int a = 1；      // ← 这个分号是全角的
+    cout &lt;&lt; a &lt;&lt; &#39;\n&#39;;
+    return 0;
+}
+</code></pre>
+<p><strong>现象</strong>：编译失败，错误信息指向的行号和内容看起来莫名其妙，往往和真正的错误位置差了好几行。</p>
+<p><strong>原因</strong>：从聊天软件、网页或全角输入法状态下复制的代码混入了全角字符（中文分号 <code>；</code>、中文引号 <code>“”</code>、中文括号 <code>（）</code> 等）。编译器只认识半角符号，全角字符会把后续的解析全部打乱。本例编译时，g++ 会报出一串完全看不懂的错误，例如 <code>error: unable to find numeric literal operator &#39;operator&quot;&quot;\U0000ff1b&#39;</code>——那个 <code>\U0000ff1b</code> 其实就是中文分号的编码；如果全角分号跟在类型后面（如 <code>int a；</code>），报的则是 <code>error: expected initializer before &#39;cout&#39;</code>，指向的甚至是<strong>下一行</strong>。具体措辞随编译器版本不同（旧版本常报 <code>stray ‘\343’ in program</code>），但共同点是：报错内容看不懂、指的位置不靠谱。</p>
+<p><strong>修复</strong>：在报错位置附近仔细检查标点是否为全角，逐个重打。预防办法：永远在 VS Code 里手敲代码，不要从聊天记录里复制。</p>
+<h3 id="错误二（re--未定义行为）：scanf-漏写">错误二（RE / 未定义行为）：scanf 漏写 &amp;</h3>
+<p>示例 9-2：<code>scanf</code> 漏写 <code>&amp;</code> 的代码。</p>
+<pre><code class="language-cpp">#include &lt;cstdio&gt;
+int main()
+{
+    int a = 0;
+    scanf(&quot;%d&quot;, a);   // 漏了 &amp;：把 a 的值当成了地址
+    printf(&quot;%d\n&quot;, a);
+    return 0;
+}
+</code></pre>
+<p><strong>现象</strong>：开启 <code>-Wall</code> 编译时，编译器会警告 <code>format &#39;%d&#39; expects argument of type &#39;int *&#39;, but argument 2 has type &#39;int&#39;</code>。如果无视警告强行运行，属于未定义行为：在本文的验证环境中，输入一个数后它直接崩溃（RE）；换种环境它也可能“看起来没事”地跑出错误数据——不保证每次都一样。</p>
+<p><strong>原因</strong>：<code>scanf</code> 需要的是变量的<strong>地址</strong>（往哪里写），漏写 <code>&amp;</code> 传入的却是变量的<strong>值</strong>（当前内容）。<code>scanf</code> 会把这个值当作内存地址使用，等于让程序往一个来路不明的位置写数据。</p>
+<p><strong>修复</strong>：<code>scanf</code> 中所有普通变量前加 <code>&amp;</code>；唯一的例外是字符数组，数组名本身就是地址，不需要加（第 4 章会见到）。用 <code>cin</code> 则完全没有这个坑，这也是默认路线推荐 <code>cin</code> 的原因之一。</p>
+<h3 id="错误三（wa）：int-溢出">错误三（WA）：int 溢出</h3>
+<p>示例 9-3：大数累加仍用 <code>int</code> 的代码。</p>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
+using namespace std;
+
+int main()
+{
+    int n;
+    cin &gt;&gt; n;
+    int sum = 0;
+    for (int i = 1; i &lt;= n; i++) {
+        sum += i + i * i;   // i*i 与累加都可能超出 int 的范围
+    }
+    cout &lt;&lt; sum &lt;&lt; &#39;\n&#39;;
+    return 0;
+}
+</code></pre>
+<p><strong>现象</strong>：输入 <code>3</code>，程序正确输出 <code>20</code>；输入 <code>100000</code>，它输出 <code>-1963344448</code>（溢出是未定义行为，这个残值换台机器可能不同，但总之是错的）——而正确答案是 <code>333343333400000</code>。程序逻辑一个字符都没错，小样例全对，大数据全错，全程没有任何报错，评测结果就是 WA。</p>
+<p><strong>原因</strong>：答案与中间运算都超出了 <code>int</code> 的表示范围（约 ±2.1×10⁹），触发 1.4 节讲的有符号整数溢出。它属于未定义行为，残值是多少取决于编译器和平台，不能指望“绕回负数”这种固定规律帮你定位问题。</p>
+<p><strong>修复</strong>：按 1.4.3 的对照表把相关变量升级为 <code>long long</code>，并且让<strong>每一次可能超界的运算</strong>都在 <code>long long</code> 中进行。修好的完整程序见 1.10 的示例 10-1（它正是 A 题「逐级加训」的解法）：改完后输入 <code>100000</code>，输出 <code>333343333400000</code>，与正确答案一致。</p>
+<h3 id="排错口诀">排错口诀</h3>
+<ul>
+<li><strong>CE</strong>：从编译信息的第一条错误看起，看不懂先查标点；</li>
+<li><strong>RE</strong>：先查数组越界，再查 <code>scanf</code> 的 <code>&amp;</code>；</li>
+<li><strong>WA</strong>：先查数据范围与变量类型是否匹配，再怀疑算法逻辑。</li>
+</ul>
+<h2 id="110-本章小结与配套习题">1.10 本章小结与配套习题</h2>
+<h3 id="本章知识路线">本章知识路线</h3>
+<pre><code class="language-text">程序骨架：#include → using namespace std → int main()
+    ↓
+变量 = 类型 + 名字，定义后立即初始化
+    ↓
+默认 int / double / char / bool，可能超界就 long long
+    ↓
+溢出看“中间运算”，不是只看输入——先乘 1LL 再算
+    ↓
+cin &gt;&gt; 读、cout &lt;&lt; 写；精确格式用 printf（%.nf、%0nd）
+    ↓
+常量起名字，作用域想清楚，写完对照 CE / RE / WA 三查
+</code></pre>
+<p>必须记牢的关键点：</p>
+<ul>
+<li><code>int</code> 约 ±2.1×10⁹、<code>long long</code> 约 ±9.2×10¹⁸，看题先读数据范围；中间运算可能超界就先乘 <code>1LL</code>，别让 <code>int</code> 乘法先发生；</li>
+<li>整数除法 <code>7 / 2</code> 得 <code>3</code>：要小数，先让某个操作数变成浮点；保留 n 位小数用 <code>fixed &lt;&lt; setprecision(n)</code> 或 <code>%.nf</code>，定宽补零用 <code>%0nd</code>；</li>
+<li><code>cin &gt;&gt;</code> 读、<code>cout &lt;&lt;</code> 写是默认路线；走 <code>scanf</code> 记得加 <code>&amp;</code>、<code>double</code> 用 <code>%lf</code>、读字符用 <code>&quot; %c&quot;</code>；</li>
+<li>转义字符 <code>\n</code> <code>\t</code> <code>\\</code> <code>\&quot;</code>；字符本质是编码（<code>&#39;A&#39;</code> 是 65），<code>char</code> 与 <code>int</code> 可以互相换算；局部变量不初始化是垃圾值，全局变量自动清零；</li>
+<li>CE 先查标点、RE 先查越界与 <code>scanf</code> 的 <code>&amp;</code>、WA 先查数据范围与变量类型。</li>
+</ul>
+<h3 id="配套习题">配套习题</h3>
+<p>本次训练题目已发布在 <a href="https://oj.syuctacm.cn/contest/6ab3c973f087531817fc71d2">SYUCTOJ：2026 SYUCTACM 新生训练 第一次</a>，请注册账号后加入比赛。<strong>先读数据范围，再选类型，最后写代码</strong>。</p>
+<p><strong>【基础练习】</strong></p>
+<table>
+<thead>
+<tr>
+<th>需要的技能</th>
+<th>对应小节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>连读多个数据、原样输出</td>
+<td>1.6.2</td>
+</tr>
+<tr>
+<td>输出表格/多行文本（<code>\n</code>、<code>\t</code>、<code>\\</code>、<code>\&quot;</code>）</td>
+<td>1.6.4</td>
+</tr>
+<tr>
+<td>保留两位小数（<code>fixed &lt;&lt; setprecision(2)</code> 或 <code>%.2f</code>）</td>
+<td>1.6.5</td>
+</tr>
+<tr>
+<td>不足位补前导零（<code>%0nd</code> 或 <code>setw + setfill</code>）</td>
+<td>1.6.6</td>
+</tr>
+<tr>
+<td>整数商与小数商（<code>7 / 2</code> 与 <code>7.0 / 2</code>）</td>
+<td>1.5.3</td>
+</tr>
+<tr>
+<td>字符与编码互换（<code>&#39;A&#39; + 1</code>、<code>&#39;C&#39; - &#39;A&#39;</code>）</td>
+<td>1.3.4</td>
+</tr>
+<tr>
+<td>答案或中间结果超界（<code>long long</code>、先乘 <code>1LL</code>）</td>
+<td>1.4</td>
+</tr>
+</tbody></table>

@@ -1,0 +1,46 @@
+{
+  "seed": 12345,
+  "rounds_requested": 150,
+  "rounds_completed": 150,
+  "status": "passed",
+  "failures": [],
+  "wrong_killed": {
+    "w-reverse": true,
+    "w-onlylen": true,
+    "w-offby": true,
+    "w-char": true,
+    "w-first2": true
+  },
+  "wrong_first_kill": {
+    "w-reverse": {
+      "round": 2,
+      "input": "isnfldniruftrflxxcqxnsqfegxcgkkaokaqwxna",
+      "exit": 0,
+      "got": "999 z i\n"
+    },
+    "w-onlylen": {
+      "round": 1,
+      "input": "z",
+      "exit": 0,
+      "got": "1\n"
+    },
+    "w-offby": {
+      "round": 1,
+      "input": "z",
+      "exit": 0,
+      "got": "0 z z\n"
+    },
+    "w-char": {
+      "round": 2,
+      "input": "isnfldniruftrflxxcqxnsqfegxcgkkaokaqwxna",
+      "exit": 0,
+      "got": "1 i i\n"
+    },
+    "w-first2": {
+      "round": 2,
+      "input": "isnfldniruftrflxxcqxnsqfegxcgkkaokaqwxna",
+      "exit": 0,
+      "got": "999 i i\n"
+    }
+  }
+}

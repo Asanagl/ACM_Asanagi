@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html data-page="problem_detail" data-layout="basic" class="layout--basic page--problem_detail theme--light nojs" data-mantine-color-scheme="light" lang="" data-app="Hydro">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="canonical" href="https://oj.syuctacm.cn/p/2335">  <meta name="theme-color" content="#56758f">
+    <meta property="og:site_name" content="SYUCT OJ" />
+  <meta property="og:url" content="https://oj.syuctacm.cn/p/2335" />
+  <meta property="og:image" content="/favicon-96x96.png" />
+                                  <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="P0846. 开拓者的奇妙冒险2 - SYUCT OJ" />
+    <meta property="og:description" content="DESCRIPTION
+在翁法罗斯永劫轮回的第33550336次循环中，开拓者跟随救世主白厄完成了逐火之旅，随着黄金裔们的不断牺牲，开拓者逐渐明白，逐火是不断失却的旅途。
+33550336在数学中是一..." />
+    <title>开拓者的奇妙冒险2 - 题目详情 - SYUCT OJ</title>
+  <style>
+    body {
+      --font-family: "Open Sans", "Open Sans", "Seravek", "Segoe UI", "Verdana", "PingFang SC", "Hiragino Sans GB", "Lantinghei SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans";
+      --code-font-family: "Source Code Pro", "monaco", "Source Code Pro", "Consolas", "Lucida Console", "monospace";
+      --font-ligatures: none !important;
+    }
+          #panel { display: flex; flex-direction: column; }
+      </style>
+      <link rel="stylesheet" media="all" href="/theme-4.58.5.css">
+        <script>
+      var _htmlNode = document.documentElement;
+      _htmlNode.className = _htmlNode.className.replace(' nojs', ' hasjs');
+      window.UiContext = '{"cdn_prefix":"/","url_prefix":"/","ws_prefix":"/","constantVersion":"afaf5740","domainId":"system","domainVersion":1792848814990,"extraTitleContent":"\u5F00\u62D3\u8005\u7684\u5947\u5999\u5192\u96692","SWConfig":{"preload":"","hosts":["http://oj.syuctacm.cn","https://oj.syuctacm.cn","https://oj.syuctacm.cn/","/"],"assets":[],"domains":[]}}';
+      window.UserContext = '{"_id":0,"mail":"Guest@hydro.local","uname":"Guest","hashType":"hydro","priv":8,"regat":"2025-03-06T12:26:22.389Z","loginat":"2026-03-07T10:35:53.368Z","perm":"BigInt::1291862133704988065921","role":"guest","scope":"BigInt::-1","tfa":false,"authn":false,"group":[],"domains":[],"timeZone":"Asia/Shanghai","codeLang":"cc.cc17","avatar":"gravatar:Guest@hydro.local","gender":2,"backgroundImage":"/components/profile/backgrounds/1.jpg","pinnedDomains":[],"checkin_time":"1997-01-11","showTimeAgo":true,"fontFamily":"Open Sans","codeFontFamily":"Source Code Pro","theme":"light","preferredEditorType":"sv","formatCode":true,"avatarUrl":"//cn.gravatar.com/avatar/97119d3d15d5201ab506330ed4bab0f7?d=mm&s=128"}';
+    </script>
+      </head>
+<body>
+      <script type="text/javascript" src="/resource/afaf5740/entry.js"></script>
+    <script type="text/javascript" src="/resource/4.58.5/lang-zh.js"></script>
+    <script type="text/javascript" src="/hydro-4.58.5.js"></script>
+    <nav class="nav slideout-menu" id="menu">
+  <div class="row"><div class="columns clearfix">
+    <ol class="nav__list nav__list--main clearfix">
+      <li class="nav__list-item">
+        <a href="/"><img class="nav__logo" src="/nav_logo_dark.png"></a>
+      </li>        <li class="nav__list-item">
+  <a href="/" class="nav__item">
+    首页
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/p" class="nav__item nav--active">
+    题库
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/training" class="nav__item">
+    训练
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/contest" class="nav__item">
+    比赛
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/homework" class="nav__item">
+    作业
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/discuss" class="nav__item">
+    讨论
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/record" class="nav__item">
+    评测记录
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/ranking" class="nav__item">
+    排名
+  </a>
+</li>
+      </ol>
+    <ol class="nav__list nav__list--secondary clearfix">
+          <li class="nav__list-item"><a href="/login" class="nav__item" name="nav_login">登录</a></li>
+            <li class="nav__list-item"><a href="/register" class="nav__item--round">注册</a></li>
+            <li class="nav__list-item nojs--hide" data-dropdown-pos="bottom right" data-dropdown-custom-class="nav__dropdown" data-dropdown-target="#menu-nav-user" data-dropdown-disabledconstrainToWindow data-dropdown-trigger-desktop-only>
+        <a href="javascript:;" class="nav__item">
+          <span class="icon icon-global"></span>Language <span class="icon icon-expand_more"></span>
+        </a>
+        <ol class="dropdown-target menu" id="menu-nav-user"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+      </li>
+        </ol>
+  </div></div>
+</nav>
+<nav class="nav--shadow"></nav>
+<div class="slideout-panel" id="panel">
+    <div class="slideout-overlay"></div>
+  <div class="header--mobile">
+  <div class="row"><div class="columns clearfix">
+    <div class="float-left">
+      <a class="header--mobile__domain" href="/" target="_self">
+        <img src="/nav_logo_dark.png">
+      </a>
+    </div>
+    <div class="float-right">
+      <button type="button" class="header__hamburger">
+  <div class="hamburger hamburger--spin">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </div>
+</button>
+    </div>
+  </div></div>
+</div>
+  <div class="main">
+        <script>
+
+  
+  
+  
+  
+  
+</script>
+                                <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="P0846. 开拓者的奇妙冒险2 - SYUCT OJ" />
+    <meta property="og:description" content="DESCRIPTION
+在翁法罗斯永劫轮回的第33550336次循环中，开拓者跟随救世主白厄完成了逐火之旅，随着黄金裔们的不断牺牲，开拓者逐渐明白，逐火是不断失却的旅途。
+33550336在数学中是一..." />
+  <div class="row" data-sticky-parent>
+  <div class="medium-9 columns">
+    <div class="section">
+      <div class="section__header">
+        <h1 class="section__title">
+                    #P0846. 开拓者的奇妙冒险2
+        </h1>
+              </div>
+      <div class="section__body">
+        <ul class="problem__tags">
+                      <span class="problem__tag-item">ID: 2335</span>
+                    <span class="problem__tag-item icon icon-book">传统题</span>
+                                <span class="problem__tag-item icon icon-stopwatch">1000ms</span>
+            <span class="problem__tag-item icon icon-comparison">256MiB</span>
+                                <a class="problem__tag-item interactive" href="/record?pid=2335">尝试: 82</a>
+            <a class="problem__tag-item interactive" href="/record?pid=2335&amp;status=1">已通过: 6</a>
+            <span class="problem__tag-item">难度: 9</span>
+            <span class="problem__tag-item interactive">上传者: <span class="user-profile-link">
+      <img class="small user-profile-avatar v-center" loading="lazy" src="/file/2/.avatar.jpg" width="20" height="20">
+    <a class="user-profile-name uname--lv0" href="/user/2">
+          root
+      </a>
+  </span>
+</span>
+                                <span name="show_tags" class="problem__tag-item interactive nojs--hide icon icon-tag">标签&gt;</span><span class="problem__tag-item tags hasjs--hide">SYUCT</span><span class="problem__tag-item tags hasjs--hide">模拟</span>        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="problem-content-container"><div class="problem-content" data-marker-enabled>
+        <div class="section__header non-scratchpad--hide">
+          <h1 class="section__title">开拓者的奇妙冒险2</h1>
+        </div>
+                <div class="section__body typo richmedia" data-fragment-id="problem-description">
+                      <h1 id="description" tabindex="-1">Description</h1>
+<p>在翁法罗斯永劫轮回的第33550336次循环中，开拓者跟随救世主白厄完成了逐火之旅，随着黄金裔们的不断牺牲，开拓者逐渐明白，逐火是不断失却的旅途。</p>
+<p>33550336在数学中是一个完全数（Perfect number），在数学上它无疑是美丽的，而在翁法罗斯的历史上，开拓者接过卡厄斯兰娜救世的责任，它代表着永劫轮回的即将结束的黎明！</p>
+<p>已知一个数恰好等于它的真因子之和，则称该数为“完全数”，例如1+2+3=6，现给出一个正整数x，如果这个数是完全数，则输出<code>小白，明天见</code>,否则输出<code>逐火是不断失却的旅途</code>。</p>
+<p>欧拉公式明确：一个偶数是完美数，当且仅当它可以表示为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><menclose notation="box"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="false"><mstyle scriptlevel="0" displaystyle="true"><mrow><msup><mn>2</mn><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></msup><mo>⋅</mo><mo stretchy="false">(</mo><msup><mn>2</mn><mi>p</mi></msup><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow></mstyle></mstyle></mstyle></menclose></mrow><annotation encoding="application/x-tex">\boxed{2^{p-1} \cdot (2^p - 1)}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1.7941em;vertical-align:-0.59em;"></span><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.2041em;"><span style="top:-3.7941em;"><span class="pstrut" style="height:3.7941em;"></span><span class="boxpad"><span class="mord"><span class="mord"><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8641em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">p</span><span class="mbin mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mopen">(</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7144em;"><span style="top:-3.113em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span></span><span style="top:-3.2041em;"><span class="pstrut" style="height:3.7941em;"></span><span class="katex-stretchy fbox" style="height:1.7941em;border-style:solid;border-width:0.04em;"></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.59em;"><span></span></span></span></span></span></span></span></span>，其中：</p>
+<ul>
+<li>p 是一个质数；</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msup><mn>2</mn><mi>p</mi></msup><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(2^p - 1)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="katex-sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">p</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span> 也必须是一个素数（这种素数被称为 “梅森素数”）。</li>
+</ul>
+<h1 id="format" tabindex="-1">Format</h1>
+<h2 id="input" tabindex="-1">Input</h2>
+<p>一个正整数x
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo>≤</mo><mi>x</mi><mo>≤</mo><mn>1</mn><mi>e</mi><mn>80</mn></mrow><annotation encoding="application/x-tex">1\leq x\leq 1e80</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7804em;vertical-align:-0.136em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">1</span><span class="mord mathnormal">e</span><span class="mord">80</span></span></span></span> .</p>
+<h2 id="output" tabindex="-1">Output</h2>
+<p>如果这个数是完全数，则输出<code>小白，明天见</code>,否则输出<code>逐火是不断失却的旅途</code>。</p>
+<h1 id="samples" tabindex="-1">Samples</h1>
+<pre><code class="language-input1">6
+</code></pre>
+<pre><code class="language-output1">小白，明天见
+</code></pre>
+<pre><code class="language-input2">1
+</code></pre>
+<pre><code class="language-output2">逐火是不断失却的旅途
+</code></pre>
+<hr>
+<p>PS:这是一个很简单的题目，不要想复杂了，否则你将变成当代梅森。</p>
+<p>另外，最后的题目最后写。。
+<img src="https://upload-bbs.miyoushe.com/upload/2025/07/04/312928755/824f4204cb47934af6c75b743fe805b6_7276892128506684780.png?x-oss-process=image//resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,png" alt="白厄，米游社链接"></p>
+<p>提示：如果你想当当代梅森，我这里有一条任务指引，你需要速成学完C++语法和高精度加，减，乘，模，数论知识卢卡斯定理，欧拉定理（别指望着学长学姐可以教你们，此题不列入日常解答中）。。。当然如果你不想的话那恭喜你，你只需要高中的知识和一支笔以及几张草稿纸和一个小时的时间，这些你都已经有了不是么？</p>
+<p>后人警示：此题可以不写</p>
+<p>后人再警示：此题允许使用python</p>
+
+</div>      </div></div>
+    </div>
+  </div>
+  <div class="medium-3 columns"><div data-sticky="large">
+        <div class="section side section--problem-sidebar">
+  <div>
+    <ol class="menu">
+                          <li class="menu__item scratchpad--hide"><a class="menu__link" href="javascript:showSignInDialog();">
+        <span class="icon icon-send"></span> 登录后递交
+      </a></li>
+                      <li class="menu__seperator"></li>
+              <li class="menu__item"><a class="menu__link" href="/discuss/problem/2335">
+        <span class="icon icon-comment--text"></span> 讨论 (0)      </a></li>
+              <li class="menu__item"><a class="menu__link" href="/p/P0846/solution">
+        <span class="icon icon-comment--text"></span> 题解 (0)      </a></li>
+          <li class="menu__item"><a class="menu__link" href="/p/P0846/files">
+        <span class="icon icon-file"></span> 文件
+      </a></li>
+      <li class="menu__item"><a class="menu__link" href="/p/P0846/stat">
+        <span class="icon icon-statistics"></span> 统计
+      </a></li>
+              <li class="menu__seperator nojs--hide"></li>
+                    </ol>
+  </div>
+</div>
+<div class="section side">
+  <div class="section__header">
+    <h1 class="section__title">相关</h1>
+  </div>
+  <div class="section__body typo">
+        <p>在下列比赛中: </p><p><a href="/contest/68f788a80cc5d7be226466a5">2025级SYUCT-ACM新生第二次训练</a></p><p><a href="/contest/6ac5b694753773230ebbcb8f">2026级SYUCT-ACM新生第二次训练</a></p>    </div>
+</div>
+  </div></div>
+</div>
+<div style="display:none" class="outer-loader-container"><div class="loader"></div></div>
+<div class="scratchpad-container" style="display:none">
+  <div style="display:none" class="loader-container"><div class="loader"></div></div>
+  <div id="scratchpad" style="opacity:0"></div>
+</div>
+  </div>
+  <div class="footer">
+  <div class="row"><div class="columns">
+      <div class="row footer__links">
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          状态
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/record">评测队列</a></li>
+          <li class="footer__category__item"><a href="/status">服务状态</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          开发
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="https://github.com/hydro-dev/Hydro" target="_blank">开源</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          支持
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/help">帮助</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">联系我们</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable end">
+        <h1>
+          关于
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/about">关于</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#privacy">隐私</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#tos">服务条款</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">版权申诉</a></li>
+        </ul></div>
+      </div>
+    </div>
+      <div class="footer__extra-link clearfix">
+      <div class="footer__extra-left">
+        <ol class="clearfix">
+                    <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-lang">
+            <span><span class="icon icon-global"></span> Language <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-lang"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+          </li>
+          <li class="footer__extra-link-item">
+                          <a href="/legacy?legacy=true">兼容模式</a>
+                      </li>
+          <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-theme">
+            <span><span class="icon icon-global"></span> 主题 <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-theme">
+              <li class="menu__item"><a class="menu__link" href="/set_theme/light">亮色</a></li>
+              <li class="menu__item"><a class="menu__link" href="/set_theme/dark">暗色</a></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+      <div class="footer__extra-right">
+        <ol class="clearfix"><li class="footer__extra-link-item"></li><li class="footer__extra-link-item"><a href="https://beian.miit.gov.cn/">辽ICP备2026022210号-1</a></li><li class="footer__extra-link-item">Worker 0, 26ms</li>
+          <!-- Prepare 7ms -->
+          <!-- Method 2ms -->
+          
+          
+          <li class="footer__extra-link-item">Powered by <a href="https://hydro.js.org">Hydro v5.0.7</a> Community</li>
+        </ol>
+      </div>
+    </div>
+  </div></div>
+</div>
+</div>
+<div class="dialog dialog--signin" style="display:none">
+  <div class="dialog__content">
+        <div class="dialog--signin__bg">
+      <div class="dialog--signin__side">
+        <h1>还没有账户？</h1>
+        <p>注册一个 SYUCT OJ 通用账户，您就可以在我们提供的所有在线评测服务上提交代码、参与讨论。</p>
+        <div><a href="/register" class="inverse rounded button">现在注册</a></div>
+      </div>
+    </div>
+        <div class="dialog--signin__main">
+      <form action="/login" method="post">
+        <div class="dialog--signin__close-container supplementary">
+          <a name="dialog--signin__close" href="javascript:;">关闭</a>
+        </div>
+        <h1 class="dialog--signin__title">登录</h1>
+        <p class="dialog--signin__note">使用您的 SYUCT OJ 通用账户</p>
+                <div class="row"><div class="columns">
+          <label class="material textbox">
+            用户名
+            <input name="uname" type="text" data-autofocus autocomplete="username webauthn">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="material textbox">
+            密码
+            <input name="password" type="password">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="checkbox">
+            <input type="checkbox" name="rememberme" class="checkbox">记住我
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <input type="hidden" name="tfa" value="">
+          <input type="hidden" name="authnChallenge" value="">
+          <input type="submit" value="登录" name="login_submit" class="expanded rounded primary button">
+        </div></div>
+        <div class="row"><div class="columns">
+          <div class="supplementary text-center">
+            <a href="/lostpass">忘记密码或者用户名？</a>
+          </div>
+        </div></div>
+      </form>
+    </div>
+  </div>
+</div>
+        <script>
+      window.UiContextNew = '{"problemId":"P0846","problemNumId":2335,"codeLang":"cc.cc17","pdoc":{"_id":"6ab3b7e3a8c5040ac87ba27a","content":"{\\"zh\\":\\"# Description\\\\n\u5728\u7FC1\u6CD5\u7F57\u65AF\u6C38\u52AB\u8F6E\u56DE\u7684\u7B2C33550336\u6B21\u5FAA\u73AF\u4E2D\uFF0C\u5F00\u62D3\u8005\u8DDF\u968F\u6551\u4E16\u4E3B\u767D\u5384\u5B8C\u6210\u4E86\u9010\u706B\u4E4B\u65C5\uFF0C\u968F\u7740\u9EC4\u91D1\u88D4\u4EEC\u7684\u4E0D\u65AD\u727A\u7272\uFF0C\u5F00\u62D3\u8005\u9010\u6E10\u660E\u767D\uFF0C\u9010\u706B\u662F\u4E0D\u65AD\u5931\u5374\u7684\u65C5\u9014\u3002\\\\n\\\\n33550336\u5728\u6570\u5B66\u4E2D\u662F\u4E00\u4E2A\u5B8C\u5168\u6570\uFF08Perfect number\uFF09\uFF0C\u5728\u6570\u5B66\u4E0A\u5B83\u65E0\u7591\u662F\u7F8E\u4E3D\u7684\uFF0C\u800C\u5728\u7FC1\u6CD5\u7F57\u65AF\u7684\u5386\u53F2\u4E0A\uFF0C\u5F00\u62D3\u8005\u63A5\u8FC7\u5361\u5384\u65AF\u5170\u5A1C\u6551\u4E16\u7684\u8D23\u4EFB\uFF0C\u5B83\u4EE3\u8868\u7740\u6C38\u52AB\u8F6E\u56DE\u7684\u5373\u5C06\u7ED3\u675F\u7684\u9ECE\u660E\uFF01\\\\n\\\\n\u5DF2\u77E5\u4E00\u4E2A\u6570\u6070\u597D\u7B49\u4E8E\u5B83\u7684\u771F\u56E0\u5B50\u4E4B\u548C\uFF0C\u5219\u79F0\u8BE5\u6570\u4E3A\u201C\u5B8C\u5168\u6570\u201D\uFF0C\u4F8B\u59821+2+3=6\uFF0C\u73B0\u7ED9\u51FA\u4E00\u4E2A\u6B63\u6574\u6570x\uFF0C\u5982\u679C\u8FD9\u4E2A\u6570\u662F\u5B8C\u5168\u6570\uFF0C\u5219\u8F93\u51FA`\u5C0F\u767D\uFF0C\u660E\u5929\u89C1`,\u5426\u5219\u8F93\u51FA`\u9010\u706B\u662F\u4E0D\u65AD\u5931\u5374\u7684\u65C5\u9014`\u3002\\\\n\\\\n\u6B27\u62C9\u516C\u5F0F\u660E\u786E\uFF1A\u4E00\u4E2A\u5076\u6570\u662F\u5B8C\u7F8E\u6570\uFF0C\u5F53\u4E14\u4EC5\u5F53\u5B83\u53EF\u4EE5\u8868\u793A\u4E3A $\\\\\\\\boxed{2^{p-1} \\\\\\\\cdot (2^p - 1)}$\uFF0C\u5176\u4E2D\uFF1A\\\\n- p \u662F\u4E00\u4E2A\u8D28\u6570\uFF1B\\\\n- $(2^p - 1)$ \u4E5F\u5FC5\u987B\u662F\u4E00\u4E2A\u7D20\u6570\uFF08\u8FD9\u79CD\u7D20\u6570\u88AB\u79F0\u4E3A \u201C\u6885\u68EE\u7D20\u6570\u201D\uFF09\u3002\\\\n\\\\n# Format\\\\n\\\\n## Input\\\\n\u4E00\u4E2A\u6B63\u6574\u6570x\\\\n$1\\\\\\\\leq x\\\\\\\\leq 1e80$ .\\\\n\\\\n## Output\\\\n\u5982\u679C\u8FD9\u4E2A\u6570\u662F\u5B8C\u5168\u6570\uFF0C\u5219\u8F93\u51FA`\u5C0F\u767D\uFF0C\u660E\u5929\u89C1`,\u5426\u5219\u8F93\u51FA`\u9010\u706B\u662F\u4E0D\u65AD\u5931\u5374\u7684\u65C5\u9014`\u3002\\\\n\\\\n# Samples\\\\n\\\\n```input1\\\\n6\\\\n```\\\\n\\\\n```output1\\\\n\u5C0F\u767D\uFF0C\u660E\u5929\u89C1\\\\n```\\\\n\\\\n```input2\\\\n1\\\\n```\\\\n\\\\n```output2\\\\n\u9010\u706B\u662F\u4E0D\u65AD\u5931\u5374\u7684\u65C5\u9014\\\\n```\\\\n\\\\n\\\\n---\\\\nPS:\u8FD9\u662F\u4E00\u4E2A\u5F88\u7B80\u5355\u7684\u9898\u76EE\uFF0C\u4E0D\u8981\u60F3\u590D\u6742\u4E86\uFF0C\u5426\u5219\u4F60\u5C06\u53D8\u6210\u5F53\u4EE3\u6885\u68EE\u3002\\\\n\\\\n\u53E6\u5916\uFF0C\u6700\u540E\u7684\u9898\u76EE\u6700\u540E\u5199\u3002\u3002\\\\n![\u767D\u5384\uFF0C\u7C73\u6E38\u793E\u94FE\u63A5](https://upload-bbs.miyoushe.com/upload/2025/07/04/312928755/824f4204cb47934af6c75b743fe805b6_7276892128506684780.png?x-oss-process=image//resize,s_600/quality,q_80/auto-orient,0/interlace,1/format,png)\\\\n\\\\n\u63D0\u793A\uFF1A\u5982\u679C\u4F60\u60F3\u5F53\u5F53\u4EE3\u6885\u68EE\uFF0C\u6211\u8FD9\u91CC\u6709\u4E00\u6761\u4EFB\u52A1\u6307\u5F15\uFF0C\u4F60\u9700\u8981\u901F\u6210\u5B66\u5B8CC++\u8BED\u6CD5\u548C\u9AD8\u7CBE\u5EA6\u52A0\uFF0C\u51CF\uFF0C\u4E58\uFF0C\u6A21\uFF0C\u6570\u8BBA\u77E5\u8BC6\u5362\u5361\u65AF\u5B9A\u7406\uFF0C\u6B27\u62C9\u5B9A\u7406\uFF08\u522B\u6307\u671B\u7740\u5B66\u957F\u5B66\u59D0\u53EF\u4EE5\u6559\u4F60\u4EEC\uFF0C\u6B64\u9898\u4E0D\u5217\u5165\u65E5\u5E38\u89E3\u7B54\u4E2D\uFF09\u3002\u3002\u3002\u5F53\u7136\u5982\u679C\u4F60\u4E0D\u60F3\u7684\u8BDD\u90A3\u606D\u559C\u4F60\uFF0C\u4F60\u53EA\u9700\u8981\u9AD8\u4E2D\u7684\u77E5\u8BC6\u548C\u4E00\u652F\u7B14\u4EE5\u53CA\u51E0\u5F20\u8349\u7A3F\u7EB8\u548C\u4E00\u4E2A\u5C0F\u65F6\u7684\u65F6\u95F4\uFF0C\u8FD9\u4E9B\u4F60\u90FD\u5DF2\u7ECF\u6709\u4E86\u4E0D\u662F\u4E48\uFF1F\\\\n\\\\n\u540E\u4EBA\u8B66\u793A\uFF1A\u6B64\u9898\u53EF\u4EE5\u4E0D\u5199\\\\n\\\\n\u540E\u4EBA\u518D\u8B66\u793A\uFF1A\u6B64\u9898\u5141\u8BB8\u4F7F\u7528python\\"}","owner":2,"domainId":"system","docType":10,"docId":2335,"title":"\u5F00\u62D3\u8005\u7684\u5947\u5999\u5192\u96692","tag":["SYUCT","\u6A21\u62DF"],"hidden":false,"nSubmit":82,"nAccept":6,"data":[{"_id":"1.in","name":"1.in","size":1,"lastModified":"2025-10-26T13:47:25.640Z","etag":"L2RhdGEvZmlsZS9oeWRyby9waWgvNTQ1Z2RueHNjN3Y4ZGxhbzl5a2FuLmlu"},{"_id":"1.out","name":"1.out","size":18,"lastModified":"2025-10-26T13:47:25.773Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xMHcvdHJzeWJpY2FjMGdjZGNtdGFpZ2F1Lm91dA=="},{"_id":"2.in","name":"2.in","size":2,"lastModified":"2025-10-26T13:47:25.914Z","etag":"L2RhdGEvZmlsZS9oeWRyby90bGMvamlqdHVodzQ2aGloMmlnYm9xZ3AwLmlu"},{"_id":"2.out","name":"2.out","size":18,"lastModified":"2025-10-26T13:47:26.024Z","etag":"L2RhdGEvZmlsZS9oeWRyby9iem4vY2EwdHN4aWJhdndzaHJ2eTBpZDFwLm91dA=="},{"_id":"3.in","name":"3.in","size":3,"lastModified":"2025-10-26T13:47:26.154Z","etag":"L2RhdGEvZmlsZS9oeWRyby9iZ2ovbHRoa256ZGJpdzBjaWFtZGZnaWV4Lmlu"},{"_id":"3.out","name":"3.out","size":18,"lastModified":"2025-10-26T13:47:26.292Z","etag":"L2RhdGEvZmlsZS9oeWRyby9nZG0vOGtnZWRnb3FxeHd0YjA0d2dycW95Lm91dA=="},{"_id":"4.in","name":"4.in","size":4,"lastModified":"2025-10-26T13:47:26.433Z","etag":"L2RhdGEvZmlsZS9oeWRyby9kN3IvZzJyZjZ5Y2hndTF6ZXRmNG52MGJzLmlu"},{"_id":"4.out","name":"4.out","size":18,"lastModified":"2025-10-26T13:47:26.567Z","etag":"L2RhdGEvZmlsZS9oeWRyby9kb3UvbzNjdmlqemF2N2FrZGVkZXR0d3VhLm91dA=="},{"_id":"5.in","name":"5.in","size":8,"lastModified":"2025-10-26T13:47:26.704Z","etag":"L2RhdGEvZmlsZS9oeWRyby9rcGEvZDEwMGN6ZDBsZmIxMGNtNGZpZnpoLmlu"},{"_id":"5.out","name":"5.out","size":18,"lastModified":"2025-10-26T13:47:26.847Z","etag":"L2RhdGEvZmlsZS9oeWRyby9hcmUvMHBsaHgwbXp5ZXR3Y2xhdXFmcnI0Lm91dA=="},{"_id":"6.in","name":"6.in","size":10,"lastModified":"2025-10-26T13:47:26.991Z","etag":"L2RhdGEvZmlsZS9oeWRyby90dzAvY3hodWt3aXNiaW0wcXJhOG15cTNuLmlu"},{"_id":"6.out","name":"6.out","size":18,"lastModified":"2025-10-26T13:47:27.129Z","etag":"L2RhdGEvZmlsZS9oeWRyby9yankveHRjdDltemJoaGFuMDgweGk4Y3hqLm91dA=="},{"_id":"7.in","name":"7.in","size":12,"lastModified":"2025-10-26T13:47:27.250Z","etag":"L2RhdGEvZmlsZS9oeWRyby95bXYvbGRjb2xjaXZxMGMwZzVxcmRweXdtLmlu"},{"_id":"7.out","name":"7.out","size":18,"lastModified":"2025-10-26T13:47:27.384Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zdHYvaDBucnkwaWtlbHpvam9qdDBxc3l4Lm91dA=="},{"_id":"8.in","name":"8.in","size":19,"lastModified":"2025-10-26T13:47:27.524Z","etag":"L2RhdGEvZmlsZS9oeWRyby95azgvN3Vjd25meGtva2hkMHV2azJxdXZlLmlu"},{"_id":"8.out","name":"8.out","size":18,"lastModified":"2025-10-26T13:47:27.651Z","etag":"L2RhdGEvZmlsZS9oeWRyby9qYmMvdjMxcXJ6bW9wdXBnenRleHVrYWt4Lm91dA=="},{"_id":"9.in","name":"9.in","size":37,"lastModified":"2025-10-26T13:47:27.794Z","etag":"L2RhdGEvZmlsZS9oeWRyby81bmkvNjUxdHF3MXoxMWVscnNmODR2aDQwLmlu"},{"_id":"9.out","name":"9.out","size":18,"lastModified":"2025-10-26T13:47:27.926Z","etag":"L2RhdGEvZmlsZS9oeWRyby9vdWovYzZkam5oY2xvaWFvaGhwZnRnMHB6Lm91dA=="},{"_id":"10.in","name":"10.in","size":54,"lastModified":"2025-10-26T13:47:28.047Z","etag":"L2RhdGEvZmlsZS9oeWRyby90cjAvYW5maTk3YWl0dXEwZjlwcTRlcms3Lmlu"},{"_id":"10.out","name":"10.out","size":18,"lastModified":"2025-10-26T13:47:28.181Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zc2QvdTBsb2tuNWNuZ2JxOWx5bXNjamcyLm91dA=="},{"_id":"11.in","name":"11.in","size":65,"lastModified":"2025-10-26T13:47:28.315Z","etag":"L2RhdGEvZmlsZS9oeWRyby83a2IvdWYybWx2ZzBlZWdxbTAxNHV6MzAwLmlu"},{"_id":"11.out","name":"11.out","size":18,"lastModified":"2025-10-26T13:47:28.460Z","etag":"L2RhdGEvZmlsZS9oeWRyby9scnIvbGUweTBvcGRvemV2Z2ZuNmM3bTYwLm91dA=="},{"_id":"12.in","name":"12.in","size":77,"lastModified":"2025-10-26T13:47:28.607Z","etag":"L2RhdGEvZmlsZS9oeWRyby94dG0vOXR5aXdxcXdkYmt6amlraHJ4bDBuLmlu"},{"_id":"12.out","name":"12.out","size":18,"lastModified":"2025-10-26T13:47:28.742Z","etag":"L2RhdGEvZmlsZS9oeWRyby9tZDEvejN6b2dyanNncXZyd2o5bDhteDB4Lm91dA=="},{"_id":"13.in","name":"13.in","size":29,"lastModified":"2025-10-26T13:47:28.876Z","etag":"L2RhdGEvZmlsZS9oeWRyby9qeWUvOG40MG14djZheWowN3ljdHpnYWIwLmlu"},{"_id":"13.out","name":"13.out","size":30,"lastModified":"2025-10-26T13:47:29.006Z","etag":"L2RhdGEvZmlsZS9oeWRyby94aGsvbGZzMHdtYWswcHV6czAzbGo3eHlkLm91dA=="},{"_id":"14.in","name":"14.in","size":65,"lastModified":"2025-10-26T13:47:29.137Z","etag":"L2RhdGEvZmlsZS9oeWRyby9ieHMvZm45OGk0bnNyMXZ2MGJzeXExemswLmlu"},{"_id":"14.out","name":"14.out","size":30,"lastModified":"2025-10-26T13:47:29.265Z","etag":"L2RhdGEvZmlsZS9oeWRyby9jcmsvcDZ2d25xdW96b3B4dWhwenA3aHkwLm91dA=="},{"_id":"15.in","name":"15.in","size":75,"lastModified":"2025-10-26T13:47:29.394Z","etag":"L2RhdGEvZmlsZS9oeWRyby95OTEvZWdwMHNqd3hnOHM3dzIyeW5kMzY1Lmlu"},{"_id":"15.out","name":"15.out","size":30,"lastModified":"2025-10-26T13:47:29.536Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zajAvdnR2d2wzeGdla3BybnJ0eHhoMGZ2Lm91dA=="},{"_id":"16.in","name":"16.in","size":75,"lastModified":"2025-10-26T13:47:29.675Z","etag":"L2RhdGEvZmlsZS9oeWRyby9yYnkvbWttbnMwMGt0cTE5Y2F2d2M1b3VlLmlu"},{"_id":"16.out","name":"16.out","size":30,"lastModified":"2025-10-26T13:47:29.814Z","etag":"L2RhdGEvZmlsZS9oeWRyby9uYmcvZmVxemt0YmJqa3RwMHN0ZGp1MHUwLm91dA=="},{"_id":"17.in","name":"17.in","size":32,"lastModified":"2025-10-26T13:47:29.948Z","etag":"L2RhdGEvZmlsZS9oeWRyby83ZnUva3JydW1sZTZoeW8wcnZha3hqMzBnLmlu"},{"_id":"17.out","name":"17.out","size":30,"lastModified":"2025-10-26T13:47:30.066Z","etag":"L2RhdGEvZmlsZS9oeWRyby91OXIvZTNyaXVwY3MxZjB6NHdiamMxZmZmLm91dA=="},{"_id":"18.in","name":"18.in","size":13,"lastModified":"2025-10-26T13:47:30.220Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xNzEvc3IxY2k1bXB5d2trbnp4cG9icGV2Lmlu"},{"_id":"18.out","name":"18.out","size":30,"lastModified":"2025-10-26T13:47:30.348Z","etag":"L2RhdGEvZmlsZS9oeWRyby8wOWovOHdjdXQ1ZWppcmF3Y2x4bjVobnRvLm91dA=="},{"_id":"19.in","name":"19.in","size":13,"lastModified":"2025-10-26T13:47:30.494Z","etag":"L2RhdGEvZmlsZS9oeWRyby9lOHAvb3JyZzl0bmJvcTdjeGk0aTM2Y2w3Lmlu"},{"_id":"19.out","name":"19.out","size":30,"lastModified":"2025-10-26T13:47:30.631Z","etag":"L2RhdGEvZmlsZS9oeWRyby9reW0vaHFpOGZ0bWR4a2dpM2NpdWhkMG1pLm91dA=="},{"_id":"20.in","name":"20.in","size":58,"lastModified":"2025-10-26T13:47:30.765Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xZXgvOXVvcjB6Y2hpbmxpajR2dHA5ZWZkLmlu"},{"_id":"20.out","name":"20.out","size":30,"lastModified":"2025-10-26T13:47:30.899Z","etag":"L2RhdGEvZmlsZS9oeWRyby9qanMvYjg4Y2FxaWJ4dWZ4cDZneXg4eWtoLm91dA=="}],"additional_file":[],"pid":"P0846","difficulty":0,"html":false,"stats":{"AC":14,"WA":35,"TLE":28,"MLE":0,"RE":1,"SE":0,"IGN":0,"CE":4,"s0":14,"s5":3,"s25":14,"s35":1,"s40":4,"s45":6,"s50":3,"s60":4,"s65":1,"s70":3,"s75":1,"s80":12,"s85":1,"s95":1,"s100":14},"config":{"count":20,"memoryMin":256,"memoryMax":256,"timeMin":1000,"timeMax":1000,"type":"default","langs":["c","cc","cc.cc98","cc.cc98o2","cc.cc11","cc.cc11o2","cc.cc14","cc.cc14o2","cc.cc17","cc.cc17o2","cc.cc20","cc.cc20o2","pas","java","kt","kt.jvm","py","py.py2","py.py3","py.pypy3","php","rs","hs","js","go","rb","cs","r","codeforces","codeforces.43","codeforces.52","codeforces.50","codeforces.54","codeforces.59","codeforces.61","codeforces.65","codeforces.9","codeforces.28","codeforces.32","codeforces.12","codeforces.60","codeforces.36","codeforces.48","codeforces.19","codeforces.3","codeforces.4","codeforces.51","codeforces.13","codeforces.6","codeforces.7","codeforces.31","codeforces.40","codeforces.41","codeforces.67","codeforces.49","codeforces.20","codeforces.34","codeforces.55"]}},"canViewRecord":true,"postSubmitUrl":"/p/2335/submit","getSubmissionsUrl":"/record?fullStatus=true&pid=2335","getRecordDetailUrl":"/record/%7Brid%7D","pretestConnUrl":"record-conn?pretest=1&uidOrName=0&pid=2335&domainId=system"}';
+      window.UserContextNew = '{}';
+    </script>
+  </body>
+</html>

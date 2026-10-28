@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html data-page="problem_detail" data-layout="basic" class="layout--basic page--problem_detail theme--light nojs" data-mantine-color-scheme="light" lang="" data-app="Hydro">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="canonical" href="https://oj.syuctacm.cn/p/217">  <meta name="theme-color" content="#56758f">
+    <meta property="og:site_name" content="SYUCT OJ" />
+  <meta property="og:url" content="https://oj.syuctacm.cn/p/217" />
+  <meta property="og:image" content="/favicon-96x96.png" />
+                                  <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="P0587. 循环练习 1 - SYUCT OJ" />
+    <meta property="og:description" content="DESCRIPTION
+给定一个n(2&lt;=n&lt;=100)，从小到大输出闭区间[2,n]中所有奇数，每个输出的奇数用空格隔开。
+FORMAT
+INPUT
+输入一个n
+OUTPUT
+输出[1,n]中所有奇..." />
+    <title>循环练习 1 - 题目详情 - SYUCT OJ</title>
+  <style>
+    body {
+      --font-family: "Open Sans", "Open Sans", "Seravek", "Segoe UI", "Verdana", "PingFang SC", "Hiragino Sans GB", "Lantinghei SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans";
+      --code-font-family: "Source Code Pro", "monaco", "Source Code Pro", "Consolas", "Lucida Console", "monospace";
+      --font-ligatures: none !important;
+    }
+          #panel { display: flex; flex-direction: column; }
+      </style>
+      <link rel="stylesheet" media="all" href="/theme-4.58.5.css">
+        <script>
+      var _htmlNode = document.documentElement;
+      _htmlNode.className = _htmlNode.className.replace(' nojs', ' hasjs');
+      window.UiContext = '{"cdn_prefix":"/","url_prefix":"/","ws_prefix":"/","constantVersion":"afaf5740","domainId":"system","domainVersion":1792848814990,"extraTitleContent":"\u5FAA\u73AF\u7EC3\u4E60 1","SWConfig":{"preload":"","hosts":["http://oj.syuctacm.cn","https://oj.syuctacm.cn","https://oj.syuctacm.cn/","/"],"assets":[],"domains":[]}}';
+      window.UserContext = '{"_id":0,"mail":"Guest@hydro.local","uname":"Guest","hashType":"hydro","priv":8,"regat":"2025-03-06T12:26:22.389Z","loginat":"2026-03-07T10:35:53.368Z","perm":"BigInt::1291862133704988065921","role":"guest","scope":"BigInt::-1","tfa":false,"authn":false,"group":[],"domains":[],"timeZone":"Asia/Shanghai","codeLang":"cc.cc17","avatar":"gravatar:Guest@hydro.local","gender":2,"backgroundImage":"/components/profile/backgrounds/1.jpg","pinnedDomains":[],"checkin_time":"1997-01-11","showTimeAgo":true,"fontFamily":"Open Sans","codeFontFamily":"Source Code Pro","theme":"light","preferredEditorType":"sv","formatCode":true,"avatarUrl":"//cn.gravatar.com/avatar/97119d3d15d5201ab506330ed4bab0f7?d=mm&s=128"}';
+    </script>
+      </head>
+<body>
+      <script type="text/javascript" src="/resource/afaf5740/entry.js"></script>
+    <script type="text/javascript" src="/resource/4.58.5/lang-zh.js"></script>
+    <script type="text/javascript" src="/hydro-4.58.5.js"></script>
+    <nav class="nav slideout-menu" id="menu">
+  <div class="row"><div class="columns clearfix">
+    <ol class="nav__list nav__list--main clearfix">
+      <li class="nav__list-item">
+        <a href="/"><img class="nav__logo" src="/nav_logo_dark.png"></a>
+      </li>        <li class="nav__list-item">
+  <a href="/" class="nav__item">
+    首页
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/p" class="nav__item nav--active">
+    题库
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/training" class="nav__item">
+    训练
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/contest" class="nav__item">
+    比赛
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/homework" class="nav__item">
+    作业
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/discuss" class="nav__item">
+    讨论
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/record" class="nav__item">
+    评测记录
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/ranking" class="nav__item">
+    排名
+  </a>
+</li>
+      </ol>
+    <ol class="nav__list nav__list--secondary clearfix">
+          <li class="nav__list-item"><a href="/login" class="nav__item" name="nav_login">登录</a></li>
+            <li class="nav__list-item"><a href="/register" class="nav__item--round">注册</a></li>
+            <li class="nav__list-item nojs--hide" data-dropdown-pos="bottom right" data-dropdown-custom-class="nav__dropdown" data-dropdown-target="#menu-nav-user" data-dropdown-disabledconstrainToWindow data-dropdown-trigger-desktop-only>
+        <a href="javascript:;" class="nav__item">
+          <span class="icon icon-global"></span>Language <span class="icon icon-expand_more"></span>
+        </a>
+        <ol class="dropdown-target menu" id="menu-nav-user"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+      </li>
+        </ol>
+  </div></div>
+</nav>
+<nav class="nav--shadow"></nav>
+<div class="slideout-panel" id="panel">
+    <div class="slideout-overlay"></div>
+  <div class="header--mobile">
+  <div class="row"><div class="columns clearfix">
+    <div class="float-left">
+      <a class="header--mobile__domain" href="/" target="_self">
+        <img src="/nav_logo_dark.png">
+      </a>
+    </div>
+    <div class="float-right">
+      <button type="button" class="header__hamburger">
+  <div class="hamburger hamburger--spin">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </div>
+</button>
+    </div>
+  </div></div>
+</div>
+  <div class="main">
+        <script>
+
+  
+  
+  
+  
+  
+</script>
+                                <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="P0587. 循环练习 1 - SYUCT OJ" />
+    <meta property="og:description" content="DESCRIPTION
+给定一个n(2&lt;=n&lt;=100)，从小到大输出闭区间[2,n]中所有奇数，每个输出的奇数用空格隔开。
+FORMAT
+INPUT
+输入一个n
+OUTPUT
+输出[1,n]中所有奇..." />
+  <div class="row" data-sticky-parent>
+  <div class="medium-9 columns">
+    <div class="section">
+      <div class="section__header">
+        <h1 class="section__title">
+                    #P0587. 循环练习 1
+        </h1>
+              </div>
+      <div class="section__body">
+        <ul class="problem__tags">
+                      <span class="problem__tag-item">ID: 217</span>
+                    <span class="problem__tag-item icon icon-book">传统题</span>
+                                <span class="problem__tag-item icon icon-stopwatch">1000ms</span>
+            <span class="problem__tag-item icon icon-comparison">256MiB</span>
+                                <a class="problem__tag-item interactive" href="/record?pid=217">尝试: 825</a>
+            <a class="problem__tag-item interactive" href="/record?pid=217&amp;status=1">已通过: 245</a>
+            <span class="problem__tag-item">难度: 5</span>
+            <span class="problem__tag-item interactive">上传者: <span class="user-profile-link">
+      <img class="small user-profile-avatar v-center" loading="lazy" src="//q1.qlogo.cn/g?b=qq&amp;nk=2595583127&amp;s=160" width="20" height="20">
+    <a class="user-profile-name uname--lv1" href="/user/3">
+          zine
+      </a>
+  </span>
+</span>
+                                <span name="show_tags" class="problem__tag-item interactive nojs--hide icon icon-tag">标签&gt;</span><span class="problem__tag-item tags hasjs--hide">SYUCT</span><span class="problem__tag-item tags hasjs--hide">基础语法</span>        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="problem-content-container"><div class="problem-content" data-marker-enabled>
+        <div class="section__header non-scratchpad--hide">
+          <h1 class="section__title">循环练习 1</h1>
+        </div>
+                <div class="section__body typo richmedia" data-fragment-id="problem-description">
+                      <h1 id="description" tabindex="-1">Description</h1>
+<p>给定一个n(2&lt;=n&lt;=100)，从小到大输出闭区间[2,n]中所有奇数，每个输出的奇数用空格隔开。</p>
+<h1 id="format" tabindex="-1">Format</h1>
+<h2 id="input" tabindex="-1">Input</h2>
+<p>输入一个n</p>
+<h2 id="output" tabindex="-1">Output</h2>
+<p>输出[1,n]中所有奇数</p>
+<h1 id="samples" tabindex="-1">Samples</h1>
+<pre><code class="language-input1">5
+</code></pre>
+<pre><code class="language-output1">1 3 5
+</code></pre>
+<h1 id="hint" tabindex="-1">Hint</h1>
+
+</div>      </div></div>
+    </div>
+  </div>
+  <div class="medium-3 columns"><div data-sticky="large">
+        <div class="section side section--problem-sidebar">
+  <div>
+    <ol class="menu">
+                          <li class="menu__item scratchpad--hide"><a class="menu__link" href="javascript:showSignInDialog();">
+        <span class="icon icon-send"></span> 登录后递交
+      </a></li>
+                      <li class="menu__seperator"></li>
+              <li class="menu__item"><a class="menu__link" href="/discuss/problem/217">
+        <span class="icon icon-comment--text"></span> 讨论 (0)      </a></li>
+              <li class="menu__item"><a class="menu__link" href="/p/P0587/solution">
+        <span class="icon icon-comment--text"></span> 题解 (0)      </a></li>
+          <li class="menu__item"><a class="menu__link" href="/p/P0587/files">
+        <span class="icon icon-file"></span> 文件
+      </a></li>
+      <li class="menu__item"><a class="menu__link" href="/p/P0587/stat">
+        <span class="icon icon-statistics"></span> 统计
+      </a></li>
+              <li class="menu__seperator nojs--hide"></li>
+                    </ol>
+  </div>
+</div>
+<div class="section side">
+  <div class="section__header">
+    <h1 class="section__title">相关</h1>
+  </div>
+  <div class="section__body typo">
+        <p>在下列比赛中: </p><p><a href="/contest/68f788a80cc5d7be226466a5">2025级SYUCT-ACM新生第二次训练</a></p><p><a href="/contest/6ac5b694753773230ebbcb8f">2026级SYUCT-ACM新生第二次训练</a></p>    </div>
+</div>
+  </div></div>
+</div>
+<div style="display:none" class="outer-loader-container"><div class="loader"></div></div>
+<div class="scratchpad-container" style="display:none">
+  <div style="display:none" class="loader-container"><div class="loader"></div></div>
+  <div id="scratchpad" style="opacity:0"></div>
+</div>
+  </div>
+  <div class="footer">
+  <div class="row"><div class="columns">
+      <div class="row footer__links">
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          状态
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/record">评测队列</a></li>
+          <li class="footer__category__item"><a href="/status">服务状态</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          开发
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="https://github.com/hydro-dev/Hydro" target="_blank">开源</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          支持
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/help">帮助</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">联系我们</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable end">
+        <h1>
+          关于
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/about">关于</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#privacy">隐私</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#tos">服务条款</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">版权申诉</a></li>
+        </ul></div>
+      </div>
+    </div>
+      <div class="footer__extra-link clearfix">
+      <div class="footer__extra-left">
+        <ol class="clearfix">
+                    <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-lang">
+            <span><span class="icon icon-global"></span> Language <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-lang"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+          </li>
+          <li class="footer__extra-link-item">
+                          <a href="/legacy?legacy=true">兼容模式</a>
+                      </li>
+          <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-theme">
+            <span><span class="icon icon-global"></span> 主题 <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-theme">
+              <li class="menu__item"><a class="menu__link" href="/set_theme/light">亮色</a></li>
+              <li class="menu__item"><a class="menu__link" href="/set_theme/dark">暗色</a></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+      <div class="footer__extra-right">
+        <ol class="clearfix"><li class="footer__extra-link-item"></li><li class="footer__extra-link-item"><a href="https://beian.miit.gov.cn/">辽ICP备2026022210号-1</a></li><li class="footer__extra-link-item">Worker 0, 22ms</li>
+          <!-- Prepare 7ms -->
+          <!-- Method 3ms -->
+          
+          
+          <li class="footer__extra-link-item">Powered by <a href="https://hydro.js.org">Hydro v5.0.7</a> Community</li>
+        </ol>
+      </div>
+    </div>
+  </div></div>
+</div>
+</div>
+<div class="dialog dialog--signin" style="display:none">
+  <div class="dialog__content">
+        <div class="dialog--signin__bg">
+      <div class="dialog--signin__side">
+        <h1>还没有账户？</h1>
+        <p>注册一个 SYUCT OJ 通用账户，您就可以在我们提供的所有在线评测服务上提交代码、参与讨论。</p>
+        <div><a href="/register" class="inverse rounded button">现在注册</a></div>
+      </div>
+    </div>
+        <div class="dialog--signin__main">
+      <form action="/login" method="post">
+        <div class="dialog--signin__close-container supplementary">
+          <a name="dialog--signin__close" href="javascript:;">关闭</a>
+        </div>
+        <h1 class="dialog--signin__title">登录</h1>
+        <p class="dialog--signin__note">使用您的 SYUCT OJ 通用账户</p>
+                <div class="row"><div class="columns">
+          <label class="material textbox">
+            用户名
+            <input name="uname" type="text" data-autofocus autocomplete="username webauthn">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="material textbox">
+            密码
+            <input name="password" type="password">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="checkbox">
+            <input type="checkbox" name="rememberme" class="checkbox">记住我
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <input type="hidden" name="tfa" value="">
+          <input type="hidden" name="authnChallenge" value="">
+          <input type="submit" value="登录" name="login_submit" class="expanded rounded primary button">
+        </div></div>
+        <div class="row"><div class="columns">
+          <div class="supplementary text-center">
+            <a href="/lostpass">忘记密码或者用户名？</a>
+          </div>
+        </div></div>
+      </form>
+    </div>
+  </div>
+</div>
+        <script>
+      window.UiContextNew = '{"problemId":"P0587","problemNumId":217,"codeLang":"cc.cc17","pdoc":{"_id":"67ea8bf43c52eb657784d975","content":"{\\"zh\\":\\"# Description\\\\n\\\\n\u7ED9\u5B9A\u4E00\u4E2An(2<=n<=100)\uFF0C\u4ECE\u5C0F\u5230\u5927\u8F93\u51FA\u95ED\u533A\u95F4[2,n]\u4E2D\u6240\u6709\u5947\u6570\uFF0C\u6BCF\u4E2A\u8F93\u51FA\u7684\u5947\u6570\u7528\u7A7A\u683C\u9694\u5F00\u3002\\\\n\\\\n\\\\n# Format\\\\n\\\\n## Input\\\\n\u8F93\u5165\u4E00\u4E2An\\\\n\\\\n\\\\n## Output\\\\n\u8F93\u51FA[1,n]\u4E2D\u6240\u6709\u5947\u6570\\\\n\\\\n# Samples\\\\n\\\\n```input1\\\\n5\\\\n```\\\\n```output1\\\\n1 3 5\\\\n```\\\\n# Hint\\"}","owner":3,"domainId":"system","docType":10,"docId":217,"title":"\u5FAA\u73AF\u7EC3\u4E60 1","tag":["SYUCT","\u57FA\u7840\u8BED\u6CD5"],"hidden":false,"nSubmit":825,"nAccept":245,"pid":"P0587","difficulty":5,"data":[{"_id":"12.in","name":"12.in","size":2,"lastModified":"2025-03-31T12:35:00.218Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zenQvZWVvd3NhZWFxd2Jldnp1ZG0ycmM1Lmlu"},{"_id":"1.out","name":"1.out","size":49,"lastModified":"2025-03-31T12:35:00.218Z","etag":"L2RhdGEvZmlsZS9oeWRyby9ndDMvbzA2bDA3ZTkwdDlqemV0emNsOHA2Lm91dA=="},{"_id":"5.out","name":"5.out","size":13,"lastModified":"2025-03-31T12:35:00.218Z","etag":"L2RhdGEvZmlsZS9oeWRyby9nOGIvZHR0dGJrY2NuYmdtbXVvZDhsZnp3Lm91dA=="},{"_id":"13.out","name":"13.out","size":139,"lastModified":"2025-03-31T12:35:00.218Z","etag":"L2RhdGEvZmlsZS9oeWRyby9odmUveG55Y2w3Ynl2bjQwMjFqamN6dms4Lm91dA=="},{"_id":"2.out","name":"2.out","size":28,"lastModified":"2025-03-31T12:35:00.218Z","etag":"L2RhdGEvZmlsZS9oeWRyby93ZHcvbjFzb240dWx0bGsxYnc2ZTlpZmZmLm91dA=="},{"_id":"14.out","name":"14.out","size":34,"lastModified":"2025-03-31T12:35:00.218Z","etag":"L2RhdGEvZmlsZS9oeWRyby9lcGUvaHFncmZlZzZ1ZDBsY3NmZmhmeDJrLm91dA=="},{"_id":"6.in","name":"6.in","size":2,"lastModified":"2025-03-31T12:35:00.218Z","etag":"L2RhdGEvZmlsZS9oeWRyby9sbTEvaHVtZ2N3dnluOG9hanNjZTBuOHVrLmlu"},{"_id":"8.in","name":"8.in","size":2,"lastModified":"2025-03-31T12:35:00.218Z","etag":"L2RhdGEvZmlsZS9oeWRyby93YXovb2t2ZTJ6M3EyZHRvbmR1ZGJ2dHpqLmlu"},{"_id":"3.in","name":"3.in","size":2,"lastModified":"2025-03-31T12:35:00.218Z","etag":"L2RhdGEvZmlsZS9oeWRyby96MmEvcWZ4M3hybmRraTRyaGtjMXYyOWo3Lmlu"},{"_id":"11.out","name":"11.out","size":100,"lastModified":"2025-03-31T12:35:00.222Z","etag":"L2RhdGEvZmlsZS9oeWRyby9oYzAvdHdlMnFucGVjZGZrenZqazlmeGZiLm91dA=="},{"_id":"15.out","name":"15.out","size":127,"lastModified":"2025-03-31T12:35:00.261Z","etag":"L2RhdGEvZmlsZS9oeWRyby94aGMvYXhsbWhqYndiNG5qdzliZmJ3NW92Lm91dA=="},{"_id":"8.out","name":"8.out","size":115,"lastModified":"2025-03-31T12:35:00.261Z","etag":"L2RhdGEvZmlsZS9oeWRyby9uaWkvaG1majV4NG04bGM1NnoyeG05NGh6Lm91dA=="},{"_id":"2.in","name":"2.in","size":2,"lastModified":"2025-03-31T12:35:00.261Z","etag":"L2RhdGEvZmlsZS9oeWRyby91bm0vOTdjeG81cXVqeHN5MHlkanR2MWxwLmlu"},{"_id":"4.out","name":"4.out","size":28,"lastModified":"2025-03-31T12:35:00.261Z","etag":"L2RhdGEvZmlsZS9oeWRyby8zc2sveDViZmh0dGVmN2NiMHQwdTlseXYyLm91dA=="},{"_id":"4.in","name":"4.in","size":2,"lastModified":"2025-03-31T12:35:00.261Z","etag":"L2RhdGEvZmlsZS9oeWRyby94c3EvaW9zZHhtNzBjMmFrczUwdXh0aXNmLmlu"},{"_id":"9.in","name":"9.in","size":2,"lastModified":"2025-03-31T12:35:00.261Z","etag":"L2RhdGEvZmlsZS9oeWRyby93a24vM3d0am55NTFmZWVhZmJlZHNwajVsLmlu"},{"_id":"6.out","name":"6.out","size":127,"lastModified":"2025-03-31T12:35:00.261Z","etag":"L2RhdGEvZmlsZS9oeWRyby82YnUvcW1qYXI5OWRtbm80ejRyYWNsYmliLm91dA=="},{"_id":"14.in","name":"14.in","size":2,"lastModified":"2025-03-31T12:35:00.262Z","etag":"L2RhdGEvZmlsZS9oeWRyby9oeWwvd3Ewcms1cHFoZmlodm80d2IxOTh4Lmlu"},{"_id":"7.in","name":"7.in","size":2,"lastModified":"2025-03-31T12:35:00.262Z","etag":"L2RhdGEvZmlsZS9oeWRyby91bXQvd2pndG5mcnI0eGlicm5oaHZ3NmdmLmlu"},{"_id":"12.out","name":"12.out","size":25,"lastModified":"2025-03-31T12:35:00.265Z","etag":"L2RhdGEvZmlsZS9oeWRyby9teHAva3owYWxkb3NpcDYzZTB4cHhkbGY3Lm91dA=="},{"_id":"15.in","name":"15.in","size":2,"lastModified":"2025-03-31T12:35:00.286Z","etag":"L2RhdGEvZmlsZS9oeWRyby9maTIvNHB4d2JiaHN4ZGJncnhkcGUzaHh0Lmlu"},{"_id":"9.out","name":"9.out","size":34,"lastModified":"2025-03-31T12:35:00.300Z","etag":"L2RhdGEvZmlsZS9oeWRyby9wZGUvZGdva3pyYTB4aXRsZXlvczRjd3NwLm91dA=="},{"_id":"1.in","name":"1.in","size":2,"lastModified":"2025-03-31T12:35:00.300Z","etag":"L2RhdGEvZmlsZS9oeWRyby9vdzMvZHRvZ2Jzem1mcGN4cWVjZTNxem5sLmlu"},{"_id":"13.in","name":"13.in","size":2,"lastModified":"2025-03-31T12:35:00.300Z","etag":"L2RhdGEvZmlsZS9oeWRyby8waXcvc3JzeGNhZHBjMGFrMWFwYmxqaXV5Lmlu"},{"_id":"10.in","name":"10.in","size":2,"lastModified":"2025-03-31T12:35:00.300Z","etag":"L2RhdGEvZmlsZS9oeWRyby8yazkva2xyaWlncGp4dHUzeXBnY2xjbDg3Lmlu"},{"_id":"7.out","name":"7.out","size":85,"lastModified":"2025-03-31T12:35:00.300Z","etag":"L2RhdGEvZmlsZS9oeWRyby9pM2Qva3A2Z2JuZGRxbnNhY2NuYWZpcXA4Lm91dA=="},{"_id":"5.in","name":"5.in","size":2,"lastModified":"2025-03-31T12:35:00.300Z","etag":"L2RhdGEvZmlsZS9oeWRyby92a2svZnA3Zmd0eGlraThpZjBpa2t6a25vLmlu"},{"_id":"11.in","name":"11.in","size":2,"lastModified":"2025-03-31T12:35:00.300Z","etag":"L2RhdGEvZmlsZS9oeWRyby9rcnovYXpvZGd2d29lcXl0NmF5anV0bWl4Lmlu"},{"_id":"3.out","name":"3.out","size":28,"lastModified":"2025-03-31T12:35:00.302Z","etag":"L2RhdGEvZmlsZS9oeWRyby9pdmoveDNlOTg2enp1ZXNkcjM3YW9ucG1vLm91dA=="},{"_id":"10.out","name":"10.out","size":46,"lastModified":"2025-03-31T12:35:00.305Z","etag":"L2RhdGEvZmlsZS9oeWRyby9kODcvZG8wemJ1aHBna25menFpcXA1aTAwLm91dA=="}],"html":false,"stats":{"AC":294,"WA":269,"TLE":30,"MLE":0,"RE":23,"SE":0,"IGN":0,"CE":209,"s0":521,"s6":1,"s39":4,"s61":5,"s100":294},"config":{"count":15,"memoryMin":256,"memoryMax":256,"timeMin":1000,"timeMax":1000,"type":"default","langs":["c","cc","cc.cc98","cc.cc98o2","cc.cc11","cc.cc11o2","cc.cc14","cc.cc14o2","cc.cc17","cc.cc17o2","cc.cc20","cc.cc20o2","pas","java","kt","kt.jvm","py","py.py2","py.py3","py.pypy3","php","rs","hs","js","go","rb","cs","r","codeforces","codeforces.43","codeforces.52","codeforces.50","codeforces.54","codeforces.59","codeforces.61","codeforces.65","codeforces.9","codeforces.28","codeforces.32","codeforces.12","codeforces.60","codeforces.36","codeforces.48","codeforces.19","codeforces.3","codeforces.4","codeforces.51","codeforces.13","codeforces.6","codeforces.7","codeforces.31","codeforces.40","codeforces.41","codeforces.67","codeforces.49","codeforces.20","codeforces.34","codeforces.55"]}},"canViewRecord":true,"postSubmitUrl":"/p/217/submit","getSubmissionsUrl":"/record?fullStatus=true&pid=217","getRecordDetailUrl":"/record/%7Brid%7D","pretestConnUrl":"record-conn?pretest=1&uidOrName=0&pid=217&domainId=system"}';
+      window.UserContextNew = '{}';
+    </script>
+  </body>
+</html>

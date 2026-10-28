@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html data-page="problem_detail" data-layout="basic" class="layout--basic page--problem_detail theme--light nojs" data-mantine-color-scheme="light" lang="" data-app="Hydro">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="canonical" href="https://oj.syuctacm.cn/p/2300">  <meta name="theme-color" content="#56758f">
+    <meta property="og:site_name" content="SYUCT OJ" />
+  <meta property="og:url" content="https://oj.syuctacm.cn/p/2300" />
+  <meta property="og:image" content="/favicon-96x96.png" />
+                                  <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="P0811. A - SYUCT OJ" />
+    <meta property="og:description" content="题目描述
+在程序设计竞赛中，AC（Accepted）代表“通过”，也就是代码成功解决了题目，得到了评测系统的认可。每当屏幕上出现那两个绿色的大写字母AC，参赛选手都会感到无比兴奋和成就感。
+如果你在一..." />
+    <title>A - 题目详情 - SYUCT OJ</title>
+  <style>
+    body {
+      --font-family: "Open Sans", "Open Sans", "Seravek", "Segoe UI", "Verdana", "PingFang SC", "Hiragino Sans GB", "Lantinghei SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans";
+      --code-font-family: "Source Code Pro", "monaco", "Source Code Pro", "Consolas", "Lucida Console", "monospace";
+      --font-ligatures: none !important;
+    }
+          #panel { display: flex; flex-direction: column; }
+      </style>
+      <link rel="stylesheet" media="all" href="/theme-4.58.5.css">
+        <script>
+      var _htmlNode = document.documentElement;
+      _htmlNode.className = _htmlNode.className.replace(' nojs', ' hasjs');
+      window.UiContext = '{"cdn_prefix":"/","url_prefix":"/","ws_prefix":"/","constantVersion":"afaf5740","domainId":"system","domainVersion":1792848814990,"extraTitleContent":"A","SWConfig":{"preload":"","hosts":["http://oj.syuctacm.cn","https://oj.syuctacm.cn","https://oj.syuctacm.cn/","/"],"assets":[],"domains":[]}}';
+      window.UserContext = '{"_id":0,"mail":"Guest@hydro.local","uname":"Guest","hashType":"hydro","priv":8,"regat":"2025-03-06T12:26:22.389Z","loginat":"2026-03-07T10:35:53.368Z","perm":"BigInt::1291862133704988065921","role":"guest","scope":"BigInt::-1","tfa":false,"authn":false,"group":[],"domains":[],"timeZone":"Asia/Shanghai","codeLang":"cc.cc17","avatar":"gravatar:Guest@hydro.local","gender":2,"backgroundImage":"/components/profile/backgrounds/1.jpg","pinnedDomains":[],"checkin_time":"1997-01-11","showTimeAgo":true,"fontFamily":"Open Sans","codeFontFamily":"Source Code Pro","theme":"light","preferredEditorType":"sv","formatCode":true,"avatarUrl":"//cn.gravatar.com/avatar/97119d3d15d5201ab506330ed4bab0f7?d=mm&s=128"}';
+    </script>
+      </head>
+<body>
+      <script type="text/javascript" src="/resource/afaf5740/entry.js"></script>
+    <script type="text/javascript" src="/resource/4.58.5/lang-zh.js"></script>
+    <script type="text/javascript" src="/hydro-4.58.5.js"></script>
+    <nav class="nav slideout-menu" id="menu">
+  <div class="row"><div class="columns clearfix">
+    <ol class="nav__list nav__list--main clearfix">
+      <li class="nav__list-item">
+        <a href="/"><img class="nav__logo" src="/nav_logo_dark.png"></a>
+      </li>        <li class="nav__list-item">
+  <a href="/" class="nav__item">
+    首页
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/p" class="nav__item nav--active">
+    题库
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/training" class="nav__item">
+    训练
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/contest" class="nav__item">
+    比赛
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/homework" class="nav__item">
+    作业
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/discuss" class="nav__item">
+    讨论
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/record" class="nav__item">
+    评测记录
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/ranking" class="nav__item">
+    排名
+  </a>
+</li>
+      </ol>
+    <ol class="nav__list nav__list--secondary clearfix">
+          <li class="nav__list-item"><a href="/login" class="nav__item" name="nav_login">登录</a></li>
+            <li class="nav__list-item"><a href="/register" class="nav__item--round">注册</a></li>
+            <li class="nav__list-item nojs--hide" data-dropdown-pos="bottom right" data-dropdown-custom-class="nav__dropdown" data-dropdown-target="#menu-nav-user" data-dropdown-disabledconstrainToWindow data-dropdown-trigger-desktop-only>
+        <a href="javascript:;" class="nav__item">
+          <span class="icon icon-global"></span>Language <span class="icon icon-expand_more"></span>
+        </a>
+        <ol class="dropdown-target menu" id="menu-nav-user"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+      </li>
+        </ol>
+  </div></div>
+</nav>
+<nav class="nav--shadow"></nav>
+<div class="slideout-panel" id="panel">
+    <div class="slideout-overlay"></div>
+  <div class="header--mobile">
+  <div class="row"><div class="columns clearfix">
+    <div class="float-left">
+      <a class="header--mobile__domain" href="/" target="_self">
+        <img src="/nav_logo_dark.png">
+      </a>
+    </div>
+    <div class="float-right">
+      <button type="button" class="header__hamburger">
+  <div class="hamburger hamburger--spin">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </div>
+</button>
+    </div>
+  </div></div>
+</div>
+  <div class="main">
+        <script>
+
+  
+  
+  
+  
+  
+</script>
+                                <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="P0811. A - SYUCT OJ" />
+    <meta property="og:description" content="题目描述
+在程序设计竞赛中，AC（Accepted）代表“通过”，也就是代码成功解决了题目，得到了评测系统的认可。每当屏幕上出现那两个绿色的大写字母AC，参赛选手都会感到无比兴奋和成就感。
+如果你在一..." />
+  <div class="row" data-sticky-parent>
+  <div class="medium-9 columns">
+    <div class="section">
+      <div class="section__header">
+        <h1 class="section__title">
+                    #P0811. A
+        </h1>
+              </div>
+      <div class="section__body">
+        <ul class="problem__tags">
+                      <span class="problem__tag-item">ID: 2300</span>
+                    <span class="problem__tag-item icon icon-book">传统题</span>
+                                <span class="problem__tag-item icon icon-stopwatch">2000ms</span>
+            <span class="problem__tag-item icon icon-comparison">256MiB</span>
+                                <a class="problem__tag-item interactive" href="/record?pid=2300">尝试: 126</a>
+            <a class="problem__tag-item interactive" href="/record?pid=2300&amp;status=1">已通过: 47</a>
+            <span class="problem__tag-item">难度: 5</span>
+            <span class="problem__tag-item interactive">上传者: <span class="user-profile-link">
+      <img class="small user-profile-avatar v-center" loading="lazy" src="//q1.qlogo.cn/g?b=qq&amp;nk=3387649844&amp;s=160" width="20" height="20">
+    <a class="user-profile-name uname--lv6" href="/user/7">
+          软件2303罗祥
+      </a>
+  </span>
+</span>
+                                <span name="show_tags" class="problem__tag-item interactive nojs--hide icon icon-tag">标签&gt;</span><span class="problem__tag-item tags hasjs--hide">SYUCT</span><span class="problem__tag-item tags hasjs--hide">模拟</span>        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="problem-content-container"><div class="problem-content" data-marker-enabled>
+        <div class="section__header non-scratchpad--hide">
+          <h1 class="section__title">A</h1>
+        </div>
+                <div class="section__body typo richmedia" data-fragment-id="problem-description">
+                      <h1 id="%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0" tabindex="-1">题目描述</h1>
+<p>在程序设计竞赛中，<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>C</mi><mtext>（</mtext><mi>A</mi><mi>c</mi><mi>c</mi><mi>e</mi><mi>p</mi><mi>t</mi><mi>e</mi><mi>d</mi><mtext>）</mtext></mrow><annotation encoding="application/x-tex">AC（Accepted）</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span><span class="mord cjk_fallback">（</span><span class="mord mathnormal">A</span><span class="mord mathnormal">cce</span><span class="mord mathnormal">pt</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mord cjk_fallback">）</span></span></span></span>代表“通过”，也就是代码成功解决了题目，得到了评测系统的认可。每当屏幕上出现那两个绿色的大写字母<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">AC</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span></span></span></span>，参赛选手都会感到无比兴奋和成就感。</p>
+<p>如果你在一场比赛中所有题都<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">AC</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.0715em;">C</span></span></span></span>，就叫他<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi><mi>K</mi><mo stretchy="false">(</mo><mi>A</mi><mi>l</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">AK(All </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.0715em;">K</span><span class="mopen">(</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span></span></span></span> <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mi>i</mi><mi>l</mi><mi>l</mi><mi>e</mi><mi>d</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">Killed)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.0715em;">K</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal" style="margin-right:0.0197em;">l</span><span class="mord mathnormal">e</span><span class="mord mathnormal">d</span><span class="mclose">)</span></span></span></span> 。这是一种极致的肯定和荣耀。为了庆祝这份荣耀，这道题希望你用代码“画”出字母<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal">A</span></span></span></span>，象征你已经站在了成功的起点。</p>
+<h1 id="%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F" tabindex="-1">输入格式</h1>
+<p>输入一行一个正整数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo stretchy="false">(</mo><mn>4</mn><mo>≤</mo><mi>n</mi><mo>≤</mo><mn>20</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">n(4 \le n \le 20)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord">4</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">20</span><span class="mclose">)</span></span></span></span></p>
+<h1 id="%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F" tabindex="-1">输出格式</h1>
+<p>输出<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>行，每行输出一个长度为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>5</mn></mrow><annotation encoding="application/x-tex">2n+5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.7278em;vertical-align:-0.0833em;"></span><span class="mord">2</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.6444em;"></span><span class="mord">5</span></span></span></span>的，仅包含 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>∗</mo></mrow><annotation encoding="application/x-tex">*</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4653em;"></span><span class="mord">∗</span></span></span></span> 和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">.</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.1056em;"></span><span class="mord">.</span></span></span></span> 两种字符的字符串。具体如样例所示。</p>
+<h1 id="%E6%A0%B7%E4%BE%8B" tabindex="-1">样例</h1>
+<pre><code class="language-input1">8
+</code></pre>
+<pre><code class="language-output1">.........***.........
+.......***.***.......
+......***...***......
+.....***********.....
+....*************....
+...***.........***...
+..***...........***..
+.***.............***.
+</code></pre>
+<pre><code class="language-input2">11
+</code></pre>
+<pre><code class="language-output2">............***............
+..........***.***..........
+.........***...***.........
+........***.....***........
+.......*************.......
+......***************......
+.....***...........***.....
+....***.............***....
+...***...............***...
+..***.................***..
+.***...................***.
+</code></pre>
+<pre><code class="language-input3">4
+</code></pre>
+<pre><code class="language-output3">.....***.....
+...*******...
+..*********..
+.***.....***.
+</code></pre>
+
+</div>      </div></div>
+    </div>
+  </div>
+  <div class="medium-3 columns"><div data-sticky="large">
+        <div class="section side section--problem-sidebar">
+  <div>
+    <ol class="menu">
+                          <li class="menu__item scratchpad--hide"><a class="menu__link" href="javascript:showSignInDialog();">
+        <span class="icon icon-send"></span> 登录后递交
+      </a></li>
+                      <li class="menu__seperator"></li>
+              <li class="menu__item"><a class="menu__link" href="/discuss/problem/2300">
+        <span class="icon icon-comment--text"></span> 讨论 (0)      </a></li>
+              <li class="menu__item"><a class="menu__link" href="/p/P0811/solution">
+        <span class="icon icon-comment--text"></span> 题解 (0)      </a></li>
+          <li class="menu__item"><a class="menu__link" href="/p/P0811/files">
+        <span class="icon icon-file"></span> 文件
+      </a></li>
+      <li class="menu__item"><a class="menu__link" href="/p/P0811/stat">
+        <span class="icon icon-statistics"></span> 统计
+      </a></li>
+              <li class="menu__seperator nojs--hide"></li>
+                    </ol>
+  </div>
+</div>
+<div class="section side">
+  <div class="section__header">
+    <h1 class="section__title">相关</h1>
+  </div>
+  <div class="section__body typo">
+        <p>在下列比赛中: </p><p><a href="/contest/68f788a80cc5d7be226466a5">2025级SYUCT-ACM新生第二次训练</a></p><p><a href="/contest/6ac5b694753773230ebbcb8f">2026级SYUCT-ACM新生第二次训练</a></p>    </div>
+</div>
+  </div></div>
+</div>
+<div style="display:none" class="outer-loader-container"><div class="loader"></div></div>
+<div class="scratchpad-container" style="display:none">
+  <div style="display:none" class="loader-container"><div class="loader"></div></div>
+  <div id="scratchpad" style="opacity:0"></div>
+</div>
+  </div>
+  <div class="footer">
+  <div class="row"><div class="columns">
+      <div class="row footer__links">
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          状态
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/record">评测队列</a></li>
+          <li class="footer__category__item"><a href="/status">服务状态</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          开发
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="https://github.com/hydro-dev/Hydro" target="_blank">开源</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          支持
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/help">帮助</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">联系我们</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable end">
+        <h1>
+          关于
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/about">关于</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#privacy">隐私</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#tos">服务条款</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">版权申诉</a></li>
+        </ul></div>
+      </div>
+    </div>
+      <div class="footer__extra-link clearfix">
+      <div class="footer__extra-left">
+        <ol class="clearfix">
+                    <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-lang">
+            <span><span class="icon icon-global"></span> Language <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-lang"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+          </li>
+          <li class="footer__extra-link-item">
+                          <a href="/legacy?legacy=true">兼容模式</a>
+                      </li>
+          <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-theme">
+            <span><span class="icon icon-global"></span> 主题 <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-theme">
+              <li class="menu__item"><a class="menu__link" href="/set_theme/light">亮色</a></li>
+              <li class="menu__item"><a class="menu__link" href="/set_theme/dark">暗色</a></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+      <div class="footer__extra-right">
+        <ol class="clearfix"><li class="footer__extra-link-item"></li><li class="footer__extra-link-item"><a href="https://beian.miit.gov.cn/">辽ICP备2026022210号-1</a></li><li class="footer__extra-link-item">Worker 0, 26ms</li>
+          <!-- Prepare 7ms -->
+          <!-- Method 2ms -->
+          
+          
+          <li class="footer__extra-link-item">Powered by <a href="https://hydro.js.org">Hydro v5.0.7</a> Community</li>
+        </ol>
+      </div>
+    </div>
+  </div></div>
+</div>
+</div>
+<div class="dialog dialog--signin" style="display:none">
+  <div class="dialog__content">
+        <div class="dialog--signin__bg">
+      <div class="dialog--signin__side">
+        <h1>还没有账户？</h1>
+        <p>注册一个 SYUCT OJ 通用账户，您就可以在我们提供的所有在线评测服务上提交代码、参与讨论。</p>
+        <div><a href="/register" class="inverse rounded button">现在注册</a></div>
+      </div>
+    </div>
+        <div class="dialog--signin__main">
+      <form action="/login" method="post">
+        <div class="dialog--signin__close-container supplementary">
+          <a name="dialog--signin__close" href="javascript:;">关闭</a>
+        </div>
+        <h1 class="dialog--signin__title">登录</h1>
+        <p class="dialog--signin__note">使用您的 SYUCT OJ 通用账户</p>
+                <div class="row"><div class="columns">
+          <label class="material textbox">
+            用户名
+            <input name="uname" type="text" data-autofocus autocomplete="username webauthn">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="material textbox">
+            密码
+            <input name="password" type="password">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="checkbox">
+            <input type="checkbox" name="rememberme" class="checkbox">记住我
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <input type="hidden" name="tfa" value="">
+          <input type="hidden" name="authnChallenge" value="">
+          <input type="submit" value="登录" name="login_submit" class="expanded rounded primary button">
+        </div></div>
+        <div class="row"><div class="columns">
+          <div class="supplementary text-center">
+            <a href="/lostpass">忘记密码或者用户名？</a>
+          </div>
+        </div></div>
+      </form>
+    </div>
+  </div>
+</div>
+        <script>
+      window.UiContextNew = '{"problemId":"P0811","problemNumId":2300,"codeLang":"cc.cc17","pdoc":{"_id":"6ab3aff2c187bc33e74cec2e","content":"{\\"zh\\":\\"# \u9898\u76EE\u63CF\u8FF0\\\\n\\\\n\u5728\u7A0B\u5E8F\u8BBE\u8BA1\u7ADE\u8D5B\u4E2D\uFF0C$AC\uFF08Accepted\uFF09$\u4EE3\u8868\u201C\u901A\u8FC7\u201D\uFF0C\u4E5F\u5C31\u662F\u4EE3\u7801\u6210\u529F\u89E3\u51B3\u4E86\u9898\u76EE\uFF0C\u5F97\u5230\u4E86\u8BC4\u6D4B\u7CFB\u7EDF\u7684\u8BA4\u53EF\u3002\u6BCF\u5F53\u5C4F\u5E55\u4E0A\u51FA\u73B0\u90A3\u4E24\u4E2A\u7EFF\u8272\u7684\u5927\u5199\u5B57\u6BCD$AC$\uFF0C\u53C2\u8D5B\u9009\u624B\u90FD\u4F1A\u611F\u5230\u65E0\u6BD4\u5174\u594B\u548C\u6210\u5C31\u611F\u3002\\\\n\\\\n\u5982\u679C\u4F60\u5728\u4E00\u573A\u6BD4\u8D5B\u4E2D\u6240\u6709\u9898\u90FD$AC$\uFF0C\u5C31\u53EB\u4ED6$AK(All $ $Killed)$ \u3002\u8FD9\u662F\u4E00\u79CD\u6781\u81F4\u7684\u80AF\u5B9A\u548C\u8363\u8000\u3002\u4E3A\u4E86\u5E86\u795D\u8FD9\u4EFD\u8363\u8000\uFF0C\u8FD9\u9053\u9898\u5E0C\u671B\u4F60\u7528\u4EE3\u7801\u201C\u753B\u201D\u51FA\u5B57\u6BCD$A$\uFF0C\u8C61\u5F81\u4F60\u5DF2\u7ECF\u7AD9\u5728\u4E86\u6210\u529F\u7684\u8D77\u70B9\u3002\\\\n\\\\n# \u8F93\u5165\u683C\u5F0F\\\\n\\\\n\u8F93\u5165\u4E00\u884C\u4E00\u4E2A\u6B63\u6574\u6570$n(4 \\\\\\\\le n \\\\\\\\le 20)$\\\\n\\\\n# \u8F93\u51FA\u683C\u5F0F\\\\n\\\\n\u8F93\u51FA$n$\u884C\uFF0C\u6BCF\u884C\u8F93\u51FA\u4E00\u4E2A\u957F\u5EA6\u4E3A$2n+5$\u7684\uFF0C\u4EC5\u5305\u542B $*$ \u548C $.$ \u4E24\u79CD\u5B57\u7B26\u7684\u5B57\u7B26\u4E32\u3002\u5177\u4F53\u5982\u6837\u4F8B\u6240\u793A\u3002\\\\n\\\\n# \u6837\u4F8B\\\\n\\\\n```input1\\\\n8\\\\n```\\\\n\\\\n```output1\\\\n.........***.........\\\\n.......***.***.......\\\\n......***...***......\\\\n.....***********.....\\\\n....*************....\\\\n...***.........***...\\\\n..***...........***..\\\\n.***.............***.\\\\n```\\\\n\\\\n```input2\\\\n11\\\\n```\\\\n\\\\n```output2\\\\n............***............\\\\n..........***.***..........\\\\n.........***...***.........\\\\n........***.....***........\\\\n.......*************.......\\\\n......***************......\\\\n.....***...........***.....\\\\n....***.............***....\\\\n...***...............***...\\\\n..***.................***..\\\\n.***...................***.\\\\n```\\\\n\\\\n```input3\\\\n4\\\\n```\\\\n\\\\n```output3\\\\n.....***.....\\\\n...*******...\\\\n..*********..\\\\n.***.....***.\\\\n```\\\\n\\\\n\\"}","owner":7,"domainId":"system","docType":10,"docId":2300,"title":"A","tag":["SYUCT","\u6A21\u62DF"],"hidden":false,"nSubmit":126,"nAccept":47,"data":[{"_id":"1.in","name":"1.in","size":3,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9pdWcvdXlyOHFvbXJkbjA1N3k0bzg1YmxqMHpuLmlu"},{"_id":"1.out","name":"1.out","size":60,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xNmkvcGM0dm0xODloYjA1MXhrcHk4ODFlNnM2Lm91dA=="},{"_id":"10.in","name":"10.in","size":4,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby91Z3gvbTB1eDB4bGRpOWhkbTRubHI4dWNpaHA2Lmlu"},{"_id":"10.out","name":"10.out","size":429,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9pMjkva2RreHkwYWRsazBoNHgyZ3h1bzdxaml4Lm91dA=="},{"_id":"11.in","name":"11.in","size":4,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby96YzUvemF0MDRhc3l6OHN2Znh5eDdia2F4c3AzLmlu"},{"_id":"11.out","name":"11.out","size":490,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby82aHIveGF5cGk2bXRqaDFtYWhnY3E2ZzQ3bnc0Lm91dA=="},{"_id":"12.in","name":"12.in","size":4,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9ud2QvNXJrM254enRlOGVyczdzMDBhODlzbjRzLmlu"},{"_id":"12.out","name":"12.out","size":555,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby93YjUvd3VicDIyejI5dWV6aHdoaXR5MmF3aG1xLm91dA=="},{"_id":"13.in","name":"13.in","size":4,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9wcXAvZ3B4a3NpdXlkZmM4Y3BqMjQ4bWVucGJiLmlu"},{"_id":"13.out","name":"13.out","size":624,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9td3gvN2dlZnpyM2QwZ2oyaXc1bG1veDJjazh5Lm91dA=="},{"_id":"14.in","name":"14.in","size":4,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby81emQvemV6MzhxdmYwOHd4Mjlxbnh0bjRvZXZ1Lmlu"},{"_id":"14.out","name":"14.out","size":697,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9lZWovOG1tandkMjRrOHhmODhtZzFuM295MDBpLm91dA=="},{"_id":"15.in","name":"15.in","size":4,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9yZGQvbHQzaGhxMzg3MWtoZXVnY3p4MW95ZGd4Lmlu"},{"_id":"15.out","name":"15.out","size":774,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9tNHkvMHZuaTl6bjhxdGV6ODdxdWpkY3N5aG9vLm91dA=="},{"_id":"16.in","name":"16.in","size":4,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby95d2sva3h1MG9vOWVzdmNzY3k5ODhldnZzYXZqLmlu"},{"_id":"16.out","name":"16.out","size":855,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9tanovM3F3ZG16MGY3aWp5eGdmNGt2MmxmMm1qLm91dA=="},{"_id":"17.in","name":"17.in","size":3,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9ta2gvcHdrbGIydW85NjZ6bHc5djFlbDN5eXRmLmlu"},{"_id":"17.out","name":"17.out","size":940,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby8zYzcvY3VmMWdiaW4yNTFnZWFpeTVyZGl0dW5mLm91dA=="},{"_id":"2.in","name":"2.in","size":3,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9rbXYvNGM1cjk5dWZoZ3BtMjdsNGtqZXFkcnVsLmlu"},{"_id":"2.out","name":"2.out","size":85,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9ueXEvNjkyc2thcmN4dTdwNHppZXNhOW1rNjIwLm91dA=="},{"_id":"3.in","name":"3.in","size":3,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zYzgvNnQwZTdjM2VubXljeDM0eTFzeTUybTlxLmlu"},{"_id":"3.out","name":"3.out","size":114,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zcjYvYmw4bGliMnFhZTQxbmwyMXM4em95eDBzLm91dA=="},{"_id":"4.in","name":"4.in","size":3,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby90ODUvcGpoaGwyYWZ0NXRuaTJ0aGVjbzByand4Lmlu"},{"_id":"4.out","name":"4.out","size":147,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9yZXYvNWJhZmR4aHdkc205cGhtbzNmdjJ6c2w3Lm91dA=="},{"_id":"5.in","name":"5.in","size":3,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9idW0vdWdmZ2JoYWpha2g3b2ZsNGV6bGVtYzVrLmlu"},{"_id":"5.out","name":"5.out","size":184,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9ramsvZDlnMmFsbWNyaGdtNG84d3R0cW9uaWwxLm91dA=="},{"_id":"6.in","name":"6.in","size":3,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9sa2YvYWJrbDNnOTg2Ymxiems0eG9yaGhndGQzLmlu"},{"_id":"6.out","name":"6.out","size":225,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby84Y2kvZngwODAyejNzdWZrZmczZGNlbHRqbzY5Lm91dA=="},{"_id":"7.in","name":"7.in","size":4,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9vMGEvenp4azhhY2s2dTJtcnZvM3BuMGp6eGM3Lmlu"},{"_id":"7.out","name":"7.out","size":270,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9uZWsvNjF0MHNwcDNibDk4anl0d3hqZDc1cDZ0Lm91dA=="},{"_id":"8.in","name":"8.in","size":4,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby95NzAvcTU1NHZ4bTY5c3N3Nml5cWxna3ZtNmZiLmlu"},{"_id":"8.out","name":"8.out","size":319,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby8ydmEvanJ2czk2Z3FtMnI5YjZ0OXlpbmxwc2RrLm91dA=="},{"_id":"9.in","name":"9.in","size":4,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby92Zm8vc3BsbWdmd2RjcjRhYzJ6OWpjNGMzYzk0Lmlu"},{"_id":"9.out","name":"9.out","size":372,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xMGMvN20zc3gxejQzcTAwMWRtNXI4c3VkNGJsLm91dA=="},{"_id":"config.yaml","name":"config.yaml","size":828,"lastModified":"2026-09-23T10:54:42.082Z","etag":"L2RhdGEvZmlsZS9oeWRyby80bW4veHlsZDhkcm11anI0ejl4dmZpM2Q1aThzLnlhbWw="}],"additional_file":[],"pid":"P0811","difficulty":0,"html":false,"config":{"count":17,"memoryMin":256,"memoryMax":256,"timeMin":2000,"timeMax":2000,"type":"default","langs":["c","cc","cc.cc98","cc.cc98o2","cc.cc11","cc.cc11o2","cc.cc14","cc.cc14o2","cc.cc17","cc.cc17o2","cc.cc20","cc.cc20o2","pas","java","kt","kt.jvm","py","py.py2","py.py3","py.pypy3","php","rs","hs","js","go","rb","cs","r","codeforces","codeforces.43","codeforces.52","codeforces.50","codeforces.54","codeforces.59","codeforces.61","codeforces.65","codeforces.9","codeforces.28","codeforces.32","codeforces.12","codeforces.60","codeforces.36","codeforces.48","codeforces.19","codeforces.3","codeforces.4","codeforces.51","codeforces.13","codeforces.6","codeforces.7","codeforces.31","codeforces.40","codeforces.41","codeforces.67","codeforces.49","codeforces.20","codeforces.34","codeforces.55"]},"stats":{"AC":49,"WA":66,"TLE":0,"MLE":0,"RE":0,"SE":0,"IGN":0,"CE":11,"s0":70,"s11":1,"s12":1,"s17":1,"s53":3,"s90":1,"s100":49}},"canViewRecord":true,"postSubmitUrl":"/p/2300/submit","getSubmissionsUrl":"/record?fullStatus=true&pid=2300","getRecordDetailUrl":"/record/%7Brid%7D","pretestConnUrl":"record-conn?pretest=1&uidOrName=0&pid=2300&domainId=system"}';
+      window.UserContextNew = '{}';
+    </script>
+  </body>
+</html>

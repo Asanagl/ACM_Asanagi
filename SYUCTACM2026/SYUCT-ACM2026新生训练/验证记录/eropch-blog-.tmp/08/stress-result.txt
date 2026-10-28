@@ -1,0 +1,1 @@
+seed=12345 rounds=100 pass=100 fail=0

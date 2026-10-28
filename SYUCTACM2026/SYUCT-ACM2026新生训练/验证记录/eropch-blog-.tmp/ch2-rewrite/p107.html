@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html data-page="problem_detail" data-layout="basic" class="layout--basic page--problem_detail theme--light nojs" data-mantine-color-scheme="light" lang="" data-app="Hydro">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="canonical" href="https://oj.syuctacm.cn/p/107">  <meta name="theme-color" content="#56758f">
+    <meta property="og:site_name" content="SYUCT OJ" />
+  <meta property="og:url" content="https://oj.syuctacm.cn/p/107" />
+  <meta property="og:image" content="/favicon-96x96.png" />
+                        <meta property="og:title" content="P0735. M ？ACM ！ - SYUCT OJ" />
+    <meta property="og:description" content="DESCRIPTION
+输入两个整数 n和 m，构造一个 n行 m列的数字矩阵，矩阵中的数字从第一行到最后一行，按从左到右的顺序依次为 1,2,3,…,n×m。
+矩阵构造完成后，将每行的最后一个数字变..." />
+    <title>M ？ACM ！ - 题目详情 - SYUCT OJ</title>
+  <style>
+    body {
+      --font-family: "Open Sans", "Open Sans", "Seravek", "Segoe UI", "Verdana", "PingFang SC", "Hiragino Sans GB", "Lantinghei SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans";
+      --code-font-family: "Source Code Pro", "monaco", "Source Code Pro", "Consolas", "Lucida Console", "monospace";
+      --font-ligatures: none !important;
+    }
+          #panel { display: flex; flex-direction: column; }
+      </style>
+      <link rel="stylesheet" media="all" href="/theme-4.58.5.css">
+        <script>
+      var _htmlNode = document.documentElement;
+      _htmlNode.className = _htmlNode.className.replace(' nojs', ' hasjs');
+      window.UiContext = '{"cdn_prefix":"/","url_prefix":"/","ws_prefix":"/","constantVersion":"afaf5740","domainId":"system","domainVersion":1792848814990,"extraTitleContent":"M \uFF1FACM \uFF01","SWConfig":{"preload":"","hosts":["http://oj.syuctacm.cn","https://oj.syuctacm.cn","https://oj.syuctacm.cn/","/"],"assets":[],"domains":[]}}';
+      window.UserContext = '{"_id":0,"mail":"Guest@hydro.local","uname":"Guest","hashType":"hydro","priv":8,"regat":"2025-03-06T12:26:22.389Z","loginat":"2026-03-07T10:35:53.368Z","perm":"BigInt::1291862133704988065921","role":"guest","scope":"BigInt::-1","tfa":false,"authn":false,"group":[],"domains":[],"timeZone":"Asia/Shanghai","codeLang":"cc.cc17","avatar":"gravatar:Guest@hydro.local","gender":2,"backgroundImage":"/components/profile/backgrounds/1.jpg","pinnedDomains":[],"checkin_time":"1997-01-11","showTimeAgo":true,"fontFamily":"Open Sans","codeFontFamily":"Source Code Pro","theme":"light","preferredEditorType":"sv","formatCode":true,"avatarUrl":"//cn.gravatar.com/avatar/97119d3d15d5201ab506330ed4bab0f7?d=mm&s=128"}';
+    </script>
+      </head>
+<body>
+      <script type="text/javascript" src="/resource/afaf5740/entry.js"></script>
+    <script type="text/javascript" src="/resource/4.58.5/lang-zh.js"></script>
+    <script type="text/javascript" src="/hydro-4.58.5.js"></script>
+    <nav class="nav slideout-menu" id="menu">
+  <div class="row"><div class="columns clearfix">
+    <ol class="nav__list nav__list--main clearfix">
+      <li class="nav__list-item">
+        <a href="/"><img class="nav__logo" src="/nav_logo_dark.png"></a>
+      </li>        <li class="nav__list-item">
+  <a href="/" class="nav__item">
+    首页
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/p" class="nav__item nav--active">
+    题库
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/training" class="nav__item">
+    训练
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/contest" class="nav__item">
+    比赛
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/homework" class="nav__item">
+    作业
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/discuss" class="nav__item">
+    讨论
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/record" class="nav__item">
+    评测记录
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/ranking" class="nav__item">
+    排名
+  </a>
+</li>
+      </ol>
+    <ol class="nav__list nav__list--secondary clearfix">
+          <li class="nav__list-item"><a href="/login" class="nav__item" name="nav_login">登录</a></li>
+            <li class="nav__list-item"><a href="/register" class="nav__item--round">注册</a></li>
+            <li class="nav__list-item nojs--hide" data-dropdown-pos="bottom right" data-dropdown-custom-class="nav__dropdown" data-dropdown-target="#menu-nav-user" data-dropdown-disabledconstrainToWindow data-dropdown-trigger-desktop-only>
+        <a href="javascript:;" class="nav__item">
+          <span class="icon icon-global"></span>Language <span class="icon icon-expand_more"></span>
+        </a>
+        <ol class="dropdown-target menu" id="menu-nav-user"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+      </li>
+        </ol>
+  </div></div>
+</nav>
+<nav class="nav--shadow"></nav>
+<div class="slideout-panel" id="panel">
+    <div class="slideout-overlay"></div>
+  <div class="header--mobile">
+  <div class="row"><div class="columns clearfix">
+    <div class="float-left">
+      <a class="header--mobile__domain" href="/" target="_self">
+        <img src="/nav_logo_dark.png">
+      </a>
+    </div>
+    <div class="float-right">
+      <button type="button" class="header__hamburger">
+  <div class="hamburger hamburger--spin">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </div>
+</button>
+    </div>
+  </div></div>
+</div>
+  <div class="main">
+        <script>
+
+  
+  
+  
+  
+  
+</script>
+                      <meta property="og:title" content="P0735. M ？ACM ！ - SYUCT OJ" />
+    <meta property="og:description" content="DESCRIPTION
+输入两个整数 n和 m，构造一个 n行 m列的数字矩阵，矩阵中的数字从第一行到最后一行，按从左到右的顺序依次为 1,2,3,…,n×m。
+矩阵构造完成后，将每行的最后一个数字变..." />
+  <div class="row" data-sticky-parent>
+  <div class="medium-9 columns">
+    <div class="section">
+      <div class="section__header">
+        <h1 class="section__title">
+                    #P0735. M ？ACM ！
+        </h1>
+              </div>
+      <div class="section__body">
+        <ul class="problem__tags">
+                      <span class="problem__tag-item">ID: 107</span>
+                    <span class="problem__tag-item icon icon-book">传统题</span>
+                                <span class="problem__tag-item icon icon-stopwatch">1000ms</span>
+            <span class="problem__tag-item icon icon-comparison">256MiB</span>
+                                <a class="problem__tag-item interactive" href="/record?pid=107">尝试: 169</a>
+            <a class="problem__tag-item interactive" href="/record?pid=107&amp;status=1">已通过: 74</a>
+            <span class="problem__tag-item">难度: 5</span>
+            <span class="problem__tag-item interactive">上传者: <span class="user-profile-link">
+      <img class="small user-profile-avatar v-center" loading="lazy" src="//q1.qlogo.cn/g?b=qq&amp;nk=2595583127&amp;s=160" width="20" height="20">
+    <a class="user-profile-name uname--lv1" href="/user/3">
+          zine
+      </a>
+  </span>
+</span>
+                                <span name="show_tags" class="problem__tag-item interactive nojs--hide icon icon-tag">标签&gt;</span><span class="problem__tag-item tags hasjs--hide">SYUCT</span><span class="problem__tag-item tags hasjs--hide">基础语法</span>        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="problem-content-container"><div class="problem-content" data-marker-enabled>
+        <div class="section__header non-scratchpad--hide">
+          <h1 class="section__title">M ？ACM ！</h1>
+        </div>
+                <div class="section__body typo richmedia" data-fragment-id="problem-description">
+                      <h1 id="description" tabindex="-1">Description</h1>
+<p>输入两个整数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span>，构造一个 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span>行 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi></mrow><annotation encoding="application/x-tex">m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span>列的数字矩阵，矩阵中的数字从第一行到最后一行，按从左到右的顺序依次为 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo separator="true">,</mo><mn>3</mn><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mi>n</mi><mo>×</mo><mi>m</mi></mrow><annotation encoding="application/x-tex">1,2,3,…,n×m</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">1</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">2</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner">…</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span>。</p>
+<p>矩阵构造完成后，将每行的最后一个数字变为 ACM。</p>
+<p>输出最终矩阵。</p>
+<h1 id="format" tabindex="-1">Format</h1>
+<h2 id="input" tabindex="-1">Input</h2>
+<p>第一行包含一个正整数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false">(</mo><mn>0</mn><mo>&lt;</mo><mi>T</mi><mo>&lt;</mo><mn>4</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">T(0 &lt; T &lt; 4)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mopen">(</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.7224em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">4</span><span class="mclose">)</span></span></span></span> ，表示有 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.1389em;">T</span></span></span></span> 组测试数据。</p>
+<p>每组数据占一行，包含两个整数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo stretchy="false">(</mo><mn>0</mn><mo>&lt;</mo><mi>n</mi><mo>&lt;</mo><mn>20</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">n(0 &lt; n &lt; 20) </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mopen">(</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">20</span><span class="mclose">)</span></span></span></span>和 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo stretchy="false">(</mo><mn>0</mn><mo>&lt;</mo><mi>m</mi><mo>&lt;</mo><mn>20</mn><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">m(0 &lt; m &lt; 20)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">m</span><span class="mopen">(</span><span class="mord">0</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:0.5782em;vertical-align:-0.0391em;"></span><span class="mord mathnormal">m</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&lt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="katex-base"><span class="katex-strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">20</span><span class="mclose">)</span></span></span></span>。</p>
+<h2 id="output" tabindex="-1">Output</h2>
+<p>对于每组数据，输出最终矩阵，具体形式参照输出样例。（两组输出之间不要留空行）</p>
+<h1 id="samples" tabindex="-1">Samples</h1>
+<pre><code class="language-input1">1
+7 4
+</code></pre>
+<pre><code class="language-output1">1 2 3 ACM
+5 6 7 ACM
+9 10 11 ACM
+13 14 15 ACM
+17 18 19 ACM
+21 22 23 ACM
+25 26 27 ACM
+</code></pre>
+<pre><code class="language-input2">3
+1 4
+5 1
+7 7
+
+</code></pre>
+<pre><code class="language-output2">1 2 3 ACM
+ACM
+ACM
+ACM
+ACM
+ACM
+1 2 3 4 5 6 ACM
+8 9 10 11 12 13 ACM
+15 16 17 18 19 20 ACM
+22 23 24 25 26 27 ACM
+29 30 31 32 33 34 ACM
+36 37 38 39 40 41 ACM
+43 44 45 46 47 48 ACM
+</code></pre>
+<h1 id="hint" tabindex="-1">Hint</h1>
+
+</div>      </div></div>
+    </div>
+  </div>
+  <div class="medium-3 columns"><div data-sticky="large">
+        <div class="section side section--problem-sidebar">
+  <div>
+    <ol class="menu">
+                          <li class="menu__item scratchpad--hide"><a class="menu__link" href="javascript:showSignInDialog();">
+        <span class="icon icon-send"></span> 登录后递交
+      </a></li>
+                      <li class="menu__seperator"></li>
+              <li class="menu__item"><a class="menu__link" href="/discuss/problem/107">
+        <span class="icon icon-comment--text"></span> 讨论 (0)      </a></li>
+              <li class="menu__item"><a class="menu__link" href="/p/P0735/solution">
+        <span class="icon icon-comment--text"></span> 题解 (0)      </a></li>
+          <li class="menu__item"><a class="menu__link" href="/p/P0735/files">
+        <span class="icon icon-file"></span> 文件
+      </a></li>
+      <li class="menu__item"><a class="menu__link" href="/p/P0735/stat">
+        <span class="icon icon-statistics"></span> 统计
+      </a></li>
+              <li class="menu__seperator nojs--hide"></li>
+                    </ol>
+  </div>
+</div>
+<div class="section side">
+  <div class="section__header">
+    <h1 class="section__title">相关</h1>
+  </div>
+  <div class="section__body typo">
+        <p>在下列比赛中: </p><p><a href="/contest/68f788a80cc5d7be226466a5">2025级SYUCT-ACM新生第二次训练</a></p><p><a href="/contest/6ac5b694753773230ebbcb8f">2026级SYUCT-ACM新生第二次训练</a></p>    </div>
+</div>
+  </div></div>
+</div>
+<div style="display:none" class="outer-loader-container"><div class="loader"></div></div>
+<div class="scratchpad-container" style="display:none">
+  <div style="display:none" class="loader-container"><div class="loader"></div></div>
+  <div id="scratchpad" style="opacity:0"></div>
+</div>
+  </div>
+  <div class="footer">
+  <div class="row"><div class="columns">
+      <div class="row footer__links">
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          状态
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/record">评测队列</a></li>
+          <li class="footer__category__item"><a href="/status">服务状态</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          开发
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="https://github.com/hydro-dev/Hydro" target="_blank">开源</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          支持
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/help">帮助</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">联系我们</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable end">
+        <h1>
+          关于
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/about">关于</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#privacy">隐私</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#tos">服务条款</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">版权申诉</a></li>
+        </ul></div>
+      </div>
+    </div>
+      <div class="footer__extra-link clearfix">
+      <div class="footer__extra-left">
+        <ol class="clearfix">
+                    <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-lang">
+            <span><span class="icon icon-global"></span> Language <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-lang"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+          </li>
+          <li class="footer__extra-link-item">
+                          <a href="/legacy?legacy=true">兼容模式</a>
+                      </li>
+          <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-theme">
+            <span><span class="icon icon-global"></span> 主题 <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-theme">
+              <li class="menu__item"><a class="menu__link" href="/set_theme/light">亮色</a></li>
+              <li class="menu__item"><a class="menu__link" href="/set_theme/dark">暗色</a></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+      <div class="footer__extra-right">
+        <ol class="clearfix"><li class="footer__extra-link-item"></li><li class="footer__extra-link-item"><a href="https://beian.miit.gov.cn/">辽ICP备2026022210号-1</a></li><li class="footer__extra-link-item">Worker 0, 24ms</li>
+          <!-- Prepare 7ms -->
+          <!-- Method 2ms -->
+          
+          
+          <li class="footer__extra-link-item">Powered by <a href="https://hydro.js.org">Hydro v5.0.7</a> Community</li>
+        </ol>
+      </div>
+    </div>
+  </div></div>
+</div>
+</div>
+<div class="dialog dialog--signin" style="display:none">
+  <div class="dialog__content">
+        <div class="dialog--signin__bg">
+      <div class="dialog--signin__side">
+        <h1>还没有账户？</h1>
+        <p>注册一个 SYUCT OJ 通用账户，您就可以在我们提供的所有在线评测服务上提交代码、参与讨论。</p>
+        <div><a href="/register" class="inverse rounded button">现在注册</a></div>
+      </div>
+    </div>
+        <div class="dialog--signin__main">
+      <form action="/login" method="post">
+        <div class="dialog--signin__close-container supplementary">
+          <a name="dialog--signin__close" href="javascript:;">关闭</a>
+        </div>
+        <h1 class="dialog--signin__title">登录</h1>
+        <p class="dialog--signin__note">使用您的 SYUCT OJ 通用账户</p>
+                <div class="row"><div class="columns">
+          <label class="material textbox">
+            用户名
+            <input name="uname" type="text" data-autofocus autocomplete="username webauthn">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="material textbox">
+            密码
+            <input name="password" type="password">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="checkbox">
+            <input type="checkbox" name="rememberme" class="checkbox">记住我
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <input type="hidden" name="tfa" value="">
+          <input type="hidden" name="authnChallenge" value="">
+          <input type="submit" value="登录" name="login_submit" class="expanded rounded primary button">
+        </div></div>
+        <div class="row"><div class="columns">
+          <div class="supplementary text-center">
+            <a href="/lostpass">忘记密码或者用户名？</a>
+          </div>
+        </div></div>
+      </form>
+    </div>
+  </div>
+</div>
+        <script>
+      window.UiContextNew = '{"problemId":"P0735","problemNumId":107,"codeLang":"cc.cc17","pdoc":{"_id":"67ea8bb63c52eb657784d906","content":"# Description\\n\\n\u8F93\u5165\u4E24\u4E2A\u6574\u6570 $n$\u548C $m$\uFF0C\u6784\u9020\u4E00\u4E2A $n$\u884C $m$\u5217\u7684\u6570\u5B57\u77E9\u9635\uFF0C\u77E9\u9635\u4E2D\u7684\u6570\u5B57\u4ECE\u7B2C\u4E00\u884C\u5230\u6700\u540E\u4E00\u884C\uFF0C\u6309\u4ECE\u5DE6\u5230\u53F3\u7684\u987A\u5E8F\u4F9D\u6B21\u4E3A $1,2,3,\u2026,n\xD7m$\u3002  \\n\\n\u77E9\u9635\u6784\u9020\u5B8C\u6210\u540E\uFF0C\u5C06\u6BCF\u884C\u7684\u6700\u540E\u4E00\u4E2A\u6570\u5B57\u53D8\u4E3A ACM\u3002  \\n\\n\u8F93\u51FA\u6700\u7EC8\u77E9\u9635\u3002  \\n\\n\\n# Format\\n\\n## Input\\n\u7B2C\u4E00\u884C\u5305\u542B\u4E00\u4E2A\u6B63\u6574\u6570 $T(0 < T < 4)$ \uFF0C\u8868\u793A\u6709 $T$ \u7EC4\u6D4B\u8BD5\u6570\u636E\u3002  \\n\\n\u6BCF\u7EC4\u6570\u636E\u5360\u4E00\u884C\uFF0C\u5305\u542B\u4E24\u4E2A\u6574\u6570 $n(0 < n < 20) $\u548C $m(0 < m < 20)$\u3002  \\n\\n\\n## Output\\n\u5BF9\u4E8E\u6BCF\u7EC4\u6570\u636E\uFF0C\u8F93\u51FA\u6700\u7EC8\u77E9\u9635\uFF0C\u5177\u4F53\u5F62\u5F0F\u53C2\u7167\u8F93\u51FA\u6837\u4F8B\u3002\uFF08\u4E24\u7EC4\u8F93\u51FA\u4E4B\u95F4\u4E0D\u8981\u7559\u7A7A\u884C\uFF09  \\n\\n# Samples\\n\\n```input1\\n1\\n7 4\\n```\\n```output1\\n1 2 3 ACM\\n5 6 7 ACM\\n9 10 11 ACM\\n13 14 15 ACM\\n17 18 19 ACM\\n21 22 23 ACM\\n25 26 27 ACM\\n```\\n```input2\\n3\\n1 4\\n5 1\\n7 7\\n\\n```\\n```output2\\n1 2 3 ACM\\nACM\\nACM\\nACM\\nACM\\nACM\\n1 2 3 4 5 6 ACM\\n8 9 10 11 12 13 ACM\\n15 16 17 18 19 20 ACM\\n22 23 24 25 26 27 ACM\\n29 30 31 32 33 34 ACM\\n36 37 38 39 40 41 ACM\\n43 44 45 46 47 48 ACM\\n```\\n# Hint","owner":3,"domainId":"system","docType":10,"docId":107,"title":"M \uFF1FACM \uFF01","tag":["SYUCT","\u57FA\u7840\u8BED\u6CD5"],"hidden":false,"nSubmit":169,"nAccept":74,"pid":"P0735","difficulty":5,"data":[{"_id":"18.out","name":"18.out","size":748,"lastModified":"2025-03-31T12:33:58.420Z","etag":"L2RhdGEvZmlsZS9oeWRyby8weDYvbTFyZHBmZXNyZmxxcXpzNmZ4bXA0Lm91dA=="},{"_id":"11.out","name":"11.out","size":513,"lastModified":"2025-03-31T12:33:58.421Z","etag":"L2RhdGEvZmlsZS9oeWRyby82aTQvbTd0OXdreHV0MDN2aGVkZ2ozMjB3Lm91dA=="},{"_id":"8.in","name":"8.in","size":17,"lastModified":"2025-03-31T12:33:58.420Z","etag":"L2RhdGEvZmlsZS9oeWRyby9jMGsvNjBvdDl3aHBqZXFnemx1emhyOGk0Lmlu"},{"_id":"29.in","name":"29.in","size":8,"lastModified":"2025-03-31T12:33:58.420Z","etag":"L2RhdGEvZmlsZS9oeWRyby8yMWkvNGZmZmdzNzBlZGhxYWtibjlrdnRhLmlu"},{"_id":"12.in","name":"12.in","size":12,"lastModified":"2025-03-31T12:33:58.420Z","etag":"L2RhdGEvZmlsZS9oeWRyby9mdGIvZ203b2dqYmJmMGtpb2hkbHA0dmJ2Lmlu"},{"_id":"18.in","name":"18.in","size":13,"lastModified":"2025-03-31T12:33:58.421Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zaHQvazZ0bWEwamRmYzg1MHZtY2pxeWV6Lmlu"},{"_id":"2.out","name":"2.out","size":761,"lastModified":"2025-03-31T12:33:58.421Z","etag":"L2RhdGEvZmlsZS9oeWRyby9weDEvenlidG8wemd0aG9hZGZ3d3BxczM4Lm91dA=="},{"_id":"14.out","name":"14.out","size":509,"lastModified":"2025-03-31T12:33:58.421Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zMGkvM2Y2d2hhbXF1NHhoMGVrejRiamdoLm91dA=="},{"_id":"26.in","name":"26.in","size":19,"lastModified":"2025-03-31T12:33:58.423Z","etag":"L2RhdGEvZmlsZS9oeWRyby9sajQvaGs1b3AwOXMwYjViMm9tZWQzd3YwLmlu"},{"_id":"1.out","name":"1.out","size":582,"lastModified":"2025-03-31T12:33:58.425Z","etag":"L2RhdGEvZmlsZS9oeWRyby9waXUvZWd1Zmc1cGNlYXVjdDllMW5tYmp1Lm91dA=="},{"_id":"5.out","name":"5.out","size":1306,"lastModified":"2025-03-31T12:33:58.490Z","etag":"L2RhdGEvZmlsZS9oeWRyby8waWgvcWd5cXNwZGx0Z3hrbW85ZXYxaWI1Lm91dA=="},{"_id":"24.in","name":"24.in","size":12,"lastModified":"2025-03-31T12:33:58.490Z","etag":"L2RhdGEvZmlsZS9oeWRyby9ub2QveHI1bGlsMWJwcXNkdmF2MW9sNGZ0Lmlu"},{"_id":"3.in","name":"3.in","size":8,"lastModified":"2025-03-31T12:33:58.490Z","etag":"L2RhdGEvZmlsZS9oeWRyby9qN2cvbWcxZTBreDVrcXV0azVzbzZxbWEzLmlu"},{"_id":"6.in","name":"6.in","size":6,"lastModified":"2025-03-31T12:33:58.491Z","etag":"L2RhdGEvZmlsZS9oeWRyby9teG8vMGFvdHJvOXg4cnptaTltdWY5Z3BjLmlu"},{"_id":"13.out","name":"13.out","size":452,"lastModified":"2025-03-31T12:33:58.491Z","etag":"L2RhdGEvZmlsZS9oeWRyby8ybW4vZ2Jwbnp6bWdkdm9vMmp4YXU2Ym1tLm91dA=="},{"_id":"2.in","name":"2.in","size":18,"lastModified":"2025-03-31T12:33:58.491Z","etag":"L2RhdGEvZmlsZS9oeWRyby96aXQvd2xheHM5d2VqZGVqdmN0dXpyZnZnLmlu"},{"_id":"17.out","name":"17.out","size":1411,"lastModified":"2025-03-31T12:33:58.491Z","etag":"L2RhdGEvZmlsZS9oeWRyby85dzIvZWpjbHp3aGJoYndudHRveWZ4M3k2Lm91dA=="},{"_id":"4.out","name":"4.out","size":809,"lastModified":"2025-03-31T12:33:58.491Z","etag":"L2RhdGEvZmlsZS9oeWRyby9sbTMvZXU5emJyN3k5enF6NW9zZGp2YjQ2Lm91dA=="},{"_id":"23.out","name":"23.out","size":2062,"lastModified":"2025-03-31T12:33:58.494Z","etag":"L2RhdGEvZmlsZS9oeWRyby9lMHova3Frd3QyYjgwd280NmZqMmJsY2FrLm91dA=="},{"_id":"22.in","name":"22.in","size":13,"lastModified":"2025-03-31T12:33:58.496Z","etag":"L2RhdGEvZmlsZS9oeWRyby9vdjIvNGxlb3lzbm5iaHQ2eGg5YXdreWVkLmlu"},{"_id":"16.in","name":"16.in","size":13,"lastModified":"2025-03-31T12:33:58.538Z","etag":"L2RhdGEvZmlsZS9oeWRyby96OWcvZXl5aTR4Z2R3Y2NkZ3V3cGJrdDRoLmlu"},{"_id":"6.out","name":"6.out","size":92,"lastModified":"2025-03-31T12:33:58.558Z","etag":"L2RhdGEvZmlsZS9oeWRyby9oc3gvM3B0dThkdWs1cm1ra3VkeDl4MHBsLm91dA=="},{"_id":"23.in","name":"23.in","size":19,"lastModified":"2025-03-31T12:33:58.558Z","etag":"L2RhdGEvZmlsZS9oeWRyby8wMHEveW5xMDduOGRuZzl1aDg2ZzMxdWU5Lmlu"},{"_id":"21.out","name":"21.out","size":509,"lastModified":"2025-03-31T12:33:58.558Z","etag":"L2RhdGEvZmlsZS9oeWRyby9ibjcvbnowdTY0cjB5YmIwMWhndmx3b3RyLm91dA=="},{"_id":"7.in","name":"7.in","size":16,"lastModified":"2025-03-31T12:33:58.558Z","etag":"L2RhdGEvZmlsZS9oeWRyby9mbHUvaHp3MHhpZHd5cmk1aXJoMDh2azB1Lmlu"},{"_id":"17.in","name":"17.in","size":13,"lastModified":"2025-03-31T12:33:58.558Z","etag":"L2RhdGEvZmlsZS9oeWRyby9kM3MvbzJ1enhjZ3d4aW9jemZjYmc4cG5tLmlu"},{"_id":"16.out","name":"16.out","size":1381,"lastModified":"2025-03-31T12:33:58.558Z","etag":"L2RhdGEvZmlsZS9oeWRyby9wN2EvenM1aWlyZWFyZGQwcXZ1cHZrd2hvLm91dA=="},{"_id":"21.in","name":"21.in","size":7,"lastModified":"2025-03-31T12:33:58.558Z","etag":"L2RhdGEvZmlsZS9oeWRyby96eGcvazN2enNoNjdjZm9iemJ2amppa2Q1Lmlu"},{"_id":"4.in","name":"4.in","size":12,"lastModified":"2025-03-31T12:33:58.558Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xcWQvZGJndW5xMXJ4eDd4cHF4dW5seHU4Lmlu"},{"_id":"8.out","name":"8.out","size":965,"lastModified":"2025-03-31T12:33:58.562Z","etag":"L2RhdGEvZmlsZS9oeWRyby8wMm0vMGt4aG5wcTYwM3h2eTBxemJsd3hnLm91dA=="},{"_id":"20.in","name":"20.in","size":18,"lastModified":"2025-03-31T12:33:58.582Z","etag":"L2RhdGEvZmlsZS9oeWRyby9jb3QvMXR0dHdrZHNrZTBnazBzMnRndWRvLmlu"},{"_id":"19.out","name":"19.out","size":429,"lastModified":"2025-03-31T12:33:58.601Z","etag":"L2RhdGEvZmlsZS9oeWRyby90czIveWl6aWVpeTB2eXpyZjYwanZ3bXB2Lm91dA=="},{"_id":"12.out","name":"12.out","size":460,"lastModified":"2025-03-31T12:33:58.601Z","etag":"L2RhdGEvZmlsZS9oeWRyby81c2UvYm9xdGhlb2NtbnZ0MGRpa2xscDRtLm91dA=="},{"_id":"27.in","name":"27.in","size":11,"lastModified":"2025-03-31T12:33:58.603Z","etag":"L2RhdGEvZmlsZS9oeWRyby8xdjMvdzAxcmZ0MGJraTl5enNqa2NiejI3Lmlu"},{"_id":"15.out","name":"15.out","size":377,"lastModified":"2025-03-31T12:33:58.603Z","etag":"L2RhdGEvZmlsZS9oeWRyby9pb2YvcHN4Z3FrenFic2pmOTRxemk0M2xtLm91dA=="},{"_id":"14.in","name":"14.in","size":11,"lastModified":"2025-03-31T12:33:58.603Z","etag":"L2RhdGEvZmlsZS9oeWRyby9wNWgvajF4dG1tN3E1c2pqaDJmZ2JudG9uLmlu"},{"_id":"22.out","name":"22.out","size":1321,"lastModified":"2025-03-31T12:33:58.604Z","etag":"L2RhdGEvZmlsZS9oeWRyby9hamsvNmdub2htcGYwdWVwbDJiY3ExeXRjLm91dA=="},{"_id":"27.out","name":"27.out","size":255,"lastModified":"2025-03-31T12:33:58.605Z","etag":"L2RhdGEvZmlsZS9oeWRyby9iZ2EvdDJ4c3hxaG5oYWtmZGdkNzJ4MHNtLm91dA=="},{"_id":"9.in","name":"9.in","size":19,"lastModified":"2025-03-31T12:33:58.606Z","etag":"L2RhdGEvZmlsZS9oeWRyby9nZzMvb3lxaXBtZ20wYnBlY2YxYm90dGo1Lmlu"},{"_id":"15.in","name":"15.in","size":16,"lastModified":"2025-03-31T12:33:58.606Z","etag":"L2RhdGEvZmlsZS9oeWRyby85ZHcveHJodTlteXFqeHh3ZXQxY2JneG80Lmlu"},{"_id":"20.out","name":"20.out","size":1027,"lastModified":"2025-03-31T12:33:58.606Z","etag":"L2RhdGEvZmlsZS9oeWRyby9mdXYvYzZueDFsdTEwbWFia3MwaWRrN3ZlLm91dA=="},{"_id":"26.out","name":"26.out","size":1733,"lastModified":"2025-03-31T12:33:58.626Z","etag":"L2RhdGEvZmlsZS9oeWRyby9oYnUvenVxdG8wZXdzc2Y4NmJsZXUwbmNuLm91dA=="},{"_id":"28.out","name":"28.out","size":513,"lastModified":"2025-03-31T12:33:58.627Z","etag":"L2RhdGEvZmlsZS9oeWRyby94OHEvbHozNjVxeHd0cXYyem1hMWpqaTViLm91dA=="},{"_id":"25.in","name":"25.in","size":11,"lastModified":"2025-03-31T12:33:58.627Z","etag":"L2RhdGEvZmlsZS9oeWRyby92azgvZmQ1YzBuc29zcmVwMGcwcmQ1NTB2Lmlu"},{"_id":"30.in","name":"30.in","size":8,"lastModified":"2025-03-31T12:33:58.636Z","etag":"L2RhdGEvZmlsZS9oeWRyby93dTAvc2YycGN5bm82cGlrb25wOHo5b2VwLmlu"},{"_id":"13.in","name":"13.in","size":11,"lastModified":"2025-03-31T12:33:58.636Z","etag":"L2RhdGEvZmlsZS9oeWRyby90M3EvN3VzaGx3dmQzenkwYmtvdngwaWg5Lmlu"},{"_id":"30.out","name":"30.out","size":428,"lastModified":"2025-03-31T12:33:58.637Z","etag":"L2RhdGEvZmlsZS9oeWRyby9obXEvbWdtcGhwaHBleHN1M2Y2emNiNTBqLm91dA=="},{"_id":"28.in","name":"28.in","size":7,"lastModified":"2025-03-31T12:33:58.637Z","etag":"L2RhdGEvZmlsZS9oeWRyby9nY2svamJyYXd0eGF1ZGNwYXF2d3NxdG9mLmlu"},{"_id":"29.out","name":"29.out","size":301,"lastModified":"2025-03-31T12:33:58.647Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zcHYvOWJ6enV3dnVta3kxd2ZnZnBiZnhpLm91dA=="},{"_id":"11.in","name":"11.in","size":12,"lastModified":"2025-03-31T12:33:58.647Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xMnMvd2J6M25qaXBuMXA3ZmE4N3BmMDFsLmlu"},{"_id":"10.in","name":"10.in","size":13,"lastModified":"2025-03-31T12:33:58.647Z","etag":"L2RhdGEvZmlsZS9oeWRyby9nN2cvbjlsZ3NqYThsbHVjcWRkNnZ6bmV3Lmlu"},{"_id":"5.in","name":"5.in","size":18,"lastModified":"2025-03-31T12:33:58.651Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xdWQvZ2V2eWtuY3ltZXB3ZWtpMTFpb3NuLmlu"},{"_id":"9.out","name":"9.out","size":1338,"lastModified":"2025-03-31T12:33:58.651Z","etag":"L2RhdGEvZmlsZS9oeWRyby80cmcvNnNzanVkbW04OHJpeHpwMHNjcTE1Lm91dA=="},{"_id":"24.out","name":"24.out","size":1145,"lastModified":"2025-03-31T12:33:58.654Z","etag":"L2RhdGEvZmlsZS9oeWRyby9uZXIvYWZzNWRyYzQzb2pkZm5lZ2syY2d6Lm91dA=="},{"_id":"25.out","name":"25.out","size":333,"lastModified":"2025-03-31T12:33:58.663Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zYzEvbmttcHlrZ2U0MXNzY2U3YXRlcG51Lm91dA=="},{"_id":"1.in","name":"1.in","size":16,"lastModified":"2025-03-31T12:33:58.663Z","etag":"L2RhdGEvZmlsZS9oeWRyby93aWsvd3dyemc0aWllcmhibXJxZ2U2ZWxjLmlu"},{"_id":"10.out","name":"10.out","size":624,"lastModified":"2025-03-31T12:33:58.663Z","etag":"L2RhdGEvZmlsZS9oeWRyby9oejEvZmxsdW1qbm9mZWdkcHNuaGttbGxxLm91dA=="},{"_id":"19.in","name":"19.in","size":8,"lastModified":"2025-03-31T12:33:58.665Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xaHQvOXQwbTAzZ3V3Y3IwcjR6MGRsZXkwLmlu"},{"_id":"3.out","name":"3.out","size":795,"lastModified":"2025-03-31T12:33:58.670Z","etag":"L2RhdGEvZmlsZS9oeWRyby8wb3QvaW1jY3N2MmV2d3ljaGY0ZjIwdW80Lm91dA=="},{"_id":"7.out","name":"7.out","size":1137,"lastModified":"2025-03-31T12:33:58.670Z","etag":"L2RhdGEvZmlsZS9oeWRyby9qbGUvbXV1MGJweTAybDVobHpvM2kxeHFtLm91dA=="}],"stats":{"AC":79,"WA":67,"TLE":1,"MLE":0,"RE":1,"SE":0,"IGN":0,"CE":21,"s0":76,"s4":1,"s25":13,"s100":79},"config":{"count":30,"memoryMin":256,"memoryMax":256,"timeMin":1000,"timeMax":1000,"type":"default","langs":["c","cc","cc.cc98","cc.cc98o2","cc.cc11","cc.cc11o2","cc.cc14","cc.cc14o2","cc.cc17","cc.cc17o2","cc.cc20","cc.cc20o2","pas","java","kt","kt.jvm","py","py.py2","py.py3","py.pypy3","php","rs","hs","js","go","rb","cs","r","codeforces","codeforces.43","codeforces.52","codeforces.50","codeforces.54","codeforces.59","codeforces.61","codeforces.65","codeforces.9","codeforces.28","codeforces.32","codeforces.12","codeforces.60","codeforces.36","codeforces.48","codeforces.19","codeforces.3","codeforces.4","codeforces.51","codeforces.13","codeforces.6","codeforces.7","codeforces.31","codeforces.40","codeforces.41","codeforces.67","codeforces.49","codeforces.20","codeforces.34","codeforces.55"]}},"canViewRecord":true,"postSubmitUrl":"/p/107/submit","getSubmissionsUrl":"/record?fullStatus=true&pid=107","getRecordDetailUrl":"/record/%7Brid%7D","pretestConnUrl":"record-conn?pretest=1&uidOrName=0&pid=107&domainId=system"}';
+      window.UserContextNew = '{}';
+    </script>
+  </body>
+</html>

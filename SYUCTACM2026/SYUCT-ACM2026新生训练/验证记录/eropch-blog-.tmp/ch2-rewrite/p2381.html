@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html data-page="problem_detail" data-layout="basic" class="layout--basic page--problem_detail theme--light nojs" data-mantine-color-scheme="light" lang="" data-app="Hydro">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="canonical" href="https://oj.syuctacm.cn/p/2381">  <meta name="theme-color" content="#56758f">
+    <meta property="og:site_name" content="SYUCT OJ" />
+  <meta property="og:url" content="https://oj.syuctacm.cn/p/2381" />
+  <meta property="og:image" content="/favicon-96x96.png" />
+                                  <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="NC14610. cayun日常之赏月 - SYUCT OJ" />
+    <meta property="og:description" content="题目描述
+在cayun星球月亮大小都有一个规律，月亮为每30天一个周期，在这30天的周期里，月亮的大小分别为0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+10, 11, 12, 13, ..." />
+    <title>cayun日常之赏月 - 题目详情 - SYUCT OJ</title>
+  <style>
+    body {
+      --font-family: "Open Sans", "Open Sans", "Seravek", "Segoe UI", "Verdana", "PingFang SC", "Hiragino Sans GB", "Lantinghei SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans";
+      --code-font-family: "Source Code Pro", "monaco", "Source Code Pro", "Consolas", "Lucida Console", "monospace";
+      --font-ligatures: none !important;
+    }
+          #panel { display: flex; flex-direction: column; }
+      </style>
+      <link rel="stylesheet" media="all" href="/theme-4.58.5.css">
+        <script>
+      var _htmlNode = document.documentElement;
+      _htmlNode.className = _htmlNode.className.replace(' nojs', ' hasjs');
+      window.UiContext = '{"cdn_prefix":"/","url_prefix":"/","ws_prefix":"/","constantVersion":"afaf5740","domainId":"system","domainVersion":1792848814990,"extraTitleContent":"cayun\u65E5\u5E38\u4E4B\u8D4F\u6708","SWConfig":{"preload":"","hosts":["http://oj.syuctacm.cn","https://oj.syuctacm.cn","https://oj.syuctacm.cn/","/"],"assets":[],"domains":[]}}';
+      window.UserContext = '{"_id":0,"mail":"Guest@hydro.local","uname":"Guest","hashType":"hydro","priv":8,"regat":"2025-03-06T12:26:22.389Z","loginat":"2026-03-07T10:35:53.368Z","perm":"BigInt::1291862133704988065921","role":"guest","scope":"BigInt::-1","tfa":false,"authn":false,"group":[],"domains":[],"timeZone":"Asia/Shanghai","codeLang":"cc.cc17","avatar":"gravatar:Guest@hydro.local","gender":2,"backgroundImage":"/components/profile/backgrounds/1.jpg","pinnedDomains":[],"checkin_time":"1997-01-11","showTimeAgo":true,"fontFamily":"Open Sans","codeFontFamily":"Source Code Pro","theme":"light","preferredEditorType":"sv","formatCode":true,"avatarUrl":"//cn.gravatar.com/avatar/97119d3d15d5201ab506330ed4bab0f7?d=mm&s=128"}';
+    </script>
+      </head>
+<body>
+      <script type="text/javascript" src="/resource/afaf5740/entry.js"></script>
+    <script type="text/javascript" src="/resource/4.58.5/lang-zh.js"></script>
+    <script type="text/javascript" src="/hydro-4.58.5.js"></script>
+    <nav class="nav slideout-menu" id="menu">
+  <div class="row"><div class="columns clearfix">
+    <ol class="nav__list nav__list--main clearfix">
+      <li class="nav__list-item">
+        <a href="/"><img class="nav__logo" src="/nav_logo_dark.png"></a>
+      </li>        <li class="nav__list-item">
+  <a href="/" class="nav__item">
+    首页
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/p" class="nav__item nav--active">
+    题库
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/training" class="nav__item">
+    训练
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/contest" class="nav__item">
+    比赛
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/homework" class="nav__item">
+    作业
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/discuss" class="nav__item">
+    讨论
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/record" class="nav__item">
+    评测记录
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/ranking" class="nav__item">
+    排名
+  </a>
+</li>
+      </ol>
+    <ol class="nav__list nav__list--secondary clearfix">
+          <li class="nav__list-item"><a href="/login" class="nav__item" name="nav_login">登录</a></li>
+            <li class="nav__list-item"><a href="/register" class="nav__item--round">注册</a></li>
+            <li class="nav__list-item nojs--hide" data-dropdown-pos="bottom right" data-dropdown-custom-class="nav__dropdown" data-dropdown-target="#menu-nav-user" data-dropdown-disabledconstrainToWindow data-dropdown-trigger-desktop-only>
+        <a href="javascript:;" class="nav__item">
+          <span class="icon icon-global"></span>Language <span class="icon icon-expand_more"></span>
+        </a>
+        <ol class="dropdown-target menu" id="menu-nav-user"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+      </li>
+        </ol>
+  </div></div>
+</nav>
+<nav class="nav--shadow"></nav>
+<div class="slideout-panel" id="panel">
+    <div class="slideout-overlay"></div>
+  <div class="header--mobile">
+  <div class="row"><div class="columns clearfix">
+    <div class="float-left">
+      <a class="header--mobile__domain" href="/" target="_self">
+        <img src="/nav_logo_dark.png">
+      </a>
+    </div>
+    <div class="float-right">
+      <button type="button" class="header__hamburger">
+  <div class="hamburger hamburger--spin">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </div>
+</button>
+    </div>
+  </div></div>
+</div>
+  <div class="main">
+        <script>
+
+  
+  
+  
+  
+  
+</script>
+                                <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="NC14610. cayun日常之赏月 - SYUCT OJ" />
+    <meta property="og:description" content="题目描述
+在cayun星球月亮大小都有一个规律，月亮为每30天一个周期，在这30天的周期里，月亮的大小分别为0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+10, 11, 12, 13, ..." />
+  <div class="row" data-sticky-parent>
+  <div class="medium-9 columns">
+    <div class="section">
+      <div class="section__header">
+        <h1 class="section__title">
+                    #NC14610. cayun日常之赏月
+        </h1>
+              </div>
+      <div class="section__body">
+        <ul class="problem__tags">
+                      <span class="problem__tag-item">ID: 2381</span>
+                    <span class="problem__tag-item icon icon-book">传统题</span>
+                                <span class="problem__tag-item icon icon-stopwatch">1000ms</span>
+            <span class="problem__tag-item icon icon-comparison">128MiB</span>
+                                <a class="problem__tag-item interactive" href="/record?pid=2381">尝试: 66</a>
+            <a class="problem__tag-item interactive" href="/record?pid=2381&amp;status=1">已通过: 18</a>
+            <span class="problem__tag-item">难度: 6</span>
+            <span class="problem__tag-item interactive">上传者: <span class="user-profile-link">
+      <img class="small user-profile-avatar v-center" loading="lazy" src="//q1.qlogo.cn/g?b=qq&amp;nk=3643001679&amp;s=160" width="20" height="20">
+    <a class="user-profile-name uname--lv1" href="/user/114514">
+          Asanagi
+      </a>
+  </span>
+</span>
+                                <span name="show_tags" class="problem__tag-item interactive nojs--hide icon icon-tag">标签&gt;</span><span class="problem__tag-item tags hasjs--hide">牛客竞赛</span><span class="problem__tag-item tags hasjs--hide">模拟</span>        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="problem-content-container"><div class="problem-content" data-marker-enabled>
+        <div class="section__header non-scratchpad--hide">
+          <h1 class="section__title">cayun日常之赏月</h1>
+        </div>
+                <div class="section__body typo richmedia" data-fragment-id="problem-description">
+                      <h2 id="%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0" tabindex="-1">题目描述</h2>
+<p>在cayun星球月亮大小都有一个规律，月亮为每30天一个周期，在这30天的周期里，月亮的大小分别为0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1，虽然天气很冷，但某个cayun今天却异常疯癫，不知为何居然想要赏月了。但他想在赏月之前知道今天的月亮到底有多大。</p>
+<h2 id="%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F" tabindex="-1">输入格式</h2>
+<p>第一行数据组数T(T &lt;= 30)，</p>
+<p>对于每组数据两个整数a, b(0 &lt;= a, b &lt;= 15)，表示前两天的月亮大小，保证数据是合法的。</p>
+<h2 id="%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F" tabindex="-1">输出格式</h2>
+<p>每组数据占一行，表示今天的月亮大小。</p>
+<h2 id="%E6%A0%B7%E4%BE%8B-1" tabindex="-1">样例 1</h2>
+<pre><code class="language-input1">2
+0 1
+11 10
+</code></pre>
+<pre><code class="language-output1">2
+9
+</code></pre>
+<h2 id="%E6%9D%A5%E6%BA%90" tabindex="-1">来源</h2>
+<p><a href="https://ac.nowcoder.com/acm/problem/14610">牛客原题</a></p>
+
+</div>      </div></div>
+    </div>
+  </div>
+  <div class="medium-3 columns"><div data-sticky="large">
+        <div class="section side section--problem-sidebar">
+  <div>
+    <ol class="menu">
+                          <li class="menu__item scratchpad--hide"><a class="menu__link" href="javascript:showSignInDialog();">
+        <span class="icon icon-send"></span> 登录后递交
+      </a></li>
+                      <li class="menu__seperator"></li>
+              <li class="menu__item"><a class="menu__link" href="/discuss/problem/2381">
+        <span class="icon icon-comment--text"></span> 讨论 (0)      </a></li>
+              <li class="menu__item"><a class="menu__link" href="/p/NC14610/solution">
+        <span class="icon icon-comment--text"></span> 题解 (0)      </a></li>
+          <li class="menu__item"><a class="menu__link" href="/p/NC14610/files">
+        <span class="icon icon-file"></span> 文件
+      </a></li>
+      <li class="menu__item"><a class="menu__link" href="/p/NC14610/stat">
+        <span class="icon icon-statistics"></span> 统计
+      </a></li>
+              <li class="menu__seperator nojs--hide"></li>
+                    </ol>
+  </div>
+</div>
+<div class="section side">
+  <div class="section__header">
+    <h1 class="section__title">相关</h1>
+  </div>
+  <div class="section__body typo">
+        <p>在下列比赛中: </p><p><a href="/contest/6ac5b694753773230ebbcb8f">2026级SYUCT-ACM新生第二次训练</a></p>    </div>
+</div>
+  </div></div>
+</div>
+<div style="display:none" class="outer-loader-container"><div class="loader"></div></div>
+<div class="scratchpad-container" style="display:none">
+  <div style="display:none" class="loader-container"><div class="loader"></div></div>
+  <div id="scratchpad" style="opacity:0"></div>
+</div>
+  </div>
+  <div class="footer">
+  <div class="row"><div class="columns">
+      <div class="row footer__links">
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          状态
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/record">评测队列</a></li>
+          <li class="footer__category__item"><a href="/status">服务状态</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          开发
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="https://github.com/hydro-dev/Hydro" target="_blank">开源</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          支持
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/help">帮助</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">联系我们</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable end">
+        <h1>
+          关于
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/about">关于</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#privacy">隐私</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#tos">服务条款</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">版权申诉</a></li>
+        </ul></div>
+      </div>
+    </div>
+      <div class="footer__extra-link clearfix">
+      <div class="footer__extra-left">
+        <ol class="clearfix">
+                    <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-lang">
+            <span><span class="icon icon-global"></span> Language <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-lang"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+          </li>
+          <li class="footer__extra-link-item">
+                          <a href="/legacy?legacy=true">兼容模式</a>
+                      </li>
+          <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-theme">
+            <span><span class="icon icon-global"></span> 主题 <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-theme">
+              <li class="menu__item"><a class="menu__link" href="/set_theme/light">亮色</a></li>
+              <li class="menu__item"><a class="menu__link" href="/set_theme/dark">暗色</a></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+      <div class="footer__extra-right">
+        <ol class="clearfix"><li class="footer__extra-link-item"></li><li class="footer__extra-link-item"><a href="https://beian.miit.gov.cn/">辽ICP备2026022210号-1</a></li><li class="footer__extra-link-item">Worker 0, 21ms</li>
+          <!-- Prepare 7ms -->
+          <!-- Method 2ms -->
+          
+          
+          <li class="footer__extra-link-item">Powered by <a href="https://hydro.js.org">Hydro v5.0.7</a> Community</li>
+        </ol>
+      </div>
+    </div>
+  </div></div>
+</div>
+</div>
+<div class="dialog dialog--signin" style="display:none">
+  <div class="dialog__content">
+        <div class="dialog--signin__bg">
+      <div class="dialog--signin__side">
+        <h1>还没有账户？</h1>
+        <p>注册一个 SYUCT OJ 通用账户，您就可以在我们提供的所有在线评测服务上提交代码、参与讨论。</p>
+        <div><a href="/register" class="inverse rounded button">现在注册</a></div>
+      </div>
+    </div>
+        <div class="dialog--signin__main">
+      <form action="/login" method="post">
+        <div class="dialog--signin__close-container supplementary">
+          <a name="dialog--signin__close" href="javascript:;">关闭</a>
+        </div>
+        <h1 class="dialog--signin__title">登录</h1>
+        <p class="dialog--signin__note">使用您的 SYUCT OJ 通用账户</p>
+                <div class="row"><div class="columns">
+          <label class="material textbox">
+            用户名
+            <input name="uname" type="text" data-autofocus autocomplete="username webauthn">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="material textbox">
+            密码
+            <input name="password" type="password">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="checkbox">
+            <input type="checkbox" name="rememberme" class="checkbox">记住我
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <input type="hidden" name="tfa" value="">
+          <input type="hidden" name="authnChallenge" value="">
+          <input type="submit" value="登录" name="login_submit" class="expanded rounded primary button">
+        </div></div>
+        <div class="row"><div class="columns">
+          <div class="supplementary text-center">
+            <a href="/lostpass">忘记密码或者用户名？</a>
+          </div>
+        </div></div>
+      </form>
+    </div>
+  </div>
+</div>
+        <script>
+      window.UiContextNew = '{"problemId":"NC14610","problemNumId":2381,"codeLang":"cc.cc17","pdoc":{"_id":"6abcfd6e753773230ebac78f","content":"{\\"zh\\":\\"## \u9898\u76EE\u63CF\u8FF0\\\\r\\\\n\\\\r\\\\n\u5728cayun\u661F\u7403\u6708\u4EAE\u5927\u5C0F\u90FD\u6709\u4E00\u4E2A\u89C4\u5F8B\uFF0C\u6708\u4EAE\u4E3A\u6BCF30\u5929\u4E00\u4E2A\u5468\u671F\uFF0C\u5728\u8FD930\u5929\u7684\u5468\u671F\u91CC\uFF0C\u6708\u4EAE\u7684\u5927\u5C0F\u5206\u522B\u4E3A0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1\uFF0C\u867D\u7136\u5929\u6C14\u5F88\u51B7\uFF0C\u4F46\u67D0\u4E2Acayun\u4ECA\u5929\u5374\u5F02\u5E38\u75AF\u766B\uFF0C\u4E0D\u77E5\u4E3A\u4F55\u5C45\u7136\u60F3\u8981\u8D4F\u6708\u4E86\u3002\u4F46\u4ED6\u60F3\u5728\u8D4F\u6708\u4E4B\u524D\u77E5\u9053\u4ECA\u5929\u7684\u6708\u4EAE\u5230\u5E95\u6709\u591A\u5927\u3002\\\\r\\\\n\\\\r\\\\n## \u8F93\u5165\u683C\u5F0F\\\\r\\\\n\\\\r\\\\n\u7B2C\u4E00\u884C\u6570\u636E\u7EC4\u6570T(T <= 30)\uFF0C\\\\r\\\\n\\\\r\\\\n\u5BF9\u4E8E\u6BCF\u7EC4\u6570\u636E\u4E24\u4E2A\u6574\u6570a, b(0 <= a, b <= 15)\uFF0C\u8868\u793A\u524D\u4E24\u5929\u7684\u6708\u4EAE\u5927\u5C0F\uFF0C\u4FDD\u8BC1\u6570\u636E\u662F\u5408\u6CD5\u7684\u3002\\\\r\\\\n\\\\r\\\\n## \u8F93\u51FA\u683C\u5F0F\\\\r\\\\n\\\\r\\\\n\u6BCF\u7EC4\u6570\u636E\u5360\u4E00\u884C\uFF0C\u8868\u793A\u4ECA\u5929\u7684\u6708\u4EAE\u5927\u5C0F\u3002\\\\r\\\\n\\\\r\\\\n## \u6837\u4F8B 1\\\\r\\\\n\\\\r\\\\n```input1\\\\r\\\\n2\\\\r\\\\n0 1\\\\r\\\\n11 10\\\\r\\\\n```\\\\r\\\\n\\\\r\\\\n```output1\\\\r\\\\n2\\\\r\\\\n9\\\\r\\\\n```\\\\r\\\\n\\\\r\\\\n\\\\r\\\\n## \u6765\u6E90\\\\r\\\\n\\\\r\\\\n[\u725B\u5BA2\u539F\u9898](https://ac.nowcoder.com/acm/problem/14610)\\\\r\\\\n\\"}","owner":114514,"domainId":"system","docType":10,"docId":2381,"title":"cayun\u65E5\u5E38\u4E4B\u8D4F\u6708","tag":["\u725B\u5BA2\u7ADE\u8D5B","\u6A21\u62DF"],"hidden":false,"nSubmit":66,"nAccept":18,"data":[{"_id":"001.in","name":"001.in","size":11,"lastModified":"2026-09-30T12:15:42.665Z","etag":"L2RhdGEvZmlsZS9oeWRyby9qYXQvcW5saXBpNml6aHFib3kxZml4Y2NtLmlu"},{"_id":"001.out","name":"001.out","size":3,"lastModified":"2026-09-30T12:15:42.668Z","etag":"L2RhdGEvZmlsZS9oeWRyby9veXovdjV5cGxyeHNieHNsZ3NlMGw4cmc0Lm91dA=="},{"_id":"002.in","name":"002.in","size":21,"lastModified":"2026-09-30T12:15:42.670Z","etag":"L2RhdGEvZmlsZS9oeWRyby85NGUvNm40ZG42ajZoMGJ6Y3RuYnhveXN1Lmlu"},{"_id":"002.out","name":"002.out","size":9,"lastModified":"2026-09-30T12:15:42.674Z","etag":"L2RhdGEvZmlsZS9oeWRyby80cXYvNGpvaHhxdnhjbDIzMG53ZGxteTlrLm91dA=="},{"_id":"003.in","name":"003.in","size":23,"lastModified":"2026-09-30T12:15:42.677Z","etag":"L2RhdGEvZmlsZS9oeWRyby9pcjAvZ2h1Y3RvaXhja2lxZzMxdjlyMXYwLmlu"},{"_id":"003.out","name":"003.out","size":10,"lastModified":"2026-09-30T12:15:42.681Z","etag":"L2RhdGEvZmlsZS9oeWRyby9tZnQvMHVsa2VybWg3aHE4bWFxeGVuM2c4Lm91dA=="},{"_id":"004.in","name":"004.in","size":25,"lastModified":"2026-09-30T12:15:42.685Z","etag":"L2RhdGEvZmlsZS9oeWRyby9tbnUvc3Fxb3NsemgxbnNrZGZnenh3ZmZ1Lmlu"},{"_id":"004.out","name":"004.out","size":11,"lastModified":"2026-09-30T12:15:42.689Z","etag":"L2RhdGEvZmlsZS9oeWRyby9jM2gvNW13YzkxOWQ4emd3NnR0anUzanpnLm91dA=="},{"_id":"005.in","name":"005.in","size":8,"lastModified":"2026-09-30T12:15:42.693Z","etag":"L2RhdGEvZmlsZS9oeWRyby8wdm4vNWhrZGJ3MHI5dXc1dHc2aWN6cHViLmlu"},{"_id":"005.out","name":"005.out","size":3,"lastModified":"2026-09-30T12:15:42.697Z","etag":"L2RhdGEvZmlsZS9oeWRyby9iOXAvbXlkYTg5dmRxZjF6N3ZldWNwMXAwLm91dA=="},{"_id":"006.in","name":"006.in","size":68,"lastModified":"2026-09-30T12:15:42.701Z","etag":"L2RhdGEvZmlsZS9oeWRyby9mancvdDloeHFiamtmcmRja200dnVxbnNkLmlu"},{"_id":"006.out","name":"006.out","size":37,"lastModified":"2026-09-30T12:15:42.704Z","etag":"L2RhdGEvZmlsZS9oeWRyby9meTIvc3l2ZXl6c2VwMGxsbWpvZ28weHdlLm91dA=="},{"_id":"007.in","name":"007.in","size":61,"lastModified":"2026-09-30T12:15:42.708Z","etag":"L2RhdGEvZmlsZS9oeWRyby8wZTMvZGJhZWVtc2M3ZnI0am9vcnE0ank2Lmlu"},{"_id":"007.out","name":"007.out","size":34,"lastModified":"2026-09-30T12:15:42.711Z","etag":"L2RhdGEvZmlsZS9oeWRyby9udHEva2ZtZTh2bHZkejhkMnNhMHRoZGVxLm91dA=="},{"_id":"008.in","name":"008.in","size":57,"lastModified":"2026-09-30T12:15:42.714Z","etag":"L2RhdGEvZmlsZS9oeWRyby95cHUvZHN3NnVhcXM5azIyMGtrY2RodW5sLmlu"},{"_id":"008.out","name":"008.out","size":31,"lastModified":"2026-09-30T12:15:42.718Z","etag":"L2RhdGEvZmlsZS9oeWRyby90Z3gvdXExanBpYWEydHBobWFneDV1MmowLm91dA=="},{"_id":"009.in","name":"009.in","size":64,"lastModified":"2026-09-30T12:15:42.722Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xbzgvanJxeGoyMHNhb21tZDFiN3Z1am9vLmlu"},{"_id":"009.out","name":"009.out","size":35,"lastModified":"2026-09-30T12:15:42.726Z","etag":"L2RhdGEvZmlsZS9oeWRyby90MHMvZm91eGd3emlqaGpzeDgwYmx2cG9yLm91dA=="},{"_id":"010.in","name":"010.in","size":63,"lastModified":"2026-09-30T12:15:42.730Z","etag":"L2RhdGEvZmlsZS9oeWRyby83dHcvaW4xeXNkcW0wb28wdHN4Ymo1d284Lmlu"},{"_id":"010.out","name":"010.out","size":34,"lastModified":"2026-09-30T12:15:42.734Z","etag":"L2RhdGEvZmlsZS9oeWRyby9hbGsvYndkdXdxdG9hamdneDBtMHJramJiLm91dA=="},{"_id":"checker.cpp","name":"checker.cpp","size":394,"lastModified":"2026-09-30T12:15:42.738Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xaDUvbGtoNTdmemtvc3pwbms1aGN4cjFqLmNwcA=="},{"_id":"config.yaml","name":"config.yaml","size":757,"lastModified":"2026-09-30T12:15:42.742Z","etag":"L2RhdGEvZmlsZS9oeWRyby8weW8vczZmdTB6aHVsZjJhbHlwdHl4Z3AwLnlhbWw="}],"additional_file":[],"pid":"NC14610","config":{"count":10,"memoryMin":128,"memoryMax":128,"timeMin":1000,"timeMax":1000,"type":"default","langs":["c","cc","cc.cc98","cc.cc98o2","cc.cc11","cc.cc11o2","cc.cc14","cc.cc14o2","cc.cc17","cc.cc17o2","cc.cc20","cc.cc20o2","pas","java","kt","kt.jvm","py","py.py2","py.py3","py.pypy3","php","rs","hs","js","go","rb","cs","r","codeforces","codeforces.43","codeforces.52","codeforces.50","codeforces.54","codeforces.59","codeforces.61","codeforces.65","codeforces.9","codeforces.28","codeforces.32","codeforces.12","codeforces.60","codeforces.36","codeforces.48","codeforces.19","codeforces.3","codeforces.4","codeforces.51","codeforces.13","codeforces.6","codeforces.7","codeforces.31","codeforces.40","codeforces.41","codeforces.67","codeforces.49","codeforces.20","codeforces.34","codeforces.55"]},"stats":{"AC":22,"WA":42,"TLE":1,"MLE":0,"RE":0,"SE":0,"IGN":0,"CE":1,"s0":3,"s10":2,"s30":1,"s40":9,"s50":2,"s60":25,"s70":1,"s80":1,"s100":22}},"canViewRecord":true,"postSubmitUrl":"/p/2381/submit","getSubmissionsUrl":"/record?fullStatus=true&pid=2381","getRecordDetailUrl":"/record/%7Brid%7D","pretestConnUrl":"record-conn?pretest=1&uidOrName=0&pid=2381&domainId=system"}';
+      window.UserContextNew = '{}';
+    </script>
+  </body>
+</html>

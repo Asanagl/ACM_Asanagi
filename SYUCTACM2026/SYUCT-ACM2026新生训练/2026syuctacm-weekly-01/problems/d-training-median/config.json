@@ -1,0 +1,39 @@
+{
+  "slug": "d-training-median",
+  "title": "中位训练",
+  "interactive": false,
+  "timeLimitMs": 2000,
+  "memoryLimitMb": 256,
+  "standard": "gnu++20",
+  "statement": "docs/statement.md",
+  "tutorial": "docs/tutorial.md",
+  "validator": "src/validator/validator.cpp",
+  "generator": {
+    "path": "src/generator/generator.cpp",
+    "cases": [
+      { "name": "sample-1", "type": "sample", "seed": 1, "group": "sample" },
+      { "name": "min-1", "type": "min", "seed": 2, "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "negative-1", "type": "negative", "seed": 3, "group": "secret", "checkWith": ["solution2", "python"] },
+      { "name": "duplicate-1", "type": "duplicate", "seed": 4, "group": "secret" },
+      { "name": "random-1", "type": "random", "seed": 5, "group": "secret" },
+      { "name": "large-sum-1", "type": "large-sum", "seed": 6, "group": "secret" },
+      { "name": "max-1", "type": "max", "seed": 7, "group": "secret" }
+    ]
+  },
+  "checker": "src/checker/checker.cpp",
+  "build": {
+    "cppCompiler": "g++",
+    "cppFlags": ["-std=gnu++20", "-O2", "-pipe"],
+    "pythonCommand": "python"
+  },
+  "solutions": [
+    { "name": "main", "path": "src/solution.cpp", "language": "cpp", "role": "main" },
+    { "name": "solution2", "path": "src/solution2.cpp", "language": "cpp", "role": "reference" },
+    { "name": "python", "path": "src/solution.py", "language": "python", "role": "reference" }
+  ],
+  "wrongSolutions": [
+    { "name": "wrong-unsorted", "path": "src/wrong/wrong-a.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-int-sum", "path": "src/wrong/wrong-b.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-index", "path": "src/wrong/wrong-c.cpp", "language": "cpp", "expected": "fail" }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "slug": "04-22",
+  "title": "子矩阵求和",
+  "interactive": false,
+  "timeLimitMs": 1000,
+  "memoryLimitMb": 256,
+  "standard": "gnu++17",
+  "statement": "docs/statement.md",
+  "tutorial": "docs/tutorial.md",
+  "validator": "src/validator/validator.cpp",
+  "generator": {
+    "path": "src/generator/generator.cpp",
+    "cases": [
+      { "name": "sample-1", "type": "sample", "seed": 1, "group": "sample" },
+
+      { "name": "min-neg-1", "type": "min-neg", "seed": 101, "group": "secret" },
+      { "name": "min-pos-1", "type": "min-pos", "seed": 102, "group": "secret" },
+      { "name": "single-row-1", "type": "single-row", "seed": 103, "group": "secret" },
+      { "name": "single-col-1", "type": "single-col", "seed": 104, "group": "secret" },
+      { "name": "square-small-1", "type": "square-small", "seed": 105, "group": "secret" },
+      { "name": "duplicate-1", "type": "duplicate", "seed": 106, "group": "secret" },
+      { "name": "zero-1", "type": "zero", "seed": 107, "group": "secret" },
+      { "name": "negative-1", "type": "negative", "seed": 108, "group": "secret" },
+      { "name": "checkerboard-1", "type": "checkerboard", "seed": 109, "group": "secret" },
+
+      { "name": "large-sum-1", "type": "large-sum", "seed": 110, "group": "secret" },
+      { "name": "large-neg-1", "type": "large-neg", "seed": 111, "group": "secret" },
+      { "name": "full-cover-1", "type": "full-cover", "seed": 112, "group": "secret" },
+      { "name": "point-query-1", "type": "point-query", "seed": 113, "group": "secret" },
+
+      { "name": "target-half-1", "type": "target-half", "seed": 114, "group": "secret" },
+      { "name": "target-half-2", "type": "target-half", "seed": 115, "group": "secret" },
+      { "name": "target-prefix-1", "type": "target-prefix", "seed": 116, "group": "secret" },
+      { "name": "target-prefix-2", "type": "target-prefix", "seed": 117, "group": "secret" },
+      { "name": "target-colrange-1", "type": "target-colrange", "seed": 118, "group": "secret" },
+      { "name": "target-colrange-2", "type": "target-colrange", "seed": 119, "group": "secret" },
+
+      { "name": "random-1", "type": "random", "seed": 120, "group": "secret" },
+      { "name": "random-2", "type": "random", "seed": 121, "group": "secret" },
+      { "name": "random-3", "type": "random", "seed": 122, "group": "secret" },
+      { "name": "random-4", "type": "random", "seed": 123, "group": "secret" },
+      { "name": "random-5", "type": "random", "seed": 124, "group": "secret" },
+      { "name": "random-6", "type": "random", "seed": 125, "group": "secret" },
+      { "name": "random-7", "type": "random", "seed": 126, "group": "secret" },
+      { "name": "random-8", "type": "random", "seed": 127, "group": "secret" },
+      { "name": "random-9", "type": "random", "seed": 128, "group": "secret" },
+      { "name": "random-10", "type": "random", "seed": 129, "group": "secret" },
+      { "name": "random-11", "type": "random", "seed": 130, "group": "secret" },
+      { "name": "random-12", "type": "random", "seed": 131, "group": "secret" },
+      { "name": "random-13", "type": "random", "seed": 132, "group": "secret" },
+      { "name": "random-14", "type": "random", "seed": 133, "group": "secret" },
+
+      { "name": "near-max-1", "type": "near-max", "seed": 134, "group": "secret" },
+      { "name": "max-1", "type": "max", "seed": 135, "group": "secret" },
+      { "name": "max-2", "type": "max", "seed": 136, "group": "secret" },
+      { "name": "max-tiny-1", "type": "max-tiny", "seed": 137, "group": "secret" },
+      { "name": "max-mixed-1", "type": "max-mixed", "seed": 138, "group": "secret" },
+      { "name": "max-mixed-2", "type": "max-mixed", "seed": 139, "group": "secret" }
+    ]
+  },
+  "checker": "src/checker/checker.cpp",
+  "build": {
+    "cppCompiler": "g++",
+    "cppFlags": ["-std=gnu++17", "-O2", "-pipe"],
+    "pythonCommand": "python"
+  },
+  "solutions": [
+    { "name": "main", "path": "src/solution.cpp", "language": "cpp", "role": "main" },
+    { "name": "solution2", "path": "src/solution2.cpp", "language": "cpp", "role": "reference" }
+  ],
+  "wrongSolutions": [
+    { "name": "wrong-half-open", "path": "src/wrong/wrong-a.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-prefix", "path": "src/wrong/wrong-b.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-int", "path": "src/wrong/wrong-c.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-rowrange", "path": "src/wrong/wrong-d.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-quadratic", "path": "src/wrong/wrong-e.cpp", "language": "cpp", "expected": "fail" }
+  ]
+}

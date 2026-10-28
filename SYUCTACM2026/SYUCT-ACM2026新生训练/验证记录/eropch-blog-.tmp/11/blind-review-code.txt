@@ -1,0 +1,34 @@
+kimi version 2.2.0
+• I need respond only code block complete C++17 matrix copy. Should comply no tools. I need understand latest request just code block no other. Should have code straightforward robust n,m read, loop int x output spaces by j or global tokens. Want format n rows each m no trailing spaces newline end. Use iostream, vector? Could stream input direct since echo and no need store. #include <iostream> int main(){std::ios::sync_with_stdio(false);std::cin.tie(nullptr); int n,m; if(!(std::cin>>n>>m)) return 0; for (int i=0; i<n; ++i){for(int j=0;j<m;++j){int value; std::cin>>value; if(j) std::cout << ' '; std::cout << value;} std::cout << '\n';} return 0;} Could no need extra handling. Is there possible issues buffered outputs interleaved? fine. Directly stream as reads values. Exactly n*m. Negative output normal. n,m max 100 int okay. Last line newline. This is all.
+
+  Perhaps avoid code comments default. Output ```cpp ...```. Should not produce analysis to user. Done.
+
+• ```cpp
+  #include <iostream>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      int n, m;
+      if (!(std::cin >> n >> m)) {
+          return 0;
+      }
+
+      for (int i = 0; i < n; ++i) {
+          for (int j = 0; j < m; ++j) {
+              int value;
+              std::cin >> value;
+              if (j > 0) {
+                  std::cout << ' ';
+              }
+              std::cout << value;
+          }
+          std::cout << '\n';
+      }
+
+      return 0;
+  }
+  ```
+
+To resume this session: kimi -r session_0a77ae4c-e4e6-4400-a20f-e53b5f0bc4a3

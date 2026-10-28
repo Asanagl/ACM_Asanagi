@@ -1,0 +1,11 @@
+{
+  "master_seed": 12345,
+  "rounds_requested": 100,
+  "rounds_completed": 100,
+  "generator_type": "small-random",
+  "comparison": "exact main/reference output plus unique-answer checker",
+  "validator_passed": 100,
+  "ok": true,
+  "status": "passed",
+  "duration_seconds": 6.158
+}

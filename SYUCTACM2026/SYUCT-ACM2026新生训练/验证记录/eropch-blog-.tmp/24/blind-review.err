@@ -1,0 +1,43 @@
+kimi version 2.2.0
+• I need respond in Chinese entirely, no tools no files. Should independently solve and provide 7 items. Carefully derive checkerboard (i+j even A else B using 1-index). Should have all constraints restatement. Correctness proof adjacency different and top-left A, uniqueness via propagation/induction perhaps graph connected, bipartite. Complexity output lower bound O(nm) time, O(m) auxiliary if build each row, total output O(nm), perhaps input O(1). Should have full C++17 code compile g++ std gnu++17 O2. Could use ios sync false etc, int n,m; cin>>n>>m; for i 1..n string row(m,'A'); for j row[j-1] = ((i+j)%2==0 ? 'A':'B'); cout<<row<<'\n';. Time O(nm), extra O(m) excluding output buffering. Could avoid row and direct put char O(1) extra. User asks spatial complexity; easiest string row O(m). At max 1000 fine. "all implicit assumptions" standard input valid two ints whitespace, no multiple test cases, 1-based, output newline allowed exact n lines m chars, `A` even i+j. Program not assume additional. Potential off-by-one, parity inversion, index, line formatting, performance flushing. I'll note official exact match sample matches. No tools. Could structure numbered sections. Should not overly verbose but full proof. Restate "任意上下左右相邻两格不同" and only A/B, top-left A, exactly n lines length m. n,m between 1 and 1000 inclusive. Unique. Perhaps no additional assumptions about n*m overflow? int i+j up to 2000 safe, nm up to 1e6; no issue. Input reading if fail return 0 perhaps not needed but robust. Code includes bits stdc++ or iostream string; with gnu++17. Could choose std::string row(m, 'A'); fill parity. For each i:
+  string row;
+  row.resize(m);
+  for (int j=1;j<=m;++j) row[j-1] = ((i+j)%2==0)?'A':'B';
+  cout << row;
+  if (i<n) cout << '\n'; User requires exactly n rows, trailing newline accepted? "恰好 n 行" trailing newline usual. Better cout << row << '\n'; n lines each with newline. Sample exact chars unaffected. "逐字符比对" whitespace likely standard; output n lines. Could use '\n'. Should avoid saying output lower bound if judge compares official answer. I can say matches unique standard answer.
+
+  Uniqueness proof: Base cell (1,1) fixed. Every other cell (i,j) has path from (1,1) e.g. right j-1 then down i-1; each step forced opposite previous, so by induction along path color uniquely determined. This proves at most one, construction proves exactly one. Or derive recurrence. Should step-by-step:
+  Define c_ij A if i+j even, B if odd.
+  1 top-left sum2 even A.
+  2 horizontal (i,j),(i,j+1) sums differ1, parity flips, so A/B different. vertical similarly.
+  3 chars only A/B.
+  4 n rows m produced by loops.
+  5 uniqueness: any valid solution fixed (1,1). Adjacent relation forces opposite. grid connected; every cell reachable by path length i+j-2; alternating colors along path determines its color. Formula follows by induction i+j. So no alternate.
+  Could include induction formula proof also: along path starting sum2 even A and each step sum+1 so alternation yields formula. Good.
+
+  Edge cases list:
+  - n=1,m>1: single row ABAB..., no vertical pairs, alternates horizontally. m=1 B if n=1 m=1? separate.
+  - m=1,n>1: one col A,B,A,...; no horiz.
+  - n=m=1: single A, adjacency vacuous.
+  - n=1000,m=1000: 1e6 cells, int parity safe, O(1e6) output; row length 1000. First row starts ABAB, last row depending n=1000 starts B (1000+1=1001 odd B), if m even ends? row n=1000, j=1000 sum2000 even A. No need list exact. Memory fine.
+  - even/odd dimensions maybe "width 1 parity no out of bounds", but at least required four. Could include n,m odd/even pattern no special handling.
+  - input whitespace/newlines standard >>.
+  "all implicit assumptions" no extra beyond valid input, conventional stdout trailing newline accepted, execution memory enough for mandated output (1 MB), ASCII? C++ char output A/B. I shouldn't invent assumptions. State "除题面外，算法不依赖任何隐藏条件。实现仅按竞赛通常约定..." Perhaps "输入总是符合范围且能一次读入 n m；不是多组测试；标准输出允许每行末尾换行（包括最后一行）" Last is an assumption? Problem output implies. "不假设 n,m 同奇偶、不假设存在相邻格、不假设多测。" Good. Easiest error list parity using 0-index incorrectly: with 0-index i0,j0, A when i0+j0 even; formula same even actually with 1-index also even? Check (1,1) sum2 even, zero (0,0) sum0 even, both same. So parity formula even works both if consistently actual indices; but mixing string index j-1 with 1-based i can cause wrong: condition `(i+j)%2` where j zero-based would (1+0)=1 odd B incorrect. State mixing 1-based and 0-based. Recurrence row `((i+j)&1)` with i 0-based and j 0-based even A is okay. Use i 1..n j1..m and string[j-1]. Potential char comparison? No.
+  Potential output exactly sample:
+  i1 j1 sum2 even A j2 B etc ABAB; i2 BABA; i3 ABAB. Include explicit line maybe in proof or after code? Task demands sample exactly, mention code yields it. Could show as inline code block? User already gave sample but I can say "对 3 4，前三行为..." Perhaps no need but to assure requirement, include `ABAB / BABA / ABAB` or block. This is okay.
+
+  No tool use as explicit. Should have no commentary before response perhaps all direct response. Ensure Chinese. I can produce around 1200-1600 Chinese chars plus code. Task detailed 7 sections. Should have "完整可直接 compile" includes `int main()` return. Use `if (!(cin >> n >> m)) return 0;` no assumptions of invalid input; doesn't alter valid. Include `<iostream>`, `<string>`. `std::string row(m, 'A');` recreate each row. for int i. `row[j - 1] = ((i + j) % 2 == 0) ? 'A' : 'B';`. output. This gives unique.
+
+  Complexity: constructing string each row initialization O(m) plus fill O(m), output O(m), total O(nm). Auxiliary O(m) for row; if excluding output buffer. Total output size Θ(nm) chars and not stored whole. Input storage O(1). Could mention cannot asymptotically faster due output. This is enough.
+
+  Uniqueness "path right then down" reachable for all cells including top row/first col; n,m >=1. Path length `(j-1)+(i-1)=i+j-2`; at each edge sum increments one, starting A. For any solution by induction position k color determined, A at even k, B odd k. Since i+j = k+2, same parity, formula. Nice rigorous.
+  Satisfies all conditions output n rows length m by construction. Only A/B by ternary. Adjacent parity flips.
+  No need prove official answer separately uniqueness ensures.
+
+  Boundary max resource `nm=1,000,000`, no integer overflow in `i+j` max2000. Auxiliary string 1000 char. Time output perhaps at most ~1 MB plus newlines. State about 1 MB not exactly 1,001,000 bytes? chars 1e6 +1000 newlines approx1MB. Fine.
+
+  Implicit assumptions and errors section perhaps two bullets lists. "隐含假设" standard judging no multiple cases, valid input. "输出末尾换行属于正常文本格式" Given exact n lines yes. I shouldn't phrase uncertain. "实现只在每行后输出 `\n`，不输出额外空格或说明文字。" This isn't assumption. "未做任何题面外假设；仅使用标准输入输出惯例..." Good.
+
+  Should have final response only no tools. I'll compose.
+
+To resume this session: kimi -r session_fc69a1b4-9c7b-4076-a1d9-b2cdf684f29b

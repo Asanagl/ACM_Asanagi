@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html data-page="problem_detail" data-layout="basic" class="layout--basic page--problem_detail theme--light nojs" data-mantine-color-scheme="light" lang="" data-app="Hydro">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="canonical" href="https://oj.syuctacm.cn/p/2383">  <meta name="theme-color" content="#56758f">
+    <meta property="og:site_name" content="SYUCT OJ" />
+  <meta property="og:url" content="https://oj.syuctacm.cn/p/2383" />
+  <meta property="og:image" content="/favicon-96x96.png" />
+                                  <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="NC14669. 栗酱的文明2 - SYUCT OJ" />
+    <meta property="og:description" content="题目描述
+“伟大的勇栗兔栽栗女王，所有栗子看到您都不寒而栗，但也非常尊重您。您骑着威风凛凛的小白兔，带领栗子们奋勇前行。伟大史诗告诉我们，烈兔勇栗从大草原飞奔出来，
+冲在每场战争的前线——无论您在哪里..." />
+    <title>栗酱的文明2 - 题目详情 - SYUCT OJ</title>
+  <style>
+    body {
+      --font-family: "Open Sans", "Open Sans", "Seravek", "Segoe UI", "Verdana", "PingFang SC", "Hiragino Sans GB", "Lantinghei SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans";
+      --code-font-family: "Source Code Pro", "monaco", "Source Code Pro", "Consolas", "Lucida Console", "monospace";
+      --font-ligatures: none !important;
+    }
+          #panel { display: flex; flex-direction: column; }
+      </style>
+      <link rel="stylesheet" media="all" href="/theme-4.58.5.css">
+        <script>
+      var _htmlNode = document.documentElement;
+      _htmlNode.className = _htmlNode.className.replace(' nojs', ' hasjs');
+      window.UiContext = '{"cdn_prefix":"/","url_prefix":"/","ws_prefix":"/","constantVersion":"afaf5740","domainId":"system","domainVersion":1792848814990,"extraTitleContent":"\u6817\u9171\u7684\u6587\u660E2","SWConfig":{"preload":"","hosts":["http://oj.syuctacm.cn","https://oj.syuctacm.cn","https://oj.syuctacm.cn/","/"],"assets":[],"domains":[]}}';
+      window.UserContext = '{"_id":0,"mail":"Guest@hydro.local","uname":"Guest","hashType":"hydro","priv":8,"regat":"2025-03-06T12:26:22.389Z","loginat":"2026-03-07T10:35:53.368Z","perm":"BigInt::1291862133704988065921","role":"guest","scope":"BigInt::-1","tfa":false,"authn":false,"group":[],"domains":[],"timeZone":"Asia/Shanghai","codeLang":"cc.cc17","avatar":"gravatar:Guest@hydro.local","gender":2,"backgroundImage":"/components/profile/backgrounds/1.jpg","pinnedDomains":[],"checkin_time":"1997-01-11","showTimeAgo":true,"fontFamily":"Open Sans","codeFontFamily":"Source Code Pro","theme":"light","preferredEditorType":"sv","formatCode":true,"avatarUrl":"//cn.gravatar.com/avatar/97119d3d15d5201ab506330ed4bab0f7?d=mm&s=128"}';
+    </script>
+      </head>
+<body>
+      <script type="text/javascript" src="/resource/afaf5740/entry.js"></script>
+    <script type="text/javascript" src="/resource/4.58.5/lang-zh.js"></script>
+    <script type="text/javascript" src="/hydro-4.58.5.js"></script>
+    <nav class="nav slideout-menu" id="menu">
+  <div class="row"><div class="columns clearfix">
+    <ol class="nav__list nav__list--main clearfix">
+      <li class="nav__list-item">
+        <a href="/"><img class="nav__logo" src="/nav_logo_dark.png"></a>
+      </li>        <li class="nav__list-item">
+  <a href="/" class="nav__item">
+    首页
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/p" class="nav__item nav--active">
+    题库
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/training" class="nav__item">
+    训练
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/contest" class="nav__item">
+    比赛
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/homework" class="nav__item">
+    作业
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/discuss" class="nav__item">
+    讨论
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/record" class="nav__item">
+    评测记录
+  </a>
+</li>
+              <li class="nav__list-item">
+  <a href="/ranking" class="nav__item">
+    排名
+  </a>
+</li>
+      </ol>
+    <ol class="nav__list nav__list--secondary clearfix">
+          <li class="nav__list-item"><a href="/login" class="nav__item" name="nav_login">登录</a></li>
+            <li class="nav__list-item"><a href="/register" class="nav__item--round">注册</a></li>
+            <li class="nav__list-item nojs--hide" data-dropdown-pos="bottom right" data-dropdown-custom-class="nav__dropdown" data-dropdown-target="#menu-nav-user" data-dropdown-disabledconstrainToWindow data-dropdown-trigger-desktop-only>
+        <a href="javascript:;" class="nav__item">
+          <span class="icon icon-global"></span>Language <span class="icon icon-expand_more"></span>
+        </a>
+        <ol class="dropdown-target menu" id="menu-nav-user"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+      </li>
+        </ol>
+  </div></div>
+</nav>
+<nav class="nav--shadow"></nav>
+<div class="slideout-panel" id="panel">
+    <div class="slideout-overlay"></div>
+  <div class="header--mobile">
+  <div class="row"><div class="columns clearfix">
+    <div class="float-left">
+      <a class="header--mobile__domain" href="/" target="_self">
+        <img src="/nav_logo_dark.png">
+      </a>
+    </div>
+    <div class="float-right">
+      <button type="button" class="header__hamburger">
+  <div class="hamburger hamburger--spin">
+    <span class="hamburger-box">
+      <span class="hamburger-inner"></span>
+    </span>
+  </div>
+</button>
+    </div>
+  </div></div>
+</div>
+  <div class="main">
+        <script>
+
+  
+  
+  
+  
+  
+</script>
+                                <meta property="og:locale:alternate" content="zh" />
+              <meta property="og:title" content="NC14669. 栗酱的文明2 - SYUCT OJ" />
+    <meta property="og:description" content="题目描述
+“伟大的勇栗兔栽栗女王，所有栗子看到您都不寒而栗，但也非常尊重您。您骑着威风凛凛的小白兔，带领栗子们奋勇前行。伟大史诗告诉我们，烈兔勇栗从大草原飞奔出来，
+冲在每场战争的前线——无论您在哪里..." />
+  <div class="row" data-sticky-parent>
+  <div class="medium-9 columns">
+    <div class="section">
+      <div class="section__header">
+        <h1 class="section__title">
+                    #NC14669. 栗酱的文明2
+        </h1>
+              </div>
+      <div class="section__body">
+        <ul class="problem__tags">
+                      <span class="problem__tag-item">ID: 2383</span>
+                    <span class="problem__tag-item icon icon-book">传统题</span>
+                                <span class="problem__tag-item icon icon-stopwatch">1000ms</span>
+            <span class="problem__tag-item icon icon-comparison">128MiB</span>
+                                <a class="problem__tag-item interactive" href="/record?pid=2383">尝试: 43</a>
+            <a class="problem__tag-item interactive" href="/record?pid=2383&amp;status=1">已通过: 7</a>
+            <span class="problem__tag-item">难度: 8</span>
+            <span class="problem__tag-item interactive">上传者: <span class="user-profile-link">
+      <img class="small user-profile-avatar v-center" loading="lazy" src="//q1.qlogo.cn/g?b=qq&amp;nk=3643001679&amp;s=160" width="20" height="20">
+    <a class="user-profile-name uname--lv1" href="/user/114514">
+          Asanagi
+      </a>
+  </span>
+</span>
+                                <span name="show_tags" class="problem__tag-item interactive nojs--hide icon icon-tag">标签&gt;</span><span class="problem__tag-item tags hasjs--hide">牛客竞赛</span><span class="problem__tag-item tags hasjs--hide">贪心</span><span class="problem__tag-item tags hasjs--hide">排序</span>        </ul>
+      </div>
+    </div>
+    <div class="section">
+      <div class="problem-content-container"><div class="problem-content" data-marker-enabled>
+        <div class="section__header non-scratchpad--hide">
+          <h1 class="section__title">栗酱的文明2</h1>
+        </div>
+                <div class="section__body typo richmedia" data-fragment-id="problem-description">
+                      <h2 id="%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0" tabindex="-1">题目描述</h2>
+<p>“伟大的勇栗兔栽栗女王，所有栗子看到您都不寒而栗，但也非常尊重您。您骑着威风凛凛的小白兔，带领栗子们奋勇前行。伟大史诗告诉我们，烈兔勇栗从大草原飞奔出来，</p>
+<p>冲在每场战争的前线——无论您在哪里，他们都能找到您。骑小白兔飞驰吧，凶猛的女王，但愿您有真正的朋友和软弱的敌人。”</p>
+<p>今天，冰雪聪明的栗酱终于玩到了她梦寐很久的文明游戏。</p>
+<p>不过作为一个萌新，兔头獐脑的栗酱自然不愿意第一次玩就遇到一个尴尬的结局，于是希望通过你来寻找一个完美结局。</p>
+<p>已知游戏结束前场上有n个国家，第i个国家有ai块土地，任意2个国家若是想建立外交关系，则需要互相在对方的一块土地上建立一个大使馆。</p>
+<p>一块土地只能建立一个大使馆，若一个国家和其他国家存在外交关系，则需要征用一块己方土地作为备用大使馆。</p>
+<p>完美结局的定义是：找到最多数量的国家，使他们相互之间存在外交关系。</p>
+<h2 id="%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F" tabindex="-1">输入格式</h2>
+<p>第一行一个数T，表示有T组数据。</p>
+<p>对于每组数据，第一行输入一个数n，表示国家的数量，接下来一行输入n个数，a<sub>1</sub>,a<sub>2</sub>,…,a<sub>n</sub>,其中a<sub>i</sub>表示第i个国家拥有的土地数量。每两个相邻的数之间用空格隔开。</p>
+<h2 id="%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F" tabindex="-1">输出格式</h2>
+<p>对于每一个询问，输出一个数，即完美结局下，相互建立外交关系的国家数量。答案至少是1。</p>
+<h2 id="%E6%8F%90%E7%A4%BA" tabindex="-1">提示</h2>
+<p>T≤10</p>
+<p>1≤n≤1000</p>
+<p>1≤a<sub>i</sub>≤n</p>
+<h2 id="%E6%A0%B7%E4%BE%8B-1" tabindex="-1">样例 1</h2>
+<pre><code class="language-input1">2
+5
+2 2 2 2 2
+10
+8 6 5 9 2 7 10 3 3 9
+</code></pre>
+<pre><code class="language-output1">2
+6
+</code></pre>
+<h3 id="%E6%A0%B7%E4%BE%8B%E8%AF%B4%E6%98%8E" tabindex="-1">样例说明</h3>
+<p>对于第一个样例：</p>
+<p>最多只能找到2个国家，使他们互相建立外交关系。</p>
+<p>对于第二个样例：</p>
+<p>第1,2,4,6,7,10个国家间可互相建立外交关系，最多数量为6。</p>
+<h2 id="%E6%9D%A5%E6%BA%90" tabindex="-1">来源</h2>
+<p><a href="https://ac.nowcoder.com/acm/problem/14669">牛客原题</a></p>
+
+</div>      </div></div>
+    </div>
+  </div>
+  <div class="medium-3 columns"><div data-sticky="large">
+        <div class="section side section--problem-sidebar">
+  <div>
+    <ol class="menu">
+                          <li class="menu__item scratchpad--hide"><a class="menu__link" href="javascript:showSignInDialog();">
+        <span class="icon icon-send"></span> 登录后递交
+      </a></li>
+                      <li class="menu__seperator"></li>
+              <li class="menu__item"><a class="menu__link" href="/discuss/problem/2383">
+        <span class="icon icon-comment--text"></span> 讨论 (0)      </a></li>
+              <li class="menu__item"><a class="menu__link" href="/p/NC14669/solution">
+        <span class="icon icon-comment--text"></span> 题解 (0)      </a></li>
+          <li class="menu__item"><a class="menu__link" href="/p/NC14669/files">
+        <span class="icon icon-file"></span> 文件
+      </a></li>
+      <li class="menu__item"><a class="menu__link" href="/p/NC14669/stat">
+        <span class="icon icon-statistics"></span> 统计
+      </a></li>
+              <li class="menu__seperator nojs--hide"></li>
+                    </ol>
+  </div>
+</div>
+<div class="section side">
+  <div class="section__header">
+    <h1 class="section__title">相关</h1>
+  </div>
+  <div class="section__body typo">
+        <p>在下列比赛中: </p><p><a href="/contest/6ac5b694753773230ebbcb8f">2026级SYUCT-ACM新生第二次训练</a></p>    </div>
+</div>
+  </div></div>
+</div>
+<div style="display:none" class="outer-loader-container"><div class="loader"></div></div>
+<div class="scratchpad-container" style="display:none">
+  <div style="display:none" class="loader-container"><div class="loader"></div></div>
+  <div id="scratchpad" style="opacity:0"></div>
+</div>
+  </div>
+  <div class="footer">
+  <div class="row"><div class="columns">
+      <div class="row footer__links">
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          状态
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/record">评测队列</a></li>
+          <li class="footer__category__item"><a href="/status">服务状态</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          开发
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="https://github.com/hydro-dev/Hydro" target="_blank">开源</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable">
+        <h1>
+          支持
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/help">帮助</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">联系我们</a></li>
+        </ul></div>
+      </div>
+      <div class="medium-3 large-2 columns footer__category expandable end">
+        <h1>
+          关于
+          <span class="expand-icon">
+            <span class="icon icon-expand_more"></span>
+          </span>
+        </h1>
+        <div class="footer__category__expander"><ul class="footer__category__list">
+          <li class="footer__category__item"><a href="/wiki/about">关于</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#privacy">隐私</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#tos">服务条款</a></li>
+          <li class="footer__category__item"><a href="/wiki/about#contact">版权申诉</a></li>
+        </ul></div>
+      </div>
+    </div>
+      <div class="footer__extra-link clearfix">
+      <div class="footer__extra-left">
+        <ol class="clearfix">
+                    <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-lang">
+            <span><span class="icon icon-global"></span> Language <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-lang"><li class="menu__item"><a class="menu__link" href="/language/en">English</a></li><li class="menu__item"><a class="menu__link" href="/language/ko">한국어</a></li><li class="menu__item"><a class="menu__link" href="/language/zh">简体中文</a></li><li class="menu__item"><a class="menu__link" href="/language/zh_TW">正體中文</a></li></ol>
+          </li>
+          <li class="footer__extra-link-item">
+                          <a href="/legacy?legacy=true">兼容模式</a>
+                      </li>
+          <li class="footer__extra-link-item nojs--hide" data-dropdown-target="#menu-footer-theme">
+            <span><span class="icon icon-global"></span> 主题 <span class="icon icon-expand_less"></span></span>
+            <ol class="dropdown-target menu" id="menu-footer-theme">
+              <li class="menu__item"><a class="menu__link" href="/set_theme/light">亮色</a></li>
+              <li class="menu__item"><a class="menu__link" href="/set_theme/dark">暗色</a></li>
+            </ol>
+          </li>
+        </ol>
+      </div>
+      <div class="footer__extra-right">
+        <ol class="clearfix"><li class="footer__extra-link-item"></li><li class="footer__extra-link-item"><a href="https://beian.miit.gov.cn/">辽ICP备2026022210号-1</a></li><li class="footer__extra-link-item">Worker 0, 22ms</li>
+          <!-- Prepare 7ms -->
+          <!-- Method 2ms -->
+          
+          
+          <li class="footer__extra-link-item">Powered by <a href="https://hydro.js.org">Hydro v5.0.7</a> Community</li>
+        </ol>
+      </div>
+    </div>
+  </div></div>
+</div>
+</div>
+<div class="dialog dialog--signin" style="display:none">
+  <div class="dialog__content">
+        <div class="dialog--signin__bg">
+      <div class="dialog--signin__side">
+        <h1>还没有账户？</h1>
+        <p>注册一个 SYUCT OJ 通用账户，您就可以在我们提供的所有在线评测服务上提交代码、参与讨论。</p>
+        <div><a href="/register" class="inverse rounded button">现在注册</a></div>
+      </div>
+    </div>
+        <div class="dialog--signin__main">
+      <form action="/login" method="post">
+        <div class="dialog--signin__close-container supplementary">
+          <a name="dialog--signin__close" href="javascript:;">关闭</a>
+        </div>
+        <h1 class="dialog--signin__title">登录</h1>
+        <p class="dialog--signin__note">使用您的 SYUCT OJ 通用账户</p>
+                <div class="row"><div class="columns">
+          <label class="material textbox">
+            用户名
+            <input name="uname" type="text" data-autofocus autocomplete="username webauthn">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="material textbox">
+            密码
+            <input name="password" type="password">
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <label class="checkbox">
+            <input type="checkbox" name="rememberme" class="checkbox">记住我
+          </label>
+        </div></div>
+        <div class="row"><div class="columns">
+          <input type="hidden" name="tfa" value="">
+          <input type="hidden" name="authnChallenge" value="">
+          <input type="submit" value="登录" name="login_submit" class="expanded rounded primary button">
+        </div></div>
+        <div class="row"><div class="columns">
+          <div class="supplementary text-center">
+            <a href="/lostpass">忘记密码或者用户名？</a>
+          </div>
+        </div></div>
+      </form>
+    </div>
+  </div>
+</div>
+        <script>
+      window.UiContextNew = '{"problemId":"NC14669","problemNumId":2383,"codeLang":"cc.cc17","pdoc":{"_id":"6abcfd6e753773230ebac793","content":"{\\"zh\\":\\"## \u9898\u76EE\u63CF\u8FF0\\\\n\\\\n\u201C\u4F1F\u5927\u7684\u52C7\u6817\u5154\u683D\u6817\u5973\u738B\uFF0C\u6240\u6709\u6817\u5B50\u770B\u5230\u60A8\u90FD\u4E0D\u5BD2\u800C\u6817\uFF0C\u4F46\u4E5F\u975E\u5E38\u5C0A\u91CD\u60A8\u3002\u60A8\u9A91\u7740\u5A01\u98CE\u51DB\u51DB\u7684\u5C0F\u767D\u5154\uFF0C\u5E26\u9886\u6817\u5B50\u4EEC\u594B\u52C7\u524D\u884C\u3002\u4F1F\u5927\u53F2\u8BD7\u544A\u8BC9\u6211\u4EEC\uFF0C\u70C8\u5154\u52C7\u6817\u4ECE\u5927\u8349\u539F\u98DE\u5954\u51FA\u6765\uFF0C\\\\n\\\\n\u51B2\u5728\u6BCF\u573A\u6218\u4E89\u7684\u524D\u7EBF\u2014\u2014\u65E0\u8BBA\u60A8\u5728\u54EA\u91CC\uFF0C\u4ED6\u4EEC\u90FD\u80FD\u627E\u5230\u60A8\u3002\u9A91\u5C0F\u767D\u5154\u98DE\u9A70\u5427\uFF0C\u51F6\u731B\u7684\u5973\u738B\uFF0C\u4F46\u613F\u60A8\u6709\u771F\u6B63\u7684\u670B\u53CB\u548C\u8F6F\u5F31\u7684\u654C\u4EBA\u3002\u201D\\\\n\\\\n\u4ECA\u5929\uFF0C\u51B0\u96EA\u806A\u660E\u7684\u6817\u9171\u7EC8\u4E8E\u73A9\u5230\u4E86\u5979\u68A6\u5BD0\u5F88\u4E45\u7684\u6587\u660E\u6E38\u620F\u3002\\\\n\\\\n\u4E0D\u8FC7\u4F5C\u4E3A\u4E00\u4E2A\u840C\u65B0\uFF0C\u5154\u5934\u7350\u8111\u7684\u6817\u9171\u81EA\u7136\u4E0D\u613F\u610F\u7B2C\u4E00\u6B21\u73A9\u5C31\u9047\u5230\u4E00\u4E2A\u5C34\u5C2C\u7684\u7ED3\u5C40\uFF0C\u4E8E\u662F\u5E0C\u671B\u901A\u8FC7\u4F60\u6765\u5BFB\u627E\u4E00\u4E2A\u5B8C\u7F8E\u7ED3\u5C40\u3002\\\\n\\\\n\u5DF2\u77E5\u6E38\u620F\u7ED3\u675F\u524D\u573A\u4E0A\u6709n\u4E2A\u56FD\u5BB6\uFF0C\u7B2Ci\u4E2A\u56FD\u5BB6\u6709ai\u5757\u571F\u5730\uFF0C\u4EFB\u610F2\u4E2A\u56FD\u5BB6\u82E5\u662F\u60F3\u5EFA\u7ACB\u5916\u4EA4\u5173\u7CFB\uFF0C\u5219\u9700\u8981\u4E92\u76F8\u5728\u5BF9\u65B9\u7684\u4E00\u5757\u571F\u5730\u4E0A\u5EFA\u7ACB\u4E00\u4E2A\u5927\u4F7F\u9986\u3002\\\\n\\\\n\u4E00\u5757\u571F\u5730\u53EA\u80FD\u5EFA\u7ACB\u4E00\u4E2A\u5927\u4F7F\u9986\uFF0C\u82E5\u4E00\u4E2A\u56FD\u5BB6\u548C\u5176\u4ED6\u56FD\u5BB6\u5B58\u5728\u5916\u4EA4\u5173\u7CFB\uFF0C\u5219\u9700\u8981\u5F81\u7528\u4E00\u5757\u5DF1\u65B9\u571F\u5730\u4F5C\u4E3A\u5907\u7528\u5927\u4F7F\u9986\u3002\\\\n\\\\n\u5B8C\u7F8E\u7ED3\u5C40\u7684\u5B9A\u4E49\u662F\uFF1A\u627E\u5230\u6700\u591A\u6570\u91CF\u7684\u56FD\u5BB6\uFF0C\u4F7F\u4ED6\u4EEC\u76F8\u4E92\u4E4B\u95F4\u5B58\u5728\u5916\u4EA4\u5173\u7CFB\u3002\\\\n\\\\n## \u8F93\u5165\u683C\u5F0F\\\\n\\\\n\u7B2C\u4E00\u884C\u4E00\u4E2A\u6570T\uFF0C\u8868\u793A\u6709T\u7EC4\u6570\u636E\u3002\\\\n\\\\n\u5BF9\u4E8E\u6BCF\u7EC4\u6570\u636E\uFF0C\u7B2C\u4E00\u884C\u8F93\u5165\u4E00\u4E2A\u6570n\uFF0C\u8868\u793A\u56FD\u5BB6\u7684\u6570\u91CF\uFF0C\u63A5\u4E0B\u6765\u4E00\u884C\u8F93\u5165n\u4E2A\u6570\uFF0Ca<sub>1</sub>,a<sub>2</sub>,\u2026,a<sub>n</sub>,\u5176\u4E2Da<sub>i</sub>\u8868\u793A\u7B2Ci\u4E2A\u56FD\u5BB6\u62E5\u6709\u7684\u571F\u5730\u6570\u91CF\u3002\u6BCF\u4E24\u4E2A\u76F8\u90BB\u7684\u6570\u4E4B\u95F4\u7528\u7A7A\u683C\u9694\u5F00\u3002\\\\n\\\\n## \u8F93\u51FA\u683C\u5F0F\\\\n\\\\n\u5BF9\u4E8E\u6BCF\u4E00\u4E2A\u8BE2\u95EE\uFF0C\u8F93\u51FA\u4E00\u4E2A\u6570\uFF0C\u5373\u5B8C\u7F8E\u7ED3\u5C40\u4E0B\uFF0C\u76F8\u4E92\u5EFA\u7ACB\u5916\u4EA4\u5173\u7CFB\u7684\u56FD\u5BB6\u6570\u91CF\u3002\u7B54\u6848\u81F3\u5C11\u662F1\u3002\\\\n\\\\n## \u63D0\u793A\\\\n\\\\nT\u226410\\\\n\\\\n1\u2264n\u22641000\\\\n\\\\n1\u2264a<sub>i</sub>\u2264n\\\\n\\\\n## \u6837\u4F8B 1\\\\n\\\\n```input1\\\\n2\\\\n5\\\\n2 2 2 2 2\\\\n10\\\\n8 6 5 9 2 7 10 3 3 9\\\\n```\\\\n\\\\n```output1\\\\n2\\\\n6\\\\n```\\\\n\\\\n### \u6837\u4F8B\u8BF4\u660E\\\\n\\\\n\u5BF9\u4E8E\u7B2C\u4E00\u4E2A\u6837\u4F8B\uFF1A\\\\n\\\\n\u6700\u591A\u53EA\u80FD\u627E\u52302\u4E2A\u56FD\u5BB6\uFF0C\u4F7F\u4ED6\u4EEC\u4E92\u76F8\u5EFA\u7ACB\u5916\u4EA4\u5173\u7CFB\u3002\\\\n\\\\n\u5BF9\u4E8E\u7B2C\u4E8C\u4E2A\u6837\u4F8B\uFF1A\\\\n\\\\n\u7B2C1,2,4,6,7,10\u4E2A\u56FD\u5BB6\u95F4\u53EF\u4E92\u76F8\u5EFA\u7ACB\u5916\u4EA4\u5173\u7CFB\uFF0C\u6700\u591A\u6570\u91CF\u4E3A6\u3002\\\\n\\\\n## \u6765\u6E90\\\\n\\\\n[\u725B\u5BA2\u539F\u9898](https://ac.nowcoder.com/acm/problem/14669)\\\\n\\"}","owner":114514,"domainId":"system","docType":10,"docId":2383,"title":"\u6817\u9171\u7684\u6587\u660E2","tag":["\u725B\u5BA2\u7ADE\u8D5B","\u8D2A\u5FC3","\u6392\u5E8F"],"hidden":false,"nSubmit":43,"nAccept":7,"data":[{"_id":"001.in","name":"001.in","size":38,"lastModified":"2026-10-14T15:48:04.317Z","etag":"L2RhdGEvZmlsZS9oeWRyby9kYjAva3NqZTJ1aTVibndnMXpkcHpvaHF0Lmlu"},{"_id":"001.out","name":"001.out","size":4,"lastModified":"2026-10-14T15:48:04.489Z","etag":"L2RhdGEvZmlsZS9oeWRyby9taHcvanBibWpxeDBvcDMwemQ1ZnVnZ200Lm91dA=="},{"_id":"002.in","name":"002.in","size":9,"lastModified":"2026-10-14T15:48:04.652Z","etag":"L2RhdGEvZmlsZS9oeWRyby84cmYvZ3UweGx6MWt2bWNyaXQwMHh1Y293Lmlu"},{"_id":"002.out","name":"002.out","size":3,"lastModified":"2026-10-14T15:48:04.803Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zajYvdGtmMmFtdGZzbHRmdjRpYWM1enpsLm91dA=="},{"_id":"003.in","name":"003.in","size":5011,"lastModified":"2026-10-14T15:48:04.953Z","etag":"L2RhdGEvZmlsZS9oeWRyby9iYzcvdWRlMGV2NWl1cmR2dDF4OHo5NHJpLmlu"},{"_id":"003.out","name":"003.out","size":9,"lastModified":"2026-10-14T15:48:05.107Z","etag":"L2RhdGEvZmlsZS9oeWRyby9kOHAveW9lNmhjMGIxZ3gzbnIwdW8xY281Lm91dA=="},{"_id":"004.in","name":"004.in","size":13,"lastModified":"2026-10-14T15:48:05.271Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xb3AvYzZxeW5iY2xxazQ4c2VxZDdlZHhiLmlu"},{"_id":"004.out","name":"004.out","size":3,"lastModified":"2026-10-14T15:48:05.530Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xaG8vcG13ZDJ6NWhsdDB0bmJhYzFpeXI3Lm91dA=="},{"_id":"005.in","name":"005.in","size":10,"lastModified":"2026-10-14T15:48:05.763Z","etag":"L2RhdGEvZmlsZS9oeWRyby9ybmEvcDBpdngzbmZxaWNwcTBtZG1jbjdiLmlu"},{"_id":"005.out","name":"005.out","size":3,"lastModified":"2026-10-14T15:48:05.915Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xdHYvbjQycjAwbGswY2FuYzBsaDFqeHFhLm91dA=="},{"_id":"006.in","name":"006.in","size":92,"lastModified":"2026-10-14T15:48:06.095Z","etag":"L2RhdGEvZmlsZS9oeWRyby9lZnUvYmtpZmVtZ2Jzb3R3NWx4cW9uMG52Lmlu"},{"_id":"006.out","name":"006.out","size":7,"lastModified":"2026-10-14T15:48:06.271Z","etag":"L2RhdGEvZmlsZS9oeWRyby83cHAvaWswc2prMnhrNW9tenUwd3BrcG9jLm91dA=="},{"_id":"007.in","name":"007.in","size":48,"lastModified":"2026-10-14T15:48:06.447Z","etag":"L2RhdGEvZmlsZS9oeWRyby9zMXYvZHZpeG9yNHRwa2twdm9zYmNnZzF2Lmlu"},{"_id":"007.out","name":"007.out","size":6,"lastModified":"2026-10-14T15:48:06.601Z","etag":"L2RhdGEvZmlsZS9oeWRyby9pY2gva2sxYWd6ZmRxamRzbHgxZWp2ajN6Lm91dA=="},{"_id":"008.in","name":"008.in","size":20,"lastModified":"2026-10-14T15:48:06.793Z","etag":"L2RhdGEvZmlsZS9oeWRyby9vbnMvcWZtam1wc21naWgwbGR5Z2lsNXVjLmlu"},{"_id":"008.out","name":"008.out","size":6,"lastModified":"2026-10-14T15:48:06.957Z","etag":"L2RhdGEvZmlsZS9oeWRyby9rdzMvM2xra3JmbmY5dXFxMWF1cDR5ZGNoLm91dA=="},{"_id":"009.in","name":"009.in","size":38,"lastModified":"2026-10-14T15:48:07.133Z","etag":"L2RhdGEvZmlsZS9oeWRyby96aWYvZTNlanF5Zmo5NWZvcXhjbGFjeHowLmlu"},{"_id":"009.out","name":"009.out","size":3,"lastModified":"2026-10-14T15:48:07.312Z","etag":"L2RhdGEvZmlsZS9oeWRyby92Z3kvNnBkb3Bucmp2YzVvcGs4cWNvejRuLm91dA=="},{"_id":"010.in","name":"010.in","size":28,"lastModified":"2026-10-14T15:48:07.511Z","etag":"L2RhdGEvZmlsZS9oeWRyby8weGEvMW1nYXd2cmpuZm0yaTBsbWRpZjV1Lmlu"},{"_id":"010.out","name":"010.out","size":6,"lastModified":"2026-10-14T15:48:07.670Z","etag":"L2RhdGEvZmlsZS9oeWRyby9rcXgvYmk1eXhvcTZocXZxZDdxMHJueHpjLm91dA=="},{"_id":"checker.cpp","name":"checker.cpp","size":394,"lastModified":"2026-10-14T15:48:07.835Z","etag":"L2RhdGEvZmlsZS9oeWRyby8xcHMvNDc0a2NlanJrd2pnbWJycWE2bXVoLmNwcA=="},{"_id":"config.yaml","name":"config.yaml","size":760,"lastModified":"2026-10-14T15:48:07.998Z","etag":"L2RhdGEvZmlsZS9oeWRyby9xcWovZm1lMHR0ZHFiNDBldTIzbmszOXpvLnlhbWw="}],"additional_file":[],"pid":"NC14669","config":{"count":10,"memoryMin":128,"memoryMax":128,"timeMin":1000,"timeMax":1000,"type":"default","langs":["c","cc","cc.cc98","cc.cc98o2","cc.cc11","cc.cc11o2","cc.cc14","cc.cc14o2","cc.cc17","cc.cc17o2","cc.cc20","cc.cc20o2","pas","java","kt","kt.jvm","py","py.py2","py.py3","py.pypy3","php","rs","hs","js","go","rb","cs","r","codeforces","codeforces.43","codeforces.52","codeforces.50","codeforces.54","codeforces.59","codeforces.61","codeforces.65","codeforces.9","codeforces.28","codeforces.32","codeforces.12","codeforces.60","codeforces.36","codeforces.48","codeforces.19","codeforces.3","codeforces.4","codeforces.51","codeforces.13","codeforces.6","codeforces.7","codeforces.31","codeforces.40","codeforces.41","codeforces.67","codeforces.49","codeforces.20","codeforces.34","codeforces.55"]},"stats":{"AC":8,"WA":29,"TLE":0,"MLE":0,"RE":0,"SE":5,"IGN":0,"CE":1,"s0":1,"s10":1,"s30":2,"s40":2,"s50":5,"s60":8,"s70":13,"s80":3,"s100":8},"difficulty":0,"html":false},"canViewRecord":true,"postSubmitUrl":"/p/2383/submit","getSubmissionsUrl":"/record?fullStatus=true&pid=2383","getRecordDetailUrl":"/record/%7Brid%7D","pretestConnUrl":"record-conn?pretest=1&uidOrName=0&pid=2383&domainId=system"}';
+      window.UserContextNew = '{}';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+ex08.cpp: In function 'int main()':
+ex08.cpp:6:16: warning: result of '2^10' is 8; did you mean '1 << 10' (1024)? [-Wxor-used-as-pow]
+    6 |     cout << (2 ^ 10) << '\n';
+      |                ^
+      |              -
+      |              1 <<
+ex08.cpp:6:14: note: you can silence this warning by using a hexadecimal constant (0x2 rather than 2)
+    6 |     cout << (2 ^ 10) << '\n';
+      |              ^
+      |              0x2

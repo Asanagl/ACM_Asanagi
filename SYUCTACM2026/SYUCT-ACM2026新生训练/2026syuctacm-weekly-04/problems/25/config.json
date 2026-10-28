@@ -1,0 +1,66 @@
+{
+  "slug": "04-25",
+  "title": "最短循环节",
+  "interactive": false,
+  "timeLimitMs": 1000,
+  "memoryLimitMb": 256,
+  "standard": "gnu++17",
+  "statement": "docs/statement.md",
+  "tutorial": "docs/tutorial.md",
+  "validator": "src/validator/validator.cpp",
+  "generator": {
+    "path": "src/generator/generator.cpp",
+    "cases": [
+      { "name": "sample-1", "type": "sample", "seed": 1, "group": "sample" },
+      { "name": "sample-2", "type": "sample", "seed": 2, "group": "sample" },
+      { "name": "min-1", "type": "min", "seed": 101, "group": "secret" },
+      { "name": "tiny-1", "type": "tiny", "seed": 102, "group": "secret" },
+      { "name": "tiny-2", "type": "tiny", "seed": 103, "group": "secret" },
+      { "name": "tiny-3", "type": "tiny", "seed": 104, "group": "secret" },
+      { "name": "small-1", "type": "small", "seed": 105, "group": "secret" },
+      { "name": "small-2", "type": "small", "seed": 106, "group": "secret" },
+      { "name": "all-same-1", "type": "all-same", "seed": 107, "group": "secret" },
+      { "name": "all-same-2", "type": "all-same", "seed": 108, "group": "secret" },
+      { "name": "repeated-1", "type": "repeated", "seed": 109, "group": "secret" },
+      { "name": "repeated-2", "type": "repeated", "seed": 110, "group": "secret" },
+      { "name": "repeated-3", "type": "repeated", "seed": 111, "group": "secret" },
+      { "name": "anti-tail-1", "type": "anti-tail", "seed": 112, "group": "secret" },
+      { "name": "anti-tail-2", "type": "anti-tail", "seed": 113, "group": "secret" },
+      { "name": "anti-tail-3", "type": "anti-tail", "seed": 114, "group": "secret" },
+      { "name": "anti-tail-4", "type": "anti-tail", "seed": 115, "group": "secret" },
+      { "name": "anti-border-1", "type": "anti-border", "seed": 116, "group": "secret" },
+      { "name": "anti-border-2", "type": "anti-border", "seed": 117, "group": "secret" },
+      { "name": "anti-border-3", "type": "anti-border", "seed": 118, "group": "secret" },
+      { "name": "anti-border-4", "type": "anti-border", "seed": 119, "group": "secret" },
+      { "name": "anti-half-1", "type": "anti-half", "seed": 120, "group": "secret" },
+      { "name": "anti-half-2", "type": "anti-half", "seed": 121, "group": "secret" },
+      { "name": "anti-half-3", "type": "anti-half", "seed": 122, "group": "secret" },
+      { "name": "random-1", "type": "random", "seed": 123, "group": "secret" },
+      { "name": "random-2", "type": "random", "seed": 124, "group": "secret" },
+      { "name": "random-3", "type": "random", "seed": 125, "group": "secret" },
+      { "name": "random-4", "type": "random", "seed": 126, "group": "secret" },
+      { "name": "random-5", "type": "random", "seed": 127, "group": "secret" },
+      { "name": "random-6", "type": "random", "seed": 128, "group": "secret" },
+      { "name": "prime-1", "type": "prime", "seed": 129, "group": "secret" },
+      { "name": "max-1", "type": "max", "seed": 130, "group": "secret" },
+      { "name": "max-periodic-1", "type": "max-periodic", "seed": 131, "group": "secret" },
+      { "name": "near-max-tail-1", "type": "near-max-tail", "seed": 132, "group": "secret" }
+    ]
+  },
+  "checker": "src/checker/checker.cpp",
+  "build": {
+    "cppCompiler": "g++",
+    "cppFlags": ["-std=gnu++17", "-O2", "-pipe"],
+    "pythonCommand": "python"
+  },
+  "solutions": [
+    { "name": "main", "path": "src/solution.cpp", "language": "cpp", "role": "main" },
+    { "name": "solution2", "path": "src/solution2.cpp", "language": "cpp", "role": "reference" }
+  ],
+  "wrongSolutions": [
+    { "name": "wrong-shift", "path": "src/wrong/wrong-shift.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-border", "path": "src/wrong/wrong-border.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-half", "path": "src/wrong/wrong-half.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-offbyone", "path": "src/wrong/wrong-offbyone.cpp", "language": "cpp", "expected": "fail" }
+  ]
+}

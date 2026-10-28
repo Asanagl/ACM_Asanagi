@@ -1,0 +1,69 @@
+You are an independent competitive-programming problem solver acting as a blind reviewer. This is a READ-ONLY review: do NOT use any tools, do NOT read any files, do NOT browse any directory or the network. Answer purely from the problem statement given below in this message. Do not ask clarifying questions; make and state reasonable assumptions.
+
+== FROZEN PUBLIC PROBLEM STATEMENT (Chinese) ==
+
+# 15. 最大值的位置
+
+给定一个 $n$ 行 $m$ 列的整数矩阵。请找出矩阵中的最大值，并输出这个最大值以及它在矩阵中第一次出现的位置。
+
+矩阵的行从 $1$ 到 $n$ 自上而下编号，列从 $1$ 到 $m$ 自左向右编号。若最大值在矩阵中出现多次，规定输出按行优先顺序第一次出现的位置：从左上角开始逐行、每行从左到右扫描（先第 $1$ 行，再第 $2$ 行，依此类推），取扫描中第一次遇到最大值的位置；也就是先取行号最小者，行号相同再取列号最小者。
+
+## 输入格式
+
+第一行两个整数 $n,m$（$1\le n,m\le 200$），表示矩阵的行数与列数。
+
+接下来 $n$ 行，每行 $m$ 个整数 $a_{i,j}$（$-10^9\le a_{i,j}\le 10^9$），表示矩阵第 $i$ 行第 $j$ 列的元素，同一行内相邻整数用一个空格分隔。
+
+## 输出格式
+
+输出一行三个整数，以空格分隔，依次表示：
+
+1. 矩阵所有元素中的最大值；
+2. 该最大值按行优先顺序第一次出现的行号；
+3. 该最大值按行优先顺序第一次出现的列号。
+
+行号与列号均从 $1$ 开始编号。
+
+## 数据范围
+
+- $1\le n,m\le 200$；
+- $-10^9\le a_{i,j}\le 10^9$。
+
+## 样例
+
+input1:
+3 4
+1 7 3 7
+5 2 7 4
+6 0 7 1
+
+output1:
+7 1 2
+
+input2:
+2 3
+-5 -1 -9
+-1 -7 -3
+
+output2:
+-1 1 2
+
+## Judge 语义
+
+输出唯一。评测程序按 token 精确比较：忽略输出首尾空白与行末空白，但输出必须恰好为三个整数（最大值、行号、列号），数值与顺序完全一致才判定正确。
+
+语言标准：C++17 (gnu++17)，时限 1000 ms，内存 256 MiB。
+
+== YOUR TASK ==
+
+请独立地完成以下所有内容，用中文回答：
+
+1. 独立复述任务（用你自己的话重新描述题目要求，包括输入、输出、tie 规则与下标基准）。
+2. 给出算法设计。
+3. 给出逐步的正确性证明（说明为什么算法对任意合法输入都输出正确的三元组）。
+4. 分析时间复杂度与空间复杂度。
+5. 列出边界条件与常见易错点（特别是重复最大值、负数、1×1 矩阵等）。
+6. 给出你自认为高风险的用例。
+7. 给出一份完整、可直接编译的 C++17 参考实现（单个代码块，使用标准输入输出）。
+
+再次强调：不要使用任何工具，不要读取任何文件，直接基于上述题面作答。

@@ -1,0 +1,105 @@
+kimi version 2.2.0
+• The user asks a blind review, no tools. I need to give a complete answer in Chinese, including task restatement, algorithm, proof, complexity, edge cases, risks, test cases, and a compilable C++17 program.
+
+  No tools. Just write the answer.
+
+  Let me be thorough but well-structured.
+
+  Key points:
+  - Read n, m; for each row read m ints; store or reverse print.
+  - Use fast IO maybe not needed but fine.
+  - Complexity O(nm) time, O(m) or O(nm) space.
+
+  Proof: define b_{i,j} = a_{i,m-1-j} (0-indexed). Output row i in increasing j reproduces reverse. Independence across rows shown by not interacting.
+
+  Edge cases: m=1, n=1, negative numbers, duplicates, ±1000, trailing newline, extra whitespace.
+
+  Risks: reading with cin >> without sync_with_stdio(false) — 10^4 numbers only, fine. Ensure newline after each row and final newline. Avoid trailing space issues (judge ignores whitespace anyway, but clean formatting is best).
+
+  Test cases: sample 1-3, n=1 m=1, single row with all equal, m=2, boundaries ±1000, m=100 n=100.
+
+  Also mention: don't concatenate; don't reverse row order; don't sort.
+
+  Let me write the C++17 program:
+
+  ```cpp
+  #include <bits/stdc++.h>
+  using namespace std;
+
+  int main() {
+      ios::sync_with_stdio(false);
+      cin.tie(nullptr);
+
+      int n, m;
+      if (!(cin >> n >> m)) return 0;
+
+      vector<vector<int>> a(n, vector<int>(m));
+      for (int i = 0; i < n; ++i)
+          for (int j = 0; j < m; ++j)
+              cin >> a[i][j];
+
+      for (int i = 0; i < n; ++i) {
+          for (int j = m - 1; j >= 0; --j) {
+              if (j != m - 1) cout << ' ';
+              cout << a[i][j];
+          }
+          cout << '\n';
+      }
+      return 0;
+  }
+  ```
+
+  `<bits/stdc++.h>` is GCC-specific; to be safe use <iostream>, <vector>. Better portable.
+
+  Let me include a verification with samples mentally.
+
+  Sample 1: n=3,m=4. row 0: 1 2 3 4 -> prints 4 3 2 1. Correct.
+
+  Sample 2: 7 -1 8 -> 8 -1 7. Correct. 0 0 5 -> 5 0 0. Correct.
+
+  Sample 3: m=1 -> prints a[i][0]. Correct.
+
+  Also mention alternative streaming solution without storing (O(m) memory): read row into vector, then print reversed; or read all, print. Since output must be row by row and input is row by row, we could even stream: read a row, print reversed immediately — O(m) memory. But simpler is O(nm) memory which is 10^4 ints = 40KB, fine within 256MB.
+
+  Actually streaming row-by-row is also possible and demonstrates row independence. I'll present the storage version as main, mention streaming variant.
+
+  Note about trailing space: printing `if (j != m-1) cout << ' ';` inserts space before each element except first printed. Alternative: print a[i][j] then space if j>0. Both fine. Let me double check: j starts m-1 down to 0. First iteration j=m-1, condition j != m-1 false -> no space, prints value. Subsequent print space then value. Good.
+
+  Complexity: time O(nm), space O(nm) (or O(m) streaming). n,m ≤ 100 → 10^4 elements, negligible.
+
+  Correctness proof: 
+  Lemma 1: output row i has exactly m tokens, token j (0-indexed from left) equals a[i][m-1-j].
+  Proof by loop invariant: at k-th iteration (k=0..m-1), j = m-1-k, prints a[i][m-1-k], which is exactly the k-th output token, and separators appear exactly between tokens.
+  Lemma 2: rows processed in order i=0..n-1, so line i of output corresponds to input row i.
+  Theorem: output equals required b.
+  Uniqueness: problem states answer unique; the sequence is determined.
+
+  Also proof that no cross-row mixing: inner loop only touches a[i][*].
+
+  Test cases list:
+  1. Sample 1.
+  2. Sample 2 (negative, duplicates, odd m).
+  3. Sample 3 (m=1).
+  4. n=1, m=1 single element, e.g. "-1000".
+  5. n=1, m=100, values alternating.
+  6. n=100, m=1.
+  7. All elements equal, e.g., 2 3 / 5 5 5 / 5 5 5 → unchanged output.
+  8. m=2 with negatives: "1 2 / -3 4" → "2 1 / 4 -3".
+  9. Boundary values ±1000 mixed.
+  10. Palindromic row (should stay same) — catches accidental double reversal? Actually reversing a palindrome gives itself; good test that no bug like skipping.
+  11. Row with all zeros including -0? -0 reads as 0.
+  12. Max size 100×100 distinct increasing numbers — check no global reversal.
+
+  Also mention potential pitfall: if someone does "reverse whole flattened array" they'd get sample 1 wrong? Flatten 1..12 reversed = 12 11 10 9 / 8 7 6 5 / 4 3 2 1 — clearly wrong vs expected.
+
+  Assumptions: input well-formed per statement; n,m fit int; values fit int; newline/whitespace separated by spaces; output must have exactly n lines (judge tolerant of whitespace but we produce proper lines).
+
+  No unprovable parts; everything is deterministic. High risk: none for this task, except portability of `<bits/stdc++.h>` and IO performance (irrelevant at 10^4).
+
+  I should also make sure the answer includes "无法证明之处" — state that correctness is fully provable given the spec; only assumption is input conforms.
+
+  Format: use headings, keep reasonably structured. The user asked for a full text answer; length is fine.
+
+  Let me write it.
+
+To resume this session: kimi -r session_37bf23a7-b36c-45ab-8624-222cb55894e3

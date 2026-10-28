@@ -1,0 +1,404 @@
+{
+  "slug": "04-08",
+  "title": "子串在哪里",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-26 14:33:05 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\08",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\08\\exported-tests",
+  "caseCount": 49,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample-1",
+      "seed": "101",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "sample-2",
+      "type": "sample-2",
+      "seed": "102",
+      "group": "sample",
+      "input": "sample\\sample-2.in",
+      "answer": "sample\\sample-2.ans"
+    },
+    {
+      "name": "sample-3",
+      "type": "sample-3",
+      "seed": "103",
+      "group": "sample",
+      "input": "sample\\sample-3.in",
+      "answer": "sample\\sample-3.ans"
+    },
+    {
+      "name": "min-found",
+      "type": "min-found",
+      "seed": "1",
+      "group": "secret",
+      "input": "secret\\min-found.in",
+      "answer": "secret\\min-found.ans"
+    },
+    {
+      "name": "min-absent",
+      "type": "min-absent",
+      "seed": "2",
+      "group": "secret",
+      "input": "secret\\min-absent.in",
+      "answer": "secret\\min-absent.ans"
+    },
+    {
+      "name": "equal-found",
+      "type": "equal-found",
+      "seed": "3",
+      "group": "secret",
+      "input": "secret\\equal-found.in",
+      "answer": "secret\\equal-found.ans"
+    },
+    {
+      "name": "equal-absent",
+      "type": "equal-absent",
+      "seed": "4",
+      "group": "secret",
+      "input": "secret\\equal-absent.in",
+      "answer": "secret\\equal-absent.ans"
+    },
+    {
+      "name": "prefix-found",
+      "type": "prefix-found",
+      "seed": "5",
+      "group": "secret",
+      "input": "secret\\prefix-found.in",
+      "answer": "secret\\prefix-found.ans"
+    },
+    {
+      "name": "found-at-pos1",
+      "type": "found-at-pos1",
+      "seed": "6",
+      "group": "secret",
+      "input": "secret\\found-at-pos1.in",
+      "answer": "secret\\found-at-pos1.ans"
+    },
+    {
+      "name": "found-at-pos2",
+      "type": "found-at-pos2",
+      "seed": "7",
+      "group": "secret",
+      "input": "secret\\found-at-pos2.in",
+      "answer": "secret\\found-at-pos2.ans"
+    },
+    {
+      "name": "overlap-all-a-1",
+      "type": "overlap-all-a",
+      "seed": "8",
+      "group": "secret",
+      "input": "secret\\overlap-all-a-1.in",
+      "answer": "secret\\overlap-all-a-1.ans"
+    },
+    {
+      "name": "overlap-all-a-2",
+      "type": "overlap-all-a",
+      "seed": "9",
+      "group": "secret",
+      "input": "secret\\overlap-all-a-2.in",
+      "answer": "secret\\overlap-all-a-2.ans"
+    },
+    {
+      "name": "overlap-inner-1",
+      "type": "overlap-inner",
+      "seed": "10",
+      "group": "secret",
+      "input": "secret\\overlap-inner-1.in",
+      "answer": "secret\\overlap-inner-1.ans"
+    },
+    {
+      "name": "overlap-inner-2",
+      "type": "overlap-inner",
+      "seed": "11",
+      "group": "secret",
+      "input": "secret\\overlap-inner-2.in",
+      "answer": "secret\\overlap-inner-2.ans"
+    },
+    {
+      "name": "shift-after-mismatch-1",
+      "type": "shift-after-mismatch",
+      "seed": "12",
+      "group": "secret",
+      "input": "secret\\shift-after-mismatch-1.in",
+      "answer": "secret\\shift-after-mismatch-1.ans"
+    },
+    {
+      "name": "shift-after-mismatch-2",
+      "type": "shift-after-mismatch",
+      "seed": "13",
+      "group": "secret",
+      "input": "secret\\shift-after-mismatch-2.in",
+      "answer": "secret\\shift-after-mismatch-2.ans"
+    },
+    {
+      "name": "tail-found-1",
+      "type": "tail-found",
+      "seed": "14",
+      "group": "secret",
+      "input": "secret\\tail-found-1.in",
+      "answer": "secret\\tail-found-1.ans"
+    },
+    {
+      "name": "tail-found-2",
+      "type": "tail-found",
+      "seed": "15",
+      "group": "secret",
+      "input": "secret\\tail-found-2.in",
+      "answer": "secret\\tail-found-2.ans"
+    },
+    {
+      "name": "tail-at-upper",
+      "type": "tail-at-upper",
+      "seed": "16",
+      "group": "secret",
+      "input": "secret\\tail-at-upper.in",
+      "answer": "secret\\tail-at-upper.ans"
+    },
+    {
+      "name": "many-occ-1",
+      "type": "many-occ",
+      "seed": "17",
+      "group": "secret",
+      "input": "secret\\many-occ-1.in",
+      "answer": "secret\\many-occ-1.ans"
+    },
+    {
+      "name": "many-occ-2",
+      "type": "many-occ",
+      "seed": "18",
+      "group": "secret",
+      "input": "secret\\many-occ-2.in",
+      "answer": "secret\\many-occ-2.ans"
+    },
+    {
+      "name": "many-occ-3",
+      "type": "many-occ",
+      "seed": "19",
+      "group": "secret",
+      "input": "secret\\many-occ-3.in",
+      "answer": "secret\\many-occ-3.ans"
+    },
+    {
+      "name": "absent-basic-1",
+      "type": "absent-basic",
+      "seed": "20",
+      "group": "secret",
+      "input": "secret\\absent-basic-1.in",
+      "answer": "secret\\absent-basic-1.ans"
+    },
+    {
+      "name": "absent-basic-2",
+      "type": "absent-basic",
+      "seed": "21",
+      "group": "secret",
+      "input": "secret\\absent-basic-2.in",
+      "answer": "secret\\absent-basic-2.ans"
+    },
+    {
+      "name": "absent-long",
+      "type": "absent-long",
+      "seed": "22",
+      "group": "secret",
+      "input": "secret\\absent-long.in",
+      "answer": "secret\\absent-long.ans"
+    },
+    {
+      "name": "absent-insert",
+      "type": "absent-insert",
+      "seed": "23",
+      "group": "secret",
+      "input": "secret\\absent-insert.in",
+      "answer": "secret\\absent-insert.ans"
+    },
+    {
+      "name": "periodic-absent",
+      "type": "periodic-absent",
+      "seed": "24",
+      "group": "secret",
+      "input": "secret\\periodic-absent.in",
+      "answer": "secret\\periodic-absent.ans"
+    },
+    {
+      "name": "all-a-max-absent",
+      "type": "all-a-max-absent",
+      "seed": "25",
+      "group": "secret",
+      "input": "secret\\all-a-max-absent.in",
+      "answer": "secret\\all-a-max-absent.ans"
+    },
+    {
+      "name": "max-single-found-1",
+      "type": "max-single-found",
+      "seed": "26",
+      "group": "secret",
+      "input": "secret\\max-single-found-1.in",
+      "answer": "secret\\max-single-found-1.ans"
+    },
+    {
+      "name": "max-single-found-2",
+      "type": "max-single-found",
+      "seed": "27",
+      "group": "secret",
+      "input": "secret\\max-single-found-2.in",
+      "answer": "secret\\max-single-found-2.ans"
+    },
+    {
+      "name": "max-single-absent",
+      "type": "max-single-absent",
+      "seed": "28",
+      "group": "secret",
+      "input": "secret\\max-single-absent.in",
+      "answer": "secret\\max-single-absent.ans"
+    },
+    {
+      "name": "near-max-found-1",
+      "type": "near-max-found",
+      "seed": "29",
+      "group": "secret",
+      "input": "secret\\near-max-found-1.in",
+      "answer": "secret\\near-max-found-1.ans"
+    },
+    {
+      "name": "near-max-found-2",
+      "type": "near-max-found",
+      "seed": "30",
+      "group": "secret",
+      "input": "secret\\near-max-found-2.in",
+      "answer": "secret\\near-max-found-2.ans"
+    },
+    {
+      "name": "near-max-absent-1",
+      "type": "near-max-absent",
+      "seed": "31",
+      "group": "secret",
+      "input": "secret\\near-max-absent-1.in",
+      "answer": "secret\\near-max-absent-1.ans"
+    },
+    {
+      "name": "near-max-absent-2",
+      "type": "near-max-absent",
+      "seed": "32",
+      "group": "secret",
+      "input": "secret\\near-max-absent-2.in",
+      "answer": "secret\\near-max-absent-2.ans"
+    },
+    {
+      "name": "near-max-binary",
+      "type": "near-max-binary",
+      "seed": "33",
+      "group": "secret",
+      "input": "secret\\near-max-binary.in",
+      "answer": "secret\\near-max-binary.ans"
+    },
+    {
+      "name": "binary-random-1",
+      "type": "binary-random",
+      "seed": "34",
+      "group": "secret",
+      "input": "secret\\binary-random-1.in",
+      "answer": "secret\\binary-random-1.ans"
+    },
+    {
+      "name": "binary-random-2",
+      "type": "binary-random",
+      "seed": "35",
+      "group": "secret",
+      "input": "secret\\binary-random-2.in",
+      "answer": "secret\\binary-random-2.ans"
+    },
+    {
+      "name": "binary-random-3",
+      "type": "binary-random",
+      "seed": "36",
+      "group": "secret",
+      "input": "secret\\binary-random-3.in",
+      "answer": "secret\\binary-random-3.ans"
+    },
+    {
+      "name": "small-random-1",
+      "type": "small-random",
+      "seed": "37",
+      "group": "secret",
+      "input": "secret\\small-random-1.in",
+      "answer": "secret\\small-random-1.ans"
+    },
+    {
+      "name": "small-random-2",
+      "type": "small-random",
+      "seed": "38",
+      "group": "secret",
+      "input": "secret\\small-random-2.in",
+      "answer": "secret\\small-random-2.ans"
+    },
+    {
+      "name": "small-random-3",
+      "type": "small-random",
+      "seed": "39",
+      "group": "secret",
+      "input": "secret\\small-random-3.in",
+      "answer": "secret\\small-random-3.ans"
+    },
+    {
+      "name": "random-1",
+      "type": "random",
+      "seed": "40",
+      "group": "secret",
+      "input": "secret\\random-1.in",
+      "answer": "secret\\random-1.ans"
+    },
+    {
+      "name": "random-2",
+      "type": "random",
+      "seed": "41",
+      "group": "secret",
+      "input": "secret\\random-2.in",
+      "answer": "secret\\random-2.ans"
+    },
+    {
+      "name": "random-3",
+      "type": "random",
+      "seed": "42",
+      "group": "secret",
+      "input": "secret\\random-3.in",
+      "answer": "secret\\random-3.ans"
+    },
+    {
+      "name": "random-4",
+      "type": "random",
+      "seed": "43",
+      "group": "secret",
+      "input": "secret\\random-4.in",
+      "answer": "secret\\random-4.ans"
+    },
+    {
+      "name": "random-5",
+      "type": "random",
+      "seed": "44",
+      "group": "secret",
+      "input": "secret\\random-5.in",
+      "answer": "secret\\random-5.ans"
+    },
+    {
+      "name": "dense-random-1",
+      "type": "dense-random",
+      "seed": "45",
+      "group": "secret",
+      "input": "secret\\dense-random-1.in",
+      "answer": "secret\\dense-random-1.ans"
+    },
+    {
+      "name": "dense-random-2",
+      "type": "dense-random",
+      "seed": "46",
+      "group": "secret",
+      "input": "secret\\dense-random-2.in",
+      "answer": "secret\\dense-random-2.ans"
+    }
+  ]
+}

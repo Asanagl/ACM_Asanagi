@@ -1,0 +1,76 @@
+{
+  "slug": "b-calendar-page",
+  "title": "日历翻页",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-16 13:22:28 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-01\\problems\\b-calendar-page",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-01\\problems\\b-calendar-page\\exported-tests",
+  "caseCount": 8,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample",
+      "seed": "1",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "zero-days-1",
+      "type": "zero-days",
+      "seed": "2",
+      "group": "secret",
+      "input": "secret\\zero-days-1.in",
+      "answer": "secret\\zero-days-1.ans"
+    },
+    {
+      "name": "month-end-1",
+      "type": "month-end",
+      "seed": "3",
+      "group": "secret",
+      "input": "secret\\month-end-1.in",
+      "answer": "secret\\month-end-1.ans"
+    },
+    {
+      "name": "leap-1",
+      "type": "leap",
+      "seed": "4",
+      "group": "secret",
+      "input": "secret\\leap-1.in",
+      "answer": "secret\\leap-1.ans"
+    },
+    {
+      "name": "century-1",
+      "type": "century",
+      "seed": "5",
+      "group": "secret",
+      "input": "secret\\century-1.in",
+      "answer": "secret\\century-1.ans"
+    },
+    {
+      "name": "random-1",
+      "type": "random",
+      "seed": "6",
+      "group": "secret",
+      "input": "secret\\random-1.in",
+      "answer": "secret\\random-1.ans"
+    },
+    {
+      "name": "random-2",
+      "type": "random",
+      "seed": "7",
+      "group": "secret",
+      "input": "secret\\random-2.in",
+      "answer": "secret\\random-2.ans"
+    },
+    {
+      "name": "large-k-1",
+      "type": "large-k",
+      "seed": "8",
+      "group": "secret",
+      "input": "secret\\large-k-1.in",
+      "answer": "secret\\large-k-1.ans"
+    }
+  ]
+}

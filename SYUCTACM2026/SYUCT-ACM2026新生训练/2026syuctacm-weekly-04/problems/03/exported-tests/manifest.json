@@ -1,0 +1,324 @@
+{
+  "slug": "04-03",
+  "title": "元音计数",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-26 14:30:50 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\03",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\03\\exported-tests",
+  "caseCount": 39,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample",
+      "seed": "101",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "sample-2",
+      "type": "sample2",
+      "seed": "102",
+      "group": "sample",
+      "input": "sample\\sample-2.in",
+      "answer": "sample\\sample-2.ans"
+    },
+    {
+      "name": "sample-3",
+      "type": "sample3",
+      "seed": "103",
+      "group": "sample",
+      "input": "sample\\sample-3.in",
+      "answer": "sample\\sample-3.ans"
+    },
+    {
+      "name": "min-a",
+      "type": "min",
+      "seed": "201",
+      "group": "secret",
+      "input": "secret\\min-a.in",
+      "answer": "secret\\min-a.ans"
+    },
+    {
+      "name": "min-consonant",
+      "type": "min-consonant",
+      "seed": "202",
+      "group": "secret",
+      "input": "secret\\min-consonant.in",
+      "answer": "secret\\min-consonant.ans"
+    },
+    {
+      "name": "min-y",
+      "type": "single-y",
+      "seed": "203",
+      "group": "secret",
+      "input": "secret\\min-y.in",
+      "answer": "secret\\min-y.ans"
+    },
+    {
+      "name": "single-u",
+      "type": "single-u",
+      "seed": "204",
+      "group": "secret",
+      "input": "secret\\single-u.in",
+      "answer": "secret\\single-u.ans"
+    },
+    {
+      "name": "small-mixed-1",
+      "type": "small-mixed",
+      "seed": "205",
+      "group": "secret",
+      "input": "secret\\small-mixed-1.in",
+      "answer": "secret\\small-mixed-1.ans"
+    },
+    {
+      "name": "small-mixed-2",
+      "type": "small-mixed",
+      "seed": "206",
+      "group": "secret",
+      "input": "secret\\small-mixed-2.in",
+      "answer": "secret\\small-mixed-2.ans"
+    },
+    {
+      "name": "small-mixed-3",
+      "type": "small-mixed",
+      "seed": "207",
+      "group": "secret",
+      "input": "secret\\small-mixed-3.in",
+      "answer": "secret\\small-mixed-3.ans"
+    },
+    {
+      "name": "all-lower-vowels",
+      "type": "all-lower-vowels",
+      "seed": "208",
+      "group": "secret",
+      "input": "secret\\all-lower-vowels.in",
+      "answer": "secret\\all-lower-vowels.ans"
+    },
+    {
+      "name": "all-upper-vowels",
+      "type": "all-upper-vowels",
+      "seed": "209",
+      "group": "secret",
+      "input": "secret\\all-upper-vowels.in",
+      "answer": "secret\\all-upper-vowels.ans"
+    },
+    {
+      "name": "no-vowels-1",
+      "type": "no-vowels",
+      "seed": "210",
+      "group": "secret",
+      "input": "secret\\no-vowels-1.in",
+      "answer": "secret\\no-vowels-1.ans"
+    },
+    {
+      "name": "no-vowels-2",
+      "type": "no-vowels",
+      "seed": "211",
+      "group": "secret",
+      "input": "secret\\no-vowels-2.in",
+      "answer": "secret\\no-vowels-2.ans"
+    },
+    {
+      "name": "y-heavy-1",
+      "type": "y-heavy",
+      "seed": "212",
+      "group": "secret",
+      "input": "secret\\y-heavy-1.in",
+      "answer": "secret\\y-heavy-1.ans"
+    },
+    {
+      "name": "y-heavy-2",
+      "type": "y-heavy",
+      "seed": "213",
+      "group": "secret",
+      "input": "secret\\y-heavy-2.in",
+      "answer": "secret\\y-heavy-2.ans"
+    },
+    {
+      "name": "y-heavy-3",
+      "type": "y-heavy",
+      "seed": "214",
+      "group": "secret",
+      "input": "secret\\y-heavy-3.in",
+      "answer": "secret\\y-heavy-3.ans"
+    },
+    {
+      "name": "upper-heavy-1",
+      "type": "upper-heavy",
+      "seed": "215",
+      "group": "secret",
+      "input": "secret\\upper-heavy-1.in",
+      "answer": "secret\\upper-heavy-1.ans"
+    },
+    {
+      "name": "upper-heavy-2",
+      "type": "upper-heavy",
+      "seed": "216",
+      "group": "secret",
+      "input": "secret\\upper-heavy-2.in",
+      "answer": "secret\\upper-heavy-2.ans"
+    },
+    {
+      "name": "u-heavy-1",
+      "type": "u-heavy",
+      "seed": "217",
+      "group": "secret",
+      "input": "secret\\u-heavy-1.in",
+      "answer": "secret\\u-heavy-1.ans"
+    },
+    {
+      "name": "u-heavy-2",
+      "type": "u-heavy",
+      "seed": "218",
+      "group": "secret",
+      "input": "secret\\u-heavy-2.in",
+      "answer": "secret\\u-heavy-2.ans"
+    },
+    {
+      "name": "u-heavy-3",
+      "type": "u-heavy",
+      "seed": "219",
+      "group": "secret",
+      "input": "secret\\u-heavy-3.in",
+      "answer": "secret\\u-heavy-3.ans"
+    },
+    {
+      "name": "boundary-near-max-1",
+      "type": "boundary-near-max",
+      "seed": "220",
+      "group": "secret",
+      "input": "secret\\boundary-near-max-1.in",
+      "answer": "secret\\boundary-near-max-1.ans"
+    },
+    {
+      "name": "boundary-near-max-2",
+      "type": "boundary-near-max",
+      "seed": "221",
+      "group": "secret",
+      "input": "secret\\boundary-near-max-2.in",
+      "answer": "secret\\boundary-near-max-2.ans"
+    },
+    {
+      "name": "boundary-max",
+      "type": "boundary-max",
+      "seed": "222",
+      "group": "secret",
+      "input": "secret\\boundary-max.in",
+      "answer": "secret\\boundary-max.ans"
+    },
+    {
+      "name": "max-same-lower",
+      "type": "max-same-lower",
+      "seed": "223",
+      "group": "secret",
+      "input": "secret\\max-same-lower.in",
+      "answer": "secret\\max-same-lower.ans"
+    },
+    {
+      "name": "max-same-upper",
+      "type": "max-same-upper",
+      "seed": "224",
+      "group": "secret",
+      "input": "secret\\max-same-upper.in",
+      "answer": "secret\\max-same-upper.ans"
+    },
+    {
+      "name": "random-small-1",
+      "type": "random-small",
+      "seed": "225",
+      "group": "secret",
+      "input": "secret\\random-small-1.in",
+      "answer": "secret\\random-small-1.ans"
+    },
+    {
+      "name": "random-small-2",
+      "type": "random-small",
+      "seed": "226",
+      "group": "secret",
+      "input": "secret\\random-small-2.in",
+      "answer": "secret\\random-small-2.ans"
+    },
+    {
+      "name": "random-small-3",
+      "type": "random-small",
+      "seed": "227",
+      "group": "secret",
+      "input": "secret\\random-small-3.in",
+      "answer": "secret\\random-small-3.ans"
+    },
+    {
+      "name": "random-mid-1",
+      "type": "random-mid",
+      "seed": "228",
+      "group": "secret",
+      "input": "secret\\random-mid-1.in",
+      "answer": "secret\\random-mid-1.ans"
+    },
+    {
+      "name": "random-mid-2",
+      "type": "random-mid",
+      "seed": "229",
+      "group": "secret",
+      "input": "secret\\random-mid-2.in",
+      "answer": "secret\\random-mid-2.ans"
+    },
+    {
+      "name": "random-mid-3",
+      "type": "random-mid",
+      "seed": "230",
+      "group": "secret",
+      "input": "secret\\random-mid-3.in",
+      "answer": "secret\\random-mid-3.ans"
+    },
+    {
+      "name": "random-large-1",
+      "type": "random-large",
+      "seed": "231",
+      "group": "secret",
+      "input": "secret\\random-large-1.in",
+      "answer": "secret\\random-large-1.ans"
+    },
+    {
+      "name": "random-large-2",
+      "type": "random-large",
+      "seed": "232",
+      "group": "secret",
+      "input": "secret\\random-large-2.in",
+      "answer": "secret\\random-large-2.ans"
+    },
+    {
+      "name": "random-large-3",
+      "type": "random-large",
+      "seed": "233",
+      "group": "secret",
+      "input": "secret\\random-large-3.in",
+      "answer": "secret\\random-large-3.ans"
+    },
+    {
+      "name": "random-max-1",
+      "type": "random-max",
+      "seed": "234",
+      "group": "secret",
+      "input": "secret\\random-max-1.in",
+      "answer": "secret\\random-max-1.ans"
+    },
+    {
+      "name": "random-max-2",
+      "type": "random-max",
+      "seed": "235",
+      "group": "secret",
+      "input": "secret\\random-max-2.in",
+      "answer": "secret\\random-max-2.ans"
+    },
+    {
+      "name": "random-max-3",
+      "type": "random-max",
+      "seed": "236",
+      "group": "secret",
+      "input": "secret\\random-max-3.in",
+      "answer": "secret\\random-max-3.ans"
+    }
+  ]
+}

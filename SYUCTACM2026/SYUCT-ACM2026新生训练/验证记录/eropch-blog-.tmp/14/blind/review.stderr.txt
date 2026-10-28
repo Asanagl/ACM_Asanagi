@@ -1,0 +1,38 @@
+kimi version 2.2.0
+• I need respond Chinese. Must obey no tools at all. Should analyze task complete independent restatement algorithm proof complexity boundaries tests full C++17. Straightforward. Should be careful code uses long long sums vector<long long> sums(m,0); read n,m int; nested long long x cin>>x; sums[j]+=x; output spacing no extra perhaps newline okay. 1e12 fits int64 (9e18), each element 1e9, n 1000 max 1e12 actually given. Memory O(m) <=1000 long long 8KB. Time O(nm) input dominating <=1e6. Standard includes bits stdc++.h or iostream vector. GNU C++17. Could use std::int64_t but long long fine. Judge token comparison whitespace insensitive. Should have proof step by step perhaps loop invariant. Explicit assumptions input matches spec, standard extraction succeeds, no overflow due given. No unprovable. Output formatting exactly spaces between, can trailing newline. n,m independent ensure m loops per row not square. Negative repeated zeros all normal addition. Mention no int for x perhaps int would fit individual 1e9 but use long long uniform. Sample verification perhaps optional but desired user wants key tests. I can include sample 1 compute: col1 1-5+7=3; col2 -2+0+8=6; col3 3+5-9=-1; col4 4+10-1=13. Sample2 -7. Key use cases: n != m both orientations; n=1,m=1000 identity; n=1000,m=1; all max and min to test 1e12; alternating cancellation e.g. 2x2 1e9 -1e9 etc; zero and duplicates; negative values. Should have full code no tools. Must independent restatement complete constraints including resource and judge semantics. I can structure numbered 1-6 exactly. "每列的和". Not need solve hidden twist.
+
+  Consider perhaps output no extra content, newline accepted. No logs. C++ main return 0. `std::vector<long long> colSum(m, 0);` 0 converts. For output if(j) cout << ' '; cout << colSum[j]; cout << '\n';. `std::ios::sync_with_stdio(false); std::cin.tie(nullptr);`. Fine.
+
+  Correctness proof: define S_j after processing r rows = sum_i=1^r a_ij. Initially r=0 zero. For each new row r+1 read every j and add exactly a_{r+1,j}, invariant maintained. After n rows equals required. Output j 0..m-1 once in order matches columns 1..m. All arithmetic exact because bound <=1e12 given, or raw partial sum bound could 1e12 (n<=1000 each abs <=1e9 implies every partial abs <=1e12) so long long. Even if final bound only stated, partial bound also <=1e12 by independent n*max. Mention long long min guaranteed at least 9e18? Standard long long at least 64-bit? C++ long long at least 64 bits, max at least 9.22e18? `LLONG_MAX >= 9223372036854775807` typically yes minimum width 64 two's complement? C++17 long long at least 64 bits and range -(2^63-1) to +? Standard min -9223372036854775807; enough. I can simply on GNU C++17 long long 64-bit. Input one million values memory no whole matrix. 1000ms fine O(1e6) I/O fast. Extra space O(m), vector plus vars. If counting output no. Input buffer hidden irrelevant. Could say program-owned extra space O(m).
+
+  Edge conditions common risks: using int sum overflow; accidentally sum rows or output by rows; assume n=m; transposition indices; entire array memory unnecessary (nm*8=8MB fits actually under 256MiB but no issue) perhaps no need. Whitespace judge accepts any but produce exact. Missing tokens etc. Ensure input extraction row major. Testing boundary `1000 1000` huge not list full; describe generator. Provide small concrete test for rectangular: n=2,m=3 matrix `1 2 3` `4 5 6` => `5 7 9`. n=3,m=2 `1 -1`, `2 -2`, `3 -3` => `6 -6`. Extremes n=2,m=2 all 1e9 => 2e9 exceeds signed int, useful simple; all -1e9 -> -2e9? -2e9 within int min -2.147e9, not overflow; use n=3 gives 3e9 and -3e9. Full bound 1000 rows all 1e9 each =1e12. Key tests no need actual 1000 listing; use smaller 3 rows demonstrates. Test 3x1 `1000000000` repeated 3 ->3000000000; negative -3000000000. Could include 2x2 mix for overflow but enough.
+
+  The user explicitly "完整约束" restatement: n,m 1 to1000 inclusive can unequal; a range; column sum abs<=1e12; output m integer in increasing column separated single spaces, unique; stdin stdout GNU C++17 1 sec 256 MiB; token judge whitespace irrelevant but token exact no missing/extra; no multi testcases implied single case. Mention single test case. No multiple solutions floating interaction. Might be overkill but requested.
+
+  No assumptions needed other than valid input. Could state "仅假设输入符合题面且标准输入读取成功；在此前提下没有未证明事项。" Is code input failure handling not needed. If fails m? not. Don't add speculative.
+
+  I need respond in Chinese clear. I can use 1. 任务... etc. No tools called. This should be straightforward, but ensure not too lengthy perhaps ~1200 Chinese chars plus code. I can deliver 6 numbered headings. Correctness proof with initialization, induction, termination/output and range perhaps included. Complexity exactly Θ(nm) time and Θ(m) extra. Code uses size type? `for (int j=0; j<m; ++j)` good m<=1000. n,m int. Input `long long value;` inside loops constructed each iteration trivial. Could declare outside to avoid but not needed.
+
+  "逐步正确性证明" perhaps show sample verification separately? Not required proof enough. Tests under 5 can show bullet with concrete inputs outputs. Common risks include output token exact, no answer labels. "每列和绝对值<=1e12" fits long long. Output `'\n'` whitespace accepted. Space logic no trailing space. `std::cout << colSums[j] << (j+1<m ? ' ' : '\n');` conditional types char okay. Simpler if.
+
+  I should not mention identity, blind review, tool prohibition. Fine.
+
+  Potential nuance constraints n,m read first and next n lines m ints, line boundaries irrelevant to `>>`, but loops exact. All values repeated no issue. Sum mathematically no overflow intermediate? Since n<=1000 and each abs<=1e9, every partial abs<=1e12 regardless final constraint. Good to explicitly prove safety even stronger. Time I/O 1e6 ints within resource typical; cannot "prove" runtime under 1000ms independent hardware, don't need. Say meets asymptotic and input upper bound; no empirical verification since user forbids tools but not need mention uncompiled? User asked complete compilable. I can confidently code. "若有假设或无法证明" state valid input assumption, no algorithmic unproven. Do I need state not actually compiled because no tools? Probably not; no need and could undermine but honest if verification claims none. Don't say tested. Provide tests recommended, not run. Use "应输出" not actual run.
+
+  I should formulate restatement judge "评测按整数 token 比较，顺序和数量必须完全一致；空白差异不影响" exactly. Output "不要输出其他内容" code no prompts.
+
+  Testing list:
+  - Public sample 1 expected `3 6 -1 13`; sample2 expected `-7`.
+  - Rectangular `2 3 ...` expected.
+  - Min/max n/m: `1 1` covered, `1 1000`, `1000 1`, `1000 1000` generated, all values ±1e9.
+  - int overflow `3 1 1e9*3 => 3000000000`; negative counterpart.
+  - cancellation `2 2 1e9 -1e9 / -1e9 1e9 => 0 0`; zero duplicates.
+  Could avoid too many. "重点验证" list 5. Good.
+
+  Full proof: Lemma invariant; theorem output. I can number 1-4. Complexity `O(nm)` and extra `O(m)`; no need storing A. There are m outputs, output time included O(m) dominated nm because n>=1. Reading exactly nm integers.
+
+  One subtlety if `long long` reading -1e9 etc exact. No integer parsing trouble.
+
+  Okay respond.
+
+To resume this session: kimi -r session_2afdd333-972c-44f7-85ac-bfe1309f0b83

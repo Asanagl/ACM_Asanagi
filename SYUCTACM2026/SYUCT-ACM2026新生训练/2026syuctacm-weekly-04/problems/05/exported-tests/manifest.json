@@ -1,0 +1,316 @@
+{
+  "slug": "04-05",
+  "title": "字符替换",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-26 14:31:40 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\05",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\05\\exported-tests",
+  "caseCount": 38,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample",
+      "seed": "1001",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "sample-2",
+      "type": "sample-same",
+      "seed": "1002",
+      "group": "sample",
+      "input": "sample\\sample-2.in",
+      "answer": "sample\\sample-2.ans"
+    },
+    {
+      "name": "min-1",
+      "type": "min",
+      "seed": "2001",
+      "group": "secret",
+      "input": "secret\\min-1.in",
+      "answer": "secret\\min-1.ans"
+    },
+    {
+      "name": "min-nooccur-1",
+      "type": "min-nooccur",
+      "seed": "2002",
+      "group": "secret",
+      "input": "secret\\min-nooccur-1.in",
+      "answer": "secret\\min-nooccur-1.ans"
+    },
+    {
+      "name": "single-1",
+      "type": "single",
+      "seed": "2003",
+      "group": "secret",
+      "input": "secret\\single-1.in",
+      "answer": "secret\\single-1.ans"
+    },
+    {
+      "name": "single-2",
+      "type": "single",
+      "seed": "2004",
+      "group": "secret",
+      "input": "secret\\single-2.in",
+      "answer": "secret\\single-2.ans"
+    },
+    {
+      "name": "two-occur-1",
+      "type": "two-occur",
+      "seed": "2005",
+      "group": "secret",
+      "input": "secret\\two-occur-1.in",
+      "answer": "secret\\two-occur-1.ans"
+    },
+    {
+      "name": "small-1",
+      "type": "small",
+      "seed": "2006",
+      "group": "secret",
+      "input": "secret\\small-1.in",
+      "answer": "secret\\small-1.ans"
+    },
+    {
+      "name": "small-2",
+      "type": "small",
+      "seed": "2007",
+      "group": "secret",
+      "input": "secret\\small-2.in",
+      "answer": "secret\\small-2.ans"
+    },
+    {
+      "name": "small-3",
+      "type": "small",
+      "seed": "2008",
+      "group": "secret",
+      "input": "secret\\small-3.in",
+      "answer": "secret\\small-3.ans"
+    },
+    {
+      "name": "repeated-1",
+      "type": "repeated",
+      "seed": "2009",
+      "group": "secret",
+      "input": "secret\\repeated-1.in",
+      "answer": "secret\\repeated-1.ans"
+    },
+    {
+      "name": "repeated-nooccur-1",
+      "type": "repeated-nooccur",
+      "seed": "2010",
+      "group": "secret",
+      "input": "secret\\repeated-nooccur-1.in",
+      "answer": "secret\\repeated-nooccur-1.ans"
+    },
+    {
+      "name": "first-pos-1",
+      "type": "first-pos",
+      "seed": "2011",
+      "group": "secret",
+      "input": "secret\\first-pos-1.in",
+      "answer": "secret\\first-pos-1.ans"
+    },
+    {
+      "name": "last-pos-1",
+      "type": "last-pos",
+      "seed": "2012",
+      "group": "secret",
+      "input": "secret\\last-pos-1.in",
+      "answer": "secret\\last-pos-1.ans"
+    },
+    {
+      "name": "same-char-1",
+      "type": "same-char",
+      "seed": "2013",
+      "group": "secret",
+      "input": "secret\\same-char-1.in",
+      "answer": "secret\\same-char-1.ans"
+    },
+    {
+      "name": "same-char-2",
+      "type": "same-char",
+      "seed": "2014",
+      "group": "secret",
+      "input": "secret\\same-char-2.in",
+      "answer": "secret\\same-char-2.ans"
+    },
+    {
+      "name": "dense-1",
+      "type": "dense",
+      "seed": "2015",
+      "group": "secret",
+      "input": "secret\\dense-1.in",
+      "answer": "secret\\dense-1.ans"
+    },
+    {
+      "name": "sparse-1",
+      "type": "sparse",
+      "seed": "2016",
+      "group": "secret",
+      "input": "secret\\sparse-1.in",
+      "answer": "secret\\sparse-1.ans"
+    },
+    {
+      "name": "swap-kill-1",
+      "type": "swap-kill",
+      "seed": "2017",
+      "group": "secret",
+      "input": "secret\\swap-kill-1.in",
+      "answer": "secret\\swap-kill-1.ans"
+    },
+    {
+      "name": "swap-kill-2",
+      "type": "swap-kill",
+      "seed": "2018",
+      "group": "secret",
+      "input": "secret\\swap-kill-2.in",
+      "answer": "secret\\swap-kill-2.ans"
+    },
+    {
+      "name": "delete-kill-1",
+      "type": "delete-kill",
+      "seed": "2019",
+      "group": "secret",
+      "input": "secret\\delete-kill-1.in",
+      "answer": "secret\\delete-kill-1.ans"
+    },
+    {
+      "name": "binary-alphabet-1",
+      "type": "binary-alphabet",
+      "seed": "2020",
+      "group": "secret",
+      "input": "secret\\binary-alphabet-1.in",
+      "answer": "secret\\binary-alphabet-1.ans"
+    },
+    {
+      "name": "alternating-1",
+      "type": "alternating",
+      "seed": "2021",
+      "group": "secret",
+      "input": "secret\\alternating-1.in",
+      "answer": "secret\\alternating-1.ans"
+    },
+    {
+      "name": "boundary-az-1",
+      "type": "boundary-az",
+      "seed": "2022",
+      "group": "secret",
+      "input": "secret\\boundary-az-1.in",
+      "answer": "secret\\boundary-az-1.ans"
+    },
+    {
+      "name": "boundary-za-1",
+      "type": "boundary-za",
+      "seed": "2023",
+      "group": "secret",
+      "input": "secret\\boundary-za-1.in",
+      "answer": "secret\\boundary-za-1.ans"
+    },
+    {
+      "name": "directed-mixed-1",
+      "type": "directed-mixed",
+      "seed": "2024",
+      "group": "secret",
+      "input": "secret\\directed-mixed-1.in",
+      "answer": "secret\\directed-mixed-1.ans"
+    },
+    {
+      "name": "directed-mixed-2",
+      "type": "directed-mixed",
+      "seed": "2025",
+      "group": "secret",
+      "input": "secret\\directed-mixed-2.in",
+      "answer": "secret\\directed-mixed-2.ans"
+    },
+    {
+      "name": "random-1",
+      "type": "random",
+      "seed": "2026",
+      "group": "secret",
+      "input": "secret\\random-1.in",
+      "answer": "secret\\random-1.ans"
+    },
+    {
+      "name": "random-2",
+      "type": "random",
+      "seed": "2027",
+      "group": "secret",
+      "input": "secret\\random-2.in",
+      "answer": "secret\\random-2.ans"
+    },
+    {
+      "name": "random-3",
+      "type": "random",
+      "seed": "2028",
+      "group": "secret",
+      "input": "secret\\random-3.in",
+      "answer": "secret\\random-3.ans"
+    },
+    {
+      "name": "random-4",
+      "type": "random",
+      "seed": "2029",
+      "group": "secret",
+      "input": "secret\\random-4.in",
+      "answer": "secret\\random-4.ans"
+    },
+    {
+      "name": "near-max-1",
+      "type": "near-max",
+      "seed": "2030",
+      "group": "secret",
+      "input": "secret\\near-max-1.in",
+      "answer": "secret\\near-max-1.ans"
+    },
+    {
+      "name": "near-max-2",
+      "type": "near-max",
+      "seed": "2031",
+      "group": "secret",
+      "input": "secret\\near-max-2.in",
+      "answer": "secret\\near-max-2.ans"
+    },
+    {
+      "name": "max-all-1",
+      "type": "max-all",
+      "seed": "2032",
+      "group": "secret",
+      "input": "secret\\max-all-1.in",
+      "answer": "secret\\max-all-1.ans"
+    },
+    {
+      "name": "max-random-1",
+      "type": "max-random",
+      "seed": "2033",
+      "group": "secret",
+      "input": "secret\\max-random-1.in",
+      "answer": "secret\\max-random-1.ans"
+    },
+    {
+      "name": "max-random-2",
+      "type": "max-random",
+      "seed": "2034",
+      "group": "secret",
+      "input": "secret\\max-random-2.in",
+      "answer": "secret\\max-random-2.ans"
+    },
+    {
+      "name": "max-same-1",
+      "type": "max-same",
+      "seed": "2035",
+      "group": "secret",
+      "input": "secret\\max-same-1.in",
+      "answer": "secret\\max-same-1.ans"
+    },
+    {
+      "name": "max-nooccur-1",
+      "type": "max-nooccur",
+      "seed": "2036",
+      "group": "secret",
+      "input": "secret\\max-nooccur-1.in",
+      "answer": "secret\\max-nooccur-1.ans"
+    }
+  ]
+}

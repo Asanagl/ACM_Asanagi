@@ -1,0 +1,316 @@
+{
+  "slug": "04-06",
+  "title": "反转字符串",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-26 14:32:12 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\06",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\06\\exported-tests",
+  "caseCount": 38,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample",
+      "seed": "1",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "sample-2",
+      "type": "sample-2",
+      "seed": "2",
+      "group": "sample",
+      "input": "sample\\sample-2.in",
+      "answer": "sample\\sample-2.ans"
+    },
+    {
+      "name": "min-digit",
+      "type": "min-digit",
+      "seed": "1001",
+      "group": "secret",
+      "input": "secret\\min-digit.in",
+      "answer": "secret\\min-digit.ans"
+    },
+    {
+      "name": "min-letter",
+      "type": "min-letter",
+      "seed": "1002",
+      "group": "secret",
+      "input": "secret\\min-letter.in",
+      "answer": "secret\\min-letter.ans"
+    },
+    {
+      "name": "len2-distinct",
+      "type": "len2-distinct",
+      "seed": "1003",
+      "group": "secret",
+      "input": "secret\\len2-distinct.in",
+      "answer": "secret\\len2-distinct.ans"
+    },
+    {
+      "name": "len2-same",
+      "type": "len2-same",
+      "seed": "1004",
+      "group": "secret",
+      "input": "secret\\len2-same.in",
+      "answer": "secret\\len2-same.ans"
+    },
+    {
+      "name": "len3",
+      "type": "len3",
+      "seed": "1005",
+      "group": "secret",
+      "input": "secret\\len3.in",
+      "answer": "secret\\len3.ans"
+    },
+    {
+      "name": "four-distinct",
+      "type": "four-distinct",
+      "seed": "1006",
+      "group": "secret",
+      "input": "secret\\four-distinct.in",
+      "answer": "secret\\four-distinct.ans"
+    },
+    {
+      "name": "digits-leading",
+      "type": "digits-leading",
+      "seed": "1007",
+      "group": "secret",
+      "input": "secret\\digits-leading.in",
+      "answer": "secret\\digits-leading.ans"
+    },
+    {
+      "name": "digits-zeros",
+      "type": "digits-zeros",
+      "seed": "1008",
+      "group": "secret",
+      "input": "secret\\digits-zeros.in",
+      "answer": "secret\\digits-zeros.ans"
+    },
+    {
+      "name": "digits-long",
+      "type": "digits-long",
+      "seed": "1009",
+      "group": "secret",
+      "input": "secret\\digits-long.in",
+      "answer": "secret\\digits-long.ans"
+    },
+    {
+      "name": "pal-odd",
+      "type": "pal-odd",
+      "seed": "1010",
+      "group": "secret",
+      "input": "secret\\pal-odd.in",
+      "answer": "secret\\pal-odd.ans"
+    },
+    {
+      "name": "pal-even",
+      "type": "pal-even",
+      "seed": "1011",
+      "group": "secret",
+      "input": "secret\\pal-even.in",
+      "answer": "secret\\pal-even.ans"
+    },
+    {
+      "name": "pal-odd-large",
+      "type": "pal-odd-large",
+      "seed": "1012",
+      "group": "secret",
+      "input": "secret\\pal-odd-large.in",
+      "answer": "secret\\pal-odd-large.ans"
+    },
+    {
+      "name": "same-small",
+      "type": "same-small",
+      "seed": "1013",
+      "group": "secret",
+      "input": "secret\\same-small.in",
+      "answer": "secret\\same-small.ans"
+    },
+    {
+      "name": "same-large",
+      "type": "same-large",
+      "seed": "1014",
+      "group": "secret",
+      "input": "secret\\same-large.in",
+      "answer": "secret\\same-large.ans"
+    },
+    {
+      "name": "alternating-small",
+      "type": "alternating-small",
+      "seed": "1015",
+      "group": "secret",
+      "input": "secret\\alternating-small.in",
+      "answer": "secret\\alternating-small.ans"
+    },
+    {
+      "name": "alternating-large",
+      "type": "alternating-large",
+      "seed": "1016",
+      "group": "secret",
+      "input": "secret\\alternating-large.in",
+      "answer": "secret\\alternating-large.ans"
+    },
+    {
+      "name": "ascending",
+      "type": "ascending",
+      "seed": "1017",
+      "group": "secret",
+      "input": "secret\\ascending.in",
+      "answer": "secret\\ascending.ans"
+    },
+    {
+      "name": "descending",
+      "type": "descending",
+      "seed": "1018",
+      "group": "secret",
+      "input": "secret\\descending.in",
+      "answer": "secret\\descending.ans"
+    },
+    {
+      "name": "nonpal-odd",
+      "type": "nonpal-odd",
+      "seed": "1019",
+      "group": "secret",
+      "input": "secret\\nonpal-odd.in",
+      "answer": "secret\\nonpal-odd.ans"
+    },
+    {
+      "name": "nonpal-even",
+      "type": "nonpal-even",
+      "seed": "1020",
+      "group": "secret",
+      "input": "secret\\nonpal-even.in",
+      "answer": "secret\\nonpal-even.ans"
+    },
+    {
+      "name": "mixed-runs",
+      "type": "mixed-runs",
+      "seed": "1021",
+      "group": "secret",
+      "input": "secret\\mixed-runs.in",
+      "answer": "secret\\mixed-runs.ans"
+    },
+    {
+      "name": "kill-even-mid",
+      "type": "kill-even-mid",
+      "seed": "1022",
+      "group": "secret",
+      "input": "secret\\kill-even-mid.in",
+      "answer": "secret\\kill-even-mid.ans"
+    },
+    {
+      "name": "random-binary",
+      "type": "random-binary",
+      "seed": "2001",
+      "group": "secret",
+      "input": "secret\\random-binary.in",
+      "answer": "secret\\random-binary.ans"
+    },
+    {
+      "name": "random-digits",
+      "type": "random-digits",
+      "seed": "2002",
+      "group": "secret",
+      "input": "secret\\random-digits.in",
+      "answer": "secret\\random-digits.ans"
+    },
+    {
+      "name": "random-small-1",
+      "type": "random-small",
+      "seed": "2003",
+      "group": "secret",
+      "input": "secret\\random-small-1.in",
+      "answer": "secret\\random-small-1.ans"
+    },
+    {
+      "name": "random-small-2",
+      "type": "random-small",
+      "seed": "2004",
+      "group": "secret",
+      "input": "secret\\random-small-2.in",
+      "answer": "secret\\random-small-2.ans"
+    },
+    {
+      "name": "random-alnum",
+      "type": "random-alnum",
+      "seed": "2005",
+      "group": "secret",
+      "input": "secret\\random-alnum.in",
+      "answer": "secret\\random-alnum.ans"
+    },
+    {
+      "name": "random-large",
+      "type": "random-large",
+      "seed": "3001",
+      "group": "secret",
+      "input": "secret\\random-large.in",
+      "answer": "secret\\random-large.ans"
+    },
+    {
+      "name": "near-max",
+      "type": "near-max",
+      "seed": "3002",
+      "group": "secret",
+      "input": "secret\\near-max.in",
+      "answer": "secret\\near-max.ans"
+    },
+    {
+      "name": "max-random",
+      "type": "max-random",
+      "seed": "3003",
+      "group": "secret",
+      "input": "secret\\max-random.in",
+      "answer": "secret\\max-random.ans"
+    },
+    {
+      "name": "max-same",
+      "type": "max-same",
+      "seed": "3004",
+      "group": "secret",
+      "input": "secret\\max-same.in",
+      "answer": "secret\\max-same.ans"
+    },
+    {
+      "name": "max-alternating",
+      "type": "max-alternating",
+      "seed": "3005",
+      "group": "secret",
+      "input": "secret\\max-alternating.in",
+      "answer": "secret\\max-alternating.ans"
+    },
+    {
+      "name": "max-ascending",
+      "type": "max-ascending",
+      "seed": "3006",
+      "group": "secret",
+      "input": "secret\\max-ascending.in",
+      "answer": "secret\\max-ascending.ans"
+    },
+    {
+      "name": "max-pal",
+      "type": "max-pal",
+      "seed": "3007",
+      "group": "secret",
+      "input": "secret\\max-pal.in",
+      "answer": "secret\\max-pal.ans"
+    },
+    {
+      "name": "max-digits",
+      "type": "max-digits",
+      "seed": "3008",
+      "group": "secret",
+      "input": "secret\\max-digits.in",
+      "answer": "secret\\max-digits.ans"
+    },
+    {
+      "name": "max-nonpal",
+      "type": "max-nonpal",
+      "seed": "3009",
+      "group": "secret",
+      "input": "secret\\max-nonpal.in",
+      "answer": "secret\\max-nonpal.ans"
+    }
+  ]
+}

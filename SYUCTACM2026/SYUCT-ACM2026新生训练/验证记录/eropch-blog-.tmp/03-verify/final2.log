@@ -1,0 +1,4 @@
+[config][error] 03: config.json 不存在：C:\Users\Asanagi\.codex\skills\icpc-problem-creator\problemsets\2026syuctacm-weekly-04\problems\03\config.json
+
+失败的测试用例：
+- [03] [config] config.json 不存在：C:\Users\Asanagi\.codex\skills\icpc-problem-creator\problemsets\2026syuctacm-weekly-04\problems\03\config.json

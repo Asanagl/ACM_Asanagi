@@ -1,0 +1,491 @@
+kimi version 2.2.0
+• The user asks me to act as a blind independent reviewer, not using any tools, and answer based only on the provided public problem statement. I should not read files. Just answer directly with the 5 parts, including a full C++17 program.
+
+  Let me carefully write a thorough answer in Chinese.
+
+  Key details:
+  - Task: count ASCII space characters (code 32) in one line of text s.
+  - Input: one line; trailing newline not part of s; the line may be empty → empty string; nothing else in input except the line-ending newline.
+  - Output: one non-negative integer, newline at end. Unique answer.
+  - Constraints: 0 <= |s| <= 100000; chars ASCII 32..126 printable; no tabs; no other whitespace except the line-ending newline.
+  - Three special situations: empty string, all spaces, consecutive spaces.
+  - Judge semantics: checker reads one non-negative integer from each of the standard answer and contestant output; both must terminate immediately after that integer (trailing whitespace/newline allowed); no extra content.
+
+  Important subtlety: getline on empty input. If input is truly empty (zero bytes), `std::getline(std::cin, s)` fails immediately, leaving s empty — but that's fine since we default s to empty string. However, if the input is a single "\n", getline reads an empty line successfully. Either way answer is 0. But careful: if getline fails, s may be left in a valid but unspecified... actually on failure, getline sets failbit and the string is erased? Let's recall: `getline(is, str, delim)` — "if no characters were extracted, failbit is set" — and str is erased before reading (str.erase()). Since C++11, str is erased at the start. So s is empty. But we initialize s = "" anyway; after a failed getline the string is empty (erased). To be fully safe, we can just initialize `std::string s; std::getline(std::cin, s);` — if it fails, s is empty. Alternatively, guard with `if (getline(...))` but not necessary. Actually to be pedantic: if the stream fails due to exception? No. It's fine.
+
+  Also, the program should be robust: no extra output. Use `std::cout << count << '\n';` or use '\n' only (no endl needed, but endl is fine; it flushes).
+
+  Potential pitfall: `std::getline` removes '\n' but if input uses CRLF line ending, '\r' remains and would be counted? '\r' is not a space (code 13), so it would not be counted as a space. But it would be part of s; the problem says s consists of printable ASCII 32..126, so '\r' shouldn't appear. But a judge on Windows might feed CRLF. Since '\r' is not a space, it doesn't affect the count. Good — so no need to strip '\r'. But wait: could the checker on Windows treat the last line's terminator? The count is unaffected since '\r' != ' '. However there is a subtle risk: if we used `cin >> s`, we'd stop at spaces — that's why getline is required.
+
+  Another subtlety: reading with `std::getline` and then counting with a loop of `s.size()` — size up to 1e5, fine.
+
+  Alternative: use `std::count(s.begin(), s.end(), ' ')` — needs `<algorithm>`. Simpler to loop.
+
+  Also could avoid storing the whole line by using `std::cin.get()` loop, or `std::getline` — but the problem says to use getline. Either is fine. Using `std::cin.get()` reading until '\n' or EOF is also correct and O(1) extra space. But the statement instructs getline; both work. I'll present getline-based main solution and mention the streaming alternative for O(1) extra space.
+
+  Careful with `std::cin.get()`: it doesn't skip whitespace and handles empty input (EOF immediately). That would give O(1) extra space. But the primary solution per problem hint uses getline. I could present the getline solution as primary, and note that a streaming variant exists.
+
+  Complexity: time O(|s|) = O(n) ≤ 1e5 character comparisons; space O(n) for the string (≤ ~100 KB, plus small overhead), well within 256 MiB; time far within 1000 ms (I/O bound).
+
+  Correctness proof: 
+  - Lemma 1: getline reads exactly the characters of s (all characters before the line-ending '\n', or all characters until EOF if no trailing newline), and does not include the '\n'. Justification from spec + input format guarantees.
+  - Lemma 2: The loop increments cnt exactly once for each character equal to ' ', i.e., ASCII 32, using char comparison `c == ' '`. Since ' ' is the space character literal, matching exactly code 32 — no other printable ASCII char equals 32 (bijection of ASCII codes), so no tabs or other characters are counted. Note char signedness irrelevant since all codes ≤ 126 < 128.
+  - Theorem: cnt equals number of space characters in s at end.
+  - Also, the three special cases: empty string → getline succeeds with empty or fails, s empty, loop zero iterations, count 0. All spaces → each character is a space → count = |s|. Consecutive spaces → each is a separate character, counted separately. Leading/trailing spaces are characters within s (they are before the '\n' terminator), so they are counted.
+
+  Wait — subtlety about leading/trailing spaces and getline: getline reads the entire line including leading and trailing spaces (getline does not skip whitespace, unlike operator>>). Yes.
+
+  Another subtlety: trailing spaces before the newline are preserved by getline. Yes.
+
+  Output: exactly one integer followed by '\n'; no other output. Program produces nothing else, so checkers reading one integer and requiring no extra content will pass. Note: avoid debug prints. Also avoid `std::endl` concerns — not an issue.
+
+  Edge cases and common mistakes:
+  1. Using `cin >> s` — stops at first space, wrong.
+  2. Using `scanf("%s", buf)` — same.
+  3. Using `scanf("%[^\n]", buf)` fails on empty line (returns 0, buffer untouched), and needs buffer init.
+  4. Mixing `cin >>` and getline without consuming newline — leftover newline makes getline read empty string; here we don't mix, but if using sync_with_stdio(false) with getchar carefully.
+  5. Using `std::isspace(c)` — would count tabs/other whitespace; but input has none besides spaces... actually input guarantees no tabs and no other whitespace. Still `isspace` with char argument can be UB for negative chars (signed char). And `isspace` also counts '\t','\n','\v','\f','\r' — safe here but semantically wrong; better `c == ' '`. Also under locale, additional chars might be classified, so avoid.
+  6. Resetting count each test — only one test.
+  7. Using `int` count — fine (≤ 1e5). Overflow would only matter for much larger input.
+  8. Outputting extra text like "5 "? Trailing whitespace is allowed after the integer. But "answer: 5" is wrong.
+  9. Reading multiple lines and summing — only one line; if the input has a trailing newline and then EOF, a loop over getline would still be OK but unnecessary; if input is empty (no bytes), getline fails.
+  10. Windows CRLF: '\r' left at end of string, not counted as space (good), but if code used `isspace` it would count it → off-by-one. This is a real risk. Since input spec guarantees no '\r' in s... but a CRLF judge would still add '\r'. The statement says "除行末换行之外，输入中没有其他内容" — so no CRLF. Still, a defensive note: using `c == ' '` makes CRLF harmless.
+  11. Storing with `char s[100005]` and using gets — unsafe, deprecated.
+  12. Using `std::cin` with `sync_with_stdio(false)` and `tie(nullptr)` — speed, not correctness.
+  13. Empty input file (zero bytes) — getline fails; string is empty due to erase semantics since C++11; but to be safe initialize and check. Actually, let me be careful about the standard: [string.io] `template<class charT, class traits, class Allocator> basic_istream<charT, traits>& getline(basic_istream<charT, traits>& is, basic_string<charT, traits, Allocator>& str, charT delim);` — Effects: Behaves as an unformatted input function, except that it does not count the number of characters extracted and does not affect the value returned by subsequent calls to is.gcount(). After constructing a sentry object, if the sentry converts to true, calls str.erase() and then extracts characters... If the function extracts no characters, it calls is.setstate(ios_base::failbit). So str is erased at the start → empty. Correct. But if the sentry fails (e.g., stream already failed/eof), str is not erased. At program start the stream is fine. If input is empty, the sentry still succeeds (not eof yet), then str.erase() and then tries to read → hits EOF → sets failbit/eofbit and returns. So str is empty. Either way 0. But for absolute safety, I might initialize `std::string s;` (default empty) and use `getline`, plus maybe `if (!std::getline(...)) { }` nothing needed. I could also write a while loop tolerant of multiple reads, but the problem says one line only. Simplest robust: 
+
+  ```cpp
+  #include <iostream>
+  #include <string>
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+      std::string s;
+      std::getline(std::cin, s);
+      long long cnt = 0;
+      for (char c : s) if (c == ' ') ++cnt;
+      std::cout << cnt << '\n';
+      return 0;
+  }
+  ```
+
+  Hmm, `long long cnt` vs `size_t`. Output of size_t via cout prints as unsigned integer, fine, but as non-negative. Using `std::size_t` is fine. I'll use `long long` for clarity, or `int`. Count ≤ 100000 so `int` suffices; `long long` costs nothing.
+
+  Should I add defensive handling of trailing '\r'? Since spec excludes it and '\r' != ' ', no need. But an alternative defensive read that strips a trailing '\r' would change nothing for counts (since '\r' isn't a space) but would alter s; irrelevant. Actually stripping could matter if... no. Not needed. But mention as a robustness note: do NOT strip it when it's not part of s? It doesn't affect the count anyway. So it's neutral; mention it.
+
+  Also the alternative streaming O(1) space version:
+
+  ```cpp
+  int c; long long cnt = 0;
+  while ((c = std::cin.get()) != EOF && c != '\n') if (c == ' ') ++cnt;
+  ```
+
+  Note `std::cin.get()` returns int_type; comparing to EOF works via `std::char_traits<char>::eof()`. `c != '\n'` compares int to char — fine. This handles empty input (EOF immediately) and empty line. It's O(1) extra space. But the problem hint suggests getline; both are correct. I'll present getline as the main answer and the streaming one as a variant, since the statement explicitly advises getline (and some graders may... no, output is what matters). Actually, to strictly follow "请使用 getline 之类的整行读入方式", the getline version fits. I'll give getline as the main program, and mention the variant as equivalent.
+
+  Hmm — one more consideration for the `cin.get()` variant: if the input ends without a trailing newline, the loop ends at EOF, fine. If the input has a trailing newline, the loop stops at it. Fine.
+
+  Another consideration: possible trailing spaces after the newline? No.
+
+  Checker semantics: output must be one non-negative integer and then immediately end, allowing trailing whitespace. Our output "5\n" satisfies it. Note: don't print anything else; a leading 'BOM' or extra newline before? We print nothing before. Fine.
+
+  Also note: if we use `std::cout` with `sync_with_stdio(false)`, output flushed at exit. Fine.
+
+  Now, complexity analysis: Time O(n) with n = |s| ≤ 1e5 → at most 1e5 char comparisons + I/O of ~100 KB, micro/milliseconds. 1000 ms is generous. Space: string of ≤ 1e5 bytes ≈ 100 KB (plus SSO/capacity overhead), far below 256 MiB. Streaming variant O(1) extra space beyond buffers. Note std::cin internal buffer exists regardless.
+
+  Now about proof structure: state the specification formally:
+  - Let L be the input stream content. The input format guarantees L is either empty, or a single line of characters from [32,126] followed by at most one '\n' (and then EOF); the problem says "除行末换行外没有其他内容" so L = s or L = s + "\n". Also possible: the whole file is just "\n" → s = "" → 0.
+  - Claim 1: after `getline`, s equals the problem's s.
+  - Claim 2: the loop's counter equals |{i : s[i] = ' '}|.
+  - Claim 3: output format matches checker.
+
+  Proof of Claim 1: getline extracts characters until delim '\n' (which is not stored) or EOF. By the input guarantee, before the first '\n' (or EOF) the characters are exactly the problem's s: there are no other newlines, and the only potential newline is the line terminator. So s = the problem's s. Empty file → getline extracts nothing, s stays empty (erase + failbit) → s = "" which is the problem's empty s. Hmm — careful: for empty file, the problem's s — is empty input (0 bytes) a valid input representing an empty line? The problem says "输入仅有一行" and "输入行可能为空". A 0-byte file is a line of length 0 without terminator; standard judges typically provide at least "\n" but 0 bytes should also be handled. Our handling covers both.
+
+  Proof of Claim 2: induction over the loop; invariant: after processing first k characters, cnt = number of spaces among first k. Base k=0: cnt=0. Step: character at index k equals ' ' → increment; else no change. Each character is examined once. Termination: k = |s|. Therefore cnt = total count. Additionally, `c == ' '` tests equality with the character whose ASCII code is 32: in the execution character set, ' ' is the space character; the input guarantees codes 32..126 so each char is one byte and comparisons are exact. Note about signed char: values ≤ 126, so no negative values → even if char is signed, comparison is well-defined and correct.
+
+  Claim 3: program writes decimal digits of cnt (non-negative) then exactly one '\n' then returns, so the stream ends; checker reads one non-negative integer and sees only trailing whitespace → accepted.
+
+  Also prove separation of consecutive spaces: each is a separate character position, each compared and counted → s = "a  b   c" gives 2+3 = 5; "   " gives 3; "" gives 0; " a " gives 2.
+
+  Let me also verify sample 3: "  a   b " → 2 + 3 + 1 = 6. Yes.
+
+  Boundary conditions list:
+  - |s| = 0 (empty line, or empty file).
+  - s all spaces, length 1e5 → answer 100000, tests int range and I/O.
+  - spaces at both ends.
+  - no spaces at all → 0.
+  - single space " " → 1.
+  - Max length 1e5 no spaces → answer 0.
+  - Characters like '~' (126) and '!' (33) — adjacent to space; must not count; the code compares to 32 only.
+  - Tabs explicitly excluded, but if present, `c == ' '` wouldn't count them (semantically correct per "空格字符（ASCII 码为 32）").
+  - CRLF: '\r' would be appended; not counted; count remains correct.
+
+  Common mistakes:
+  1. `cin >> s` — counts 0 always for lines with spaces, and for empty line reads nothing → 0 (accidentally right for empty).
+  2. `scanf("%s")` same.
+  3. `scanf(" %[^\n]")` — leading space in format skips whitespace, destroying leading spaces; answer off.
+  4. `gets` — reads empty line fine but unsafe/removed in C++14+.
+  5. `fgets(buf, ...)` — keeps trailing '\n', and would count? '\n' isn't space, so count OK, but if using isspace it's wrong; also empty line → buf = "\n". Count still 0 with `== ' '`. Fine but must handle buffer size ≥ 100002.
+  6. Using `isspace` or `c == ' ' || c == '\t'` — wrong semantics; also UB with negative char.
+  7. Not resetting across lines / reading multiple lines with `while (getline)` and summing — would still be right if input is one line, but if trailing extra content... spec says none. Actually if input ends with "\n", a `while (getline)` loop reads one line and then fails → fine. If the file were "abc\n\n" it would sum two lines, but spec says no.
+  8. Off-by-one with 1-indexed storage.
+  9. Outputting extra lines/explanations.
+  10. Outputting a negative or unsigned weirdness.
+  11. Using `int` for count — safe at 1e5; mention that it's fine.
+  12. Recursion/stack issues — none.
+  13. Not handling failbit before output? If getline fails, cin has failbit but cout is separate, so output still works. Good — note that cout is unaffected by cin's failbit. Important subtlety: if one mistakenly checks `if (!cin) return 0;` after getline, empty input would produce no output → WA. Mention that.
+
+  Also caution: don't use `cin.eof()` checks that skip output.
+
+  Another risk: using `std::getline(std::cin, s)` then `s.length()` — size_t; fine.
+
+  Potential judge risk: the checker might be strict about "immediately end" — with '\n' after integer that's allowed explicitly.
+
+  Also: using `std::endl` vs `'\n'` — both fine; endl flushes, no harm.
+
+  Also mention: `return 0;` ensures flush.
+
+  Let me also consider whether `std::cin` with `sync_with_stdio(false)` requires no mixing with C I/O — we don't mix.
+
+  Now let me write out the answer in Chinese, structured with headings but keeping it readable. The user asked for 5 parts. I'll write it fully.
+
+  I need to be complete: "用自己的话完整复述任务、输入输出与全部约束（包括空串、全空格、连续空格这三种情况）".
+
+  Let me write part 1:
+
+  **任务**：给定一行文本 s，数出 s 里 ASCII 32 空格字符出现了多少次。每个空格独立计数：连续的多个空格各算一次（"a  b" 中间 2 个空格算 2），行首空格、行尾空格都算，不做任何 trim 或合并。
+
+  **输入**：标准输入中恰好一行，内容是字符串 s。行末的换行符是分隔符，不属于 s，不计数。输入可能是一个空行（s = ""），也可能整行全是空格。除该行（以及它的行末换行）之外没有别的内容；不存在多行、不存在前导空行。允许的长度区间 0 ≤ |s| ≤ 100000。
+
+  **每个字符的取值**：可打印 ASCII，32 ≤ code ≤ 126，所以可以包含空格但不能包含制表符、回车等其它空白；只有 32 是空格。
+
+  **输出**：一个非负整数（s 中空格数），末尾换行。唯一答案，不能有解释文字、不能有第二行。
+
+  **三种特别情形**：
+  - 空串：输入就是空行（或 0 字节文件），s = ""，答案 0。注意不是"没有输入就报错"。
+  - 全空格：s 的每个字符都是空格，答案 = |s|，最多 100000。
+  - 连续空格：每一段连续空格中的每个字符都要单独计，答案等于所有段长度之和，而不是段数。样例 1 的 "a  b   c" 是 2 + 3 = 5；样例 3 的 "  a   b " 是 2 + 3 + 1 = 6。
+
+  **判定**：checker 从标准答案和自己的输出各读一个非负整数，要求两者在该整数之后立即结束（末尾可有空白/换行），没有多余内容，并且数值相等。因此程序输出 "5\n" 正确；输出 "5\n\n" 也允许（末尾空白）；输出 "答案：5" 或输出两行则错。
+
+  Then part 2: algorithm + proof.
+
+  Algorithm:
+  1. 用 getline 把整行读入 string s（不跳过空白，保留行首/行尾空格，丢弃行末 '\n'）。
+  2. 计数器 cnt = 0。
+  3. 遍历 s 的每个字符 c，若 c == ' '（ASCII 32）则 ++cnt。
+  4. 输出 cnt 加换行。
+
+  Proof by lemmas, as above.
+
+  Also address: why getline and not >>; why ' ' not isspace; why signed char is not an issue.
+
+  Part 3: complexity.
+
+  Part 4: edge cases, mistakes, risk tests. Include a table of test inputs → expected outputs.
+
+  Let me include risk cases:
+  - "" (0 字节) → 0
+  - "\n" (空行) → 0
+  - " " → 1
+  - "\n"? Let me label inputs clearly.
+  - "a" → 0
+  - " a" → 1
+  - "a " → 1
+  - " a " → 2
+  - "     ..." 1e5 spaces → 100000
+  - 1e5 'a' → 0
+  - "a  b   c" → 5
+  - "  a   b " → 6
+  - "!  ~" → 2
+  - "ab" → 0
+  - Mixed 99999 a + 1 space.
+
+  Also mention potential judge environmental risks: CRLF file, no trailing newline, BOM (if the judge prepends UTF-8 BOM — extremely unlikely; BOM bytes are not spaces so count unaffected actually — BOM at start of s would be extra chars but not spaces, so count still right; but it would change |s| — not affecting count).
+
+  Part 5: the program.
+
+  ```cpp
+  #include <iostream>
+  #include <string>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      std::string s;
+      std::getline(std::cin, s);
+
+      long long cnt = 0;
+      for (std::string::size_type i = 0; i < s.size(); ++i) {
+          if (s[i] == ' ') ++cnt;
+      }
+
+      std::cout << cnt << '\n';
+      return 0;
+  }
+  ```
+
+  Or range-for. Let me use range-for `for (char c : s)`. Both fine. I'll use the index version maybe simpler to reason, but range-for is cleaner. I'll use range-for and mention equivalent.
+
+  Add note that `std::getline` failure on totally empty input leaves s empty (since C++11 it erases first), so no special case needed; and no `if (!cin) return 0;` guard, which would be a bug.
+
+  Actually, let me double-check the claim "on failed getline s is empty". If sentry fails (stream already in failed state), erase is not performed. At program start, the stream is good, sentry constructs, tier flush, then erase, then read. So yes.
+
+  But what if the input is 0 bytes? getline: sentry ok (eof not set yet, because sentry checks... sentry construction with noskipws? For unformatted input, sentry is constructed with `sentry is(*this, true)` — if the stream is at EOF already, sentry sets failbit. At program start, has eofbit been set? Only after a read attempt hits EOF. So initial state good. getline proceeds: erase, then `sbumpc` returns eof → setstate(eofbit|failbit), returns. s empty. Good.
+
+  Now compile check mentally: `std::getline` needs <string>, `std::cout` needs <iostream>. Fine. g++ -std=gnu++17 -O2 compiles.
+
+  One more consideration: `std::ios::sync_with_stdio(false)` — is it safe? Yes, we only use cin/cout. It speeds I/O. Keep.
+
+  Also mention the O(1)-extra-space variant with `cin.get()`:
+
+  ```cpp
+  int c;
+  long long cnt = 0;
+  while ((c = std::cin.get()) != std::char_traits<char>::eof() && c != '\n')
+      if (c == ' ') ++cnt;
+  ```
+
+  Note comparing int with EOF: `std::cin.get()` returns `int_type` = int; EOF is -1. Use `std::char_traits<char>::eof()` or `EOF`. Careful that `c != '\n'` compares int to char → '\n' promotes to int 10. Fine.
+
+  But careful with sync_with_stdio(false) and cin.get(): still fine since only using cin.
+
+  The problem explicitly says to use getline, so main answer uses getline. Mention the variant is equivalent and saves the O(n) string; not needed here.
+
+  Let me also state the correctness proof carefully with numbered steps:
+
+  Definitions:
+  - Let A be the input byte sequence. By the problem, either A = s, or A = s + '\n' where s ∈ [32..126]*, or A is empty (equivalent to s = ""). Actually more precisely, A consists of s followed optionally by a single '\n' and then end of file. And the case A = "\n" corresponds to s = "".
+
+  Hmm, "输入行可能为空" means the line is empty; a line of length 0. If the file is a single '\n', s = "". If the file is empty (no bytes at all), is that a "line"? Many judges would treat it as an empty line too. Our program handles both identically → 0.
+
+  Lemma 1 (reading): After `std::getline(std::cin, s)`, the string s contains exactly the characters of the problem's s, in order, and the terminating '\n' (if any) is not stored.
+  Proof: getline extracts and appends characters until it encounters the delimiter '\n' (not extracted) or end-of-file, after first clearing s. Since the input has no '\n' inside s and at most one at the end, the extracted characters are exactly s. QED.
+
+  Lemma 2 (counting): The loop visits each character exactly once and increments cnt iff the character equals ' ' (code 32), so by induction cnt after the loop equals the number of positions i with s[i] = ' '.
+  Proof: invariant. Also correctness of the test: ASCII codes of the allowed characters are distinct; ' ' has code 32; hence c == ' ' holds exactly for space characters. All codes ≤ 126 ≤ 127, so no signedness/locale issue: the comparison is on the byte value, unlike isspace which depends on locale and is UB for negative char values. QED.
+
+  Theorem: The program prints exactly the number of ASCII-32 characters in s.
+
+  Corollary for special cases: empty s → loop body zero times → 0; s all spaces → every iteration increments → |s|; consecutive spaces → each position counted separately (no merging).
+
+  Lemma 3 (output): Output is the decimal representation of a non-negative integer followed by a single '\n' and nothing else; it satisfies the checker.
+
+  Part of the proof should note cnt ≥ 0 and ≤ 1e5 fits in long long.
+
+  Also note the program never branches on read failure and never prints anything else.
+
+  Time complexity: reading O(n) (n ≤ 1e5 bytes), loop O(n), output O(1) digits (≤6). Total O(n) with small constant; 1e5 char comparisons is far below 1000 ms (typical ~1e6-1e8 ops/ms budget; even with iostream overhead ~ms). Extra space: the string s: up to 1e5 bytes ≈ 98 KiB, plus a few bytes for cnt and stream buffers (iostream internal buffer ~ several KiB) → well under 256 MiB. Streaming variant O(1).
+
+  Note: 256 MiB = 268435456 bytes; the string's max size 100000 is about 0.04% of it.
+
+  Now boundary/risk list. Let me organize:
+
+  A. 边界输入
+  | 输入（可见化） | 期望 |
+  | 0 字节文件 | 0 |
+  | 单个换行 "\n" | 0 |
+  | " " + 换行 | 1 |
+  | "  " (2 spaces) | 2 |
+  | 1e5 spaces | 100000 |
+  | 1e5 'a' | 0 |
+  | "a  b   c" | 5 |
+  | "  a   b " | 6 |
+  | "a" | 0 |
+  | "!" | 0 (33 is not 32) |
+  | "~" | 0 |
+  | last line without '\n' e.g. "ab  " | 2 |
+  | "  \n" | 2 |
+
+  B. 常见错误
+  1. cin >> s → stops at first whitespace; "a  b" gives 0 or "a" → 0, WA. Also empty line: >> fails and s empty → 0 (coincidentally right).
+  2. scanf("%s") / gets / fgets nuances.
+  3. scanf(" %[^\n]") leading blank in format eats leading spaces.
+  4. isspace / isblank → wrong semantics + potential UB with negative char; locale.
+  5. Counting only "runs" of spaces (段数) → sample 1 would give 2.
+  6. Trimming: stripping leading/trailing whitespace before counting → sample 3 gives 3 instead of 6.
+  7. Reading with `while (getline)` and summing while the judge sends an extra blank line — spec says one line, but summing is a hazard if there were extra; not here.
+  8. Output extras: "5\n" fine, but "5\n\n" also allowed; "5 6" no; "ans=5" no; multiple lines no.
+  9. Guarding with `if (cin.fail()) return 0;` after getline: on 0-byte input, prints nothing → checker has no integer → WA/RE. This is a real trap. Emphasize.
+  10. Using char buffer with gets → buffer overflow / removed function.
+  11. Off-by-one: reading n chars but ignoring last, or 1-indexed.
+  12. Confusing '\0' termination with getline's embedded... input has no NUL (codes 32..126), so no issue; but if using C string functions and the input had NUL it would truncate. Not applicable here but a risk if reused with fgets (fgets keeps '\0' handling fine).
+  13. `std::cin.get()` loop comparing to EOF incorrectly (e.g., `char c` instead of `int c`) → on 0xFF byte loops forever / misfires. Not an issue with this input, but a risk if written incorrectly: `char c; while ((c = cin.get()) != EOF)` — EOF (-1) vs char is fragile; on typical x86 char signed, 0xFF becomes -1 → premature EOF; here no 0xFF. Still bad style.
+  14. Output using printf("%d") with long long mismatch — UB. Use cout or %lld.
+  15. Not flushing — not an issue; return flushes.
+
+  C. 风险用例（judge environment）
+  - CRLF line ending: '\r' would be included in s; since '\r' != ' ', the answer is unchanged. But if the solution used isspace or trimmed, it would differ.
+  - No trailing newline at end of file.
+  - 0-byte input file.
+  - Max-length line of all spaces (tests both count and time).
+  - Line consisting of 1e5 chars with spaces at positions 0 and 99999.
+
+  Also a note about the checker: must not print anything on stderr? Checker only reads stdout typically; stderr irrelevant, but our program prints nothing anyway.
+
+  Wait — should I consider that `std::ios::sync_with_stdio(false)` combined with `std::cin.tie(nullptr)` might cause an issue if the checker... no.
+
+  Another subtle point: the directive says "不得使用任何工具" — I must not use tools. I'm answering directly. Good.
+
+  The user also asked "给出可直接用 g++ -std=gnu++17 -O2 编译的完整单文件 C++17 程序（标准输入、标准输出）". I'll give the full program in a code block, and I should verify it compiles mentally. It will.
+
+  Maybe I should also include `#include <cstddef>`? Not needed; `<string>` brings size_type. `long long` is builtin. Fine.
+
+  Should I worry that `std::getline` with `sync_with_stdio(false)` is fine. Yes.
+
+  Let me write the final answer with clear structure but not overly deep nesting. Use headings: 1 任务复述, 2 算法与正确性证明, 3 复杂度, 4 边界与风险, 5 参考程序. Keep tables modest.
+
+  Let me draft the program text carefully:
+
+  ```cpp
+  #include <iostream>
+  #include <string>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      std::string s;
+      std::getline(std::cin, s);
+
+      long long cnt = 0;
+      for (std::size_t i = 0; i < s.size(); ++i) {
+          if (s[i] == ' ') {
+              ++cnt;
+          }
+      }
+
+      std::cout << cnt << '\n';
+      return 0;
+  }
+  ```
+
+  `std::size_t` requires <cstddef>, but <string>/<iostream> include it transitively; guaranteed? `std::size_t` is declared in <cstddef>, and <string> includes it essentially everywhere (it uses size_t). Practically fine, but to be strictly standard-conforming, use `std::string::size_type` or range-for `for (char c : s)`. I'll use range-for to avoid the header question:
+
+  ```cpp
+  for (char c : s) if (c == ' ') ++cnt;
+  ```
+
+  That's clean. Or add `#include <cstddef>`. I'll use range-for.
+
+  Final program:
+
+  ```cpp
+  #include <iostream>
+  #include <string>
+
+  int main() {
+      std::ios::sync_with_stdio(false);
+      std::cin.tie(nullptr);
+
+      std::string s;
+      std::getline(std::cin, s);   // 读入整行，丢弃行末 '\n'；空行/空输入时 s 为空串
+
+      long long cnt = 0;
+      for (char c : s) {
+          if (c == ' ') ++cnt;     // 只认 ASCII 32
+      }
+
+      std::cout << cnt << '\n';
+      return 0;
+  }
+  ```
+
+  Comments: In the final answer code, the user asked for a complete program; comments in code are okay for an explanation, though the system prompt says avoid unnecessary comments. For a teaching answer, brief comments are acceptable. I'll keep minimal comments (maybe 2 short ones) or none. The system prompt: "Default to writing no comments: ones that explain what the code does... become noise". For a standalone answer to a problem, a couple of comments are fine but I can keep them very short. I'll include one or two.
+
+  Also mention the alternative streaming version.
+
+  Also, a line about `std::endl` not needed.
+
+  Let me double check the "空格字符（ASCII 码为 32）" — count only spaces, not other whitespace. Yes.
+
+  Now, sample verification: "a  b   c": characters a, space, space, b, space, space, space, c → 5. "  a   b ": 2+3+1 = 6. Good.
+
+  Length bound: answer ≤ 100000, fits int; long long safe.
+
+  Now write part 2 proof more formally:
+
+  Notation: Let the input after the optional terminator be s = s_0 s_1 … s_{n-1}, n = |s|.
+
+  Precondition from the input spec: the input byte stream is exactly s, optionally followed by one '\n', then EOF; all s_i ∈ [32,126].
+
+  Lemma 1 (read correctness). After `std::getline(std::cin, s)`, the program variable s equals s_0…s_{n-1}.
+  Proof: getline first clears the string, then extracts characters one by one and appends each until it either sees the delimiter '\n' (which it extracts but does not append) or reaches EOF. By the precondition, the first '\n' in the stream, if it exists, is exactly the terminator right after s_{n-1}; before it the stream contains exactly s. If no '\n' exists, the stream ends right after s_{n-1} (or is empty). In the empty-input case getline extracts no character and (since C++11) leaves s as the cleared empty string. Therefore the stored string is exactly s. Note getline does not skip whitespace and preserves leading/trailing spaces, unlike `operator>>`. ∎
+
+  Lemma 2 (count correctness). At loop exit, cnt = |{i : s_i = ' '}|.
+  Proof: invariant after processing the first k characters: cnt equals the number of j < k with s_j = ' '. Base k=0. Step: the k-th character c = s_k is tested; if c = ' ' cnt increases by 1, else unchanged; both match the definition of the count over j < k+1. The range-for visits k = 0..n-1 exactly once. At k = n the invariant gives the claim. Moreover, `c == ' '` is true exactly when the byte value is 32: ' ' has value 32 in ASCII, all codes are distinct, and all input codes are in [32,126] so even a signed char holds a non-negative value → no sign/locale pitfalls (unlike isspace, which also accepts '\t','\n','\r','\f','\v' and is locale-dependent and UB for negative char). ∎
+
+  Lemma 3 (output correctness). The program writes exactly the decimal digits of cnt, then a single '\n', then terminates without further output.
+  Proof: total count ≤ n ≤ 1e5, non-negative; cout prints the decimal representation; only one output statement, return 0 flushes and ends. So the checker reads one non-negative integer followed by only trailing whitespace and hits end of stream → matches the required form. ∎
+
+  Theorem. The output equals the number of ASCII-32 characters in s, hence equals the unique correct answer; the program is accepted on every input allowed by the spec.
+
+  Special-case corollaries:
+  - n = 0: s empty, loop body never executes, cnt=0.
+  - All spaces: each of n chars satisfies the test, cnt = n.
+  - Consecutive spaces: the loop has no notion of runs; each character position is tested independently, so a run of length L contributes L.
+
+  Good.
+
+  Complexity:
+  - Time: getline O(n) (n bytes copied), loop O(n) char comparisons, output O(log10 n) digits ≤ 6. Total O(n) = at most ~1e5 operations, plus const I/O. Well within 1000 ms (marginal cost of iostream with sync off is on the order of microseconds to a few ms).
+  - Space: string of n bytes (n ≤ 1e5 → ≤ ~100 KB, i.e. < 0.04% of 256 MiB), plus constant-size variables and the standard stream buffers (a few KB). O(n) extra.
+  - Streaming variant O(1) extra, also fine.
+
+  Verdict: 轻松通过。
+
+  Now the tables. Keep them small.
+
+  Risk cases table:
+
+  | 输入（\n 表示行末换行） | 说明 | 期望输出 |
+  | 空文件（0 字节） | s = "" | 0 |
+  | \n | 空行 | 0 |
+  | " " | 单个空格 | 1 |
+  | "   " (3) | 全空格 | 3 |
+  | "a" | 无空格 | 0 |
+  | " a" | 行首空格 | 1 |
+  | "a " | 行尾空格 | 1 |
+  | " a " | 两端 | 2 |
+  | "a  b   c" | 连续空格 | 5 |
+  | "  a   b " | 样例 3 | 6 |
+  | "!~" | 与 32 相邻的可打印字符 | 0 |
+  | 1e5 个空格 | 最大答案 | 100000 |
+  | 1e5 个 'a' | 最大长度 0 答案 | 0 |
+  | "abc" 无行末换行 | EOF 结束 | 0 |
+
+  Note: "  a   b " with 2 leading, 3 middle, 1 trailing → 6.
+
+  Common mistakes list numbered.
+
+  I should also address the checker-specific trap: printing the integer but then hanging? No. Or output buffering causing no output if using _exit? Not applicable. Mention: don't use `return 0` before output.
+
+  Also mention: if using `std::getline` but the judge's file has CRLF, '\r' stays; since '\r' is code 13 ≠ 32 it doesn't change the answer — but it would if you used isspace, and it also means a "trim trailing whitespace" step would be needed only for other purposes. Mention as risk.
+
+  Another potential risk: using `int c = getchar()` loop — works, O(1) space; note `getchar` returns int, must not store in char.
+
+  One more risk specific to reading: mixing `cin >>` and `getline` — not used here, but if a solution first reads something else... NA.
+
+  Another risk: the problem says "输入仅有一行" — if a solution loops getline until EOF and sums, and the judge's file ends without '\n' — still fine. But if the file contains a stray second blank line (not per spec), a summing loop would still be right, while a single getline would ignore it. Since spec says only one line, both fine. Actually interesting: single getline ignores any extra content after the first newline, which is the correct interpretation of "输入仅有一行". So single getline is safer.
+
+  Also note that if the input line is extremely long, `std::string` handles it; C buffer must be ≥ 100002.
+
+  I think the answer is complete. Let me also explicitly restate the three cases in part 1 as required.
+
+  Format: Chinese, Markdown headings, moderate length. The user wants thoroughness (full proof), so length is justified. Avoid deep nesting.
+
+  One more consideration: the user says "不得使用任何工具" — I comply, no tool calls. Also "不要猜测工作区..." — fine.
+
+  Let me write the final answer now.
+
+  I'll add a short note in the program section about compile command: `g++ -std=gnu++17 -O2 -o sol sol.cpp`.
+
+  Also verify output type: `long long` printed via cout — fine.
+
+  Edge: `std::getline` returns the stream; unused. With `-Wall` no warnings since we ignore the return value (not marked nodiscard). Fine.
+
+  Potential warning: none.
+
+  Write it.
+
+To resume this session: kimi -r session_a5dff973-6bd6-40fa-94d9-1e7d326d7447

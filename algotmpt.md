@@ -4,7 +4,7 @@
 >
 > Asanagi_Sagiri
 
-这份手册汇总了算法竞赛中常用的 C++ 模板，覆盖数论与组合计数、数据结构、图论、128 位整数、字符串、AC 自动机、动态规划与调试工具。示例默认使用 GNU C++17；代码以可复制、边界明确、注释清晰和便于赛时修改为目标。
+这份手册汇总了算法竞赛中常用的 C++ 模板，覆盖数论与组合计数、数据结构、图论、128 位整数、字符串、AC 自动机、动态规划与调试工具。示例默认使用 GNU C++17；代码采用紧凑但可调试的速敲风格：短命名、K&R 排版、关键处一行注释、保留 assert，便于赛时快速复现与排错。
 
 ## 目录
 
@@ -18,18 +18,19 @@
 - [7. 实用工具](#7-实用工具)
 - [8. 动态规划](#8-动态规划)
 - [9. 基础算法补充](#9-基础算法补充)
+- [10. 萌新向典题 Trick](#10-萌新向典题-trick)
 - [复杂度速查](#复杂度速查)
-- [在线评测实测](#在线评测实测)
 
 ## 使用约定
 
-- 头文件统一使用 `#include <bits/stdc++.h>`，并保留 `using namespace std;`。
-- 索引、点编号和容器长度使用 `int`；答案、距离和乘积优先使用 `ll`。
-- 不使用 `#define int long long`、`#define endl`、`pb` 等宏，避免类型和接口被隐式改变。
-- 图、树、并查集、树状数组和线段树默认 **1-based**；字符串和普通数组算法默认 **0-based**。
-- 类型名使用 `PascalCase`，多词函数与变量使用 `snake_case`，缩进为 4 个空格。
-- 代码注释按“状态含义、维护方式、边界条件、易错点”的顺序编写；赛时确认理解后可按需删除。
-- 同一章节的后续片段可能依赖前文类型，例如 Dijkstra、SPFA 和 Prim 依赖 `Edge` 与 `Graph`，模逆元依赖 `exgcd`。
+- 头文件统一 `#include <bits/stdc++.h>`，保留 `using namespace std;`。
+- 索引、点编号、容器长度用 `int`；答案、距离、乘积用 `ll`。
+- 不用 `#define int long long`、`#define endl`、`pb`/`all` 等宏；保留 `using ll = long long;` 和 `i128`/`u128` 别名。
+- 结构体成员与局部变量用竞赛短名（`n, m, a, f, tr, lz, siz, fa, l, r, mid, ql, qr, res` 等）；对外接口保留直观名字（`find/merge/same`、`add/sum`、`power_mod`、`is_prime` 等）。
+- K&R 括号，缩进 4 空格；短 if/for 可写一行；函数体内不留多余空行。
+- 注释只留关键/易错处的一行（懒标记下传、128 位防溢出等），删掉解释性长注释；assert 等调试辅助保留。
+- 图、树、并查集、树状数组、线段树默认 **1-based**；字符串和普通数组算法默认 **0-based**。
+- 片段间依赖照旧：Dijkstra、SPFA、Prim 依赖 `Edge` 与 `Graph`，模逆元依赖 `exgcd`。
 
 ### 比赛代码骨架
 
@@ -37,29 +38,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-using ll = long long;       // 常规 64 位有符号整数。
-using i128 = __int128_t;    // 需要避免 64 位乘法溢出时使用。
+using ll = long long;
+using i128 = __int128_t;  // 避免 64 位乘法溢出时使用
 using u128 = __uint128_t;
-using pii = pair<int, int>; // 常用的“两个 int”组合。
+using pii = pair<int, int>;
 
-void Asanagi()
-{
-    // 当前测试用例的主逻辑。
+void Asanagi() {
+    // 单组数据主逻辑
 }
 
-int main()
-{
-    // 关闭 C 与 C++ 标准流同步，解绑 cin/cout，可显著加快输入输出。
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    // 默认只有一组数据；题目明确给出 T 时再取消下一行注释。
     int t = 1;
     // cin >> t;
-    while (t--)
-    {
-        Asanagi();
-    }
+    while (t--) Asanagi();
     return 0;
 }
 ```
@@ -68,210 +62,108 @@ int main()
 
 ### 1.1 64 位素数测试与整数分解
 
-确定性 Miller-Rabin 可在 `uint64_t` 范围内判断素数；Pollard-Rho 用于分解没有小因子的合数。前置条件为 `n >= 1`，分解结果按升序返回。
-
-- Miller-Rabin：对 64 位整数使用固定底数，单次判定约为 `O(log n)` 次模乘。
-- Pollard-Rho：期望复杂度约为 `O(n^(1/4))`，最坏复杂度不作保证。
-- 模乘使用 `__uint128_t`，避免 64 位乘法溢出。
+确定性 Miller-Rabin 判定 `uint64_t` 素性（`O(log n)` 次模乘），Pollard-Rho 分解无小因子合数（期望 `O(n^(1/4))`），结果升序返回。模乘用 `__uint128_t` 防溢出。
 
 ```cpp
 using u64 = uint64_t;
 using u128 = __uint128_t;
 
-u64 mul_mod(u64 a, u64 b, u64 mod)
-{
-    // 先提升到 128 位再相乘，避免 a * b 在 64 位中溢出。
-    return static_cast<u64>(static_cast<u128>(a) * b % mod);
+u64 mul_mod(u64 a, u64 b, u64 mod) {
+    return (u64)((u128)a * b % mod); // 128 位防溢出
 }
 
-u64 pow_mod(u64 a, u64 b, u64 mod)
-{
-    // res 保存已经选中的二进制位所贡献的乘积。
+u64 pow_mod(u64 a, u64 b, u64 mod) {
     u64 res = 1 % mod;
-    while (b > 0)
-    {
-        // 当前最低位为 1，说明答案需要乘上当前的 a。
-        if (b & 1)
-        {
-            res = mul_mod(res, a, mod);
-        }
-        // a 依次表示原底数的 1、2、4、8……次幂。
+    while (b > 0) {
+        if (b & 1) res = mul_mod(res, a, mod);
         a = mul_mod(a, a, mod);
         b >>= 1;
     }
     return res;
 }
 
-bool is_prime(u64 n)
-{
-    // 0、1 以及负数语义下的值都不是素数。
-    if (n < 2)
-    {
-        return false;
+bool is_prime(u64 n) {
+    if (n < 2) return false;
+    for (u64 p : {2ULL, 3ULL, 5ULL, 7ULL, 11ULL, 13ULL, 17ULL, 19ULL, 23ULL, 29ULL, 31ULL, 37ULL}) {
+        if (n % p == 0) return n == p;
     }
-
-    // 先处理小质数，既能加速，也能避免后面出现特殊边界。
-    for (u64 p : {2ULL, 3ULL, 5ULL, 7ULL, 11ULL, 13ULL, 17ULL, 19ULL, 23ULL, 29ULL, 31ULL, 37ULL})
-    {
-        if (n % p == 0)
-        {
-            return n == p;
-        }
-    }
-
-    // 把 n - 1 写成 d * 2^s，其中 d 为奇数。
     u64 d = n - 1;
     int s = 0;
-    while ((d & 1) == 0)
-    {
+    while ((d & 1) == 0) {
         d >>= 1;
         ++s;
     }
-
-    // 这组底数足以确定性判断完整 uint64_t 范围。
-    constexpr u64 bases[] = {
-        2ULL, 325ULL, 9375ULL, 28178ULL,
-        450775ULL, 9780504ULL, 1795265022ULL
-    };
-
-    for (u64 a : bases)
-    {
-        // a 是 n 的倍数时，这一轮没有判别能力，直接跳过。
-        if (a % n == 0)
-        {
-            continue;
-        }
-
-        // Miller-Rabin 首先检查 a^d mod n。
+    // 这组底数可确定性覆盖整个 uint64_t 范围
+    constexpr u64 bases[] = {2ULL, 325ULL, 9375ULL, 28178ULL, 450775ULL, 9780504ULL, 1795265022ULL};
+    for (u64 a : bases) {
+        if (a % n == 0) continue;
         u64 x = pow_mod(a % n, d, n);
-        if (x == 1 || x == n - 1)
-        {
-            continue;
-        }
-
-        // 连续平方；若始终到不了 n - 1，则 a 是“合数证人”。
+        if (x == 1 || x == n - 1) continue;
         bool witness = true;
-        for (int r = 1; r < s; ++r)
-        {
+        for (int r = 1; r < s; ++r) {
             x = mul_mod(x, x, n);
-            if (x == n - 1)
-            {
+            if (x == n - 1) {
                 witness = false;
                 break;
             }
         }
-        if (witness)
-        {
-            return false;
-        }
+        if (witness) return false;
     }
     return true;
 }
 
-// 随机起点和常数可以降低 Pollard-Rho 卡在坏循环上的概率。
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 
-u64 pollard_rho(u64 n)
-{
-    // 最常见的小因子直接返回，避免进入随机过程。
-    if (n % 2 == 0)
-    {
-        return 2;
-    }
-    if (n % 3 == 0)
-    {
-        return 3;
-    }
-
-    while (true)
-    {
+u64 pollard_rho(u64 n) {
+    if (n % 2 == 0) return 2;
+    if (n % 3 == 0) return 3;
+    while (true) {
         uniform_int_distribution<u64> pick(2, n - 2);
-        u64 x = pick(rng); // 慢指针。
-        u64 y = x;         // 快指针。
-        u64 c = pick(rng); // 多项式 f(v) = v^2 + c 中的常数。
-        u64 d = 1;         // 当前找到的 gcd；1 表示尚未找到因子。
-
-        auto next = [&](u64 value)
-        {
-            // 计算 f(value)，所有运算都在模 n 意义下进行。
-            return static_cast<u64>(
-                (static_cast<u128>(mul_mod(value, value, n)) + c) % n
-            );
-        };
-
-        while (d == 1)
-        {
-            // Floyd 判环：x 每次走一步，y 每次走两步。
-            x = next(x);
-            y = next(next(y));
-            u64 diff = x > y ? x - y : y - x;
-            // 若两个状态在某个质因子意义下相等，gcd 会暴露该因子。
-            d = gcd(diff, n);
+        u64 x = pick(rng), y = x, c = pick(rng), d = 1;
+        auto nxt = [&](u64 v) { return (u64)(((u128)mul_mod(v, v, n) + c) % n); }; // f(v) = v^2 + c
+        while (d == 1) { // Floyd 判环
+            x = nxt(x);
+            y = nxt(nxt(y));
+            d = gcd(x > y ? x - y : y - x, n);
         }
-
-        // d == n 表示本轮失败，重新随机参数再试。
-        if (d != n)
-        {
-            return d;
-        }
+        if (d != n) return d; // d == n 则本轮失败，重新随机
     }
 }
 
-void factor_dfs(u64 n, vector<u64>& factors)
-{
-    if (n == 1)
-    {
+void factor_dfs(u64 n, vector<u64>& fac) {
+    if (n == 1) return;
+    if (is_prime(n)) {
+        fac.push_back(n);
         return;
     }
-    if (is_prime(n))
-    {
-        // 递归终点：n 已经不能继续分解。
-        factors.push_back(n);
-        return;
-    }
-
-    // 找到一个非平凡因子后，把问题拆成 d 与 n / d 两部分。
     u64 d = pollard_rho(n);
-    factor_dfs(d, factors);
-    factor_dfs(n / d, factors);
+    factor_dfs(d, fac);
+    factor_dfs(n / d, fac);
 }
 
-vector<u64> factorize(u64 n)
-{
-    vector<u64> factors;
-    factor_dfs(n, factors);
-    // Pollard-Rho 找因子的顺序不固定，统一排序便于使用。
-    sort(factors.begin(), factors.end());
-    return factors;
+vector<u64> factorize(u64 n) {
+    vector<u64> fac;
+    factor_dfs(n, fac);
+    sort(fac.begin(), fac.end()); // 统一升序返回
+    return fac;
 }
 ```
 
 ### 1.2 快速幂
 
-计算 `a^b mod mod`，要求 `b >= 0` 且 `mod > 0`。使用 `i128` 完成中间乘法，适用于模数不超过有符号 64 位范围的场景。
+`a^b mod mod`，要求 `b >= 0`、`mod > 0`；中间乘法用 `i128`，模数不超过有符号 64 位。
 
 ```cpp
 using ll = long long;
 using i128 = __int128_t;
 
-ll power_mod(ll a, ll b, ll mod)
-{
-    // C++ 的负数取模仍可能为负，先把底数规范到 [0, mod)。
+ll power_mod(ll a, ll b, ll mod) {
     a %= mod;
-    if (a < 0)
-    {
-        a += mod;
-    }
-
-    ll res = 1 % mod; // mod == 1 时答案应为 0。
-    while (b > 0)
-    {
-        if (b & 1)
-        {
-            // 中间乘积使用 i128，避免 long long 溢出。
-            res = static_cast<ll>(static_cast<i128>(res) * a % mod);
-        }
-        a = static_cast<ll>(static_cast<i128>(a) * a % mod);
+    if (a < 0) a += mod;
+    ll res = 1 % mod; // mod == 1 时答案为 0
+    while (b > 0) {
+        if (b & 1) res = (ll)((i128)res * a % mod); // i128 防溢出
+        a = (ll)((i128)a * a % mod);
         b >>= 1;
     }
     return res;
@@ -280,352 +172,213 @@ ll power_mod(ll a, ll b, ll mod)
 
 ### 1.3 线性筛
 
-线性筛在 `O(n)` 时间内得到不超过 `n` 的全部素数，并记录每个正整数的最小质因子，空间复杂度为 `O(n)`。
+`O(n)` 筛出不超过 `n` 的全部素数，并记录每个数的最小质因子。
 
 > [!WARNING]
-> `vector<int> min_prime` 每个位置占 4 字节。在洛谷 P3383 的 `n = 10^8` 上，本实现实测峰值内存约为 **416 MB**；若只需要素数表或素性标记，应改用更节省内存的筛法。
+> `mp` 每位置占 4 字节：洛谷 P3383（`n = 10^8`）实测峰值内存约 **416 MB**；只要素数表/素性标记时应换更省内存的筛法。
 
 ```cpp
-struct LinearSieve
-{
-    vector<int> min_prime; // min_prime[x]：x 的最小质因子。
-    vector<int> primes;    // 按从小到大保存已经找到的全部质数。
+struct LinearSieve {
+    vector<int> mp; // mp[x]：x 的最小质因子
+    vector<int> primes;
 
-    explicit LinearSieve(int n) : min_prime(n + 1, 0)
-    {
-        for (int i = 2; i <= n; ++i)
-        {
-            if (min_prime[i] == 0)
-            {
-                // i 没被更小的质数筛掉，因此 i 本身是质数。
-                min_prime[i] = i;
+    explicit LinearSieve(int n) : mp(n + 1, 0) {
+        for (int i = 2; i <= n; ++i) {
+            if (mp[i] == 0) {
+                mp[i] = i;
                 primes.push_back(i);
             }
-
-            for (int p : primes)
-            {
-                // p > min_prime[i] 时继续枚举会造成重复筛除。
-                // 第二个条件保证 i * p 不越过预处理上界。
-                if (p > min_prime[i] || 1LL * i * p > n)
-                {
-                    break;
-                }
-                min_prime[i * p] = p;
+            for (int p : primes) {
+                if (p > mp[i] || 1LL * i * p > n) break; // 每个合数只被最小质因子筛一次
+                mp[i * p] = p;
             }
         }
     }
 
-    bool is_prime(int x) const
-    {
-        // 质数的最小质因子就是它自己。
-        return x >= 2 && min_prime[x] == x;
+    bool is_prime(int x) const {
+        return x >= 2 && mp[x] == x;
     }
 };
 ```
 
 ### 1.4 扩展欧几里得
 
-`exgcd(a, b, x, y)` 求出一组整数解，使 `a * x + b * y = gcd(a, b)`。进一步可解线性同余方程 `a * x = b (mod mod)`；返回值中的第二项是解的周期。
+`exgcd(a, b, x, y)` 求 `a*x + b*y = gcd(a, b)`；`solve_linear_congruence` 解 `a*x = b (mod mod)`，返回 `{x0, period}`。
 
 ```cpp
 using ll = long long;
 using i128 = __int128_t;
 
-ll exgcd(ll a, ll b, ll& x, ll& y)
-{
-    if (b == 0)
-    {
-        // a * 1 + 0 * 0 = a，递归从这里开始回代。
+ll exgcd(ll a, ll b, ll& x, ll& y) {
+    if (b == 0) {
         x = 1;
         y = 0;
         return a;
     }
-
-    // 递归参数中的 x、y 交换，是为了直接接住下一层的系数。
-    ll g = exgcd(b, a % b, y, x);
-    // 根据 a % b = a - floor(a / b) * b 回代系数。
+    ll g = exgcd(b, a % b, y, x); // 交换 x、y 直接接住下一层系数
     y -= a / b * x;
     return g;
 }
 
-optional<pair<ll, ll>> solve_linear_congruence(ll a, ll b, ll mod)
-{
+optional<pair<ll, ll>> solve_linear_congruence(ll a, ll b, ll mod) {
     assert(mod > 0);
-
     ll x, y;
     ll g = exgcd(a, mod, x, y);
-    // 统一让 gcd 为正，便于后续整除和取模。
-    if (g < 0)
-    {
+    if (g < 0) {
         g = -g;
         x = -x;
         y = -y;
     }
-    if (b % g != 0)
-    {
-        // gcd(a, mod) 不能整除 b 时，同余方程无解。
-        return nullopt;
-    }
-
-    ll period = mod / g; // 所有解按 period 循环出现。
-    // x * (b / g) 可能超过 64 位，因此使用 i128 计算。
-    ll x0 = static_cast<ll>(static_cast<i128>(x) * (b / g) % period);
-    if (x0 < 0)
-    {
-        x0 += period;
-    }
+    if (b % g != 0) return nullopt;
+    ll period = mod / g; // 所有解按 period 循环
+    ll x0 = (ll)((i128)x * (b / g) % period); // i128 防溢出
+    if (x0 < 0) x0 += period;
     return pair{x0, period};
 }
 ```
 
 ### 1.5 模逆元
 
-当且仅当 `gcd(a, mod) = 1` 时，`a` 在模 `mod` 意义下存在逆元。扩展欧几里得适用于任意正模数；费马小定理版本只适用于质数模数且 `a` 不能被模数整除。
+`gcd(a, mod) = 1` 时逆元存在。exgcd 版适用任意正模数；费马小定理版仅限质数模数且 `a` 不被模数整除。依赖 1.4 的 `exgcd` 与 1.2 的 `power_mod`。
 
 ```cpp
 using ll = long long;
 
-optional<ll> inverse_mod(ll a, ll mod)
-{
+optional<ll> inverse_mod(ll a, ll mod) {
     assert(mod > 0);
     a %= mod;
-    if (a < 0)
-    {
-        a += mod;
-    }
-
+    if (a < 0) a += mod;
     ll x, y;
-    ll g = exgcd(a, mod, x, y);
-    if (g != 1)
-    {
-        // 只有 gcd(a, mod) == 1 时逆元才存在。
-        return nullopt;
-    }
-
-    // exgcd 给出的 x 可能为负，将其规范到 [0, mod)。
+    if (exgcd(a, mod, x, y) != 1) return nullopt; // 仅 gcd == 1 时存在
     x %= mod;
-    if (x < 0)
-    {
-        x += mod;
-    }
+    if (x < 0) x += mod;
     return x;
 }
 
-ll inverse_prime_mod(ll a, ll prime_mod)
-{
-    // 费马小定理：a^(p - 1) ≡ 1 (mod p)，所以逆元是 a^(p - 2)。
-    assert(a % prime_mod != 0);
-    return power_mod(a, prime_mod - 2, prime_mod);
+ll inverse_prime_mod(ll a, ll p) {
+    assert(a % p != 0);
+    return power_mod(a, p - 2, p); // 费马小定理，p 必须为质数
 }
 ```
 
 ### 1.6 卡特兰数
 
-卡特兰数常见于合法括号序列、不同形态的二叉树、凸多边形三角剖分等计数问题。前几项为 `1, 1, 2, 5, 14, 42, ...`。
-
-常用闭式为 `C[n] = binom(2n, n) / (n + 1)`，也可写成 `binom(2n, n) - binom(2n, n - 1)`。
-
-递推式
-
-`C[n] = C[n - 1] * (4n - 2) / (n + 1)`
-
-中的除法一定整除。卡特兰数增长很快：`C[36]` 是最后一个能放入 `unsigned long long` 的卡特兰数，`C[37]` 已经溢出。
-
-下面的无依赖版本会在乘法前约分，避免“最终答案未溢出，但中间乘积先溢出”。它已在洛谷 P1044（该题只需要 `n <= 18`）通过。
+`C[n] = binom(2n, n) / (n + 1)`，递推 `C[n] = C[n-1] * (4n - 2) / (n + 1)` 中的除法必整除。`C[36]` 是最后一个能放进 `unsigned long long` 的值。无依赖版乘前约分防中间溢出，已过洛谷 P1044（`n <= 18`）。
 
 ```cpp
 using u64 = unsigned long long;
 
-vector<u64> catalan_u64(int n)
-{
+vector<u64> catalan_u64(int n) {
     assert(0 <= n && n <= 36);
-    vector<u64> catalan(n + 1);
-    catalan[0] = 1; // 空结构也算一种方案。
-
-    for (int i = 1; i <= n; ++i)
-    {
-        u64 numerator = 4ULL * i - 2;
-        u64 denominator = i + 1;
-        u64 previous = catalan[i - 1];
-
-        // 分母可分别与乘数、上一项约分，最终一定被完全消去。
-        u64 common = gcd(numerator, denominator);
-        numerator /= common;
-        denominator /= common;
-
-        common = gcd(previous, denominator);
-        previous /= common;
-        denominator /= common;
-
-        assert(denominator == 1);
-        assert(previous <= numeric_limits<u64>::max() / numerator);
-        catalan[i] = previous * numerator;
+    vector<u64> c(n + 1);
+    c[0] = 1;
+    for (int i = 1; i <= n; ++i) {
+        u64 num = 4ULL * i - 2, den = i + 1, pre = c[i - 1];
+        u64 g = gcd(num, den); // 乘前约分，防中间溢出
+        num /= g;
+        den /= g;
+        g = gcd(pre, den);
+        pre /= g;
+        den /= g;
+        assert(den == 1);
+        assert(pre <= numeric_limits<u64>::max() / num);
+        c[i] = pre * num;
     }
-    return catalan;
+    return c;
 }
 ```
 
-若需要 `n > 36` 的精确值，可使用 Boost.Multiprecision。2026-07-25 的洛谷 C++17 评测环境未提供该头文件，因此比赛前应确认目标平台是否支持 `boost/multiprecision/cpp_int.hpp`。
+`n > 36` 用 Boost.Multiprecision。注意洛谷 C++17 评测环境（2026-07-25 实测）未提供该头文件，赛前确认平台支持。
 
 ```cpp
 #include <boost/multiprecision/cpp_int.hpp>
 
 using boost::multiprecision::cpp_int;
 
-vector<cpp_int> catalan_exact(int n)
-{
+vector<cpp_int> catalan_exact(int n) {
     assert(n >= 0);
-    vector<cpp_int> catalan(n + 1);
-    catalan[0] = 1; // 空结构也算一种方案。
-
-    for (int i = 1; i <= n; ++i)
-    {
-        // 先乘后除；根据卡特兰数递推式，这里不会产生小数。
-        catalan[i] = catalan[i - 1] * (4LL * i - 2) / (i + 1);
-    }
-    return catalan;
+    vector<cpp_int> c(n + 1);
+    c[0] = 1;
+    for (int i = 1; i <= n; ++i) c[i] = c[i - 1] * (4LL * i - 2) / (i + 1);
+    return c;
 }
 ```
 
 ### 1.7 循环引理
 
-若整数序列的总和大于 0，从“最后一个最小前缀和”的后一位开始循环，可得到一个所有非空前缀和都严格大于 0 的循环移位。
-
-经典循环引理还说明：当每一项都是 `+1` 或 `-1`，且总和为 `k > 0` 时，恰有 `k` 个循环移位满足所有非空前缀和严格为正。
+总和大于 0 时，从“最后一个最小前缀和”的后一位开始循环，可得所有非空前缀和严格为正的循环移位。`+1/-1` 序列总和为 `k > 0` 时恰有 `k` 个合法移位。
 
 ```cpp
 using ll = long long;
 
-int positive_rotation_start(const vector<ll>& a)
-{
-    if (a.empty())
-    {
-        return 0;
-    }
-
+int positive_rotation_start(const vector<ll>& a) {
+    if (a.empty()) return 0;
     ll total = accumulate(a.begin(), a.end(), 0LL);
-    if (total <= 0)
-    {
-        // 总和不为正时，不保证存在满足条件的循环移位。
-        return -1;
-    }
-
-    ll prefix = 0;
-    ll minimum_prefix = 0;
-    int start = 0;
-
-    for (int i = 0; i < static_cast<int>(a.size()); ++i)
-    {
-        prefix += a[i];
-        if (prefix <= minimum_prefix)
-        {
-            // 使用 <=，确保记录的是“最后一次”取得最小值的位置。
-            minimum_prefix = prefix;
-            start = i + 1;
+    if (total <= 0) return -1; // 总和不为正时不保证存在
+    ll pre = 0, mi = 0;
+    int st = 0;
+    for (int i = 0; i < (int)a.size(); ++i) {
+        pre += a[i];
+        if (pre <= mi) { // <= 取最后一次最小值
+            mi = pre;
+            st = i + 1;
         }
     }
-
-    // start == a.size() 表示从原序列的 0 号位置开始。
-    return start % static_cast<int>(a.size());
+    return st % (int)a.size();
 }
 ```
 
 ### 1.8 莫比乌斯反演入门
 
-莫比乌斯函数满足：
-
-- `mu(1) = 1`；
-- 含有平方质因子的数，`mu(n) = 0`；
-- 其余情况下，若 `n` 含有 `k` 个不同质因子，则 `mu(n) = (-1)^k`。
-
-若
-
-`F(n) = sum(f(d))`，其中 `d` 枚举 `n` 的所有正因数，
-
-则莫比乌斯反演给出
-
-`f(n) = sum(mu(d) * F(n / d))`。
+`mu(1) = 1`；含平方质因子则 `mu = 0`；否则 `k` 个不同质因子时 `mu = (-1)^k`。若 `F(n) = sum_{d|n} f(d)`，则 `f(n) = sum mu(d) * F(n / d)`。
 
 ```cpp
 using ll = long long;
 
-struct MobiusSieve
-{
-    vector<int> mu;
-    vector<int> primes;
-    vector<char> is_composite;
+struct MobiusSieve {
+    vector<int> mu, primes;
+    vector<char> vis;
 
-    explicit MobiusSieve(int n)
-        : mu(n + 1, 0), is_composite(n + 1, false)
-    {
+    explicit MobiusSieve(int n) : mu(n + 1, 0), vis(n + 1, false) {
         assert(n >= 1);
         mu[1] = 1;
-
-        for (int i = 2; i <= n; ++i)
-        {
-            if (!is_composite[i])
-            {
-                // 质数只有一个不同质因子，所以 mu[p] = -1。
+        for (int i = 2; i <= n; ++i) {
+            if (!vis[i]) {
                 primes.push_back(i);
                 mu[i] = -1;
             }
-
-            for (int p : primes)
-            {
-                if (1LL * i * p > n)
-                {
+            for (int p : primes) {
+                if (1LL * i * p > n) break;
+                vis[i * p] = true;
+                if (i % p == 0) { // i*p 含 p^2
+                    mu[i * p] = 0;
                     break;
                 }
-
-                int value = i * p;
-                is_composite[value] = true;
-                if (i % p == 0)
-                {
-                    // value 含有 p^2，莫比乌斯函数为 0。
-                    mu[value] = 0;
-                    break;
-                }
-
-                // 新增了一个不同质因子，符号翻转。
-                mu[value] = -mu[i];
+                mu[i * p] = -mu[i];
             }
         }
     }
 };
 
-vector<ll> mobius_invert(const vector<ll>& divisor_sum)
-{
-    // 输入约定：divisor_sum[n] = sum_{d | n} original[d]。
-    int n = static_cast<int>(divisor_sum.size()) - 1;
-    MobiusSieve sieve(n);
-    vector<ll> original(n + 1, 0);
-
-    for (int d = 1; d <= n; ++d)
-    {
-        if (sieve.mu[d] == 0)
-        {
-            continue;
-        }
-        for (int multiple = d; multiple <= n; multiple += d)
-        {
-            original[multiple] += 1LL * sieve.mu[d]
-                                * divisor_sum[multiple / d];
-        }
+vector<ll> mobius_invert(const vector<ll>& F) {
+    // 输入约定：F[n] = sum_{d | n} f[d]
+    int n = (int)F.size() - 1;
+    MobiusSieve s(n);
+    vector<ll> f(n + 1, 0);
+    for (int d = 1; d <= n; ++d) {
+        if (s.mu[d] == 0) continue;
+        for (int m = d; m <= n; m += d) f[m] += 1LL * s.mu[d] * F[m / d];
     }
-    return original;
+    return f;
 }
 
-ll count_coprime_pairs(ll n, ll m, const vector<int>& mu)
-{
-    // 统计 1 <= x <= n、1 <= y <= m 且 gcd(x, y) == 1 的有序数对。
-    int limit = static_cast<int>(min(n, m));
-    assert(static_cast<int>(mu.size()) > limit);
-    ll answer = 0;
-    for (int d = 1; d <= limit; ++d)
-    {
-        answer += 1LL * mu[d] * (n / d) * (m / d);
-    }
-    return answer;
+ll count_coprime_pairs(ll n, ll m, const vector<int>& mu) {
+    // 1 <= x <= n, 1 <= y <= m 且 gcd(x, y) == 1 的有序对数
+    int lim = (int)min(n, m);
+    assert((int)mu.size() > lim);
+    ll res = 0;
+    for (int d = 1; d <= lim; ++d) res += 1LL * mu[d] * (n / d) * (m / d);
+    return res;
 }
 ```
 
@@ -633,1084 +386,688 @@ ll count_coprime_pairs(ll n, ll m, const vector<int>& mu)
 
 ### 2.1 树状数组
 
-下标采用 **1-based**。单点增加与前缀和查询均为 `O(log n)`；`lower_bound` 仅在所有增量非负、前缀和单调时使用。
+**1-based**。`add`/`sum` 均为 `O(log n)`；`lower_bound` 仅在增量全非负（前缀和单调）时可用。
 
 ```cpp
 template <class T>
-struct Fenwick
-{
-    int n;         // 可用下标范围为 [1, n]。
-    vector<T> bit; // bit[i] 维护长度为 lowbit(i) 的一段后缀和。
+struct Fenwick {
+    int n; // 有效下标 [1, n]
+    vector<T> tr;
 
-    explicit Fenwick(int n_) : n(n_), bit(n_ + 1, T{})
-    {
+    explicit Fenwick(int n_) : n(n_), tr(n_ + 1, T{}) {}
+
+    void add(int x, T d) {
+        for (int i = x; i <= n; i += i & -i) tr[i] += d;
     }
 
-    void add(int idx, T delta)
-    {
-        // 每次跳到包含 idx 的更大树状数组节点。
-        for (int i = idx; i <= n; i += i & -i)
-        {
-            bit[i] += delta;
-        }
-    }
-
-    T prefix_sum(int idx) const
-    {
+    T sum(int x) const { // 前缀和 [1, x]
         T res{};
-        // 不断删掉最低位的 1，把 [1, idx] 拆成若干互不相交区间。
-        for (int i = idx; i > 0; i -= i & -i)
-        {
-            res += bit[i];
-        }
+        for (int i = x; i > 0; i -= i & -i) res += tr[i];
         return res;
     }
 
-    T range_sum(int left, int right) const
-    {
-        if (left > right)
-        {
-            return T{};
-        }
-        // [left, right] = [1, right] - [1, left - 1]。
-        return prefix_sum(right) - prefix_sum(left - 1);
+    T range_sum(int l, int r) const {
+        if (l > r) return T{};
+        return sum(r) - sum(l - 1);
     }
 
-    int lower_bound(T target) const
-    {
-        // 查找最小的 idx，使 prefix_sum(idx) >= target。
+    int lower_bound(T target) const { // 最小的 x 使 sum(x) >= target
         assert(target > T{});
-
-        int idx = 0;   // 当前已确认“前缀和仍小于 target”的最大位置。
-        T current{};   // prefix_sum(idx)。
+        int x = 0;
+        T cur{};
         int step = 1;
-        // 从不超过 n 的最高二进制位开始试跳。
-        while ((step << 1) <= n)
-        {
-            step <<= 1;
-        }
-
-        for (; step > 0; step >>= 1)
-        {
-            int next = idx + step;
-            if (next <= n && current + bit[next] < target)
-            {
-                // 加上这一整块后仍不够 target，可以安全跳过去。
-                idx = next;
-                current += bit[next];
+        while ((step << 1) <= n) step <<= 1; // 不超过 n 的最高二进制位
+        for (; step > 0; step >>= 1) {
+            int nx = x + step;
+            if (nx <= n && cur + tr[nx] < target) {
+                x = nx;
+                cur += tr[nx];
             }
         }
-        return idx + 1;
+        return x + 1;
     }
 };
 ```
 
 ### 2.2 线段树
 
-该版本维护 **1-based** 数组，支持区间赋值与区间求和，单次操作复杂度为 `O(log n)`。`has_lazy` 用于区分“没有懒标记”和“整段赋值为 0”。
+**1-based**，区间加 + 区间求和，单次 `O(log n)`。孩子用 `o<<1` / `o<<1|1`，懒标记 `lz` 存待下传的增量。
 
 ```cpp
 using ll = long long;
 
-struct SegTreeRangeSet
-{
+struct SegTree {
     int n;
-    vector<ll> tree;      // tree[node]：当前区间的元素和。
-    vector<ll> lazy;      // lazy[node]：待下传的“整段赋值”。
-    vector<char> has_lazy; // 单独记录是否有标记，因为赋值为 0 也是合法操作。
+    vector<ll> tr, lz; // tr：区间和；lz：待下传的区间加
 
-    explicit SegTreeRangeSet(const vector<ll>& a)
-        : n(static_cast<int>(a.size()) - 1),
-          tree(4 * n + 4, 0),
-          lazy(4 * n + 4, 0),
-          has_lazy(4 * n + 4, false)
-    {
+    explicit SegTree(const vector<ll>& a) : n((int)a.size() - 1), tr(4 * n + 4), lz(4 * n + 4) {
         assert(n >= 1);
         build(1, 1, n, a);
     }
 
-    void build(int node, int left, int right, const vector<ll>& a)
-    {
-        if (left == right)
-        {
-            // 叶子节点只对应原数组中的一个位置。
-            tree[node] = a[left];
+    void build(int o, int l, int r, const vector<ll>& a) {
+        if (l == r) {
+            tr[o] = a[l];
             return;
         }
-
-        int mid = (left + right) / 2;
-        build(node * 2, left, mid, a);
-        build(node * 2 + 1, mid + 1, right, a);
-        pull(node);
+        int mid = (l + r) >> 1;
+        build(o << 1, l, mid, a);
+        build(o << 1 | 1, mid + 1, r, a);
+        pushup(o);
     }
 
-    void pull(int node)
-    {
-        // 父区间的和等于左右子区间之和。
-        tree[node] = tree[node * 2] + tree[node * 2 + 1];
+    void pushup(int o) {
+        tr[o] = tr[o << 1] + tr[o << 1 | 1];
     }
 
-    void apply(int node, int left, int right, ll value)
-    {
-        // 整段都变为 value，区间和就是 value * 区间长度。
-        tree[node] = value * (right - left + 1);
-        lazy[node] = value;
-        has_lazy[node] = true;
+    void pushdown(int o, int l, int r) { // 懒标记下传
+        if (lz[o] == 0 || l == r) return;
+        int mid = (l + r) >> 1;
+        tr[o << 1] += lz[o] * (mid - l + 1);
+        lz[o << 1] += lz[o];
+        tr[o << 1 | 1] += lz[o] * (r - mid);
+        lz[o << 1 | 1] += lz[o];
+        lz[o] = 0;
     }
 
-    void push(int node, int left, int right)
-    {
-        // 没有标记或已经是叶子时，无需下传。
-        if (!has_lazy[node] || left == right)
-        {
+    void modify(int ql, int qr, ll v) {
+        modify(1, 1, n, ql, qr, v);
+    }
+
+    void modify(int o, int l, int r, int ql, int qr, ll v) { // 区间加
+        if (ql <= l && r <= qr) {
+            tr[o] += v * (r - l + 1);
+            lz[o] += v;
             return;
         }
-
-        int mid = (left + right) / 2;
-        // 左右孩子都继承父节点的整段赋值。
-        apply(node * 2, left, mid, lazy[node]);
-        apply(node * 2 + 1, mid + 1, right, lazy[node]);
-        has_lazy[node] = false;
+        pushdown(o, l, r);
+        int mid = (l + r) >> 1;
+        if (ql <= mid) modify(o << 1, l, mid, ql, qr, v);
+        if (qr > mid) modify(o << 1 | 1, mid + 1, r, ql, qr, v);
+        pushup(o);
     }
 
-    void range_set(int query_left, int query_right, ll value)
-    {
-        range_set(1, 1, n, query_left, query_right, value);
+    ll query(int ql, int qr) {
+        return query(1, 1, n, ql, qr);
     }
 
-    void range_set(int node, int left, int right, int query_left, int query_right, ll value)
-    {
-        // 当前区间与修改区间完全不相交。
-        if (query_right < left || right < query_left)
-        {
-            return;
-        }
-        if (query_left <= left && right <= query_right)
-        {
-            // 当前区间被完整覆盖，直接打懒标记，不再递归。
-            apply(node, left, right, value);
-            return;
-        }
-
-        // 继续访问孩子前，必须先把旧标记下传。
-        push(node, left, right);
-        int mid = (left + right) / 2;
-        range_set(node * 2, left, mid, query_left, query_right, value);
-        range_set(node * 2 + 1, mid + 1, right, query_left, query_right, value);
-        pull(node);
-    }
-
-    ll range_sum(int query_left, int query_right)
-    {
-        return range_sum(1, 1, n, query_left, query_right);
-    }
-
-    ll range_sum(int node, int left, int right, int query_left, int query_right)
-    {
-        if (query_right < left || right < query_left)
-        {
-            return 0;
-        }
-        if (query_left <= left && right <= query_right)
-        {
-            // 完整覆盖时直接使用已经维护好的区间和。
-            return tree[node];
-        }
-
-        push(node, left, right);
-        int mid = (left + right) / 2;
-        return range_sum(node * 2, left, mid, query_left, query_right)
-             + range_sum(node * 2 + 1, mid + 1, right, query_left, query_right);
+    ll query(int o, int l, int r, int ql, int qr) { // 区间和
+        if (ql <= l && r <= qr) return tr[o];
+        pushdown(o, l, r);
+        int mid = (l + r) >> 1;
+        ll res = 0;
+        if (ql <= mid) res += query(o << 1, l, mid, ql, qr);
+        if (qr > mid) res += query(o << 1 | 1, mid + 1, r, ql, qr);
+        return res;
     }
 };
 ```
+
+改成区间赋值版的要点（不另附代码）：
+- 懒标记改为“整段赋为 v”：`tr[o] = v * (r - l + 1)`，`pushdown` 用覆盖而非累加；
+- 需额外 `has_lz` 标记区分“无标记”和“整段赋 0”。
 
 ### 2.3 并查集
 
-下标采用 **1-based**。路径压缩配合按集合大小合并，单次操作的均摊复杂度接近 `O(1)`；`merge` 返回是否真的合并了两个集合。
+**1-based**，路径压缩 + 按大小合并，均摊近 `O(1)`；`merge` 返回是否真的合并。
 
 ```cpp
-struct DSU
-{
-    vector<int> parent; // parent[x]：x 在并查集森林中的父节点。
-    vector<int> size;   // 只保证根节点的 size 有意义。
-    int set_count;      // 当前互不相交集合的数量。
+struct DSU {
+    vector<int> fa, siz; // siz 只对根有意义
+    int cnt;             // 集合数量
 
-    explicit DSU(int n) : parent(n + 1), size(n + 1, 1), set_count(n)
-    {
-        // 初始时每个点都是自己的根。
-        iota(parent.begin(), parent.end(), 0);
+    explicit DSU(int n) : fa(n + 1), siz(n + 1, 1), cnt(n) {
+        iota(fa.begin(), fa.end(), 0);
     }
 
-    int find(int x)
-    {
-        if (parent[x] == x)
-        {
-            return x;
-        }
-        // 路径压缩：以后再查询 x 时可以直接接近根节点。
-        return parent[x] = find(parent[x]);
+    int find(int x) {
+        if (fa[x] == x) return x;
+        return fa[x] = find(fa[x]); // 路径压缩
     }
 
-    bool merge(int x, int y)
-    {
+    bool merge(int x, int y) {
         x = find(x);
         y = find(y);
-        if (x == y)
-        {
-            return false;
-        }
-        if (size[x] < size[y])
-        {
-            // 始终把小树接到大树下面，控制树高。
-            swap(x, y);
-        }
-
-        parent[y] = x; // y 不再是根，整个集合并入 x。
-        size[x] += size[y];
-        --set_count;
+        if (x == y) return false;
+        if (siz[x] < siz[y]) swap(x, y); // 小树并到大树
+        fa[y] = x;
+        siz[x] += siz[y];
+        --cnt;
         return true;
     }
 
-    bool same(int x, int y)
-    {
+    bool same(int x, int y) {
         return find(x) == find(y);
     }
 
-    int component_size(int x)
-    {
-        return size[find(x)];
+    int size(int x) {
+        return siz[find(x)];
     }
 };
 ```
 
-### 2.4 分数类
+### 2.4 异或线性基
 
-分子、分母始终约分，且分母保持为正。四则运算使用 `i128` 计算中间值，并断言最终结果能放入 `ll`；除法还要求除数非零。
+维护一组线性无关的二进制向量，可求最大子集异或和、判断可表示性、空间维数。处理 `uint64_t`，从高位向低位消元。
+
+```cpp
+using u64 = uint64_t;
+
+struct XorBasis {
+    static constexpr int BITS = 64;
+    array<u64, BITS> b{};
+    int rk = 0; // 线性无关向量数
+
+    bool insert(u64 v) {
+        for (int i = BITS - 1; i >= 0; --i) {
+            if (((v >> i) & 1ULL) == 0) continue;
+            if (b[i] == 0) {
+                b[i] = v;
+                ++rk;
+                return true;
+            }
+            v ^= b[i]; // 消掉当前最高位
+        }
+        return false; // v 可由已有基异或得到
+    }
+
+    bool can_represent(u64 v) const {
+        for (int i = BITS - 1; i >= 0; --i) {
+            if ((v >> i) & 1ULL) v ^= b[i];
+        }
+        return v == 0;
+    }
+
+    u64 max_xor(u64 init = 0) const {
+        u64 res = init;
+        for (int i = BITS - 1; i >= 0; --i) res = max(res, res ^ b[i]);
+        return res;
+    }
+};
+```
+
+### 2.5 分数类
+
+分子分母始终约分、分母恒正；四则运算中间值用 `i128`，并断言结果能放入 `ll`；除法要求除数非零。
 
 ```cpp
 using ll = long long;
 using i128 = __int128_t;
 
-struct Fraction
-{
-    ll num = 0; // 分子。
-    ll den = 1; // 分母始终为正。
+struct Fraction {
+    ll num = 0, den = 1; // den 始终为正
 
     Fraction() = default;
 
-    Fraction(ll num_, ll den_ = 1) : num(num_), den(den_)
-    {
+    Fraction(ll num_, ll den_ = 1) : num(num_), den(den_) {
         normalize();
     }
 
-    static i128 gcd_i128(i128 a, i128 b)
-    {
-        // 独立实现 128 位 gcd，避免中间数退回 64 位。
-        if (a < 0)
-        {
-            a = -a;
-        }
-        if (b < 0)
-        {
-            b = -b;
-        }
-        while (b != 0)
-        {
+    static i128 gcd_i128(i128 a, i128 b) {
+        if (a < 0) a = -a;
+        if (b < 0) b = -b;
+        while (b != 0) {
             a %= b;
             swap(a, b);
         }
         return a;
     }
 
-    void normalize()
-    {
+    void normalize() {
         assert(den != 0);
-        // 提升到 i128 后再处理 LLONG_MIN 取反等边界。
-        i128 wide_num = num;
-        i128 wide_den = den;
-        if (wide_den < 0)
-        {
-            // 统一把负号放到分子上。
-            wide_num = -wide_num;
-            wide_den = -wide_den;
+        i128 a = num, b = den; // i128 处理 LLONG_MIN 取反等边界
+        if (b < 0) {
+            a = -a;
+            b = -b;
         }
-
-        // 构造后立刻约分，保证相等分数具有唯一表示。
-        i128 g = gcd_i128(wide_num, wide_den);
-        wide_num /= g;
-        wide_den /= g;
-        assert(wide_num >= numeric_limits<ll>::min()
-            && wide_num <= numeric_limits<ll>::max());
-        assert(wide_den >= 1 && wide_den <= numeric_limits<ll>::max());
-        num = static_cast<ll>(wide_num);
-        den = static_cast<ll>(wide_den);
+        i128 g = gcd_i128(a, b);
+        a /= g;
+        b /= g;
+        assert(a >= numeric_limits<ll>::min() && a <= numeric_limits<ll>::max());
+        assert(b >= 1 && b <= numeric_limits<ll>::max());
+        num = (ll)a;
+        den = (ll)b;
     }
 
-    static Fraction from_i128(i128 num, i128 den)
-    {
-        // 所有四则运算都先在 i128 中完成，再从这里统一约分和检查范围。
-        assert(den != 0);
-        if (den < 0)
-        {
-            num = -num;
-            den = -den;
+    static Fraction from_i128(i128 a, i128 b) { // 四则运算统一在此约分并检查范围
+        assert(b != 0);
+        if (b < 0) {
+            a = -a;
+            b = -b;
         }
-
-        i128 g = gcd_i128(num, den);
-        num /= g;
-        den /= g;
-        assert(num >= numeric_limits<ll>::min() && num <= numeric_limits<ll>::max());
-        assert(den >= 1 && den <= numeric_limits<ll>::max());
-
-        Fraction result;
-        result.num = static_cast<ll>(num);
-        result.den = static_cast<ll>(den);
-        return result;
+        i128 g = gcd_i128(a, b);
+        a /= g;
+        b /= g;
+        assert(a >= numeric_limits<ll>::min() && a <= numeric_limits<ll>::max());
+        assert(b >= 1 && b <= numeric_limits<ll>::max());
+        Fraction res;
+        res.num = (ll)a;
+        res.den = (ll)b;
+        return res;
     }
 
-    friend Fraction operator+(const Fraction& lhs, const Fraction& rhs)
-    {
-        // a / b + c / d = (ad + cb) / bd。
-        return from_i128(
-            static_cast<i128>(lhs.num) * rhs.den + static_cast<i128>(rhs.num) * lhs.den,
-            static_cast<i128>(lhs.den) * rhs.den
-        );
+    friend Fraction operator+(const Fraction& x, const Fraction& y) {
+        return from_i128((i128)x.num * y.den + (i128)y.num * x.den, (i128)x.den * y.den);
     }
 
-    friend Fraction operator-(const Fraction& lhs, const Fraction& rhs)
-    {
-        return from_i128(
-            static_cast<i128>(lhs.num) * rhs.den - static_cast<i128>(rhs.num) * lhs.den,
-            static_cast<i128>(lhs.den) * rhs.den
-        );
+    friend Fraction operator-(const Fraction& x, const Fraction& y) {
+        return from_i128((i128)x.num * y.den - (i128)y.num * x.den, (i128)x.den * y.den);
     }
 
-    friend Fraction operator*(const Fraction& lhs, const Fraction& rhs)
-    {
-        // 中间乘积可能超过 ll，因此先转换为 i128。
-        return from_i128(
-            static_cast<i128>(lhs.num) * rhs.num,
-            static_cast<i128>(lhs.den) * rhs.den
-        );
+    friend Fraction operator*(const Fraction& x, const Fraction& y) {
+        return from_i128((i128)x.num * y.num, (i128)x.den * y.den);
     }
 
-    friend Fraction operator/(const Fraction& lhs, const Fraction& rhs)
-    {
-        // 除以 c / d 等价于乘以 d / c，因此 c 不能为 0。
-        assert(rhs.num != 0);
-        i128 num = static_cast<i128>(lhs.num) * rhs.den;
-        i128 den = static_cast<i128>(lhs.den) * rhs.num;
-        if (den < 0)
-        {
-            num = -num;
-            den = -den;
+    friend Fraction operator/(const Fraction& x, const Fraction& y) {
+        assert(y.num != 0);
+        i128 a = (i128)x.num * y.den, b = (i128)x.den * y.num;
+        if (b < 0) {
+            a = -a;
+            b = -b;
         }
-        return from_i128(num, den);
+        return from_i128(a, b);
     }
 
-    friend bool operator==(const Fraction& lhs, const Fraction& rhs)
-    {
-        return lhs.num == rhs.num && lhs.den == rhs.den;
+    friend bool operator==(const Fraction& x, const Fraction& y) {
+        return x.num == y.num && x.den == y.den;
     }
 
-    friend bool operator<(const Fraction& lhs, const Fraction& rhs)
-    {
-        // 分母均为正，可以安全交叉相乘比较。
-        return static_cast<i128>(lhs.num) * rhs.den
-             < static_cast<i128>(rhs.num) * lhs.den;
+    friend bool operator<(const Fraction& x, const Fraction& y) {
+        return (i128)x.num * y.den < (i128)y.num * x.den; // 分母均为正，可交叉相乘
     }
 
-    friend ostream& operator<<(ostream& out, const Fraction& value)
-    {
-        out << value.num;
-        if (value.den != 1)
-        {
-            out << '/' << value.den;
-        }
+    friend ostream& operator<<(ostream& out, const Fraction& v) {
+        out << v.num;
+        if (v.den != 1) out << '/' << v.den;
         return out;
     }
 };
 ```
 
-### 2.5 取模类
+### 2.6 取模类
 
-该模板面向小于 `2^32` 的质数模数。乘法用 `uint64_t` 承接中间结果；除法通过费马小定理求逆元，因此除数不能为 0。
+面向小于 `2^32` 的质数模数；乘法用 `uint64_t` 承接，除法走费马小定理求逆（除数不能为 0）。
 
 ```cpp
 template <uint32_t MOD>
-class ModInt
-{
+class ModInt {
 public:
-    ModInt(long long value = 0)
-    {
-        // 任何输入都规范到 [0, MOD)。
-        value %= static_cast<long long>(MOD);
-        if (value < 0)
-        {
-            value += MOD;
-        }
-        value_ = static_cast<uint32_t>(value);
+    ModInt(long long v = 0) {
+        v %= (long long)MOD;
+        if (v < 0) v += MOD;
+        x = (uint32_t)v;
     }
 
-    uint32_t value() const
-    {
-        return value_;
+    uint32_t value() const {
+        return x;
     }
 
-    ModInt power(uint64_t exponent) const
-    {
-        // 与普通快速幂相同，只是每次乘法都会自动取模。
-        ModInt base = *this;
-        ModInt res = 1;
-        while (exponent > 0)
-        {
-            if (exponent & 1)
-            {
-                res *= base;
-            }
-            base *= base;
-            exponent >>= 1;
+    ModInt power(uint64_t b) const {
+        ModInt a = *this, res = 1;
+        while (b > 0) {
+            if (b & 1) res *= a;
+            a *= a;
+            b >>= 1;
         }
         return res;
     }
 
-    ModInt inverse() const
-    {
-        // MOD 必须为质数；0 没有乘法逆元。
-        assert(value_ != 0);
+    ModInt inverse() const {
+        assert(x != 0); // MOD 必须为质数
         return power(MOD - 2);
     }
 
-    ModInt& operator+=(const ModInt& rhs)
-    {
-        // 两个模数内的值相加最多小于 2 * MOD，只需减一次。
-        uint64_t sum = static_cast<uint64_t>(value_) + rhs.value_;
-        value_ = static_cast<uint32_t>(sum >= MOD ? sum - MOD : sum);
+    ModInt& operator+=(const ModInt& r) {
+        uint64_t s = (uint64_t)x + r.x;
+        x = (uint32_t)(s >= MOD ? s - MOD : s); // 最多减一次
         return *this;
     }
 
-    ModInt& operator-=(const ModInt& rhs)
-    {
-        // 不够减时先加一个 MOD，避免无符号下溢。
-        uint64_t difference = value_ >= rhs.value_
-            ? value_ - rhs.value_
-            : static_cast<uint64_t>(value_) + MOD - rhs.value_;
-        value_ = static_cast<uint32_t>(difference);
+    ModInt& operator-=(const ModInt& r) {
+        uint64_t d = x >= r.x ? x - r.x : (uint64_t)x + MOD - r.x; // 防无符号下溢
+        x = (uint32_t)d;
         return *this;
     }
 
-    ModInt& operator*=(const ModInt& rhs)
-    {
-        // MOD < 2^32，因此两个余数的乘积可放入 uint64_t。
-        value_ = static_cast<uint32_t>(
-            static_cast<uint64_t>(value_) * rhs.value_ % MOD
-        );
+    ModInt& operator*=(const ModInt& r) {
+        x = (uint32_t)((uint64_t)x * r.x % MOD); // MOD < 2^32，乘积可放入 u64
         return *this;
     }
 
-    ModInt& operator/=(const ModInt& rhs)
-    {
-        return *this *= rhs.inverse();
+    ModInt& operator/=(const ModInt& r) {
+        return *this *= r.inverse();
     }
 
-    friend ModInt operator+(ModInt lhs, const ModInt& rhs)
-    {
-        return lhs += rhs;
+    friend ModInt operator+(ModInt l, const ModInt& r) { return l += r; }
+    friend ModInt operator-(ModInt l, const ModInt& r) { return l -= r; }
+    friend ModInt operator*(ModInt l, const ModInt& r) { return l *= r; }
+    friend ModInt operator/(ModInt l, const ModInt& r) { return l /= r; }
+
+    friend bool operator==(const ModInt& l, const ModInt& r) {
+        return l.x == r.x;
     }
 
-    friend ModInt operator-(ModInt lhs, const ModInt& rhs)
-    {
-        return lhs -= rhs;
-    }
-
-    friend ModInt operator*(ModInt lhs, const ModInt& rhs)
-    {
-        return lhs *= rhs;
-    }
-
-    friend ModInt operator/(ModInt lhs, const ModInt& rhs)
-    {
-        return lhs /= rhs;
-    }
-
-    friend bool operator==(const ModInt& lhs, const ModInt& rhs)
-    {
-        return lhs.value_ == rhs.value_;
-    }
-
-    friend ostream& operator<<(ostream& out, const ModInt& value)
-    {
-        return out << value.value_;
+    friend ostream& operator<<(ostream& out, const ModInt& v) {
+        return out << v.x;
     }
 
 private:
-    uint32_t value_ = 0;
+    uint32_t x = 0;
 };
 
 using Z = ModInt<998244353>;
 ```
 
-### 2.6 自定义 `tuple` 排序
+### 2.7 STL 自定义比较
 
-一次性比较规则优先使用无捕获 lambda。比较器必须满足严格弱序；当前示例先按整数升序，再按字符串字典序升序。
-
-```cpp
-using Item = tuple<int, string>;
-
-void sort_items(vector<Item>& items)
-{
-    sort(items.begin(), items.end(), [](const Item& lhs, const Item& rhs)
-    {
-        // 第一关键字不同，按整数升序。
-        if (get<0>(lhs) != get<0>(rhs))
-        {
-            return get<0>(lhs) < get<0>(rhs);
-        }
-        // 第一关键字相同时，再按字符串升序。
-        return get<1>(lhs) < get<1>(rhs);
-    });
-}
-```
-
-### 2.7 自定义优先队列（函数对象）
-
-`priority_queue` 的比较器在 `lhs` 优先级低于 `rhs` 时返回 `true`。示例中分数越高优先级越高；分数相同则年龄较小者优先。
+比较器必须满足严格弱序。`sort`/`set` 是“小于”语义（返回 true 表示 `x` 排前面）；`priority_queue` 相反（返回 true 表示 `x` 排在 `y` 后面，即堆顶是“最不差”的元素）。`set` 视“互不小于”为等价：要保留同键不同字段的元素须加次关键字，允许完全重复用 `multiset`。只用一次的比较器可用 `decltype` 传 lambda（构造容器时带上它）。
 
 ```cpp
-struct Person
-{
+struct Person {
     string name;
     int age;
     int score;
 };
 
-struct PersonPriority
-{
-    bool operator()(const Person& lhs, const Person& rhs) const
-    {
-        // priority_queue 中返回 true 表示 lhs 应排在 rhs 后面。
-        if (lhs.score != rhs.score)
-        {
-            return lhs.score < rhs.score;
-        }
-        return lhs.age > rhs.age;
+// sort：lambda 直接当第三参数
+void demo_sort(vector<Person>& v) {
+    sort(v.begin(), v.end(), [](const Person& x, const Person& y) {
+        if (x.score != y.score) return x.score > y.score; // 分数降序
+        return x.age < y.age;                             // 同分年龄升序
+    });
+}
+
+// tuple 同理；默认即字典序，常常无需比较器
+using Item = tuple<int, string>;
+void demo_tuple(vector<Item>& v) {
+    sort(v.begin(), v.end(), [](const Item& x, const Item& y) {
+        if (get<0>(x) != get<0>(y)) return get<0>(x) < get<0>(y);
+        return get<1>(x) < get<1>(y);
+    });
+}
+
+// priority_queue：函数对象版
+struct Cmp {
+    bool operator()(const Person& x, const Person& y) const {
+        if (x.score != y.score) return x.score < y.score; // 分数高者优先
+        return x.age > y.age;
     }
 };
+priority_queue<Person, vector<Person>, Cmp> pq;
 
-priority_queue<Person, vector<Person>, PersonPriority> people;
-```
-
-### 2.8 自定义优先队列（lambda）
-
-比较规则只使用一次时，可通过 `decltype` 把 lambda 类型传给容器。
-
-```cpp
-auto person_priority = [](const Person& lhs, const Person& rhs)
-{
-    // 分数越高越优先；分数相同时，年龄越小越优先。
-    if (lhs.score != rhs.score)
-    {
-        return lhs.score < rhs.score;
-    }
-    return lhs.age > rhs.age;
-};
-
-priority_queue<Person, vector<Person>, decltype(person_priority)> people(person_priority);
-```
-
-### 2.9 自定义集合（函数对象）
-
-`set` 会把“互不小于”的两个元素视为等价。若需要保留同龄但姓名不同的对象，比较器必须增加姓名作为次关键字；允许完全重复时改用 `multiset`。
-
-```cpp
-struct PersonOrder
-{
-    bool operator()(const Person& lhs, const Person& rhs) const
-    {
-        // set 的比较器必须形成严格弱序，不能在相等时返回 true。
-        if (lhs.age != rhs.age)
-        {
-            return lhs.age < rhs.age;
-        }
-        return lhs.name < rhs.name;
+// set / multiset：函数对象版
+struct Less {
+    bool operator()(const Person& x, const Person& y) const {
+        if (x.age != y.age) return x.age < y.age;
+        return x.name < y.name; // 次关键字，避免同龄不同名被去重
     }
 };
+set<Person, Less> st;
+multiset<Person, Less> mst;
 
-set<Person, PersonOrder> people;
-multiset<Person, PersonOrder> people_with_duplicates;
-```
-
-### 2.10 自定义集合（lambda）
-
-```cpp
-auto person_order = [](const Person& lhs, const Person& rhs)
-{
-    // set 先按年龄、再按姓名建立唯一的升序关系。
-    if (lhs.age != rhs.age)
-    {
-        return lhs.age < rhs.age;
-    }
-    return lhs.name < rhs.name;
-};
-
-set<Person, decltype(person_order)> people(person_order);
-multiset<Person, decltype(person_order)> people_with_duplicates(person_order);
-```
-
-### 2.11 异或线性基
-
-线性基维护一组彼此线性无关的二进制向量，使原集合任意子集的异或和都能由它们表示。常用于最大子集异或和、判断某个值能否被表示、求异或空间维数。
-
-下面处理 `uint64_t`，从最高位向最低位消元。
-
-```cpp
-using u64 = uint64_t;
-
-struct XorBasis
-{
-    static constexpr int BITS = 64;
-    array<u64, BITS> basis{};
-    int rank = 0; // 当前线性无关向量的数量。
-
-    bool insert(u64 value)
-    {
-        for (int bit = BITS - 1; bit >= 0; --bit)
-        {
-            if (((value >> bit) & 1ULL) == 0)
-            {
-                continue;
-            }
-
-            if (basis[bit] == 0)
-            {
-                // value 的最高位此前没有主元，可以加入线性基。
-                basis[bit] = value;
-                ++rank;
-                return true;
-            }
-
-            // 消掉 value 的当前最高位，继续处理更低位。
-            value ^= basis[bit];
-        }
-
-        // value 被完全消为 0，说明它能由已有向量异或得到。
-        return false;
-    }
-
-    bool can_represent(u64 value) const
-    {
-        for (int bit = BITS - 1; bit >= 0; --bit)
-        {
-            if (((value >> bit) & 1ULL) != 0)
-            {
-                value ^= basis[bit];
-            }
-        }
-        return value == 0;
-    }
-
-    u64 maximum_xor(u64 initial = 0) const
-    {
-        u64 answer = initial;
-        for (int bit = BITS - 1; bit >= 0; --bit)
-        {
-            // 若异或当前主元能让数值变大，就选用它。
-            answer = max(answer, answer ^ basis[bit]);
-        }
-        return answer;
-    }
-};
+// lambda 版：用 decltype 传类型，构造时传比较器
+auto cmp = [](const Person& x, const Person& y) { return x.score < y.score; };
+priority_queue<Person, vector<Person>, decltype(cmp)> pq2(cmp);
+set<Person, decltype(cmp)> st2(cmp);
 ```
 
 ## 3. 图论
 
 ### 3.1 邻接矩阵
 
-邻接矩阵适合点数较少的稠密图，空间复杂度为 `O(n^2)`。以下模板使用 **0-based** 点编号；重边保留最小边权。
+适合点数少的稠密图，空间 `O(n^2)`。**0-based**，重边保留最小边权。
 
 ```cpp
 using ll = long long;
 
 const ll INF = numeric_limits<ll>::max() / 4;
 
-vector<vector<ll>> make_matrix(int n)
-{
-    // 初始时任意两个不同点都不可达。
-    vector<vector<ll>> graph(n, vector<ll>(n, INF));
-    for (int i = 0; i < n; ++i)
-    {
-        // 点到自身的最短距离为 0。
-        graph[i][i] = 0;
-    }
-    return graph;
+vector<vector<ll>> make_matrix(int n) {
+    vector<vector<ll>> g(n, vector<ll>(n, INF));
+    for (int i = 0; i < n; ++i) g[i][i] = 0;
+    return g;
 }
 
-void add_directed_edge(vector<vector<ll>>& graph, int from, int to, ll weight)
-{
-    // 出现重边时只保留最小边权。
-    graph[from][to] = min(graph[from][to], weight);
+void add_directed_edge(vector<vector<ll>>& g, int u, int v, ll w) {
+    g[u][v] = min(g[u][v], w); // 重边保留最小权值
 }
 
-void add_undirected_edge(vector<vector<ll>>& graph, int u, int v, ll weight)
-{
-    add_directed_edge(graph, u, v, weight);
-    add_directed_edge(graph, v, u, weight);
+void add_undirected_edge(vector<vector<ll>>& g, int u, int v, ll w) {
+    add_directed_edge(g, u, v, w);
+    add_directed_edge(g, v, u, w);
 }
 ```
 
 ### 3.2 邻接表
 
-邻接表适合竞赛中的大多数稀疏图。以下模板使用 **1-based** 点编号，边记录终点与权值。
+适合大多数稀疏图。**1-based**，边记录终点与权值。
 
 ```cpp
 using ll = long long;
 
-struct Edge
-{
-    int to;       // 边的终点。
-    ll weight;    // 边权。
+struct Edge {
+    int to;
+    ll w;
 };
 
 using Graph = vector<vector<Edge>>;
 
-void add_directed_edge(Graph& graph, int from, int to, ll weight = 1)
-{
-    graph[from].push_back({to, weight});
+void add_directed_edge(Graph& g, int u, int v, ll w = 1) {
+    g[u].push_back({v, w});
 }
 
-void add_undirected_edge(Graph& graph, int u, int v, ll weight = 1)
-{
-    // 无向边等价于两条方向相反、权值相同的有向边。
-    add_directed_edge(graph, u, v, weight);
-    add_directed_edge(graph, v, u, weight);
+void add_undirected_edge(Graph& g, int u, int v, ll w = 1) {
+    add_directed_edge(g, u, v, w);
+    add_directed_edge(g, v, u, w);
 }
 ```
 
 ### 3.3 DFS 深度优先搜索
 
-时间复杂度为 `O(n + m)`。递归版本简洁，但链状图很深时可能栈溢出，此时应改用显式栈。
+`O(n + m)`。深链状图递归可能爆栈，应改显式栈。
 
 ```cpp
-void dfs(int u, const Graph& graph, vector<char>& visited)
-{
-    // 进入节点后立刻标记，避免在有环图中重复递归。
-    visited[u] = true;
-    for (const Edge& edge : graph[u])
-    {
-        if (!visited[edge.to])
-        {
-            // 沿尚未访问的边继续深入。
-            dfs(edge.to, graph, visited);
-        }
+void dfs(int u, const Graph& g, vector<char>& vis) {
+    vis[u] = true;
+    for (const Edge& e : g[u]) {
+        if (!vis[e.to]) dfs(e.to, g, vis);
     }
 }
 ```
 
 ### 3.4 BFS 广度优先搜索
 
-无权图中，BFS 可在 `O(n + m)` 时间内求起点到所有可达点的最少边数。不可达点的距离保持为 `-1`。
+无权图 `O(n + m)` 求最少边数；不可达点距离为 `-1`。
 
 ```cpp
-vector<int> bfs(int start, const Graph& graph)
-{
-    int n = static_cast<int>(graph.size()) - 1;
-    vector<int> dist(n + 1, -1);
+vector<int> bfs(int s, const Graph& g) {
+    int n = (int)g.size() - 1;
+    vector<int> dis(n + 1, -1);
     queue<int> q;
-
-    dist[start] = 0; // 起点到自身需要经过 0 条边。
-    q.push(start);
-
-    while (!q.empty())
-    {
+    dis[s] = 0;
+    q.push(s);
+    while (!q.empty()) {
         int u = q.front();
         q.pop();
-
-        for (const Edge& edge : graph[u])
-        {
-            int v = edge.to;
-            if (dist[v] != -1)
-            {
-                // BFS 第一次到达一个点时，距离已经最短。
-                continue;
-            }
-            dist[v] = dist[u] + 1;
-            q.push(v);
+        for (const Edge& e : g[u]) {
+            if (dis[e.to] != -1) continue; // BFS 首次到达即最短
+            dis[e.to] = dis[u] + 1;
+            q.push(e.to);
         }
     }
-    return dist;
+    return dis;
 }
 ```
 
 ### 3.5 Dijkstra 最短路
 
-适用于所有边权非负的图，使用二叉堆时复杂度为 `O((n + m) log n)`。弹出旧状态时直接跳过，不需要额外的 `visited` 数组。
+边权非负，二叉堆 `O((n + m) log n)`；弹出旧状态直接跳过，无需 `vis` 数组。依赖 3.2 的 `Edge`/`Graph`。
 
 ```cpp
 using ll = long long;
 
-vector<ll> dijkstra(int start, const Graph& graph)
-{
+vector<ll> dijkstra(int s, const Graph& g) {
     const ll INF = numeric_limits<ll>::max() / 4;
-    int n = static_cast<int>(graph.size()) - 1;
-    vector<ll> dist(n + 1, INF);
-
-    // first 是当前距离，second 是点编号；greater 形成小根堆。
-    using State = pair<ll, int>;
+    int n = (int)g.size() - 1;
+    vector<ll> dis(n + 1, INF);
+    using State = pair<ll, int>; // {距离, 点}，小根堆
     priority_queue<State, vector<State>, greater<State>> pq;
-
-    dist[start] = 0;
-    pq.push({0, start});
-
-    while (!pq.empty())
-    {
-        auto [current_dist, u] = pq.top();
+    dis[s] = 0;
+    pq.push({0, s});
+    while (!pq.empty()) {
+        auto [d, u] = pq.top();
         pq.pop();
-
-        if (current_dist != dist[u])
-        {
-            // u 之前已经被更短的路径更新；这是留在堆中的旧状态。
-            continue;
-        }
-
-        for (const Edge& edge : graph[u])
-        {
-            assert(edge.weight >= 0);
-            if (dist[edge.to] > current_dist + edge.weight)
-            {
-                // 松弛：经过 u 到达 edge.to 得到了更短路径。
-                dist[edge.to] = current_dist + edge.weight;
-                pq.push({dist[edge.to], edge.to});
+        if (d != dis[u]) continue; // 堆中旧状态
+        for (const Edge& e : g[u]) {
+            assert(e.w >= 0);
+            if (dis[e.to] > d + e.w) {
+                dis[e.to] = d + e.w;
+                pq.push({dis[e.to], e.to});
             }
         }
     }
-    return dist;
+    return dis;
 }
 ```
 
 ### 3.6 SPFA 与负环检测
 
-SPFA 能处理负边，并检测从起点可达的负环；若存在负环则返回 `nullopt`。其最坏复杂度为 `O(nm)`，没有负边时优先使用 Dijkstra。
+可处理负边，检测从起点可达的负环（存在时返回 `nullopt`）。最坏 `O(nm)`，无负边优先 Dijkstra。
 
 > [!CAUTION]
-> 返回结果只覆盖 `start` 可达的点。洛谷 P3385 只要求判断从 1 号点可达的负环，因此应调用 `spfa(1, graph)`；不要无条件添加超级源，否则会把不连通分量中的负环误判为答案。
+> 结果只覆盖 `s` 可达的点。洛谷 P3385 只要求 1 号点可达的负环，应调用 `spfa(1, g)`；不要加超级源，否则会把不连通分量中的负环误判进来。
 
 ```cpp
 using ll = long long;
 
-optional<vector<ll>> spfa(int start, const Graph& graph)
-{
+optional<vector<ll>> spfa(int s, const Graph& g) {
     const ll INF = numeric_limits<ll>::max() / 4;
-    int n = static_cast<int>(graph.size()) - 1;
-
-    vector<ll> dist(n + 1, INF);
-    // path_edges[v]：当前用于更新 dist[v] 的路径包含多少条边。
-    vector<int> path_edges(n + 1, 0);
-    // 同一个点不重复入队，避免队列中出现大量相同状态。
-    vector<char> in_queue(n + 1, false);
+    int n = (int)g.size() - 1;
+    vector<ll> dis(n + 1, INF);
+    vector<int> cnt(n + 1, 0); // 更新 dis[v] 的路径边数
+    vector<char> inq(n + 1, false);
     queue<int> q;
-
-    dist[start] = 0;
-    in_queue[start] = true;
-    q.push(start);
-
-    while (!q.empty())
-    {
+    dis[s] = 0;
+    inq[s] = true;
+    q.push(s);
+    while (!q.empty()) {
         int u = q.front();
         q.pop();
-        // 出队后允许 u 在未来再次被更新并入队。
-        in_queue[u] = false;
-
-        for (const Edge& edge : graph[u])
-        {
-            int v = edge.to;
-            if (dist[v] <= dist[u] + edge.weight)
-            {
-                // 经过 u 不能改善 v，跳过这条边。
-                continue;
-            }
-
-            dist[v] = dist[u] + edge.weight;
-            path_edges[v] = path_edges[u] + 1;
-            if (path_edges[v] >= n)
-            {
-                // 含至少 n 条边的严格变短路径必然重复顶点，说明存在可达负环。
-                return nullopt;
-            }
-
-            if (!in_queue[v])
-            {
-                in_queue[v] = true;
+        inq[u] = false;
+        for (const Edge& e : g[u]) {
+            int v = e.to;
+            if (dis[v] <= dis[u] + e.w) continue;
+            dis[v] = dis[u] + e.w;
+            cnt[v] = cnt[u] + 1;
+            if (cnt[v] >= n) return nullopt; // 含 n 条边的变短路径必过负环
+            if (!inq[v]) {
+                inq[v] = true;
                 q.push(v);
             }
         }
     }
-    return dist;
+    return dis;
 }
 ```
 
 ### 3.7 最小生成树（Prim）
 
-Prim 适用于无向图。优先队列中保存“连接当前生成树与未选点的最小边”；若图不连通则返回 `nullopt`。复杂度为 `O((n + m) log n)`。
+无向图，`O((n + m) log n)`；图不连通返回 `nullopt`。
 
 ```cpp
 using ll = long long;
 
-optional<ll> prim(int start, const Graph& graph)
-{
-    int n = static_cast<int>(graph.size()) - 1;
-    vector<char> used(n + 1, false);
-
+optional<ll> prim(int s, const Graph& g) {
+    int n = (int)g.size() - 1;
+    vector<char> vis(n + 1, false);
     using State = pair<ll, int>;
     priority_queue<State, vector<State>, greater<State>> pq;
-    // 起点通过一条权值为 0 的“虚拟边”加入生成树。
-    pq.push({0, start});
-
-    ll total_weight = 0;
-    int used_count = 0;
-
-    while (!pq.empty())
-    {
-        auto [weight, u] = pq.top();
+    pq.push({0, s}); // 起点以权 0 的虚拟边入堆
+    ll tot = 0;
+    int used = 0;
+    while (!pq.empty()) {
+        auto [w, u] = pq.top();
         pq.pop();
-
-        if (used[u])
-        {
-            // 同一个点可能由多条候选边加入堆，只采用第一次弹出的最小边。
-            continue;
-        }
-        used[u] = true;
-        total_weight += weight;
-        ++used_count;
-
-        for (const Edge& edge : graph[u])
-        {
-            if (!used[edge.to])
-            {
-                // 暂时把所有跨越割的边加入候选集合。
-                pq.push({edge.weight, edge.to});
-            }
+        if (vis[u]) continue;
+        vis[u] = true;
+        tot += w;
+        ++used;
+        for (const Edge& e : g[u]) {
+            if (!vis[e.to]) pq.push({e.w, e.to});
         }
     }
-
-    if (used_count != n)
-    {
-        // 没有访问完所有点，原图不连通，不存在生成树。
-        return nullopt;
-    }
-    return total_weight;
+    if (used != n) return nullopt; // 图不连通
+    return tot;
 }
 ```
 
 ### 3.8 Floyd 全源最短路
 
-Floyd 适合点数较少的稠密图，可在 `O(n^3)` 时间和 `O(n^2)` 空间内求任意两点间最短路。矩阵使用 **0-based** 点编号。
+`O(n^3)` 时间、`O(n^2)` 空间，适合点数少的稠密图。矩阵 **0-based**。
 
 ```cpp
 using ll = long long;
 
-vector<vector<ll>> floyd_warshall(vector<vector<ll>> dist)
-{
+vector<vector<ll>> floyd_warshall(vector<vector<ll>> dis) {
     const ll INF = numeric_limits<ll>::max() / 4;
-    int n = static_cast<int>(dist.size());
-
-    for (int middle = 0; middle < n; ++middle)
-    {
-        // 本轮允许 middle 作为路径中的中间点。
-        for (int from = 0; from < n; ++from)
-        {
-            if (dist[from][middle] == INF)
-            {
-                continue;
-            }
-            for (int to = 0; to < n; ++to)
-            {
-                if (dist[middle][to] == INF)
-                {
-                    continue;
-                }
-
-                dist[from][to] = min(
-                    dist[from][to],
-                    dist[from][middle] + dist[middle][to]
-                );
+    int n = (int)dis.size();
+    for (int k = 0; k < n; ++k) {
+        for (int i = 0; i < n; ++i) {
+            if (dis[i][k] == INF) continue;
+            for (int j = 0; j < n; ++j) {
+                if (dis[k][j] == INF) continue;
+                dis[i][j] = min(dis[i][j], dis[i][k] + dis[k][j]);
             }
         }
     }
-    return dist;
+    return dis;
 }
 ```
 
 ### 3.9 二分图最大匹配（匈牙利算法）
 
-左右两部分点均使用 **1-based** 编号。每次为一个左部点寻找增广路；若右部点已经匹配，就递归尝试让其原搭档改配其他点。复杂度为 `O(VE)`。
+左右部均 **1-based**，`O(VE)`。逐个左部点找增广路，右部点已匹配则递归让原搭档改配。
 
 ```cpp
-struct KuhnMatcher
-{
-    int left_size;
-    int right_size;
-    vector<vector<int>> graph;
-    vector<int> match_right;
-    vector<int> visited_stamp;
+struct KuhnMatcher {
+    int nl, nr;
+    vector<vector<int>> g;
+    vector<int> mt;  // 右部点当前匹配的左部点
+    vector<int> vis; // 时间戳代替每轮清空
     int stamp = 0;
 
-    KuhnMatcher(int left_size_, int right_size_)
-        : left_size(left_size_),
-          right_size(right_size_),
-          graph(left_size_ + 1),
-          match_right(right_size_ + 1, 0),
-          visited_stamp(right_size_ + 1, 0)
-    {
+    KuhnMatcher(int nl_, int nr_) : nl(nl_), nr(nr_), g(nl_ + 1), mt(nr_ + 1, 0), vis(nr_ + 1, 0) {}
+
+    void add_edge(int u, int v) {
+        g[u].push_back(v);
     }
 
-    void add_edge(int left, int right)
-    {
-        graph[left].push_back(right);
-    }
-
-    bool augment(int left)
-    {
-        for (int right : graph[left])
-        {
-            if (visited_stamp[right] == stamp)
-            {
-                // 本轮增广已经尝试过这个右部点。
-                continue;
-            }
-            visited_stamp[right] = stamp;
-
-            if (match_right[right] == 0
-                || augment(match_right[right]))
-            {
-                // right 未匹配，或它的原搭档成功改配到了别处。
-                match_right[right] = left;
+    bool augment(int u) {
+        for (int v : g[u]) {
+            if (vis[v] == stamp) continue;
+            vis[v] = stamp;
+            if (mt[v] == 0 || augment(mt[v])) { // v 空出，或其原搭档改配成功
+                mt[v] = u;
                 return true;
             }
         }
         return false;
     }
 
-    int maximum_matching()
-    {
-        int matches = 0;
-        for (int left = 1; left <= left_size; ++left)
-        {
-            // 时间戳代替每轮清空 visited 数组。
+    int max_matching() {
+        int res = 0;
+        for (int u = 1; u <= nl; ++u) {
             ++stamp;
-            if (augment(left))
-            {
-                ++matches;
-            }
+            if (augment(u)) ++res;
         }
-        return matches;
+        return res;
     }
 };
 ```
 
 ## 4. 128 位整数
 
-GNU C++ 提供 `__int128_t` 和 `__uint128_t`，但标准流没有原生输入输出重载。以下转换函数支持符号并检查十进制文本是否越界。
+GNU C++ 提供 `__int128_t`/`__uint128_t`，但标准流无原生 I/O 重载。以下转换函数支持符号并检查十进制越界。
 
 ### 4.1 字符串转换与输出
 
@@ -1718,104 +1075,59 @@ GNU C++ 提供 `__int128_t` 和 `__uint128_t`，但标准流没有原生输入�
 using i128 = __int128_t;
 using u128 = __uint128_t;
 
-i128 parse_i128(string_view text)
-{
-    assert(!text.empty());
-
+i128 parse_i128(string_view s) {
+    assert(!s.empty());
     int pos = 0;
-    bool negative = false;
-    // 单独读取符号，后面只累积绝对值。
-    if (text[pos] == '+' || text[pos] == '-')
-    {
-        negative = text[pos] == '-';
+    bool neg = false;
+    if (s[pos] == '+' || s[pos] == '-') {
+        neg = s[pos] == '-';
         ++pos;
     }
-    assert(pos < static_cast<int>(text.size()));
-
-    // i128 的负数绝对值上限比正数上限多 1。
-    const u128 negative_limit = static_cast<u128>(1) << 127;
-    const u128 positive_limit = negative_limit - 1;
-    const u128 limit = negative ? negative_limit : positive_limit;
-
-    u128 magnitude = 0;
-    for (; pos < static_cast<int>(text.size()); ++pos)
-    {
-        assert(isdigit(static_cast<unsigned char>(text[pos])));
-        int digit = text[pos] - '0';
-        // 在执行 magnitude * 10 + digit 前检查是否越界。
-        assert(magnitude <= (limit - digit) / 10);
-        magnitude = magnitude * 10 + digit;
+    assert(pos < (int)s.size());
+    const u128 neg_lim = (u128)1 << 127; // 负数绝对值上限比正数多 1
+    const u128 lim = neg ? neg_lim : neg_lim - 1;
+    u128 v = 0;
+    for (; pos < (int)s.size(); ++pos) {
+        assert(isdigit((unsigned char)s[pos]));
+        int d = s[pos] - '0';
+        assert(v <= (lim - d) / 10); // 乘 10 前检查越界
+        v = v * 10 + d;
     }
-
-    if (!negative)
-    {
-        return static_cast<i128>(magnitude);
-    }
-    if (magnitude == negative_limit)
-    {
-        // 最小 i128 不能直接写成 -static_cast<i128>(2^127)。
-        return -static_cast<i128>(magnitude - 1) - 1;
-    }
-    return -static_cast<i128>(magnitude);
+    if (!neg) return (i128)v;
+    if (v == neg_lim) return -(i128)(v - 1) - 1; // 最小 i128 不能直接取负
+    return -(i128)v;
 }
 
-string to_string_i128(i128 value)
-{
-    if (value == 0)
-    {
-        return "0";
+string to_string_i128(i128 v) {
+    if (v == 0) return "0";
+    bool neg = v < 0;
+    u128 x = neg ? (u128)(-(v + 1)) + 1 : (u128)v; // 安全取得最小负数的绝对值
+    string s;
+    while (x > 0) {
+        s.push_back((char)('0' + x % 10));
+        x /= 10;
     }
-
-    bool negative = value < 0;
-    // 用 -(value + 1) + 1 安全取得最小负数的绝对值。
-    u128 magnitude = negative
-        ? static_cast<u128>(-(value + 1)) + 1
-        : static_cast<u128>(value);
-
-    string text;
-    while (magnitude > 0)
-    {
-        // 当前最低十进制位先写入，最后再整体翻转。
-        text.push_back(static_cast<char>('0' + magnitude % 10));
-        magnitude /= 10;
-    }
-    if (negative)
-    {
-        text.push_back('-');
-    }
-    reverse(text.begin(), text.end());
-    return text;
+    if (neg) s.push_back('-');
+    reverse(s.begin(), s.end());
+    return s;
 }
 ```
 
 ### 4.2 整数平方根
 
-返回最大的 `x`，使 `x * x <= n`。比较时使用 `x <= n / x`，避免在接近 128 位上界时乘法溢出。
+返回最大的 `x` 使 `x*x <= n`；用 `x <= n / x` 比较，避免接近 128 位上界时乘法溢出。
 
 ```cpp
 using u128 = __uint128_t;
 
-u128 sqrt_u128(u128 n)
-{
-    // 任意 u128 的平方根都不会超过 2^64 - 1。
-    u128 left = 0;
-    u128 right = (static_cast<u128>(1) << 64) - 1;
-
-    while (left < right)
-    {
-        // 取上中位数，避免 left 无法向右收缩。
-        u128 mid = left + (right - left + 1) / 2;
-        if (mid <= n / mid)
-        {
-            // mid^2 <= n，答案至少为 mid。
-            left = mid;
-        }
-        else
-        {
-            right = mid - 1;
-        }
+u128 sqrt_u128(u128 n) {
+    u128 l = 0, r = ((u128)1 << 64) - 1; // 答案不超过 2^64 - 1
+    while (l < r) {
+        u128 mid = l + (r - l + 1) / 2; // 上中位数
+        if (mid <= n / mid) l = mid;
+        else r = mid - 1;
     }
-    return left;
+    return l;
 }
 ```
 
@@ -1824,11 +1136,8 @@ u128 sqrt_u128(u128 n)
 ```cpp
 using u128 = __uint128_t;
 
-u128 gcd_u128(u128 a, u128 b)
-{
-    while (b != 0)
-    {
-        // 欧几里得算法：gcd(a, b) = gcd(b, a mod b)。
+u128 gcd_u128(u128 a, u128 b) {
+    while (b != 0) {
         a %= b;
         swap(a, b);
     }
@@ -1840,52 +1149,38 @@ u128 gcd_u128(u128 a, u128 b)
 
 ### 5.1 精确平方根
 
-`sqrtl` 先给出近似值，再用 `i128` 校正，返回 `floor(sqrt(n))`。前置条件为 `n >= 0`。
+`sqrtl` 给初值，`i128` 双向校正，返回 `floor(sqrt(n))`，要求 `n >= 0`。
 
 ```cpp
 using ll = long long;
 using i128 = __int128_t;
 
-ll integer_sqrt(ll n)
-{
+ll integer_sqrt(ll n) {
     assert(n >= 0);
-    // 浮点开方只负责给出接近答案的初值。
-    ll root = static_cast<ll>(sqrtl(static_cast<long double>(n)));
-
-    // 浮点误差可能让初值偏小，向上校正。
-    while (static_cast<i128>(root + 1) * (root + 1) <= n)
-    {
-        ++root;
-    }
-    // 浮点误差也可能让初值偏大，向下校正。
-    while (static_cast<i128>(root) * root > n)
-    {
-        --root;
-    }
-    return root;
+    ll x = (ll)sqrtl((long double)n); // 浮点只给初值
+    while ((i128)(x + 1) * (x + 1) <= n) ++x; // 双向校正浮点误差
+    while ((i128)x * x > n) --x;
+    return x;
 }
 ```
 
 ### 5.2 精确对数上取整
 
-返回最小的非负整数 `k`，使 `base^k >= target`。要求 `base >= 2` 且 `target >= 1`。
+返回最小的非负整数 `k` 使 `base^k >= target`，要求 `base >= 2`、`target >= 1`。
 
 ```cpp
 using ll = long long;
 using i128 = __int128_t;
 
-int ceil_log(ll base, ll target)
-{
+int ceil_log(ll base, ll target) {
     assert(base >= 2 && target >= 1);
-
-    i128 value = 1; // 始终等于 base^exponent。
-    int exponent = 0;
-    while (value < target)
-    {
-        value *= base;
-        ++exponent;
+    i128 v = 1;
+    int k = 0;
+    while (v < target) {
+        v *= base;
+        ++k;
     }
-    return exponent;
+    return k;
 }
 ```
 
@@ -1893,137 +1188,87 @@ int ceil_log(ll base, ll target)
 
 ### 6.1 前缀函数（KMP）
 
-前缀函数 `pi[i]` 表示 `s[0..i]` 的最长相等真前缀与真后缀长度。构造和匹配均为 `O(n)`，所有位置采用 **0-based**。
+`pi[i]` 为 `s[0..i]` 最长相等真前后缀长度；构造与匹配均 `O(n)`，**0-based**。
 
 ```cpp
-vector<int> prefix_function(string_view s)
-{
-    int n = static_cast<int>(s.size());
+vector<int> prefix_function(string_view s) {
+    int n = (int)s.size();
     vector<int> pi(n, 0);
-
-    for (int i = 1; i < n; ++i)
-    {
-        // 先尝试延长前一个位置的最长 border。
+    for (int i = 1; i < n; ++i) {
         int j = pi[i - 1];
-        while (j > 0 && s[i] != s[j])
-        {
-            // 当前 border 无法延长，跳到它自己的最长 border。
-            j = pi[j - 1];
-        }
-        if (s[i] == s[j])
-        {
-            // 新字符匹配成功，border 长度增加 1。
-            ++j;
-        }
+        while (j > 0 && s[i] != s[j]) j = pi[j - 1]; // 失配跳到次长 border
+        if (s[i] == s[j]) ++j;
         pi[i] = j;
     }
     return pi;
 }
 
-vector<int> find_occurrences(string_view text, string_view pattern)
-{
-    if (pattern.empty())
-    {
-        return {};
-    }
-
-    vector<int> pi = prefix_function(pattern);
-    vector<int> positions;
-    int matched = 0; // 当前已经匹配的模式串前缀长度。
-
-    for (int i = 0; i < static_cast<int>(text.size()); ++i)
-    {
-        while (matched > 0 && text[i] != pattern[matched])
-        {
-            // 失配时利用 pi 跳转，不需要让文本指针回退。
-            matched = pi[matched - 1];
-        }
-        if (text[i] == pattern[matched])
-        {
-            ++matched;
-        }
-        if (matched == static_cast<int>(pattern.size()))
-        {
-            // 当前匹配在 i 结束，起点为 i - |pattern| + 1。
-            positions.push_back(i - matched + 1);
-            // 继续保留可重叠匹配的最长后缀。
-            matched = pi[matched - 1];
+vector<int> find_occurrences(string_view t, string_view p) {
+    if (p.empty()) return {};
+    vector<int> pi = prefix_function(p);
+    vector<int> pos;
+    int m = 0; // 已匹配的模式前缀长度
+    for (int i = 0; i < (int)t.size(); ++i) {
+        while (m > 0 && t[i] != p[m]) m = pi[m - 1];
+        if (t[i] == p[m]) ++m;
+        if (m == (int)p.size()) {
+            pos.push_back(i - m + 1);
+            m = pi[m - 1]; // 保留可重叠匹配
         }
     }
-    return positions;
+    return pos;
 }
 ```
 
 ### 6.2 字典树（Trie）
 
-该版本维护小写英文字母，根节点编号为 0，字符串位置采用 **0-based**。插入和查询复杂度均为 `O(|s|)`；`end_count` 可区分重复插入。
+小写字母，根编号 0，插入/查询 `O(|s|)`；`cnt` 区分重复插入。
 
 ```cpp
-struct Trie
-{
-    struct Node
-    {
-        array<int, 26> next{}; // next[c]：沿字符 c 转移到的节点编号。
-        int end_count = 0;     // 有多少个完整单词在该节点结束。
+struct Trie {
+    struct Node {
+        array<int, 26> nxt{};
+        int cnt = 0; // 在此结束的完整单词数
     };
 
-    vector<Node> nodes; // nodes[0] 是根节点，同时 0 也表示“没有孩子”。
+    vector<Node> tr; // tr[0] 为根，0 同时表示空孩子
 
-    Trie() : nodes(1)
-    {
+    Trie() : tr(1) {}
+
+    static int idx(char c) {
+        assert('a' <= c && c <= 'z');
+        return c - 'a';
     }
 
-    static int index(char ch)
-    {
-        assert('a' <= ch && ch <= 'z');
-        return ch - 'a';
-    }
-
-    void insert(string_view word)
-    {
+    void insert(string_view s) {
         int u = 0;
-        for (char ch : word)
-        {
-            int c = index(ch);
-            if (nodes[u].next[c] == 0)
-            {
-                // 当前前缀不存在，创建一个新节点。
-                nodes[u].next[c] = static_cast<int>(nodes.size());
-                nodes.push_back({});
+        for (char c : s) {
+            int i = idx(c);
+            if (tr[u].nxt[i] == 0) {
+                tr[u].nxt[i] = (int)tr.size();
+                tr.push_back({});
             }
-            u = nodes[u].next[c];
+            u = tr[u].nxt[i];
         }
-        // 只有走完整个单词后才增加结束计数。
-        ++nodes[u].end_count;
+        ++tr[u].cnt;
     }
 
-    int count(string_view word) const
-    {
+    int count(string_view s) const {
         int u = 0;
-        for (char ch : word)
-        {
-            int c = index(ch);
-            if (nodes[u].next[c] == 0)
-            {
-                // 中途断路，说明这个完整单词从未插入。
-                return 0;
-            }
-            u = nodes[u].next[c];
+        for (char c : s) {
+            int i = idx(c);
+            if (tr[u].nxt[i] == 0) return 0;
+            u = tr[u].nxt[i];
         }
-        return nodes[u].end_count;
+        return tr[u].cnt;
     }
 
-    bool starts_with(string_view prefix) const
-    {
+    bool starts_with(string_view s) const {
         int u = 0;
-        for (char ch : prefix)
-        {
-            int c = index(ch);
-            if (nodes[u].next[c] == 0)
-            {
-                return false;
-            }
-            u = nodes[u].next[c];
+        for (char c : s) {
+            int i = idx(c);
+            if (tr[u].nxt[i] == 0) return false;
+            u = tr[u].nxt[i];
         }
         return true;
     }
@@ -2032,153 +1277,103 @@ struct Trie
 
 ### 6.3 AC 自动机
 
-AC 自动机把多模式串匹配合并到一棵 Trie 上，并通过失败指针在失配时跳到最长可用后缀。构建复杂度与 Trie 节点数乘字符集大小有关，扫描文本为 `O(|text|)`。
-
-下面采用 `D:\ACM\模板笔记\字典树+AC自动机` 中的拓扑回传思路：扫描时只给当前状态计数，扫描结束后按 BFS 逆序把次数累加到失败指针父节点，即可得到每个模式串的出现次数。
+多模式串匹配：扫描文本 `O(|text|)` 时只给当前状态计数，结束后按 BFS 逆序把次数回传给 fail 父节点（拓扑回传思路），即得每个模式串出现次数。
 
 ```cpp
 using ll = long long;
 
-struct AhoCorasick
-{
-    struct Node
-    {
-        array<int, 26> next{};
+struct AhoCorasick {
+    struct Node {
+        array<int, 26> nxt{};
         int fail = 0;
-        ll visits = 0;
+        ll cnt = 0;
     };
 
-    vector<Node> nodes;
-    vector<int> bfs_order;
+    vector<Node> tr;
+    vector<int> ord; // BFS 序
 
-    AhoCorasick() : nodes(1)
-    {
+    AhoCorasick() : tr(1) {}
+
+    static int idx(char c) {
+        assert('a' <= c && c <= 'z');
+        return c - 'a';
     }
 
-    static int index(char ch)
-    {
-        assert('a' <= ch && ch <= 'z');
-        return ch - 'a';
-    }
-
-    int insert(string_view pattern)
-    {
+    int insert(string_view p) {
         int u = 0;
-        for (char ch : pattern)
-        {
-            int c = index(ch);
-            if (nodes[u].next[c] == 0)
-            {
-                nodes[u].next[c] = static_cast<int>(nodes.size());
-                nodes.push_back({});
+        for (char c : p) {
+            int i = idx(c);
+            if (tr[u].nxt[i] == 0) {
+                tr[u].nxt[i] = (int)tr.size();
+                tr.push_back({});
             }
-            u = nodes[u].next[c];
+            u = tr[u].nxt[i];
         }
-
-        // 保存这个终止节点，查询后可直接读取该模式串的出现次数。
-        return u;
+        return u; // 返回终止节点，之后直接读出现次数
     }
 
-    void build()
-    {
+    void build() {
         queue<int> q;
-        bfs_order.clear();
-
-        // 根节点的直接孩子失败后仍回到根节点。
-        for (int c = 0; c < 26; ++c)
-        {
-            int child = nodes[0].next[c];
-            if (child != 0)
-            {
-                nodes[child].fail = 0;
-                q.push(child);
+        ord.clear();
+        for (int i = 0; i < 26; ++i) {
+            int v = tr[0].nxt[i];
+            if (v != 0) {
+                tr[v].fail = 0;
+                q.push(v);
             }
         }
-
-        while (!q.empty())
-        {
+        while (!q.empty()) {
             int u = q.front();
             q.pop();
-            bfs_order.push_back(u);
-
-            for (int c = 0; c < 26; ++c)
-            {
-                int child = nodes[u].next[c];
-                if (child != 0)
-                {
-                    // u --c--> child 失配时，转到 fail[u] 再走字符 c。
-                    nodes[child].fail = nodes[nodes[u].fail].next[c];
-                    q.push(child);
-                }
-                else
-                {
-                    // 补全 Trie 图，扫描文本时每个字符只需一次转移。
-                    nodes[u].next[c] = nodes[nodes[u].fail].next[c];
+            ord.push_back(u);
+            for (int i = 0; i < 26; ++i) {
+                int v = tr[u].nxt[i];
+                if (v != 0) {
+                    tr[v].fail = tr[tr[u].fail].nxt[i];
+                    q.push(v);
+                } else {
+                    tr[u].nxt[i] = tr[tr[u].fail].nxt[i]; // 补全 Trie 图，扫描时一次转移
                 }
             }
         }
     }
 
-    void scan(string_view text)
-    {
+    void scan(string_view t) {
         int u = 0;
-        for (char ch : text)
-        {
-            u = nodes[u].next[index(ch)];
-            ++nodes[u].visits;
+        for (char c : t) {
+            u = tr[u].nxt[idx(c)];
+            ++tr[u].cnt;
         }
     }
 
-    void propagate_counts()
-    {
-        // 子节点对应更长的字符串，必须先把它的次数传给较短后缀。
-        for (int i = static_cast<int>(bfs_order.size()) - 1; i >= 0; --i)
-        {
-            int u = bfs_order[i];
-            nodes[nodes[u].fail].visits += nodes[u].visits;
+    void propagate() {
+        for (int i = (int)ord.size() - 1; i >= 0; --i) { // BFS 逆序回传给 fail
+            int u = ord[i];
+            tr[tr[u].fail].cnt += tr[u].cnt;
         }
     }
 
-    ll occurrences(int terminal_node) const
-    {
-        return nodes[terminal_node].visits;
+    ll occurrences(int u) const {
+        return tr[u].cnt;
     }
 
-    void clear_counts()
-    {
-        // 复用自动机匹配另一批文本前，清空上一次的统计值。
-        for (Node& node : nodes)
-        {
-            node.visits = 0;
-        }
+    void clear_counts() { // 复用自动机前清空统计
+        for (Node& nd : tr) nd.cnt = 0;
     }
 };
 
-vector<ll> count_patterns(
-    const vector<string>& patterns,
-    string_view text
-)
-{
-    AhoCorasick automaton;
-    vector<int> terminal_nodes;
-    terminal_nodes.reserve(patterns.size());
-
-    for (const string& pattern : patterns)
-    {
-        terminal_nodes.push_back(automaton.insert(pattern));
-    }
-
-    automaton.build();
-    automaton.scan(text);
-    automaton.propagate_counts();
-
-    vector<ll> answer;
-    answer.reserve(patterns.size());
-    for (int terminal : terminal_nodes)
-    {
-        answer.push_back(automaton.occurrences(terminal));
-    }
-    return answer;
+vector<ll> count_patterns(const vector<string>& ps, string_view t) {
+    AhoCorasick ac;
+    vector<int> ter;
+    ter.reserve(ps.size());
+    for (const string& p : ps) ter.push_back(ac.insert(p));
+    ac.build();
+    ac.scan(t);
+    ac.propagate();
+    vector<ll> res;
+    res.reserve(ps.size());
+    for (int u : ter) res.push_back(ac.occurrences(u));
+    return res;
 }
 ```
 
@@ -2186,109 +1381,76 @@ vector<ll> count_patterns(
 
 ### 7.1 作用域计时器
 
-对象离开作用域时自动输出耗时，适合配合数据生成器比较不同实现。计时结果写入 `cerr`，不会污染正常答案输出。
+RAII：离开作用域自动把耗时写入 `cerr`，不污染正常输出。
 
 ```cpp
-class ScopedTimer
-{
+class ScopedTimer {
 public:
-    explicit ScopedTimer(string label_ = "elapsed")
-        : label(move(label_)), start(chrono::steady_clock::now())
-    {
-        // 构造对象时自动记录起点，无需手动调用 start()。
-    }
+    explicit ScopedTimer(string lab = "elapsed") : lab(move(lab)), st(chrono::steady_clock::now()) {}
 
-    ~ScopedTimer()
-    {
-        // RAII：对象离开作用域时自动计算并输出耗时。
-        auto finish = chrono::steady_clock::now();
-        double milliseconds = chrono::duration<double, milli>(finish - start).count();
-        cerr << label << ": " << fixed << setprecision(3)
-             << milliseconds << " ms\n";
+    ~ScopedTimer() {
+        auto ed = chrono::steady_clock::now();
+        double ms = chrono::duration<double, milli>(ed - st).count();
+        cerr << lab << ": " << fixed << setprecision(3) << ms << " ms\n";
     }
 
 private:
-    string label;
-    chrono::steady_clock::time_point start;
+    string lab;
+    chrono::steady_clock::time_point st;
 };
 ```
 
 ### 7.2 随机数据生成器
 
-`uniform_int_distribution` 的区间两端均包含在结果中。固定种子便于复现错误；使用时间种子则适合随机压力测试。
+`uniform_int_distribution` 两端均包含；固定种子复现错误，时间种子用于压力测试。
 
 ```cpp
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 template <class Int>
-vector<Int> random_integers(Int left, Int right, int count)
-{
-    // 防止误把浮点类型传入 uniform_int_distribution。
+vector<Int> random_integers(Int l, Int r, int cnt) {
     static_assert(is_integral_v<Int>);
-    assert(left <= right && count >= 0);
-
-    // 左右端点都可能被生成。
-    uniform_int_distribution<Int> distribution(left, right);
-    vector<Int> values;
-    values.reserve(count);
-
-    for (int i = 0; i < count; ++i)
-    {
-        values.push_back(distribution(rng));
-    }
-    return values;
+    assert(l <= r && cnt >= 0);
+    uniform_int_distribution<Int> dis(l, r);
+    vector<Int> a;
+    a.reserve(cnt);
+    for (int i = 0; i < cnt; ++i) a.push_back(dis(rng));
+    return a;
 }
 ```
 
 ### 7.3 组合类型哈希
 
-对输入先做 SplitMix64 扰动，可降低构造碰撞数据攻击 `unordered_map` / `unordered_set` 的风险。不要向 `namespace std` 添加 `tuple` 的偏特化；把自定义哈希作为容器的第三个模板参数传入。
+SplitMix64 扰动 + 随机盐，降低哈希碰撞攻击风险。不要向 `namespace std` 加 `tuple` 偏特化，把自定义哈希作为容器第三个模板参数传入。
 
 ```cpp
-uint64_t splitmix64(uint64_t x)
-{
-    // 多轮异或、移位和乘法把相近输入充分打散。
+uint64_t splitmix64(uint64_t x) {
     x += 0x9e3779b97f4a7c15ULL;
     x = (x ^ (x >> 30)) * 0xbf58476d1ce4e5b9ULL;
     x = (x ^ (x >> 27)) * 0x94d049bb133111ebULL;
     return x ^ (x >> 31);
 }
 
-void hash_combine(size_t& seed, size_t value)
-{
-    // 每次程序启动使用不同盐值，降低对抗构造哈希碰撞的风险。
-    static const uint64_t salt =
-        chrono::steady_clock::now().time_since_epoch().count();
-    seed ^= splitmix64(static_cast<uint64_t>(value) + salt + seed);
+void hash_combine(size_t& seed, size_t v) {
+    static const uint64_t salt = chrono::steady_clock::now().time_since_epoch().count(); // 每次启动换盐
+    seed ^= splitmix64((uint64_t)v + salt + seed);
 }
 
-struct PairHash
-{
-    template <class First, class Second>
-    size_t operator()(const pair<First, Second>& value) const
-    {
+struct PairHash {
+    template <class A, class B>
+    size_t operator()(const pair<A, B>& p) const {
         size_t seed = 0;
-        // 依次把 pair 的两个成员混入同一个种子。
-        hash_combine(seed, hash<First>{}(value.first));
-        hash_combine(seed, hash<Second>{}(value.second));
+        hash_combine(seed, hash<A>{}(p.first));
+        hash_combine(seed, hash<B>{}(p.second));
         return seed;
     }
 };
 
-struct TupleHash
-{
-    template <class... Types>
-    size_t operator()(const tuple<Types...>& value) const
-    {
+struct TupleHash {
+    template <class... Ts>
+    size_t operator()(const tuple<Ts...>& t) const {
         size_t seed = 0;
-        // apply 展开 tuple，折叠表达式按顺序合并每个元素的哈希。
-        apply([&](const auto&... elements)
-        {
-            (hash_combine(
-                seed,
-                hash<decay_t<decltype(elements)>>{}(elements)
-            ), ...);
-        }, value);
+        apply([&](const auto&... x) { (hash_combine(seed, hash<decay_t<decltype(x)>>{}(x)), ...); }, t);
         return seed;
     }
 };
@@ -2299,73 +1461,41 @@ unordered_set<tuple<int, string, double>, TupleHash> records;
 
 ### 7.4 字符串流
 
-`istringstream` 用于解析，`ostringstream` 用于拼接。解析失败后流会进入失败状态，可直接用于循环条件。
+`istringstream` 解析、`ostringstream` 拼接；解析失败后流进入失败状态，可直接作循环条件。
 
 ```cpp
-string normalize_integer_list(string_view text)
-{
-    // istringstream 会自动跳过任意数量的空白字符。
-    istringstream input{string(text)};
-    vector<int> values;
-    for (int value; input >> value; )
-    {
-        values.push_back(value);
+string normalize_integer_list(string_view s) {
+    istringstream in{string(s)}; // 自动跳过空白
+    vector<int> a;
+    for (int x; in >> x;) a.push_back(x);
+    ostringstream out;
+    for (int i = 0; i < (int)a.size(); ++i) {
+        if (i > 0) out << ' ';
+        out << a[i];
     }
-
-    ostringstream output;
-    for (int i = 0; i < static_cast<int>(values.size()); ++i)
-    {
-        if (i > 0)
-        {
-            // 从第二个数字开始，在前面补一个空格。
-            output << ' ';
-        }
-        output << values[i];
-    }
-    return output.str();
+    return out.str();
 }
 ```
 
 ## 8. 动态规划
 
-动态规划最重要的不是背公式，而是按顺序回答四个问题：
-
-1. `dp` 状态具体表示什么；
-2. 当前状态可以从哪些已知状态转移；
-3. 初始状态和不可达状态如何设置；
-4. 枚举顺序是否保证转移来源已经计算完成。
-
-本章结合 `D:\ACM\dp` 与 `D:\ACM\模板笔记` 中的练习代码，整理为可复用的通用模板。
+按顺序回答四个问题：`dp` 状态含义、转移来源、初始/不可达状态、枚举顺序是否保证来源已算好。
 
 ### 8.1 线性 DP：青蛙跳跃
 
-`dp[i]` 表示到达第 `i` 个位置的最小代价。当前位置只依赖前面至多 `max_jump` 个状态。
+`dp[i]` = 到达位置 `i` 的最小代价，只依赖前至多 `k` 个状态。
 
 ```cpp
 using ll = long long;
 
-ll minimum_frog_cost(const vector<ll>& height, int max_jump)
-{
-    int n = static_cast<int>(height.size());
-    if (n == 0)
-    {
-        return 0;
-    }
-
+ll minimum_frog_cost(const vector<ll>& h, int k) {
+    int n = (int)h.size();
+    if (n == 0) return 0;
     const ll INF = numeric_limits<ll>::max() / 4;
     vector<ll> dp(n, INF);
-    dp[0] = 0; // 已经站在起点，不需要代价。
-
-    for (int i = 1; i < n; ++i)
-    {
-        for (int jump = 1; jump <= max_jump && jump <= i; ++jump)
-        {
-            int previous = i - jump;
-            dp[i] = min(
-                dp[i],
-                dp[previous] + abs(height[i] - height[previous])
-            );
-        }
+    dp[0] = 0;
+    for (int i = 1; i < n; ++i) {
+        for (int j = 1; j <= k && j <= i; ++j) dp[i] = min(dp[i], dp[i - j] + abs(h[i] - h[i - j]));
     }
     return dp[n - 1];
 }
@@ -2373,105 +1503,53 @@ ll minimum_frog_cost(const vector<ll>& height, int max_jump)
 
 ### 8.2 0/1 背包与完全背包
 
-`dp[capacity]` 表示容量不超过 `capacity` 时能取得的最大价值。
-
-- 0/1 背包中每件物品最多使用一次，容量必须倒序枚举；
-- 完全背包中每件物品可以重复使用，容量必须正序枚举。
+`dp[c]` = 容量不超过 `c` 的最大价值。0/1 背包倒序枚举容量（每件一次），完全背包正序（可重复）。
 
 ```cpp
 using ll = long long;
 
-ll knapsack_01(
-    const vector<int>& weight,
-    const vector<ll>& value,
-    int capacity
-)
-{
-    assert(weight.size() == value.size());
-    vector<ll> dp(capacity + 1, 0);
-
-    for (int i = 0; i < static_cast<int>(weight.size()); ++i)
-    {
-        assert(weight[i] > 0);
-        // 倒序保证 dp[current - weight[i]] 仍属于“未使用第 i 件物品”的状态。
-        for (int current = capacity; current >= weight[i]; --current)
-        {
-            dp[current] = max(
-                dp[current],
-                dp[current - weight[i]] + value[i]
-            );
-        }
+ll knapsack_01(const vector<int>& w, const vector<ll>& v, int C) {
+    assert(w.size() == v.size());
+    vector<ll> dp(C + 1, 0);
+    for (int i = 0; i < (int)w.size(); ++i) {
+        assert(w[i] > 0);
+        for (int c = C; c >= w[i]; --c) dp[c] = max(dp[c], dp[c - w[i]] + v[i]); // 倒序：每件只用一次
     }
-    return dp[capacity];
+    return dp[C];
 }
 
-ll complete_knapsack(
-    const vector<int>& weight,
-    const vector<ll>& value,
-    int capacity
-)
-{
-    assert(weight.size() == value.size());
-    vector<ll> dp(capacity + 1, 0);
-
-    for (int i = 0; i < static_cast<int>(weight.size()); ++i)
-    {
-        assert(weight[i] > 0);
-        // 正序使更新后的状态可以继续选择同一件物品。
-        for (int current = weight[i]; current <= capacity; ++current)
-        {
-            dp[current] = max(
-                dp[current],
-                dp[current - weight[i]] + value[i]
-            );
-        }
+ll complete_knapsack(const vector<int>& w, const vector<ll>& v, int C) {
+    assert(w.size() == v.size());
+    vector<ll> dp(C + 1, 0);
+    for (int i = 0; i < (int)w.size(); ++i) {
+        assert(w[i] > 0);
+        for (int c = w[i]; c <= C; ++c) dp[c] = max(dp[c], dp[c - w[i]] + v[i]); // 正序：可重复选
     }
-    return dp[capacity];
+    return dp[C];
 }
 ```
 
 ### 8.3 按价值定义的 0/1 背包
 
-当容量很大、总价值较小时，改用 `dp[value] = 取得该价值所需的最小重量`。这正是 AtCoder DP Contest E 的常见做法。
+容量大、总价值小时改用 `dp[v] = 取得价值 v 的最小重量`（AtCoder DP Contest E 套路）。
 
 ```cpp
 using ll = long long;
 
-int knapsack_by_value(
-    const vector<ll>& weight,
-    const vector<int>& value,
-    ll capacity
-)
-{
-    assert(weight.size() == value.size());
-    int total_value = accumulate(value.begin(), value.end(), 0);
+int knapsack_by_value(const vector<ll>& w, const vector<int>& v, ll C) {
+    assert(w.size() == v.size());
+    int V = accumulate(v.begin(), v.end(), 0);
     const ll INF = numeric_limits<ll>::max() / 4;
-
-    vector<ll> dp(total_value + 1, INF);
-    dp[0] = 0; // 价值为 0 时不需要任何重量。
-
-    for (int i = 0; i < static_cast<int>(weight.size()); ++i)
-    {
-        // 仍是 0/1 背包，所以价值倒序枚举。
-        for (int current = total_value; current >= value[i]; --current)
-        {
-            if (dp[current - value[i]] == INF)
-            {
-                continue;
-            }
-            dp[current] = min(
-                dp[current],
-                dp[current - value[i]] + weight[i]
-            );
+    vector<ll> dp(V + 1, INF);
+    dp[0] = 0;
+    for (int i = 0; i < (int)w.size(); ++i) {
+        for (int c = V; c >= v[i]; --c) { // 仍是 0/1 背包，倒序
+            if (dp[c - v[i]] == INF) continue;
+            dp[c] = min(dp[c], dp[c - v[i]] + w[i]);
         }
     }
-
-    for (int answer = total_value; answer >= 0; --answer)
-    {
-        if (dp[answer] <= capacity)
-        {
-            return answer;
-        }
+    for (int res = V; res >= 0; --res) {
+        if (dp[res] <= C) return res;
     }
     return 0;
 }
@@ -2479,632 +1557,529 @@ int knapsack_by_value(
 
 ### 8.4 最长上升子序列（LIS）
 
-`tails[len - 1]` 表示长度为 `len` 的严格上升子序列能够取得的最小末尾值。该数组不是原序列中的实际 LIS，但其长度就是答案。
+`t[i]` = 长度 `i + 1` 的严格上升子序列的最小末尾；`t` 不是实际 LIS，但其长度即答案。
 
 ```cpp
 template <class T>
-int lis_length(const vector<T>& values)
-{
-    vector<T> tails;
-
-    for (const T& value : values)
-    {
-        // lower_bound 对应“严格上升”；非严格上升改用 upper_bound。
-        auto it = lower_bound(tails.begin(), tails.end(), value);
-        if (it == tails.end())
-        {
-            tails.push_back(value);
-        }
-        else
-        {
-            // 用更小的末尾值替换，可为后续元素留下更大空间。
-            *it = value;
-        }
+int lis_length(const vector<T>& a) {
+    vector<T> t;
+    for (const T& x : a) {
+        auto it = lower_bound(t.begin(), t.end(), x); // 严格上升；非严格改用 upper_bound
+        if (it == t.end()) t.push_back(x);
+        else *it = x; // 更小末尾为后续留空间
     }
-    return static_cast<int>(tails.size());
+    return (int)t.size();
 }
 ```
 
 ### 8.5 最长公共子序列（LCS）与方案恢复
 
-`dp[i][j]` 表示 `left` 的前 `i` 个字符和 `right` 的前 `j` 个字符的 LCS 长度。计算完成后沿状态来源倒推，可恢复一组具体方案。
+`dp[i][j]` = `a` 前 `i` 字符与 `b` 前 `j` 字符的 LCS 长度；沿来源倒推恢复方案。
 
 ```cpp
-string longest_common_subsequence(string_view left, string_view right)
-{
-    int n = static_cast<int>(left.size());
-    int m = static_cast<int>(right.size());
+string longest_common_subsequence(string_view a, string_view b) {
+    int n = (int)a.size(), m = (int)b.size();
     vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0));
-
-    for (int i = 1; i <= n; ++i)
-    {
-        for (int j = 1; j <= m; ++j)
-        {
-            if (left[i - 1] == right[j - 1])
-            {
-                dp[i][j] = dp[i - 1][j - 1] + 1;
-            }
-            else
-            {
-                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
-            }
+    for (int i = 1; i <= n; ++i) {
+        for (int j = 1; j <= m; ++j) {
+            if (a[i - 1] == b[j - 1]) dp[i][j] = dp[i - 1][j - 1] + 1;
+            else dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
         }
     }
-
-    string answer;
-    int i = n;
-    int j = m;
-    while (i > 0 && j > 0)
-    {
-        if (left[i - 1] == right[j - 1])
-        {
-            // 这两个相等字符来自 dp[i - 1][j - 1]。
-            answer.push_back(left[i - 1]);
+    string res;
+    int i = n, j = m;
+    while (i > 0 && j > 0) {
+        if (a[i - 1] == b[j - 1]) {
+            res.push_back(a[i - 1]);
             --i;
             --j;
-        }
-        else if (dp[i - 1][j] >= dp[i][j - 1])
-        {
-            --i;
-        }
-        else
-        {
-            --j;
-        }
+        } else if (dp[i - 1][j] >= dp[i][j - 1]) --i;
+        else --j;
     }
-
-    reverse(answer.begin(), answer.end());
-    return answer;
+    reverse(res.begin(), res.end());
+    return res;
 }
 ```
 
-### 8.6 区间 DP：合并石子
+### 8.6 区间 DP
 
-`dp[left][right]` 表示把区间 `[left, right]` 合并成一堆的最小代价。最后一次合并一定会在某个 `middle` 处分成左右两段。
+`f[l][r]` 表示区间 `[l, r]` 上的最优解。按长度从小到大枚举，保证转移用到的子区间已算好；长度→起点→分割点三重循环，`O(n^3)` 时间、`O(n^2)` 空间。
+
+```cpp
+for (int len = 2; len <= n; ++len) {     // 枚举区间长度
+    for (int l = 0; l + len <= n; ++l) { // 枚举起点
+        int r = l + len - 1;
+        for (int m = l; m < r; ++m)      // 枚举分割点
+            f[l][r] = min(f[l][r], f[l][m] + f[m + 1][r] + cost(l, r));
+    }
+}
+```
+
+**合并石子（直线版，洛谷 P1880 的一半）**：`dp[l][r]` = 合并 `[l, r]` 成一堆的最小代价；最后一次合并必在某个 `m` 处分成两段，区间和用前缀和 `O(1)` 取得。
 
 ```cpp
 using ll = long long;
 
-ll minimum_merge_cost(const vector<ll>& stones)
-{
-    int n = static_cast<int>(stones.size());
-    if (n == 0)
-    {
-        return 0;
-    }
-
-    vector<ll> prefix(n + 1, 0);
-    for (int i = 0; i < n; ++i)
-    {
-        prefix[i + 1] = prefix[i] + stones[i];
-    }
-
+ll minimum_merge_cost(const vector<ll>& a) {
+    int n = (int)a.size();
+    if (n == 0) return 0;
+    vector<ll> pre(n + 1, 0);
+    for (int i = 0; i < n; ++i) pre[i + 1] = pre[i] + a[i];
     const ll INF = numeric_limits<ll>::max() / 4;
     vector<vector<ll>> dp(n, vector<ll>(n, 0));
-
-    // 短区间必须先于长区间计算。
-    for (int length = 2; length <= n; ++length)
-    {
-        for (int left = 0; left + length <= n; ++left)
-        {
-            int right = left + length - 1;
-            ll interval_sum = prefix[right + 1] - prefix[left];
-            dp[left][right] = INF;
-
-            for (int middle = left; middle < right; ++middle)
-            {
-                dp[left][right] = min(
-                    dp[left][right],
-                    dp[left][middle]
-                        + dp[middle + 1][right]
-                        + interval_sum
-                );
-            }
+    for (int len = 2; len <= n; ++len) { // 短区间先算
+        for (int l = 0; l + len <= n; ++l) {
+            int r = l + len - 1;
+            ll sum = pre[r + 1] - pre[l];
+            dp[l][r] = INF;
+            for (int m = l; m < r; ++m) dp[l][r] = min(dp[l][r], dp[l][m] + dp[m + 1][r] + sum);
         }
     }
     return dp[0][n - 1];
 }
 ```
 
-### 8.7 树形 DP：最大权独立集
-
-选择若干树节点，要求任意两个被选节点不相邻，并最大化权值和。
-
-- `dp[u][0]`：不选择 `u` 时，`u` 子树的最大答案；
-- `dp[u][1]`：选择 `u` 时，`u` 子树的最大答案。
+**环形石子合并（洛谷 P1880）**：破环成链——数组复制一倍，只枚举长度 `<= n` 的区间，最后对所有长度为 `n` 的区间取最优。求最大值把 `min` 换 `max`、初值 `INF` 换 `0` 即可。
 
 ```cpp
 using ll = long long;
 
-void tree_dp_dfs(
-    int u,
-    int parent,
-    const vector<vector<int>>& tree,
-    const vector<ll>& weight,
-    vector<array<ll, 2>>& dp
-)
-{
-    dp[u][0] = 0;
-    dp[u][1] = weight[u];
-
-    for (int v : tree[u])
-    {
-        if (v == parent)
-        {
-            continue;
+ll min_ring_merge_cost(const vector<ll>& a) {
+    int n = (int)a.size();
+    if (n == 0) return 0;
+    vector<ll> b(2 * n); // 破环成链
+    for (int i = 0; i < 2 * n; ++i) b[i] = a[i % n];
+    vector<ll> pre(2 * n + 1, 0);
+    for (int i = 0; i < 2 * n; ++i) pre[i + 1] = pre[i] + b[i];
+    const ll INF = numeric_limits<ll>::max() / 4;
+    vector<vector<ll>> f(2 * n, vector<ll>(2 * n, 0));
+    for (int len = 2; len <= n; ++len) { // 长度不超过 n
+        for (int l = 0; l + len <= 2 * n; ++l) {
+            int r = l + len - 1;
+            ll sum = pre[r + 1] - pre[l];
+            f[l][r] = INF;
+            for (int m = l; m < r; ++m) f[l][r] = min(f[l][r], f[l][m] + f[m + 1][r] + sum);
         }
+    }
+    ll res = INF;
+    for (int l = 0; l < n; ++l) res = min(res, f[l][l + n - 1]); // 枚举环的起点
+    return res;
+}
+```
 
-        tree_dp_dfs(v, u, tree, weight, dp);
-        // 不选 u 时，孩子可以自由选择选或不选。
-        dp[u][0] += max(dp[v][0], dp[v][1]);
-        // 选择 u 后，与 u 相邻的孩子都不能选择。
-        dp[u][1] += dp[v][0];
+**回文类：最长回文子序列**：`f[l][r]` = `s[l..r]` 内最长回文子序列长度。两端相等则同时入选，否则丢掉较差的一端。`O(n^2)`。
+
+```cpp
+int longest_palindrome_subseq(string_view s) {
+    int n = (int)s.size();
+    if (n == 0) return 0;
+    vector<vector<int>> f(n, vector<int>(n, 0));
+    for (int i = 0; i < n; ++i) f[i][i] = 1;
+    for (int len = 2; len <= n; ++len) {
+        for (int l = 0; l + len <= n; ++l) {
+            int r = l + len - 1;
+            if (s[l] == s[r]) f[l][r] = f[l + 1][r - 1] + 2; // len == 2 时取到全 0 的非法区间，不影响正确性
+            else f[l][r] = max(f[l + 1][r], f[l][r - 1]);
+        }
+    }
+    return f[0][n - 1];
+}
+```
+
+**四边形不等式优化**：当代价满足四边形不等式且最优分割点单调（`opt[l][r-1] <= opt[l][r] <= opt[l+1][r]`）时，分割点只需在 `[opt[l][r-1], opt[l+1][r]]` 内枚举，可把 `O(n^3)` 降到 `O(n^2)`。适用面窄，用前需验证条件，不附代码。
+
+### 8.7 树形 DP：最大权独立集
+
+`dp[u][0/1]` = 不选/选 `u` 时其子树的最大答案。
+
+```cpp
+using ll = long long;
+
+void tree_dp_dfs(int u, int fa, const vector<vector<int>>& tr, const vector<ll>& w, vector<array<ll, 2>>& dp) {
+    dp[u][0] = 0;
+    dp[u][1] = w[u];
+    for (int v : tr[u]) {
+        if (v == fa) continue;
+        tree_dp_dfs(v, u, tr, w, dp);
+        dp[u][0] += max(dp[v][0], dp[v][1]); // 不选 u，孩子任选
+        dp[u][1] += dp[v][0];                // 选 u，孩子不能选
     }
 }
 
-ll maximum_weight_independent_set(
-    const vector<vector<int>>& tree,
-    const vector<ll>& weight,
-    int root = 1
-)
-{
-    // array 的值初始化会把两个状态都置为 0。
-    vector<array<ll, 2>> dp(tree.size());
-    tree_dp_dfs(root, 0, tree, weight, dp);
+ll maximum_weight_independent_set(const vector<vector<int>>& tr, const vector<ll>& w, int root = 1) {
+    vector<array<ll, 2>> dp(tr.size());
+    tree_dp_dfs(root, 0, tr, w, dp);
     return max(dp[root][0], dp[root][1]);
 }
 ```
 
 ### 8.8 状态压缩 DP：最短哈密顿路径
 
-从 0 号点出发，恰好访问每个点一次，并在 `n - 1` 号点结束。`dp[mask][last]` 表示已访问集合为 `mask`、当前位于 `last` 的最短距离。
+从 0 号点出发恰好访问每点一次、在 `n - 1` 号点结束。`dp[mask][u]` = 已访问集合为 `mask`、当前在 `u` 的最短距离。
 
 ```cpp
 using ll = long long;
 
-ll shortest_hamilton_path(const vector<vector<ll>>& weight)
-{
-    int n = static_cast<int>(weight.size());
-    if (n == 0)
-    {
-        return 0;
-    }
-    assert(n <= 20); // 状态数为 2^n，n 再大通常无法承受。
-
+ll shortest_hamilton_path(const vector<vector<ll>>& w) {
+    int n = (int)w.size();
+    if (n == 0) return 0;
+    assert(n <= 20); // 状态数 2^n
     const ll INF = numeric_limits<ll>::max() / 4;
-    int state_count = 1 << n;
-    vector<vector<ll>> dp(state_count, vector<ll>(n, INF));
-    dp[1][0] = 0; // mask == 1 表示只访问了 0 号点。
-
-    for (int mask = 0; mask < state_count; ++mask)
-    {
-        for (int last = 0; last < n; ++last)
-        {
-            if (((mask >> last) & 1) == 0 || dp[mask][last] == INF)
-            {
-                continue;
-            }
-
-            for (int next = 0; next < n; ++next)
-            {
-                if ((mask >> next) & 1)
-                {
-                    continue;
-                }
-                if (weight[last][next] == INF)
-                {
-                    // INF 表示两点间没有可用边。
-                    continue;
-                }
-
-                int next_mask = mask | (1 << next);
-                dp[next_mask][next] = min(
-                    dp[next_mask][next],
-                    dp[mask][last] + weight[last][next]
-                );
+    int S = 1 << n;
+    vector<vector<ll>> dp(S, vector<ll>(n, INF));
+    dp[1][0] = 0;
+    for (int mask = 0; mask < S; ++mask) {
+        for (int u = 0; u < n; ++u) {
+            if (((mask >> u) & 1) == 0 || dp[mask][u] == INF) continue;
+            for (int v = 0; v < n; ++v) {
+                if ((mask >> v) & 1) continue;
+                if (w[u][v] == INF) continue; // 无边
+                dp[mask | (1 << v)][v] = min(dp[mask | (1 << v)][v], dp[mask][u] + w[u][v]);
             }
         }
     }
-    return dp[state_count - 1][n - 1];
+    return dp[S - 1][n - 1];
 }
 ```
 
 ### 8.9 数位 DP：统计指定数位和
 
-下面统计 `[0, upper]` 中十进制数位和等于 `target_sum` 的整数个数。`tight` 表示当前前缀是否仍与上界前缀完全相同；只有 `tight == false` 的状态可以安全记忆化。
+统计 `[0, up]` 中数位和等于 `ts` 的整数个数。只有 `tight == false` 的状态可以记忆化。
 
 ```cpp
 using ll = long long;
 
-ll count_with_digit_sum(ll upper, int target_sum)
-{
-    // 负上界表示区间为空，直接返回 0。
-    if (upper < 0 || target_sum < 0)
-    {
-        return 0;
-    }
-
-    string digits = to_string(upper);
-    int length = static_cast<int>(digits.size());
-    vector<vector<ll>> memo(
-        length,
-        vector<ll>(target_sum + 1, -1)
-    );
-
-    // position：当前处理到第几位；sum：已选数位和；tight：是否贴住上界。
-    function<ll(int, int, bool)> dfs = [&](int position, int sum, bool tight)
-    {
-        if (sum > target_sum)
-        {
-            return 0LL;
-        }
-        if (position == length)
-        {
-            return sum == target_sum ? 1LL : 0LL;
-        }
-
-        if (!tight && memo[position][sum] != -1)
-        {
-            return memo[position][sum];
-        }
-
-        int upper_digit = tight ? digits[position] - '0' : 9;
-        ll ways = 0;
-        for (int digit = 0; digit <= upper_digit; ++digit)
-        {
-            // 前导零自然参与递归，但不会改变数位和。
-            ways += dfs(
-                position + 1,
-                sum + digit,
-                tight && digit == upper_digit
-            );
-        }
-
-        if (!tight)
-        {
-            memo[position][sum] = ways;
-        }
-        return ways;
+ll count_with_digit_sum(ll up, int ts) {
+    if (up < 0 || ts < 0) return 0;
+    string dig = to_string(up);
+    int len = (int)dig.size();
+    vector<vector<ll>> memo(len, vector<ll>(ts + 1, -1));
+    // pos：当前位；s：已选数位和；tight：是否贴住上界
+    function<ll(int, int, bool)> dfs = [&](int pos, int s, bool tight) {
+        if (s > ts) return 0LL;
+        if (pos == len) return s == ts ? 1LL : 0LL;
+        if (!tight && memo[pos][s] != -1) return memo[pos][s];
+        int lim = tight ? dig[pos] - '0' : 9;
+        ll res = 0;
+        for (int d = 0; d <= lim; ++d) res += dfs(pos + 1, s + d, tight && d == lim);
+        if (!tight) memo[pos][s] = res; // 只有不贴上界的状态可记忆化
+        return res;
     };
-
     return dfs(0, 0, true);
 }
 
-ll count_with_digit_sum(ll left, ll right, int target_sum)
-{
-    return count_with_digit_sum(right, target_sum)
-         - count_with_digit_sum(left - 1, target_sum);
+ll count_with_digit_sum(ll l, ll r, int ts) {
+    return count_with_digit_sum(r, ts) - count_with_digit_sum(l - 1, ts);
 }
 ```
 
 ### 8.10 DAG 上的 DP：最长路径
 
-拓扑序保证处理 `u` 时，所有指向 `u` 的前驱都已完成转移。下面返回以任意入度为 0 的点为起点、到每个点的最长边数；图中有环时返回 `nullopt`。
+拓扑序保证处理 `u` 时前驱已完成转移；返回到每个点的最长边数，有环返回 `nullopt`。
 
 ```cpp
-optional<vector<int>> longest_path_in_dag(
-    const vector<vector<int>>& graph
-)
-{
-    int n = static_cast<int>(graph.size()) - 1;
-    vector<int> indegree(n + 1, 0);
-    // 先统计入度，为 Kahn 拓扑排序做准备。
-    for (int u = 1; u <= n; ++u)
-    {
-        for (int v : graph[u])
-        {
-            ++indegree[v];
-        }
+optional<vector<int>> longest_path_in_dag(const vector<vector<int>>& g) {
+    int n = (int)g.size() - 1;
+    vector<int> ind(n + 1, 0);
+    for (int u = 1; u <= n; ++u) {
+        for (int v : g[u]) ++ind[v];
     }
-
     queue<int> q;
     vector<int> dp(n + 1, 0);
-    for (int u = 1; u <= n; ++u)
-    {
-        if (indegree[u] == 0)
-        {
-            // 所有入度为 0 的点都可以作为一条路径的起点。
-            q.push(u);
-        }
+    for (int u = 1; u <= n; ++u) {
+        if (ind[u] == 0) q.push(u);
     }
-
-    int processed = 0;
-    while (!q.empty())
-    {
+    int cnt = 0;
+    while (!q.empty()) { // Kahn 拓扑
         int u = q.front();
         q.pop();
-        ++processed;
-
-        for (int v : graph[u])
-        {
-            // 尝试用“到 u 的最长路径 + 边 u -> v”更新 v。
+        ++cnt;
+        for (int v : g[u]) {
             dp[v] = max(dp[v], dp[u] + 1);
-            if (--indegree[v] == 0)
-            {
-                q.push(v);
-            }
+            if (--ind[v] == 0) q.push(v);
         }
     }
-
-    if (processed != n)
-    {
-        // 仍有点未进入拓扑序，说明图中存在有向环。
-        return nullopt;
-    }
+    if (cnt != n) return nullopt; // 有环
     return dp;
 }
 ```
 
 ## 9. 基础算法补充
 
-本章整理 `D:\ACM\模板笔记\板子.md` 中适合赛时复用、且尚未被前文覆盖的基础模板。选择排序、冒泡排序等教学实现不再重复收录，比赛中直接使用 `std::sort`。
+前文未覆盖的基础模板；排序直接用 `std::sort`。
 
 ### 9.1 整数二分答案
 
-`first_true` 查找第一个满足单调谓词的位置；要求区间右端点一定满足条件。
+`first_true` 找第一个满足单调谓词的位置（要求右端点满足）；`last_true` 对称。
 
 ```cpp
 using ll = long long;
 
-template <class Predicate>
-ll first_true(ll left, ll right, Predicate check)
-{
-    assert(left <= right && check(right));
-
-    while (left < right)
-    {
-        // 取下中位数；check(mid) 为真时保留 mid。
-        ll mid = left + (right - left) / 2;
-        if (check(mid))
-        {
-            right = mid;
-        }
-        else
-        {
-            left = mid + 1;
-        }
+template <class F>
+ll first_true(ll l, ll r, F check) {
+    assert(l <= r && check(r));
+    while (l < r) {
+        ll mid = l + (r - l) / 2; // 下中位数，check(mid) 为真时保留 mid
+        if (check(mid)) r = mid;
+        else l = mid + 1;
     }
-    return left;
+    return l;
 }
 
-template <class Predicate>
-ll last_true(ll left, ll right, Predicate check)
-{
-    assert(left <= right && check(left));
-
-    while (left < right)
-    {
-        // 取上中位数；check(mid) 为真时保留 mid。
-        ll mid = left + (right - left + 1) / 2;
-        if (check(mid))
-        {
-            left = mid;
-        }
-        else
-        {
-            right = mid - 1;
-        }
+template <class F>
+ll last_true(ll l, ll r, F check) {
+    assert(l <= r && check(l));
+    while (l < r) {
+        ll mid = l + (r - l + 1) / 2; // 上中位数
+        if (check(mid)) l = mid;
+        else r = mid - 1;
     }
-    return left;
+    return l;
 }
 ```
 
 ### 9.2 双指针与滑动窗口
 
-当数组元素均非负时，窗口右端点右移只会让区间和增大，因此左端点也只需单调右移。下面求和不超过 `limit` 的最长连续子数组。
+元素非负时左右端点均单调右移。求和不超过 `lim` 的最长连续子数组。
 
 ```cpp
 using ll = long long;
 
-int longest_window_sum_at_most(const vector<ll>& values, ll limit)
-{
-    assert(limit >= 0);
-
-    int left = 0;
-    int answer = 0;
-    ll window_sum = 0;
-
-    for (int right = 0; right < static_cast<int>(values.size()); ++right)
-    {
-        assert(values[right] >= 0);
-        window_sum += values[right];
-
-        while (left <= right && window_sum > limit)
-        {
-            // 当前窗口过大，移除最左端元素。
-            window_sum -= values[left];
-            ++left;
-        }
-
-        answer = max(answer, right - left + 1);
+int longest_window_sum_at_most(const vector<ll>& a, ll lim) {
+    assert(lim >= 0);
+    int l = 0, res = 0;
+    ll sum = 0;
+    for (int r = 0; r < (int)a.size(); ++r) {
+        assert(a[r] >= 0);
+        sum += a[r];
+        while (l <= r && sum > lim) sum -= a[l++];
+        res = max(res, r - l + 1);
     }
-    return answer;
+    return res;
 }
 ```
 
 ### 9.3 归并排序统计逆序对
 
-合并两个有序区间时，若右侧元素小于左侧当前元素，那么左侧剩余元素都与它构成逆序对。
+合并时右侧元素小于左侧当前元素，则左侧剩余元素全与它构成逆序对。
 
 ```cpp
 using ll = long long;
 
 template <class T>
-ll inversion_count_impl(
-    vector<T>& values,
-    vector<T>& buffer,
-    int left,
-    int right
-)
-{
-    if (right - left <= 1)
-    {
-        return 0;
-    }
-
-    int middle = (left + right) / 2;
-    ll inversions = inversion_count_impl(values, buffer, left, middle)
-                  + inversion_count_impl(values, buffer, middle, right);
-
-    int i = left;
-    int j = middle;
-    int k = left;
-    while (i < middle || j < right)
-    {
-        if (j == right || (i < middle && values[i] <= values[j]))
-        {
-            buffer[k++] = values[i++];
-        }
-        else
-        {
-            buffer[k++] = values[j++];
-            // values[i..middle) 全都大于刚取出的右侧元素。
-            inversions += middle - i;
+ll inv_impl(vector<T>& a, vector<T>& buf, int l, int r) {
+    if (r - l <= 1) return 0;
+    int m = (l + r) / 2;
+    ll res = inv_impl(a, buf, l, m) + inv_impl(a, buf, m, r);
+    int i = l, j = m, k = l;
+    while (i < m || j < r) {
+        if (j == r || (i < m && a[i] <= a[j])) buf[k++] = a[i++];
+        else {
+            buf[k++] = a[j++];
+            res += m - i; // a[i..m) 都与它构成逆序对
         }
     }
-
-    copy(buffer.begin() + left, buffer.begin() + right, values.begin() + left);
-    return inversions;
+    copy(buf.begin() + l, buf.begin() + r, a.begin() + l);
+    return res;
 }
 
 template <class T>
-ll inversion_count(vector<T> values)
-{
-    // 按值传参，排序过程不会改变调用者的原数组。
-    vector<T> buffer(values.size());
-    return inversion_count_impl(
-        values,
-        buffer,
-        0,
-        static_cast<int>(values.size())
-    );
+ll inversion_count(vector<T> a) { // 按值传参，不改原数组
+    vector<T> buf(a.size());
+    return inv_impl(a, buf, 0, (int)a.size());
 }
 ```
 
 ### 9.4 回溯枚举排列
 
-`path` 保存当前已经选择的数字，`used[x]` 表示数字 `x` 是否已经出现在当前排列中。总复杂度为 `O(n * n!)`。
+`path` 存当前排列，`used[x]` 标记已选。总复杂度 `O(n * n!)`。
 
 ```cpp
-template <class Callback>
-void enumerate_permutations(int n, Callback process)
-{
+template <class F>
+void enumerate_permutations(int n, F process) {
     vector<int> path;
     vector<char> used(n + 1, false);
-
-    function<void()> dfs = [&]()
-    {
-        if (static_cast<int>(path.size()) == n)
-        {
-            // 找到一个完整排列，交给调用者处理。
+    function<void()> dfs = [&]() {
+        if ((int)path.size() == n) {
             process(path);
             return;
         }
-
-        for (int value = 1; value <= n; ++value)
-        {
-            if (used[value])
-            {
-                continue;
-            }
-
-            // 选择 value。
-            used[value] = true;
-            path.push_back(value);
+        for (int x = 1; x <= n; ++x) {
+            if (used[x]) continue;
+            used[x] = true;
+            path.push_back(x);
             dfs();
-
-            // 撤销选择，恢复进入本层递归前的状态。
-            path.pop_back();
-            used[value] = false;
+            path.pop_back(); // 回溯撤销
+            used[x] = false;
         }
     };
-
     dfs();
 }
 ```
 
 ### 9.5 回溯寻找子集和
 
-下面返回一组元素下标，使所选元素之和等于 `target`。该模板不要求元素为正数，因此不使用“当前和超过目标就剪枝”的错误假设。
+返回一组下标使所选元素和等于 `target`。元素可为负，因此不做“和超过目标就剪枝”。
 
 ```cpp
 using ll = long long;
 
-optional<vector<int>> find_subset_sum(
-    const vector<ll>& values,
-    ll target
-)
-{
-    vector<int> chosen_indices;
-
-    function<bool(int, ll)> dfs = [&](int index, ll remaining)
-    {
-        if (remaining == 0)
-        {
-            return true;
-        }
-        if (index == static_cast<int>(values.size()))
-        {
-            return false;
-        }
-
-        // 分支一：选择当前元素。
-        chosen_indices.push_back(index);
-        if (dfs(index + 1, remaining - values[index]))
-        {
-            return true;
-        }
-        chosen_indices.pop_back();
-
-        // 分支二：不选择当前元素。
-        return dfs(index + 1, remaining);
+optional<vector<int>> find_subset_sum(const vector<ll>& a, ll target) {
+    vector<int> sel;
+    function<bool(int, ll)> dfs = [&](int i, ll rem) {
+        if (rem == 0) return true;
+        if (i == (int)a.size()) return false;
+        sel.push_back(i); // 选 a[i]
+        if (dfs(i + 1, rem - a[i])) return true;
+        sel.pop_back();
+        return dfs(i + 1, rem); // 不选
     };
-
-    if (!dfs(0, target))
-    {
-        return nullopt;
-    }
-    return chosen_indices;
+    if (!dfs(0, target)) return nullopt;
+    return sel;
 }
 ```
 
 ### 9.6 区间调度贪心
 
-对半开区间 `[left, right)` 按右端点升序排序，每次选择最早结束且与已选区间不重叠的区间，可得到最多区间数量。
+半开区间 `[l, r)` 按右端点排序，每次选最早结束且不重叠的区间，得最多区间数。
 
 ```cpp
 using ll = long long;
 
-struct Interval
-{
-    ll left;
-    ll right;
+struct Interval {
+    ll l, r;
 };
 
-int maximum_non_overlapping_intervals(vector<Interval> intervals)
-{
-    sort(intervals.begin(), intervals.end(), [](const Interval& lhs, const Interval& rhs)
-    {
-        if (lhs.right != rhs.right)
-        {
-            // 最早结束的区间优先，为后续区间留下最多空间。
-            return lhs.right < rhs.right;
-        }
-        return lhs.left < rhs.left;
+int maximum_non_overlapping_intervals(vector<Interval> a) {
+    sort(a.begin(), a.end(), [](const Interval& x, const Interval& y) {
+        if (x.r != y.r) return x.r < y.r; // 最早结束优先
+        return x.l < y.l;
     });
-
-    ll current_end = numeric_limits<ll>::min();
-    int answer = 0;
-    for (const Interval& interval : intervals)
-    {
-        assert(interval.left <= interval.right);
-        if (interval.left >= current_end)
-        {
-            ++answer;
-            current_end = interval.right;
+    ll ed = numeric_limits<ll>::min();
+    int res = 0;
+    for (const Interval& v : a) {
+        assert(v.l <= v.r);
+        if (v.l >= ed) { // 半开区间，端点相接不冲突
+            ++res;
+            ed = v.r;
         }
     }
-    return answer;
+    return res;
+}
+```
+
+## 10. 萌新向典题 Trick
+
+赛时高频小套路，每条配最简代码。
+
+### 10.1 快速读入
+
+关了 `sync_with_stdio` 还不够快（整数读取量 10^6 级以上）时用手写快读。
+
+```cpp
+inline int read() {
+    int x = 0, f = 1;
+    char c = getchar();
+    while (c < '0' || c > '9') { // 跳过符号与前缀空白
+        if (c == '-') f = -1;
+        c = getchar();
+    }
+    while (c >= '0' && c <= '9') {
+        x = x * 10 + c - '0';
+        c = getchar();
+    }
+    return x * f;
+}
+```
+
+### 10.2 前缀和与差分
+
+前缀和把区间和变成 `O(1)` 查询；差分把区间加变成 `O(1)` 修改，最后统一求前缀和还原。一维差分典题洛谷 P2367，二维差分典题 P3397。
+
+```cpp
+// 一维前缀和：s[i] = a[1..i]，区间和 [l, r] = s[r] - s[l - 1]
+vector<ll> s(n + 1, 0);
+for (int i = 1; i <= n; ++i) s[i] = s[i - 1] + a[i];
+
+// 一维差分：区间 [l, r] 加 v
+vector<ll> d(n + 2, 0);
+d[l] += v;
+d[r + 1] -= v;
+// 全部修改完后还原：for (int i = 1; i <= n; ++i) d[i] += d[i - 1];
+```
+
+```cpp
+// 二维前缀和：s[i][j] = (1,1)~(i,j) 的和
+for (int i = 1; i <= n; ++i)
+    for (int j = 1; j <= m; ++j)
+        s[i][j] = s[i - 1][j] + s[i][j - 1] - s[i - 1][j - 1] + a[i][j];
+// 子矩阵和 (x1,y1)~(x2,y2)
+ll sum = s[x2][y2] - s[x1 - 1][y2] - s[x2][y1 - 1] + s[x1 - 1][y1 - 1];
+
+// 二维差分：子矩阵 (x1,y1)~(x2,y2) 加 v
+d[x1][y1] += v;
+d[x2 + 1][y1] -= v;
+d[x1][y2 + 1] -= v;
+d[x2 + 1][y2 + 1] += v;
+// 最后对整个 d 求二维前缀和还原
+```
+
+### 10.3 离散化
+
+值域大但元素少时，把原值映射为排名（1-based）。
+
+```cpp
+vector<int> v(a); // 复制一份
+sort(v.begin(), v.end());
+v.erase(unique(v.begin(), v.end()), v.end()); // 去重
+// x 的离散化值：
+int id = (int)(lower_bound(v.begin(), v.end(), x) - v.begin()) + 1;
+```
+
+### 10.4 整数取整与常见公式
+
+向上取整 `(a + b - 1) / b`（要求 `b > 0`）；口诀：乘除前先转 `ll`（`1LL * a * b`），防止 int 乘法中途溢出。
+
+```cpp
+using ll = long long;
+
+int ceil_div(int a, int b) { // a / b 向上取整，b > 0
+    assert(b > 0);
+    if (a >= 0) return (a + b - 1) / b;
+    return a / b; // 负数时 C++ 整除本身向零取整，恰好是向上取整
+}
+
+ll safe_mul(int a, int b) { // 先转 ll 再乘，防溢出
+    return 1LL * a * b;
+}
+```
+
+### 10.5 常用 STL 速查
+
+```cpp
+sort(v.begin(), v.end());                                 // 升序
+sort(v.begin(), v.end(), greater<int>());                 // 降序
+v.erase(unique(v.begin(), v.end()), v.end());             // 去重（先排序）
+int rk = (int)(lower_bound(v.begin(), v.end(), x) - v.begin()); // 第一个 >= x 的下标
+int cnt = (int)(upper_bound(v.begin(), v.end(), x) - lower_bound(v.begin(), v.end(), x)); // x 出现次数
+__builtin_popcount(x);     // 二进制中 1 的个数（ll 用 __builtin_popcountll）
+__builtin_ctz(x);          // 最低位 1 的位置，x != 0（ll 用 __builtin_ctzll）
+nth_element(v.begin(), v.begin() + k, v.end()); // O(n) 让 v[k] 成为第 k 小
+```
+
+### 10.6 中位数贪心
+
+货仓选址类：数轴上选一点使到所有点的距离和最小，答案取中位数（偶数个取中间两点之一均可）。
+
+```cpp
+using ll = long long;
+
+ll min_total_distance(vector<ll> a) {
+    sort(a.begin(), a.end());
+    ll mid = a[a.size() / 2]; // 中位数
+    ll res = 0;
+    for (ll x : a) res += abs(x - mid);
+    return res;
 }
 ```
 
@@ -3120,7 +2095,7 @@ int maximum_non_overlapping_intervals(vector<Interval> intervals)
 | 莫比乌斯线性筛 | `O(n)` | `O(n)` | 预处理上界已知 |
 | 莫比乌斯反演 | `O(n log n)` | `O(n)` | 已知所有因数和 `F(n)` |
 | 树状数组 | 单次 `O(log n)` | `O(n)` | 1-based |
-| 懒标记线段树 | 单次 `O(log n)` | `O(n)` | 1-based，区间赋值/求和 |
+| 懒标记线段树 | 单次 `O(log n)` | `O(n)` | 1-based，区间加/求和 |
 | 并查集 | 均摊 `O(alpha(n))` | `O(n)` | 1-based |
 | 异或线性基 | 单次 `O(64)` | `O(64)` | `uint64_t` |
 | DFS / BFS | `O(n + m)` | `O(n)` | 邻接表 |
@@ -3146,4 +2121,3 @@ int maximum_non_overlapping_intervals(vector<Interval> intervals)
 | 排列回溯 | `O(n * n!)` | `O(n)` | 仅适合较小 `n` |
 | 子集和回溯 | `O(2^n)` | `O(n)` | 仅适合较小 `n` |
 | 区间调度 | `O(n log n)` | `O(n)` | 半开区间，按右端点贪心 |
-

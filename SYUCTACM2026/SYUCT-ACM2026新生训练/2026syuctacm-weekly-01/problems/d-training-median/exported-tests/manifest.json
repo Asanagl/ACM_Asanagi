@@ -1,0 +1,68 @@
+{
+  "slug": "d-training-median",
+  "title": "中位训练",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-16 13:22:29 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-01\\problems\\d-training-median",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-01\\problems\\d-training-median\\exported-tests",
+  "caseCount": 7,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample",
+      "seed": "1",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "min-1",
+      "type": "min",
+      "seed": "2",
+      "group": "secret",
+      "input": "secret\\min-1.in",
+      "answer": "secret\\min-1.ans"
+    },
+    {
+      "name": "negative-1",
+      "type": "negative",
+      "seed": "3",
+      "group": "secret",
+      "input": "secret\\negative-1.in",
+      "answer": "secret\\negative-1.ans"
+    },
+    {
+      "name": "duplicate-1",
+      "type": "duplicate",
+      "seed": "4",
+      "group": "secret",
+      "input": "secret\\duplicate-1.in",
+      "answer": "secret\\duplicate-1.ans"
+    },
+    {
+      "name": "random-1",
+      "type": "random",
+      "seed": "5",
+      "group": "secret",
+      "input": "secret\\random-1.in",
+      "answer": "secret\\random-1.ans"
+    },
+    {
+      "name": "large-sum-1",
+      "type": "large-sum",
+      "seed": "6",
+      "group": "secret",
+      "input": "secret\\large-sum-1.in",
+      "answer": "secret\\large-sum-1.ans"
+    },
+    {
+      "name": "max-1",
+      "type": "max",
+      "seed": "7",
+      "group": "secret",
+      "input": "secret\\max-1.in",
+      "answer": "secret\\max-1.ans"
+    }
+  ]
+}

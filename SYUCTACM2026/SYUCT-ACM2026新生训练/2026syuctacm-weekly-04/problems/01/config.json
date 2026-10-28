@@ -1,0 +1,66 @@
+{
+  "slug": "04-01",
+  "title": "字符串的头和尾",
+  "interactive": false,
+  "timeLimitMs": 1000,
+  "memoryLimitMb": 256,
+  "standard": "gnu++17",
+  "statement": "docs/statement.md",
+  "tutorial": "docs/tutorial.md",
+  "validator": "src/validator/validator.cpp",
+  "generator": {
+    "path": "src/generator/generator.cpp",
+    "cases": [
+      { "name": "sample-1", "type": "sample", "seed": 1, "group": "sample" },
+      { "name": "sample-2", "type": "sample", "seed": 2, "group": "sample" },
+      { "name": "min-1", "type": "min", "seed": 11, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "min-2", "type": "min", "seed": 12, "group": "secret" },
+      { "name": "two-1", "type": "two", "seed": 13, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "two-2", "type": "two", "seed": 14, "group": "secret" },
+      { "name": "same-1", "type": "same", "seed": 15, "group": "secret" },
+      { "name": "same-2", "type": "same", "seed": 16, "group": "secret" },
+      { "name": "same-max", "type": "same-max", "seed": 17, "group": "secret" },
+      { "name": "alt-1", "type": "alt", "seed": 18, "group": "secret" },
+      { "name": "alt-2", "type": "alt", "seed": 19, "group": "secret" },
+      { "name": "pair-1", "type": "pair", "seed": 20, "group": "secret" },
+      { "name": "pair-2", "type": "pair", "seed": 21, "group": "secret" },
+      { "name": "pair-3", "type": "pair", "seed": 22, "group": "secret" },
+      { "name": "directed-1", "type": "directed", "seed": 23, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "directed-2", "type": "directed", "seed": 24, "group": "secret" },
+      { "name": "random-1", "type": "random", "seed": 30, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "random-2", "type": "random", "seed": 31, "group": "secret" },
+      { "name": "random-3", "type": "random", "seed": 32, "group": "secret" },
+      { "name": "random-4", "type": "random", "seed": 33, "group": "secret" },
+      { "name": "random-5", "type": "random", "seed": 34, "group": "secret" },
+      { "name": "random-6", "type": "random", "seed": 35, "group": "secret" },
+      { "name": "random-7", "type": "random", "seed": 36, "group": "secret" },
+      { "name": "random-8", "type": "random", "seed": 37, "group": "secret" },
+      { "name": "random-9", "type": "random", "seed": 38, "group": "secret" },
+      { "name": "random-10", "type": "random", "seed": 39, "group": "secret" },
+      { "name": "random-11", "type": "random", "seed": 40, "group": "secret" },
+      { "name": "random-12", "type": "random", "seed": 41, "group": "secret" },
+      { "name": "mid-1", "type": "mid", "seed": 50, "group": "secret" },
+      { "name": "near-max-1", "type": "near-max", "seed": 51, "group": "secret" },
+      { "name": "near-max-2", "type": "near-max", "seed": 52, "group": "secret" },
+      { "name": "max-1", "type": "max", "seed": 53, "group": "secret", "checkWith": ["solution2"] },
+      { "name": "max-2", "type": "max", "seed": 54, "group": "secret" }
+    ]
+  },
+  "checker": "src/checker/checker.cpp",
+  "build": {
+    "cppCompiler": "g++",
+    "cppFlags": ["-std=gnu++17", "-O2", "-pipe", "-static"],
+    "pythonCommand": "python"
+  },
+  "solutions": [
+    { "name": "main", "path": "src/solution.cpp", "language": "cpp", "role": "main" },
+    { "name": "solution2", "path": "src/solution2.cpp", "language": "cpp", "role": "reference" }
+  ],
+  "wrongSolutions": [
+    { "name": "wrong-reverse", "path": "src/wrong/wrong-reverse.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-only-length", "path": "src/wrong/wrong-only-length.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-off-by-one", "path": "src/wrong/wrong-off-by-one.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-char-read", "path": "src/wrong/wrong-char-read.cpp", "language": "cpp", "expected": "fail" },
+    { "name": "wrong-first-twice", "path": "src/wrong/wrong-first-twice.cpp", "language": "cpp", "expected": "fail" }
+  ]
+}

@@ -1,0 +1,112 @@
+kimi version 2.2.0
+• The user wants a blind review — no tools. They want six parts in Chinese, including a complete C++17 solution. I must not use any tools. Just produce the answer.
+
+  Let me work through it carefully.
+
+  Task: n rows, m cols, q queries. Compute sum over closed rectangle. Constraints: n,m ≤ 100, q ≤ 1000, a[i][j] ∈ [-1e9, 1e9]. Answer magnitude up to 1e13 → need 64-bit.
+
+  Algorithm choices: direct enumeration O(n*m*q) = 100*100*1000 = 1e7, fine. Or 2D prefix sums O(nm + q). The problem says direct enumeration passes. I'll present 2D prefix sum as the main approach (more instructive), but note direct enumeration is also fine. Actually, to be safe and simple, maybe present prefix sum since it's clean, with careful 0-indexed/1-indexed handling. Both are correct. I'll do prefix sum with 1-indexed (n+1)×(m+1) array of long long, P[i][j] = sum of a[1..i][1..j], query = P[r2][c2] - P[r1-1][c2] - P[r2][c1-1] + P[r1-1][c1-1].
+
+  Correctness proof: invariant on prefix definition by induction; inclusion-exclusion derivation.
+
+  Complexity: O(nm + q) time, O(nm) extra space (or O(1) extra if streaming; but we need the grid anyway... actually with prefix sums we only need the prefix array, so O(nm) memory ~ 101*101*8 bytes ≈ 81.6 KB). Fine for 256 MiB and 1000 ms.
+
+  Overflow analysis: max sum = 100*100*1e9 = 1e13 < 9.22e18. Intermediate prefix values bounded by 1e13 in absolute value. Inclusion-exclusion intermediate: P[r2][c2] - P[r1-1][c2] - P[r2][c1-1] + P[r1-1][c1-1] — each term ≤1e13 in abs, so partial sums bounded by ~3e13, well within long long.
+
+  Input reading: use fast IO or cin with sync_with_stdio(false). q up to 1000, numbers ~1e4, trivial.
+
+  Edge cases: single cell, r1=r2, c1=c2, single row/column, all negative values, zeros, maximum values, full matrix.
+
+  Implementation risks: off-by-one on prefix indices; forgetting long long; using int for prefix; output format (one per line, no extra tokens); trailing whitespace ok but no extra tokens; must not print anything else.
+
+  Also note: input may have negative numbers, reading into long long directly.
+
+  Let me write the code.
+
+  ```cpp
+  #include <cstdio>
+  #include <vector>
+
+  int main() {
+      int n, m, q;
+      if (std::scanf("%d %d %d", &n, &m, &q) != 3) return 0;
+      std::vector<std::vector<long long>> pre(n + 1, std::vector<long long>(m + 1, 0));
+      for (int i = 1; i <= n; ++i) {
+          for (int j = 1; j <= m; ++j) {
+              long long x;
+              std::scanf("%lld", &x);
+              pre[i][j] = x + pre[i - 1][j] + pre[i][j - 1] - pre[i - 1][j - 1];
+          }
+      }
+      for (int k = 0; k < q; ++k) {
+          int r1, c1, r2, c2;
+          std::scanf("%d %d %d %d", &r1, &c1, &r2, &c2);
+          long long ans = pre[r2][c2] - pre[r1 - 1][c2] - pre[r2][c1 - 1] + pre[r1 - 1][c1 - 1];
+          std::printf("%lld\n", ans);
+      }
+      return 0;
+  }
+  ```
+
+  That's fine. Use cin/cout alternative? scanf/printf is fine and fast enough.
+
+  Note the sample: whole matrix sum = 12 cells... let's verify quickly to make sure the code semantics match sample: row1: 1e9,1e9,1e9,-1e9 → sum 2e9. row2: 1e9,-1e9,1e9,1e9 → 2e9. row3: -1e9,1e9,1e9,1e9 → 2e9. Total 6e9 ✓ matches.
+
+  Query 2: rows 1-2, cols 1-2: row1: 1e9+1e9=2e9; row2: 1e9-1e9=0 → 2e9 ✓.
+
+  Query 3: rows 2-3 cols 2-3: row2: -1e9+1e9=0; row3: 1e9+1e9=2e9 → 2e9 ✓.
+
+  Query 5: rows 2-3 cols 4-4: row2: 1e9, row3: 1e9 → 2e9 ✓.
+
+  Good.
+
+  I should mention no assumptions beyond the stated problem; the only unprovable thing is that the input actually conforms to the constraints (trust the judge). Also note: I cannot verify the sample by running since no tools allowed — I verified by hand computation, state that.
+
+  Also mention the alternative direct enumeration O(nmq)=1e7 which also passes; the judge requires exact output regardless of algorithm.
+
+  Let me structure six sections clearly, moderately detailed. Include proof steps.
+
+  Proof:
+
+  Lemma 1 (prefix invariant): after the loops, for all 0≤i≤n, 0≤j≤m, pre[i][j] = Σ_{x=1..i} Σ_{y=1..j} a[x][y], with pre[i][0]=pre[0][j]=0.
+
+  Induction on i then j: base i=0 or j=0 zero. Step: the set of cells in rectangle [1..i]×[1..j] = [1..i-1]×[1..j] ∪ [1..i]×[1..j-1] ∪ {(i,j)} minus intersection [1..i-1]×[1..j-1]; by IE the counts are correct, giving the recurrence. So the computed value equals the true sum. Standard.
+
+  Lemma 2 (query formula): the answer A = Σ_{i=r1..r2} Σ_{j=c1..c2} a[i][j] = pre[r2][c2] - pre[r1-1][c2] - pre[r2][c1-1] + pre[r1-1][c1-1].
+
+  Proof: each cell (i,j) with 1≤i≤r2, 1≤j≤c2 contributes to pre[r2][c2] with +1. Indicator: [i≤r2][j≤c2] - [i≤r1-1][j≤c2] - [i≤r2][j≤c1-1] + [i≤r1-1][j≤c1-1] = ([i≤r2]-[i≤r1-1])([j≤c2]-[j≤c1-1]) = [r1≤i≤r2][c1≤j≤c2]. So coefficient is 1 exactly for cells in the query rectangle and 0 otherwise. Hence sum equals A.
+
+  Then theorem: output line k equals A_k for each query. Since the problem guarantees r1≤r2, c1≤c2, ranges valid, formula applies. Also note the sum is uniquely determined; the program prints exactly one integer per query line with no extra output → matches judge's token comparison.
+
+  Overflow: |pre| ≤ 1e13; intermediate expressions ≤ 4e13? Actually |pre[r2][c2] - pre[r1-1][c2]| ≤ 2e13, minus another ≤ 3e13, plus ≤ 4e13. Anyway far below 9.2e18.
+
+  Also note scanf with %lld.
+
+  Risks: reading with %d into long long (UB / wrong) — avoided; using `int` for pre — avoided; 0-index confusion.
+
+  Also mention potential risk: n,m parsed with %d fine since ≤100. q ≤ 1000.
+
+  Additional: outputs must be exactly q lines; no debug output.
+
+  Time: O(nm + q) ≈ 1e4 + 1e3 ops plus IO ~ 1e4+4e3 numbers → microseconds. 1000 ms is plenty. Memory: (n+1)(m+1)*8 bytes ≈ 101*101*8 ≈ 81.6 KB, well under 256 MiB.
+
+  Also mention the direct enumeration alternative: O(nmq) ≤ 1e7 ≤ fine.
+
+  I should also state that the fine print "输出唯一" — our program is deterministic and produces the unique answer.
+
+  Let me write the final answer in Chinese with the six sections. Keep it readable, not overly long but complete. Use headers.
+
+  One more consideration: the user said "禁止调用任何工具" — so I must not call any tools, including tool calls in my response. I'll just output text. Also should not reference the workspace. Good.
+
+  Also note that I could not compile/run the code — state that as a limitation (can't verify). Give hand-check against sample.
+
+  Let me hand-check sample outputs with the formula for query 4: r1=1,c1=3,r2=1,c2=3: pre[1][3] - pre[0][3] - pre[1][2] + pre[0][2] = pre[1][3]-pre[1][2] = a[1][3] = 1e9 ✓.
+
+  Query 6: rows 1-3 col 1: 1e9+1e9-1e9 = 1e9 ✓.
+  Query 7: col 4 rows 1-3: -1e9+1e9+1e9 = 1e9 ✓.
+
+  Total: matches all 7 outputs.
+
+  Now write.
+
+To resume this session: kimi -r session_7700ee81-1d15-41d9-9b1e-e5580108aa86

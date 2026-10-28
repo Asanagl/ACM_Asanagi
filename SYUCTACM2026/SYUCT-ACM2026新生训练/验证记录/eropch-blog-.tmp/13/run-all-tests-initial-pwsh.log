@@ -1,0 +1,191 @@
+[workspace] 04-13 (C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13)
+[info] memoryLimitMb=256 ½ö¶ÔÖ÷½â/²Î¿¼½â/´í½âÉúÐ§£»generator Óë validator Ê¹ÓÃ¸ü¿íËÉµÄ±¾µØÐ£Ñé¶î¶È¡£
+[compile] 04-13
+g++ -std=gnu++17 -O2 -pipe -I C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\include C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\src\validator\validator.cpp -o C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\validator.exe -Wl,--stack,268435456
+g++ -std=gnu++17 -O2 -pipe -I C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\include C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\src\generator\generator.cpp -o C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe -Wl,--stack,268435456
+g++ -std=gnu++17 -O2 -pipe -I C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\include C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\src\checker\checker.cpp -o C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\checker.exe -Wl,--stack,268435456
+g++ -std=gnu++17 -O2 -pipe -I C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\include C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\src\solution.cpp -o C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\main.exe -Wl,--stack,268435456
+g++ -std=gnu++17 -O2 -pipe -I C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\include C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\src\solution2.cpp -o C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\solution2.exe -Wl,--stack,268435456
+g++ -std=gnu++17 -O2 -pipe -I C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\include C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\src\wrong\wrong-a.cpp -o C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\wrong-int.exe -Wl,--stack,268435456
+g++ -std=gnu++17 -O2 -pipe -I C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\include C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\src\wrong\wrong-b.cpp -o C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\wrong-colsum.exe -Wl,--stack,268435456
+g++ -std=gnu++17 -O2 -pipe -I C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\include C:\Users\Asanagi\eropch-blog\problemsets\2026syuctacm-weekly-04\problems\13\src\wrong\wrong-c.cpp -o C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\wrong-prefix.exe -Wl,--stack,268435456
+[generate] 04-13
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe sample 1
+[generate][error] 04-13: generator Ê§°Ü£ºcase=sample-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe sample 1
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe min 2
+[generate][error] 04-13: generator Ê§°Ü£ºcase=min-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe min 2
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe min 3
+[generate][error] 04-13: generator Ê§°Ü£ºcase=min-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe min 3
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-row 4
+[generate][error] 04-13: generator Ê§°Ü£ºcase=single-row-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-row 4
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-row 5
+[generate][error] 04-13: generator Ê§°Ü£ºcase=single-row-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-row 5
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-row 6
+[generate][error] 04-13: generator Ê§°Ü£ºcase=single-row-3
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-row 6
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-col 7
+[generate][error] 04-13: generator Ê§°Ü£ºcase=single-col-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-col 7
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-col 8
+[generate][error] 04-13: generator Ê§°Ü£ºcase=single-col-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-col 8
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-col 9
+[generate][error] 04-13: generator Ê§°Ü£ºcase=single-col-3
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-col 9
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe square 10
+[generate][error] 04-13: generator Ê§°Ü£ºcase=square-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe square 10
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe square 11
+[generate][error] 04-13: generator Ê§°Ü£ºcase=square-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe square 11
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe zero 12
+[generate][error] 04-13: generator Ê§°Ü£ºcase=zero-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe zero 12
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe zero 13
+[generate][error] 04-13: generator Ê§°Ü£ºcase=zero-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe zero 13
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe all-same 18
+[generate][error] 04-13: generator Ê§°Ü£ºcase=all-same-pos
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe all-same 18
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe all-same 19
+[generate][error] 04-13: generator Ê§°Ü£ºcase=all-same-neg
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe all-same 19
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe all-same 20
+[generate][error] 04-13: generator Ê§°Ü£ºcase=all-same-small
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe all-same 20
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe boundary 17
+[generate][error] 04-13: generator Ê§°Ü£ºcase=boundary-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe boundary 17
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe boundary 14
+[generate][error] 04-13: generator Ê§°Ü£ºcase=boundary-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe boundary 14
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-pos 19
+[generate][error] 04-13: generator Ê§°Ü£ºcase=overflow-pos-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-pos 19
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-pos 20
+[generate][error] 04-13: generator Ê§°Ü£ºcase=overflow-pos-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-pos 20
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-neg 21
+[generate][error] 04-13: generator Ê§°Ü£ºcase=overflow-neg-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-neg 21
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-neg 22
+[generate][error] 04-13: generator Ê§°Ü£ºcase=overflow-neg-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-neg 22
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe cancel 23
+[generate][error] 04-13: generator Ê§°Ü£ºcase=cancel-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe cancel 23
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe cancel 24
+[generate][error] 04-13: generator Ê§°Ü£ºcase=cancel-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe cancel 24
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe colswap 25
+[generate][error] 04-13: generator Ê§°Ü£ºcase=colswap-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe colswap 25
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe colswap 26
+[generate][error] 04-13: generator Ê§°Ü£ºcase=colswap-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe colswap 26
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe colswap 27
+[generate][error] 04-13: generator Ê§°Ü£ºcase=colswap-3
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe colswap 27
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random-small 28
+[generate][error] 04-13: generator Ê§°Ü£ºcase=random-small-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random-small 28
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random-small 29
+[generate][error] 04-13: generator Ê§°Ü£ºcase=random-small-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random-small 29
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 30
+[generate][error] 04-13: generator Ê§°Ü£ºcase=random-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 30
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 31
+[generate][error] 04-13: generator Ê§°Ü£ºcase=random-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 31
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 32
+[generate][error] 04-13: generator Ê§°Ü£ºcase=random-3
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 32
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 33
+[generate][error] 04-13: generator Ê§°Ü£ºcase=random-4
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 33
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe max 34
+[generate][error] 04-13: generator Ê§°Ü£ºcase=max-1
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe max 34
+C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe max 35
+[generate][error] 04-13: generator Ê§°Ü£ºcase=max-2
+[generate][repro] C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe max 35
+[generate][error] 04-13: Ã»ÓÐÈÎºÎ³É¹¦Éú³ÉµÄ²âÊÔµã¡£
+
+Ê§°ÜµÄ²âÊÔÓÃÀý£º
+- [04-13] [generate] generator Ê§°Ü£ºcase=sample-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe sample 1
+- [04-13] [generate] generator Ê§°Ü£ºcase=min-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe min 2
+- [04-13] [generate] generator Ê§°Ü£ºcase=min-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe min 3
+- [04-13] [generate] generator Ê§°Ü£ºcase=single-row-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-row 4
+- [04-13] [generate] generator Ê§°Ü£ºcase=single-row-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-row 5
+- [04-13] [generate] generator Ê§°Ü£ºcase=single-row-3
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-row 6
+- [04-13] [generate] generator Ê§°Ü£ºcase=single-col-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-col 7
+- [04-13] [generate] generator Ê§°Ü£ºcase=single-col-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-col 8
+- [04-13] [generate] generator Ê§°Ü£ºcase=single-col-3
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe single-col 9
+- [04-13] [generate] generator Ê§°Ü£ºcase=square-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe square 10
+- [04-13] [generate] generator Ê§°Ü£ºcase=square-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe square 11
+- [04-13] [generate] generator Ê§°Ü£ºcase=zero-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe zero 12
+- [04-13] [generate] generator Ê§°Ü£ºcase=zero-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe zero 13
+- [04-13] [generate] generator Ê§°Ü£ºcase=all-same-pos
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe all-same 18
+- [04-13] [generate] generator Ê§°Ü£ºcase=all-same-neg
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe all-same 19
+- [04-13] [generate] generator Ê§°Ü£ºcase=all-same-small
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe all-same 20
+- [04-13] [generate] generator Ê§°Ü£ºcase=boundary-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe boundary 17
+- [04-13] [generate] generator Ê§°Ü£ºcase=boundary-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe boundary 14
+- [04-13] [generate] generator Ê§°Ü£ºcase=overflow-pos-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-pos 19
+- [04-13] [generate] generator Ê§°Ü£ºcase=overflow-pos-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-pos 20
+- [04-13] [generate] generator Ê§°Ü£ºcase=overflow-neg-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-neg 21
+- [04-13] [generate] generator Ê§°Ü£ºcase=overflow-neg-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe overflow-neg 22
+- [04-13] [generate] generator Ê§°Ü£ºcase=cancel-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe cancel 23
+- [04-13] [generate] generator Ê§°Ü£ºcase=cancel-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe cancel 24
+- [04-13] [generate] generator Ê§°Ü£ºcase=colswap-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe colswap 25
+- [04-13] [generate] generator Ê§°Ü£ºcase=colswap-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe colswap 26
+- [04-13] [generate] generator Ê§°Ü£ºcase=colswap-3
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe colswap 27
+- [04-13] [generate] generator Ê§°Ü£ºcase=random-small-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random-small 28
+- [04-13] [generate] generator Ê§°Ü£ºcase=random-small-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random-small 29
+- [04-13] [generate] generator Ê§°Ü£ºcase=random-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 30
+- [04-13] [generate] generator Ê§°Ü£ºcase=random-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 31
+- [04-13] [generate] generator Ê§°Ü£ºcase=random-3
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 32
+- [04-13] [generate] generator Ê§°Ü£ºcase=random-4
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe random 33
+- [04-13] [generate] generator Ê§°Ü£ºcase=max-1
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe max 34
+- [04-13] [generate] generator Ê§°Ü£ºcase=max-2
+  repro: C:\Users\Asanagi\.codex\skills\icpc-problem-creator\.codex-test-artifacts\build\04-13\bin\generator.exe max 35
+- [04-13] [generate] Ã»ÓÐÈÎºÎ³É¹¦Éú³ÉµÄ²âÊÔµã¡£

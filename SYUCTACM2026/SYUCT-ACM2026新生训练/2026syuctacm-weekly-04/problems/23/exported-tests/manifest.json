@@ -1,0 +1,300 @@
+{
+  "slug": "04-23",
+  "title": "回文修补",
+  "interactive": false,
+  "exportMode": "static",
+  "exportedAt": "2026-10-26 14:40:47 +08:00",
+  "workspace": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\23",
+  "outputRoot": "C:\\Users\\Asanagi\\eropch-blog\\problemsets\\2026syuctacm-weekly-04\\problems\\23\\exported-tests",
+  "caseCount": 36,
+  "cases": [
+    {
+      "name": "sample-1",
+      "type": "sample-even",
+      "seed": "101",
+      "group": "sample",
+      "input": "sample\\sample-1.in",
+      "answer": "sample\\sample-1.ans"
+    },
+    {
+      "name": "sample-2",
+      "type": "sample-odd",
+      "seed": "102",
+      "group": "sample",
+      "input": "sample\\sample-2.in",
+      "answer": "sample\\sample-2.ans"
+    },
+    {
+      "name": "min-odd-1",
+      "type": "min-1",
+      "seed": "201",
+      "group": "secret",
+      "input": "secret\\min-odd-1.in",
+      "answer": "secret\\min-odd-1.ans"
+    },
+    {
+      "name": "min-even-diff-1",
+      "type": "min-2",
+      "seed": "202",
+      "group": "secret",
+      "input": "secret\\min-even-diff-1.in",
+      "answer": "secret\\min-even-diff-1.ans"
+    },
+    {
+      "name": "min-even-same-1",
+      "type": "min-2-same",
+      "seed": "203",
+      "group": "secret",
+      "input": "secret\\min-even-same-1.in",
+      "answer": "secret\\min-even-same-1.ans"
+    },
+    {
+      "name": "pal-odd-small-1",
+      "type": "pal-odd-small",
+      "seed": "204",
+      "group": "secret",
+      "input": "secret\\pal-odd-small-1.in",
+      "answer": "secret\\pal-odd-small-1.ans"
+    },
+    {
+      "name": "pal-even-small-1",
+      "type": "pal-even-small",
+      "seed": "205",
+      "group": "secret",
+      "input": "secret\\pal-even-small-1.in",
+      "answer": "secret\\pal-even-small-1.ans"
+    },
+    {
+      "name": "one-diff-small-1",
+      "type": "one-diff-small",
+      "seed": "206",
+      "group": "secret",
+      "input": "secret\\one-diff-small-1.in",
+      "answer": "secret\\one-diff-small-1.ans"
+    },
+    {
+      "name": "two-diff-small-1",
+      "type": "two-diff-small",
+      "seed": "207",
+      "group": "secret",
+      "input": "secret\\two-diff-small-1.in",
+      "answer": "secret\\two-diff-small-1.ans"
+    },
+    {
+      "name": "all-same-even-1",
+      "type": "all-same-even",
+      "seed": "208",
+      "group": "secret",
+      "input": "secret\\all-same-even-1.in",
+      "answer": "secret\\all-same-even-1.ans"
+    },
+    {
+      "name": "all-same-odd-1",
+      "type": "all-same-odd",
+      "seed": "209",
+      "group": "secret",
+      "input": "secret\\all-same-odd-1.in",
+      "answer": "secret\\all-same-odd-1.ans"
+    },
+    {
+      "name": "alt-even-1",
+      "type": "alt-even",
+      "seed": "210",
+      "group": "secret",
+      "input": "secret\\alt-even-1.in",
+      "answer": "secret\\alt-even-1.ans"
+    },
+    {
+      "name": "alt-odd-1",
+      "type": "alt-odd",
+      "seed": "211",
+      "group": "secret",
+      "input": "secret\\alt-odd-1.in",
+      "answer": "secret\\alt-odd-1.ans"
+    },
+    {
+      "name": "two-blocks-1",
+      "type": "two-blocks",
+      "seed": "212",
+      "group": "secret",
+      "input": "secret\\two-blocks-1.in",
+      "answer": "secret\\two-blocks-1.ans"
+    },
+    {
+      "name": "period-3-1",
+      "type": "period-3",
+      "seed": "213",
+      "group": "secret",
+      "input": "secret\\period-3-1.in",
+      "answer": "secret\\period-3-1.ans"
+    },
+    {
+      "name": "half-mismatch-1",
+      "type": "half-mismatch",
+      "seed": "214",
+      "group": "secret",
+      "input": "secret\\half-mismatch-1.in",
+      "answer": "secret\\half-mismatch-1.ans"
+    },
+    {
+      "name": "random-small-1",
+      "type": "random-small",
+      "seed": "215",
+      "group": "secret",
+      "input": "secret\\random-small-1.in",
+      "answer": "secret\\random-small-1.ans"
+    },
+    {
+      "name": "random-small-2",
+      "type": "random-small",
+      "seed": "216",
+      "group": "secret",
+      "input": "secret\\random-small-2.in",
+      "answer": "secret\\random-small-2.ans"
+    },
+    {
+      "name": "random-small-3",
+      "type": "random-small",
+      "seed": "217",
+      "group": "secret",
+      "input": "secret\\random-small-3.in",
+      "answer": "secret\\random-small-3.ans"
+    },
+    {
+      "name": "random-small-4",
+      "type": "random-small",
+      "seed": "218",
+      "group": "secret",
+      "input": "secret\\random-small-4.in",
+      "answer": "secret\\random-small-4.ans"
+    },
+    {
+      "name": "random-small-5",
+      "type": "random-small",
+      "seed": "219",
+      "group": "secret",
+      "input": "secret\\random-small-5.in",
+      "answer": "secret\\random-small-5.ans"
+    },
+    {
+      "name": "random-small-6",
+      "type": "random-small",
+      "seed": "220",
+      "group": "secret",
+      "input": "secret\\random-small-6.in",
+      "answer": "secret\\random-small-6.ans"
+    },
+    {
+      "name": "random-small-7",
+      "type": "random-small",
+      "seed": "221",
+      "group": "secret",
+      "input": "secret\\random-small-7.in",
+      "answer": "secret\\random-small-7.ans"
+    },
+    {
+      "name": "random-small-8",
+      "type": "random-small",
+      "seed": "222",
+      "group": "secret",
+      "input": "secret\\random-small-8.in",
+      "answer": "secret\\random-small-8.ans"
+    },
+    {
+      "name": "random-med-1",
+      "type": "random-med",
+      "seed": "223",
+      "group": "secret",
+      "input": "secret\\random-med-1.in",
+      "answer": "secret\\random-med-1.ans"
+    },
+    {
+      "name": "random-med-2",
+      "type": "random-med",
+      "seed": "224",
+      "group": "secret",
+      "input": "secret\\random-med-2.in",
+      "answer": "secret\\random-med-2.ans"
+    },
+    {
+      "name": "random-med-3",
+      "type": "random-med",
+      "seed": "225",
+      "group": "secret",
+      "input": "secret\\random-med-3.in",
+      "answer": "secret\\random-med-3.ans"
+    },
+    {
+      "name": "random-med-4",
+      "type": "random-med",
+      "seed": "226",
+      "group": "secret",
+      "input": "secret\\random-med-4.in",
+      "answer": "secret\\random-med-4.ans"
+    },
+    {
+      "name": "random-med-5",
+      "type": "random-med",
+      "seed": "227",
+      "group": "secret",
+      "input": "secret\\random-med-5.in",
+      "answer": "secret\\random-med-5.ans"
+    },
+    {
+      "name": "near-max-even-1",
+      "type": "near-max-even",
+      "seed": "228",
+      "group": "secret",
+      "input": "secret\\near-max-even-1.in",
+      "answer": "secret\\near-max-even-1.ans"
+    },
+    {
+      "name": "near-max-odd-1",
+      "type": "near-max-odd",
+      "seed": "229",
+      "group": "secret",
+      "input": "secret\\near-max-odd-1.in",
+      "answer": "secret\\near-max-odd-1.ans"
+    },
+    {
+      "name": "pal-random-even-1",
+      "type": "pal-random-even",
+      "seed": "230",
+      "group": "secret",
+      "input": "secret\\pal-random-even-1.in",
+      "answer": "secret\\pal-random-even-1.ans"
+    },
+    {
+      "name": "pal-random-odd-1",
+      "type": "pal-random-odd",
+      "seed": "231",
+      "group": "secret",
+      "input": "secret\\pal-random-odd-1.in",
+      "answer": "secret\\pal-random-odd-1.ans"
+    },
+    {
+      "name": "one-diff-max-1",
+      "type": "one-diff-max",
+      "seed": "232",
+      "group": "secret",
+      "input": "secret\\one-diff-max-1.in",
+      "answer": "secret\\one-diff-max-1.ans"
+    },
+    {
+      "name": "max-even-1",
+      "type": "max-even",
+      "seed": "233",
+      "group": "secret",
+      "input": "secret\\max-even-1.in",
+      "answer": "secret\\max-even-1.ans"
+    },
+    {
+      "name": "max-odd-1",
+      "type": "max-odd",
+      "seed": "234",
+      "group": "secret",
+      "input": "secret\\max-odd-1.in",
+      "answer": "secret\\max-odd-1.ans"
+    }
+  ]
+}
