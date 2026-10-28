@@ -2,27 +2,6 @@
 using namespace std;
 #define int long long 
 
-#define MaxSize 100
-typedef struct{
-    ElemType data[MaxSize];
-    int length;
-}SqList;
-
-int ListInsert_Sq(SqList &L, int i, ElemType e)
-{
-    if(i < 1 || i > L.length + 1)
-        return 0;
-    if(L.length >= MaxSize)
-        return 0;
-    for(int j = L.length; j >= i; j--)
-    {
-        L.data[j] = L.data[j - 1];
-    }
-    L.data[i - 1] = e;
-    L.length++;
-    return 1;
-}
-
 
 
 void solve() {
